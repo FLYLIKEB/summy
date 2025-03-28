@@ -26,7 +26,7 @@ export default function SpecialFeatures() {
             <div className="card">
               <h3 className="font-bold mb-2">요약본에 코멘트와 인사이트 추가도 가능</h3>
               <p className="text-base opacity-90">
-                AI가 제안하는 인사이트를 통해 더 깊이 있는 이해가 가능합니다.
+                AI가 제안하는 인사이트와 상황에 맞는 답변을 통해 더 깊이 있는 이해와 효과적인 소통이 가능합니다.
               </p>
             </div>
           </div>
