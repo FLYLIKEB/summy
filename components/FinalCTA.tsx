@@ -2,9 +2,9 @@ import React from 'react'
 
 export default function FinalCTA() {
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="interview-card max-w-3xl mx-auto text-center">
+    <section>
+      <div className="section-container">
+        <div className="card text-center">
           <h2 className="text-4xl font-bold mb-6">
             지금 바로 시작해보세요
           </h2>
