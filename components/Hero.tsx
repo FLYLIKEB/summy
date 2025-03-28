@@ -1,7 +1,27 @@
-import React from 'react'
+'use client'
+
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function Hero() {
+  const [showScrollButton, setShowScrollButton] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 300)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
   return (
     <>
       <div className="fixed top-4 left-4 z-50">
@@ -9,6 +29,28 @@ export default function Hero() {
           summy
         </h2>
       </div>
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-50 p-3 bg-white bg-opacity-10 backdrop-blur-sm rounded-full text-white hover:bg-opacity-20 transition-all border border-white border-opacity-20"
+          aria-label="맨 위로 스크롤"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+        </button>
+      )}
       <section className="min-h-[80vh] container mx-auto px-4 flex flex-col items-center justify-center text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-6xl font-bold mb-6">
