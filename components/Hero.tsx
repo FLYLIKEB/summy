@@ -1,19 +1,24 @@
-import { Button } from "@/components/ui/Button"
+import React from 'react'
 
 export default function Hero() {
   return (
-    <section className="py-20 px-4 text-center">
-      <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-        당신의 일상을 더 스마트하게
-      </h1>
-      <p className="mt-6 text-lg leading-8 text-gray-600">
-        Summy와 함께 더 효율적이고 생산적인 일상을 시작하세요.
-      </p>
-      <div className="mt-10 flex items-center justify-center gap-x-6">
-        <Button size="lg">시작하기</Button>
-        <Button variant="outline" size="lg">
-          자세히 알아보기
-        </Button>
+    <section className="min-h-[80vh] container mx-auto px-4 flex flex-col items-center justify-center text-center">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-6xl font-bold mb-6">
+          메신저 대화,<br />
+          요약의 기술
+        </h1>
+        <p className="text-2xl mb-12 opacity-90">
+          대화 읽기 귀찮을 땐, summy가 대신 요약해줄게요
+        </p>
+        <div className="flex gap-4 justify-center">
+          <button className="px-8 py-4 bg-white text-purple-700 rounded-full font-bold text-lg hover:bg-opacity-90 transition-all">
+            무료로 시작하기
+          </button>
+          <button className="px-8 py-4 bg-white bg-opacity-10 text-white rounded-full font-bold text-lg hover:bg-opacity-20 transition-all border border-white border-opacity-20">
+            요약 체험하기
+          </button>
+        </div>
       </div>
     </section>
   )
