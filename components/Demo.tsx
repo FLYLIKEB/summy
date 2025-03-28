@@ -4,28 +4,25 @@ export default function Demo() {
   return (
     <section>
       <div className="section-container">
+        <h2 className="section-title">
+          대화 내용을 한눈에 파악하세요
+        </h2>
         <div className="card">
-          <div className="card-title">
-            <span className="card-title-icon">✨</span>
-            <h2 className="card-title-text">이런 식으로 정리해드려요!</h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="relative aspect-[3/4]">
-              <Image
-                src="/images/mockups/demo_1.png"
-                alt="카카오톡 단체 채팅방 예시"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="relative aspect-[3/4]">
-              <Image
-                src="/images/mockups/demo_2.png"
-                alt="Summy가 요약한 결과"
-                fill
-                className="object-contain"
-              />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Image
+              src="/images/mockups/demo_1.png"
+              alt="Original KakaoTalk group chat"
+              width={400}
+              height={600}
+              className="w-full h-auto aspect-[2/3] object-contain"
+            />
+            <Image
+              src="/images/mockups/demo_2.png"
+              alt="Summarized chat by Summy"
+              width={400}
+              height={600}
+              className="w-full h-auto aspect-[2/3] object-contain"
+            />
           </div>
         </div>
       </div>

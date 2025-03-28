@@ -4,11 +4,10 @@ export default function SpecialFeatures() {
   return (
     <section>
       <div className="section-container">
+        <h2 className="section-title">
+          summy의 특별한 점
+        </h2>
         <div className="card">
-          <div className="card-title">
-            <span className="card-title-icon">🤖</span>
-            <h2 className="card-title-text">summy의 특별한 점</h2>
-          </div>
           <div className="space-y-6">
             <div className="card">
               <h3 className="font-bold mb-2">AI 기반 요약으로 높은 정확도</h3>

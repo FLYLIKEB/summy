@@ -4,11 +4,10 @@ export default function Features() {
   return (
     <section>
       <div className="section-container">
+        <h2 className="section-title">
+          어떤 대화든 요약해드려요
+        </h2>
         <div className="card">
-          <div className="card-title">
-            <span className="card-title-icon">💬</span>
-            <h2 className="card-title-text">어떤 대화든 요약해드려요</h2>
-          </div>
           <div className="space-y-6">
             <p className="text-base opacity-90">
               카카오톡, 라인, 슬랙 등 다양한 메신저의 대화를 지원해요.
