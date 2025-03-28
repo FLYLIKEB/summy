@@ -1,52 +1,107 @@
+import React from 'react'
+import Link from 'next/link'
+
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Summy</h3>
-            <p className="text-gray-600">
-              당신의 일상을 더 스마트하게 만들어주는 AI 요약 서비스
+    <footer className="border-t border-white border-opacity-10">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold">summy</h3>
+            <p className="text-sm opacity-70">
+              복잡한 대화를 쉽게 이해하는<br />
+              AI 기반 메시지 요약 서비스
             </p>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">링크</h3>
+
+          {/* Product */}
+          <div className="space-y-4">
+            <h4 className="font-bold">Product</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  소개
-                </a>
+                <Link href="#features" className="text-sm opacity-70 hover:opacity-100">
+                  주요 기능
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  기능
-                </a>
+                <Link href="#pricing" className="text-sm opacity-70 hover:opacity-100">
+                  요금제
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  가격
-                </a>
+                <Link href="#demo" className="text-sm opacity-70 hover:opacity-100">
+                  데모 체험
+                </Link>
               </li>
             </ul>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">문의</h3>
+
+          {/* Company */}
+          <div className="space-y-4">
+            <h4 className="font-bold">Company</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  이메일
+                <Link href="/about" className="text-sm opacity-70 hover:opacity-100">
+                  회사 소개
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-sm opacity-70 hover:opacity-100">
+                  개인정보처리방침
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-sm opacity-70 hover:opacity-100">
+                  이용약관
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="space-y-4">
+            <h4 className="font-bold">Contact</h4>
+            <ul className="space-y-2">
+              <li>
+                <a 
+                  href="mailto:contact@summy.ai" 
+                  className="text-sm opacity-70 hover:opacity-100"
+                >
+                  contact@summy.ai
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-900">
-                  고객센터
+                <a 
+                  href="https://github.com/FLYLIKEB/summy" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-sm opacity-70 hover:opacity-100"
+                >
+                  GitHub
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t text-center text-gray-600">
-          <p>&copy; 2024 Summy. All rights reserved.</p>
+
+        <div className="mt-12 pt-8 border-t border-white border-opacity-10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm opacity-70">
+              © 2024 summy. All rights reserved.
+            </p>
+            <div className="flex items-center gap-2 text-sm opacity-70">
+              <span>Made with 💜 by</span>
+              <a 
+                href="https://github.com/FLYLIKEB" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-100"
+              >
+                FLYLIKEB
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
