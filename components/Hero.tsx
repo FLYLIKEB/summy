@@ -65,10 +65,10 @@ export default function Hero() {
             상황에 맞는 답변을 추천해드려요.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-purple-700 rounded-full font-bold text-base sm:text-lg hover:bg-opacity-90 transition-all">
+            <button className="btn-secondary">
               무료로 시작하기
             </button>
-            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-purple-700 text-white rounded-full font-bold text-base sm:text-lg hover:bg-purple-600 transition-all">
+            <button className="btn-primary">
               요약 체험하기
             </button>
           </div>
