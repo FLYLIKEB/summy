@@ -12,11 +12,11 @@ export default function FinalCTA() {
             매일 쌓이는 메시지와 씨름하지 마세요.<br />
             summy와 함께라면 단 몇 초만에 핵심을 파악할 수 있습니다.
           </p>
-          <div className="flex gap-4 justify-center">
-            <button className="px-8 py-4 bg-white text-purple-700 rounded-full font-bold text-lg hover:bg-opacity-90 transition-all">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="btn-secondary">
               무료로 시작하기
             </button>
-            <button className="px-8 py-4 bg-white bg-opacity-10 text-white rounded-full font-bold text-lg hover:bg-opacity-20 transition-all border border-white border-opacity-20">
+            <button className="btn-primary">
               요약 체험하기
             </button>
           </div>
