@@ -88,7 +88,7 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-white border-opacity-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm opacity-70">
-              © 2024 summy. All rights reserved.
+              © 2025 summy. All rights reserved.
             </p>
             <div className="flex items-center gap-2 text-sm opacity-70">
               <span>Made with 💜 by</span>
