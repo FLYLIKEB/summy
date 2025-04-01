@@ -187,12 +187,12 @@ export default function DemoPage() {
                         
                         <div className="relative">
                           <div className="flex items-center gap-3 mb-4">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                              <span className="text-lg font-bold text-purple-400">{index + 1}</span>
+                            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                              <span className="text-sm font-bold text-purple-400">{index + 1}</span>
                             </div>
-                            <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">{title}</h3>
+                            <h3 className="text-base font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">{title}</h3>
                           </div>
-                          <ul className="space-y-3">
+                          <ul className="space-y-2 text-sm">
                             {points.map((point, pointIndex) => {
                               // 참여자별 발언 섹션인 경우 특별한 스타일 적용
                               if (title === '2. 참여자별 발언') {
@@ -200,14 +200,49 @@ export default function DemoPage() {
                                 return (
                                   <li key={pointIndex} className="flex items-start gap-3 text-white/80 group/item">
                                     <div className="relative">
-                                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover/item:scale-110 transition-transform duration-300">
-                                        <span className="text-lg font-bold text-purple-400">{name[0]}</span>
+                                      <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover/item:scale-110 transition-transform duration-300">
+                                        <span className="text-sm font-bold text-purple-400">{name[0]}</span>
                                       </div>
                                       <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                     <div className="flex-1">
                                       <div className="font-semibold text-purple-400 group-hover/item:text-pink-400 transition-colors duration-300">{name}</div>
                                       <div className="text-white/80 group-hover/item:text-white transition-colors duration-300">{content.join(':')}</div>
+                                    </div>
+                                  </li>
+                                )
+                              }
+                              // 주요 내용 섹션의 경우 주요 단어 강조
+                              if (title === '1. 주요 내용') {
+                                const text = point.trim().replace(/^-\s*/, '')
+                                const words = text.split(' ')
+                                return (
+                                  <li key={pointIndex} className="flex items-start gap-3 text-white/80 group/item">
+                                    <span className="text-purple-400 mt-1 group-hover/item:text-pink-400 transition-colors duration-300">•</span>
+                                    <span className="group-hover/item:text-white transition-colors duration-300">
+                                      {words.map((word, wordIndex) => (
+                                        <span key={wordIndex} className={word.length > 3 ? 'font-medium text-purple-300' : ''}>
+                                          {word}{' '}
+                                        </span>
+                                      ))}
+                                    </span>
+                                  </li>
+                                )
+                              }
+                              // 다음 단계 섹션의 경우 타임라인 형태로 표시
+                              if (title === '4. 다음 단계') {
+                                const [date, content] = point.trim().replace(/^-\s*/, '').split(':')
+                                return (
+                                  <li key={pointIndex} className="flex items-start gap-4 text-white/80 group/item relative">
+                                    <div className="relative">
+                                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover/item:scale-110 transition-transform duration-300">
+                                        <span className="text-sm font-bold text-purple-400">•</span>
+                                      </div>
+                                      <div className="absolute left-1/2 top-6 w-0.5 h-full bg-gradient-to-b from-purple-500/20 to-pink-500/20"></div>
+                                    </div>
+                                    <div className="flex-1 pb-6">
+                                      <div className="font-semibold text-purple-400 group-hover/item:text-pink-400 transition-colors duration-300">{date}</div>
+                                      <div className="text-white/80 group-hover/item:text-white transition-colors duration-300">{content}</div>
                                     </div>
                                   </li>
                                 )
