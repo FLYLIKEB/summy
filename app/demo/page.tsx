@@ -85,6 +85,10 @@ export default function DemoPage() {
   const [isDragging, setIsDragging] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState('')
+  const [responseStyle, setResponseStyle] = useState('formal')
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedResponse, setEditedResponse] = useState('')
+  const [showReason, setShowReason] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -183,6 +187,61 @@ export default function DemoPage() {
     }, 400)
   }
 
+  const handleCopyResponse = () => {
+    navigator.clipboard.writeText(isEditing ? editedResponse : suggestedResponse)
+  }
+
+  const handleStyleChange = (style: string) => {
+    setResponseStyle(style)
+    // 스타일에 따른 답변 재생성 로직
+    const baseResponse = `안녕하세요, 회의 내용을 잘 확인했습니다. 
+제안하신 일정 조정안과 기능 개발 계획에 동의합니다. 
+다음 주 월요일까지 각자 담당 업무 진행 상황을 공유하도록 하겠습니다.`
+
+    let newResponse = ''
+    let reason = ''
+    switch (style) {
+      case 'formal':
+        newResponse = baseResponse
+        reason = `- 격식있는 어조로 작성하여 전문성 강조
+- 명확한 문장 구조로 의사 전달
+- 공손한 어미 사용으로 상대방 존중
+- 업무 진행 상황에 대한 구체적 언급`
+        break
+      case 'friendly':
+        newResponse = `안녕하세요! 회의 내용 잘 확인했습니다 😊
+제안하신 일정 조정안과 기능 개발 계획이 정말 좋아 보이네요!
+다음 주 월요일까지 각자 진행 상황을 공유하도록 할게요~`
+        reason = `- 이모지와 친근한 어조로 긍정적 분위기 전달
+- 구어체 사용으로 자연스러운 대화체 구현
+- 느낌표와 물결표로 따뜻한 감성 표현
+- 간결한 문장으로 가독성 확보`
+        break
+      case 'concise':
+        newResponse = `회의 내용 확인했습니다.
+일정 조정안과 개발 계획 동의합니다.
+다음 주 월요일까지 진행 상황 공유 예정입니다.`
+        reason = `- 핵심 내용만 간단히 전달
+- 불필요한 수식어 제거
+- 명확한 의사 전달
+- 업무 중심의 효율적 커뮤니케이션`
+        break
+    }
+    setSuggestedResponse(newResponse)
+    setEditedResponse(newResponse)
+    setShowReason(false)
+  }
+
+  const handleEditResponse = () => {
+    setIsEditing(true)
+    setEditedResponse(suggestedResponse)
+  }
+
+  const handleSaveResponse = () => {
+    setSuggestedResponse(editedResponse)
+    setIsEditing(false)
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <div className="container mx-auto px-4 py-8">
@@ -190,12 +249,20 @@ export default function DemoPage() {
           <Link href="/" className="text-2xl font-black tracking-tight bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
             summy
           </Link>
-          <Link 
-            href="/" 
-            className="px-4 py-2 rounded-full border border-white border-opacity-20 hover:bg-white hover:bg-opacity-10 transition-all"
-          >
-            돌아가기
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link 
+              href="/login"
+              className="px-4 py-2 text-white/60 hover:text-white transition-colors cursor-pointer"
+            >
+              로그인
+            </Link>
+            <Link 
+              href="/signup"
+              className="px-4 py-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white rounded-lg hover:shadow-lg hover:shadow-purple-500/20 transition-all cursor-pointer"
+            >
+              회원가입
+            </Link>
+          </div>
         </div>
 
         <div className="max-w-3xl mx-auto">
@@ -208,7 +275,7 @@ export default function DemoPage() {
 
           {/* 파일 업로드 영역 */}
           <div 
-            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer mb-6 ${
+            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer mb-6 backdrop-blur-sm ${
               isDragging 
                 ? 'border-purple-500 bg-purple-500/10' 
                 : 'border-white/20 hover:border-purple-500/50'
@@ -251,7 +318,7 @@ export default function DemoPage() {
 
           {/* 업로드된 파일 표시 */}
           {fileName && (
-            <div className="flex items-center justify-between bg-purple-500/10 rounded-lg p-4 mb-6">
+            <div className="flex items-center justify-between bg-purple-500/10 backdrop-blur-sm rounded-lg p-4 mb-6">
               <div className="flex items-center space-x-3">
                 <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -280,7 +347,7 @@ export default function DemoPage() {
           </div>
 
           {/* 텍스트 입력 영역 */}
-          <div className="card mb-6">
+          <div className="card mb-6 backdrop-blur-sm">
             <textarea
               value={input}
               onChange={(e) => {
@@ -298,7 +365,7 @@ export default function DemoPage() {
               type="button"
               onClick={handleSummarize}
               disabled={isSummarizing || isSuggesting}
-              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-sm"
             >
               {isSummarizing ? (
                 <div className="flex items-center gap-2">
@@ -316,7 +383,7 @@ export default function DemoPage() {
               type="button"
               onClick={handleSuggestResponse}
               disabled={isSummarizing || isSuggesting}
-              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-sm"
             >
               {isSuggesting ? (
                 <div className="flex items-center gap-2">
@@ -333,33 +400,147 @@ export default function DemoPage() {
           </div>
 
           {suggestedResponse && (
-            <div className="card mt-8 bg-gradient-to-br from-blue-900/50 to-cyan-900/50 backdrop-blur-sm border border-white/10 relative overflow-hidden">
+            <div className="card mt-8 bg-gradient-to-br from-blue-900/50 to-cyan-900/50 backdrop-blur-lg border border-white/10 relative overflow-hidden">
               {/* 배경 효과 */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 animate-gradient"></div>
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
 
               <div className="relative">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="relative">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 animate-pulse">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                      </svg>
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 animate-pulse">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                      </div>
+                      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text animate-gradient">답변 제안</h2>
+                        <span className="px-2 py-1 text-xs font-medium bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full text-blue-300">AI 제안</span>
+                      </div>
+                      <p className="text-sm text-white/60 mt-1">회의 내용을 바탕으로 적절한 답변을 제안합니다</p>
+                    </div>
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text animate-gradient">답변 제안</h2>
-                      <span className="px-2 py-1 text-xs font-medium bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full text-blue-300">AI 제안</span>
-                    </div>
-                    <p className="text-sm text-white/60 mt-1">회의 내용을 바탕으로 적절한 답변을 제안합니다</p>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleCopyResponse}
+                      className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-lg hover:bg-blue-500/30 transition-colors flex items-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                      </svg>
+                      복사
+                    </button>
                   </div>
                 </div>
 
-                <div className="bg-white/5 rounded-xl p-6 border border-white/5 hover:border-blue-500/20 transition-all duration-300">
-                  <div className="text-white/80 whitespace-pre-line">{suggestedResponse}</div>
+                {/* 스타일 선택 */}
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="text-sm text-white/60">답변 스타일:</span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleStyleChange('formal')}
+                      className={`px-3 py-1 rounded-lg transition-colors ${
+                        responseStyle === 'formal'
+                          ? 'bg-blue-500/30 text-blue-300'
+                          : 'bg-white/5 text-white/60 hover:bg-white/10'
+                      }`}
+                    >
+                      격식있게
+                    </button>
+                    <button
+                      onClick={() => handleStyleChange('friendly')}
+                      className={`px-3 py-1 rounded-lg transition-colors ${
+                        responseStyle === 'friendly'
+                          ? 'bg-blue-500/30 text-blue-300'
+                          : 'bg-white/5 text-white/60 hover:bg-white/10'
+                      }`}
+                    >
+                      친근하게
+                    </button>
+                    <button
+                      onClick={() => handleStyleChange('concise')}
+                      className={`px-3 py-1 rounded-lg transition-colors ${
+                        responseStyle === 'concise'
+                          ? 'bg-blue-500/30 text-blue-300'
+                          : 'bg-white/5 text-white/60 hover:bg-white/10'
+                      }`}
+                    >
+                      간단히
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/5 hover:border-blue-500/20 transition-all duration-300">
+                  {isEditing ? (
+                    <div className="space-y-4">
+                      <textarea
+                        value={editedResponse}
+                        onChange={(e) => setEditedResponse(e.target.value)}
+                        className="w-full h-32 bg-white/5 rounded-lg p-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
+                      />
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() => setIsEditing(false)}
+                          className="px-4 py-2 bg-white/5 text-white/60 rounded-lg hover:bg-white/10 transition-colors"
+                        >
+                          취소
+                        </button>
+                        <button
+                          onClick={handleSaveResponse}
+                          className="px-4 py-2 bg-blue-500/30 text-blue-300 rounded-lg hover:bg-blue-500/40 transition-colors"
+                        >
+                          저장
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative group">
+                      <div className="text-white/80 whitespace-pre-line">{suggestedResponse}</div>
+                      <div className="flex justify-end gap-2 mt-4">
+                        <button
+                          onClick={() => setShowReason(!showReason)}
+                          className="px-3 py-1 bg-white/5 text-white/60 rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {showReason ? '닫기' : '답변 이유 보기'}
+                        </button>
+                        <button
+                          onClick={handleEditResponse}
+                          className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
+                        >
+                          <svg className="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                          </svg>
+                        </button>
+                      </div>
+                      {showReason && (
+                        <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/5">
+                          <h4 className="text-sm font-medium text-blue-300 mb-2">답변 작성 이유</h4>
+                          <div className="text-sm text-white/60 whitespace-pre-line">
+                            {responseStyle === 'formal' && `- 격식있는 어조로 작성하여 전문성 강조
+- 명확한 문장 구조로 의사 전달
+- 공손한 어미 사용으로 상대방 존중
+- 업무 진행 상황에 대한 구체적 언급`}
+                            {responseStyle === 'friendly' && `- 이모지와 친근한 어조로 긍정적 분위기 전달
+- 구어체 사용으로 자연스러운 대화체 구현
+- 느낌표와 물결표로 따뜻한 감성 표현
+- 간결한 문장으로 가독성 확보`}
+                            {responseStyle === 'concise' && `- 핵심 내용만 간단히 전달
+- 불필요한 수식어 제거
+- 명확한 의사 전달
+- 업무 중심의 효율적 커뮤니케이션`}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-white/10">
@@ -379,7 +560,7 @@ export default function DemoPage() {
           )}
 
           {result && (
-            <div className="card mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10 relative overflow-hidden">
+            <div className="card mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-lg border border-white/10 relative overflow-hidden">
               {/* 배경 효과 */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 animate-gradient"></div>
               <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -406,7 +587,7 @@ export default function DemoPage() {
                 
                 {/* 통계 정보 섹션 */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
                         <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -419,7 +600,7 @@ export default function DemoPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
                         <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -432,7 +613,7 @@ export default function DemoPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
                         <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -445,7 +626,7 @@ export default function DemoPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
                         <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -474,7 +655,7 @@ export default function DemoPage() {
                     <span className="text-white/60">프로젝트 진행률</span>
                     <span className="text-purple-400">75%</span>
                   </div>
-                  <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-2 bg-white/5 backdrop-blur-sm rounded-full overflow-hidden">
                     <div className="h-full w-3/4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-[pulse_1s_ease-in-out_infinite]"></div>
                   </div>
                 </div>
@@ -483,7 +664,7 @@ export default function DemoPage() {
                   {result.split('\n\n').map((section, index) => {
                     const [title, ...points] = section.split('\n')
                     return (
-                      <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/5 hover:border-purple-500/20 transition-all duration-300 group relative overflow-hidden">
+                      <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/5 hover:border-purple-500/20 transition-all duration-300 group relative overflow-hidden">
                         {/* 카드 배경 효과 */}
                         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         
@@ -572,14 +753,6 @@ export default function DemoPage() {
                         </svg>
                       </div>
                       <span className="group-hover:text-white transition-colors duration-300">요약 완료</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-white/60 group">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <span className="group-hover:text-white transition-colors duration-300">AI 분석 완료</span>
                     </div>
                   </div>
                 </div>
