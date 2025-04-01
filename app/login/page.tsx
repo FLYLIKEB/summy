@@ -57,11 +57,15 @@ export default function LoginPage() {
 
           <div className="space-y-6">
             {/* 카카오 로그인 */}
-            <KakaoLoginButton
-              onSuccess={handleKakaoLoginSuccess}
-              onError={handleKakaoLoginError}
-              className="btn-secondary"
-            />
+            <div className="flex justify-center">
+              <div className="w-full sm:w-80">
+                <KakaoLoginButton
+                  onSuccess={handleKakaoLoginSuccess}
+                  onError={handleKakaoLoginError}
+                  className="btn-secondary w-full"
+                />
+              </div>
+            </div>
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -117,13 +121,17 @@ export default function LoginPage() {
                   비밀번호 찾기
                 </Link>
               </div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="btn-primary w-full"
-              >
-                {isLoading ? '로그인 중...' : '로그인'}
-              </button>
+              <div className="flex justify-center">
+                <div className="w-full sm:w-80">
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="btn-primary w-full"
+                  >
+                    {isLoading ? '로그인 중...' : '로그인'}
+                  </button>
+                </div>
+              </div>
             </form>
 
             <p className="text-center text-sm text-gray-400">
