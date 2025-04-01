@@ -25,11 +25,11 @@ export default function Hero() {
 
   return (
     <div className="relative isolate overflow-hidden">
-      <div className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-12 px-4">
-              <h1 className="text-8xl sm:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+            <div className="mb-8 sm:mb-12 px-2 sm:px-4">
+              <h1 className="text-6xl sm:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 tracking-tight">
                 SUMMY
               </h1>
             </div>
