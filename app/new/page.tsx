@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Slack, MessageCircle, Upload, Loader2 } from 'lucide-react'
+import { Slack, MessageCircle, Loader2 } from 'lucide-react'
+import FileUpload from '@/components/FileUpload'
 
 const platforms = [
   {
@@ -22,12 +23,6 @@ export default function NewSummaryPage() {
   const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null)
   const [file, setFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0])
-    }
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -86,32 +81,21 @@ export default function NewSummaryPage() {
         {/* 파일 업로드 */}
         {selectedPlatform && (
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-white/10 rounded-2xl bg-white/5">
-              <div className="p-3 rounded-xl bg-white/5 mb-4">
-                <Upload className="w-6 h-6 text-gray-400" />
-              </div>
-              <div className="text-center mb-4">
-                <p className="font-medium">대화 내용 파일을 업로드하세요</p>
-                <p className="text-sm text-gray-400 mt-1">
-                  모든 파일 형식을 지원합니다
-                </p>
-              </div>
-              <input
-                type="file"
-                onChange={handleFileChange}
-                className="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-purple-500/10 file:text-purple-400 hover:file:bg-purple-500/20"
-              />
-            </div>
+            <FileUpload onFileChange={setFile} />
 
-            <div className="flex justify-center">
+            <div className="flex justify-end">
               <button
                 type="submit"
                 disabled={!file || isLoading}
-                className="btn-primary flex items-center gap-2"
+                className={`inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed ${
+                  isLoading
+                    ? 'bg-purple-500/30 text-purple-300'
+                    : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600'
+                }`}
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
                     요약 중...
                   </>
                 ) : (
