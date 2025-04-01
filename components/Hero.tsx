@@ -41,16 +41,16 @@ export default function Hero() {
               💬 긴 대화를 AI가 빠르게 요약해드립니다.<br />
               🎯 핵심만 쏙 뽑아서, 답변까지 제안해드려요.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-y-4 sm:gap-y-0 sm:gap-x-6">
               <Link
                 href="/signup"
-                className="btn-primary"
+                className="btn-primary w-full sm:w-auto"
               >
                 🎮 첫 달 무료로 시작하기
               </Link>
               <Link
                 href="/demo"
-                className="btn-secondary"
+                className="btn-secondary w-full sm:w-auto"
               >
                 🎯 실제 대화 요약해보기
               </Link>
