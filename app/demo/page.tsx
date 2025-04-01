@@ -10,11 +10,6 @@ export default function DemoPage() {
 
   const handleSummarize = () => {
     console.log('요약하기 버튼 클릭됨')
-    if (!input.trim()) {
-      console.log('입력값이 비어있음')
-      return
-    }
-
     setIsLoading(true)
     setResult('')
 
@@ -23,7 +18,7 @@ export default function DemoPage() {
       try {
         console.log('요약 시작')
         // 임시 결과 (실제로는 API 응답을 사용)
-        const summary = `요약 결과:
+        const summary = input.trim() ? `요약 결과:
 
 1. 주요 내용
 - 프로젝트 일정 조정 및 마감일 확정
@@ -44,7 +39,29 @@ export default function DemoPage() {
 4. 다음 단계
 - 5월 1일까지 상세 일정표 작성
 - 5월 15일까지 UI/UX 개선안 확정
-- 6월 1일까지 테스트 계획 수립`
+- 6월 1일까지 테스트 계획 수립` : `요약 결과:
+
+1. 주요 내용
+- Q2 프로젝트 일정 조정 논의
+- 신규 기능 개발 계획 수립
+- 팀원별 진행 상황 공유
+
+2. 참여자별 발언
+- 김팀장: 프로젝트 일정 조정 및 신규 기능 개발 논의 주도
+- 박개발: 프론트엔드 70%, 백엔드 80% 완료, 검색 기능 개선 필요
+- 이디자인: UI/UX 개선안 제시 및 디자인 시스템 구축 제안
+- 정기획: 신규 기능 일정 조정 제안
+
+3. 감정/분위기 분석
+- 건설적이고 협력적인 회의 분위기
+- 일정 조정에 대한 팀원들의 긍정적 수용
+- 효율적인 의사결정 과정
+
+4. 다음 단계
+- 5월 1일: 상세 일정표 작성
+- 5월 15일: UI/UX 개선안 확정
+- 6월 1일: 테스트 계획 수립
+- 다음 주 월요일: 팀원별 진행 상황 공유`
 
         console.log('요약 결과 설정')
         setResult(summary)
@@ -115,7 +132,7 @@ export default function DemoPage() {
             <button 
               type="button"
               onClick={handleSummarize}
-              disabled={isLoading || !input.trim()}
+              disabled={isLoading}
               className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
