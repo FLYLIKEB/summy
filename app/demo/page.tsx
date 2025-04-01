@@ -47,7 +47,13 @@ const EXAMPLE_SUMMARY = `1. 주요 내용
 - 5월 1일: 상세 일정표 작성
 - 5월 15일: UI/UX 개선안 확정
 - 6월 1일: 테스트 계획 수립
-- 다음 주 월요일: 팀원별 진행 상황 공유`
+- 다음 주 월요일: 팀원별 진행 상황 공유
+
+5. 통계 정보
+- 참여자 수: 4명
+- 회의 시간: 30분
+- 주요 키워드: 일정 조정, 기능 개발, UI/UX 개선
+- 진행률: 75%`
 
 const DETAILED_SUMMARY = `1. 주요 내용
 - 프로젝트 일정 조정 및 마감일 확정
@@ -177,6 +183,81 @@ export default function DemoPage() {
                   </div>
                 </div>
                 
+                {/* 통계 정보 섹션 */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="text-sm text-white/60">참여자 수</div>
+                        <div className="text-lg font-semibold text-white">4명</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="text-sm text-white/60">회의 시간</div>
+                        <div className="text-lg font-semibold text-white">30분</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="text-sm text-white/60">키워드</div>
+                        <div className="text-lg font-semibold text-white">3개</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white/5 rounded-xl p-4 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="text-sm text-white/60">진행률</div>
+                        <div className="text-lg font-semibold text-white">75%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 키워드 태그 */}
+                <div className="flex flex-wrap gap-2 mb-8">
+                  <span className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm">일정 조정</span>
+                  <span className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm">기능 개발</span>
+                  <span className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm">UI/UX 개선</span>
+                  <span className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm">프로젝트 관리</span>
+                </div>
+
+                {/* 진행 상태 바 */}
+                <div className="mb-8">
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-white/60">프로젝트 진행률</span>
+                    <span className="text-purple-400">75%</span>
+                  </div>
+                  <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full w-3/4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+
                 <div className="grid gap-6">
                   {result.split('\n\n').map((section, index) => {
                     const [title, ...points] = section.split('\n')
