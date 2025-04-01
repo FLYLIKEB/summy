@@ -80,6 +80,7 @@ export default function DemoPage() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState('')
+  const [suggestedResponse, setSuggestedResponse] = useState('')
 
   const handleSummarize = () => {
     console.log('요약하기 버튼 클릭됨')
@@ -102,6 +103,30 @@ export default function DemoPage() {
         setIsLoading(false)
       }
     }, 2000)
+  }
+
+  const handleSuggestResponse = () => {
+    setIsLoading(true)
+    setSuggestedResponse('')
+
+    // 실제 API 호출 대신 임시로 지연 시간을 추가
+    setTimeout(() => {
+      try {
+        console.log('답변 제안 시작')
+        // 임시 답변 제안 (실제로는 API 응답을 사용)
+        const suggestion = `안녕하세요, 회의 내용을 잘 확인했습니다. 
+제안하신 일정 조정안과 기능 개발 계획에 동의합니다. 
+다음 주 월요일까지 각자 담당 업무 진행 상황을 공유하도록 하겠습니다.`
+
+        console.log('답변 제안 설정')
+        setSuggestedResponse(suggestion)
+      } catch (error) {
+        console.error('답변 제안 중 오류 발생:', error)
+        setSuggestedResponse('답변 제안 중 오류가 발생했습니다. 다시 시도해주세요.')
+      } finally {
+        setIsLoading(false)
+      }
+    }, 1500)
   }
 
   return (
@@ -136,7 +161,7 @@ export default function DemoPage() {
             />
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-4">
             <button 
               type="button"
               onClick={handleSummarize}
@@ -155,7 +180,71 @@ export default function DemoPage() {
                 '요약하기'
               )}
             </button>
+            <button 
+              type="button"
+              onClick={handleSuggestResponse}
+              disabled={isLoading}
+              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  제안 중...
+                </div>
+              ) : (
+                '답변 제안받기'
+              )}
+            </button>
           </div>
+
+          {suggestedResponse && (
+            <div className="card mt-8 bg-gradient-to-br from-blue-900/50 to-cyan-900/50 backdrop-blur-sm border border-white/10 relative overflow-hidden">
+              {/* 배경 효과 */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 animate-gradient"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 animate-pulse">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                      </svg>
+                    </div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text animate-gradient">답변 제안</h2>
+                      <span className="px-2 py-1 text-xs font-medium bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full text-blue-300">AI 제안</span>
+                    </div>
+                    <p className="text-sm text-white/60 mt-1">회의 내용을 바탕으로 적절한 답변을 제안합니다</p>
+                  </div>
+                </div>
+
+                <div className="bg-white/5 rounded-xl p-6 border border-white/5 hover:border-blue-500/20 transition-all duration-300">
+                  <div className="text-white/80 whitespace-pre-line">{suggestedResponse}</div>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-3 text-white/60 group">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                      </div>
+                      <span className="group-hover:text-white transition-colors duration-300">AI 답변 제안</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {result && (
             <div className="card mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10 relative overflow-hidden">
