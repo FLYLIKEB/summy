@@ -1,14 +1,14 @@
 export const RESPONSE_STYLES = {
   formal: {
-    label: '정중한',
+    label: '🎩 정중한',
     description: '공손하고 격식있는 어조로 작성된 답변'
   },
   friendly: {
-    label: '친근한',
+    label: '😊 친근한',
     description: '편안하고 친근한 어조로 작성된 답변'
   },
   professional: {
-    label: '전문적인',
+    label: '💼 전문적인',
     description: '전문적이고 신뢰감 있는 어조로 작성된 답변'
   }
 } as const;
