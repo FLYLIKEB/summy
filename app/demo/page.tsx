@@ -203,13 +203,91 @@ export default function DemoPage() {
             요약 체험하기
           </h1>
           <p className="text-center mb-8 opacity-80">
-            실제 대화를 입력해보세요. AI가 요약해드립니다.
+            실제 대화를 입력하거나 파일을 업로드하세요. AI가 요약해드립니다.
           </p>
 
+          {/* 파일 업로드 영역 */}
+          <div 
+            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer mb-6 ${
+              isDragging 
+                ? 'border-purple-500 bg-purple-500/10' 
+                : 'border-white/20 hover:border-purple-500/50'
+            }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileInputChange}
+              accept=".txt,.xlsx,.xls"
+              className="hidden"
+            />
+            <div className="space-y-4">
+              <div className="flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                </div>
+              </div>
+              <div className="text-white/60">
+                <p className="text-lg font-medium">파일을 드래그하거나 클릭하여 업로드</p>
+                <p className="text-sm mt-2">지원 형식: TXT, XLSX, XLS</p>
+              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  fileInputRef.current?.click()
+                }}
+                className="px-6 py-2 bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors"
+              >
+                파일 선택
+              </button>
+            </div>
+          </div>
+
+          {/* 업로드된 파일 표시 */}
+          {fileName && (
+            <div className="flex items-center justify-between bg-purple-500/10 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span className="text-white/80">{fileName}</span>
+              </div>
+              <button
+                onClick={handleRemoveFile}
+                className="text-white/40 hover:text-white/60 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {/* 구분선 */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-white/10"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-gray-900 text-white/40">또는</span>
+            </div>
+          </div>
+
+          {/* 텍스트 입력 영역 */}
           <div className="card mb-6">
             <textarea
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value)
+                setUploadedFile(null)
+                setFileName('')
+              }}
               className="w-full h-48 bg-white bg-opacity-5 rounded-xl p-4 text-white placeholder:text-white/50 placeholder:text-sm placeholder:font-light placeholder:leading-relaxed focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
               placeholder={EXAMPLE_CONVERSATION}
             />
@@ -508,49 +586,6 @@ export default function DemoPage() {
               </div>
             </div>
           )}
-
-          {/* 파일 업로드 영역 */}
-          <div 
-            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer ${
-              isDragging 
-                ? 'border-purple-500 bg-purple-500/10' 
-                : 'border-white/20 hover:border-purple-500/50'
-            }`}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileInputChange}
-              accept=".txt,.xlsx,.xls"
-              className="hidden"
-            />
-            <div className="space-y-4">
-              <div className="flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                  </svg>
-                </div>
-              </div>
-              <div className="text-white/60">
-                <p className="text-lg font-medium">파일을 드래그하거나 클릭하여 업로드</p>
-                <p className="text-sm mt-2">지원 형식: TXT, XLSX, XLS</p>
-              </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  fileInputRef.current?.click()
-                }}
-                className="px-6 py-2 bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors"
-              >
-                파일 선택
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </main>
