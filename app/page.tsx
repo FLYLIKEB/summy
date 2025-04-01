@@ -19,8 +19,6 @@ export default function Home() {
         <SpecialFeatures /> {/* 특별한 점 소개 */}
         <FinalCTA /> {/* 최종 초대 호출 */}
       </main>
-
-      <Footer />
     </div>
   )
 } 

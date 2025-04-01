@@ -6,6 +6,21 @@ import { Button } from '@/components/ui/Button'
 import { RESPONSE_STYLES, RESPONSE_REASONS } from '../constants'
 import { ResponseStyle } from '../types'
 
+const styleLabels: Record<ResponseStyle, { label: string; description: string }> = {
+  formal: {
+    label: '🎩 정중한',
+    description: '공손하고 격식있는 어조로 작성된 답변'
+  },
+  friendly: {
+    label: '😊 친근한',
+    description: '편안하고 친근한 어조로 작성된 답변'
+  },
+  concise: {
+    label: '⚡ 간결한',
+    description: '짧고 핵심적인 내용만 담은 답변'
+  }
+}
+
 // 컴포넌트 Props 타입 정의
 interface ResponseSuggestionProps {
   isEditing: boolean                                  // 편집 모드 여부
