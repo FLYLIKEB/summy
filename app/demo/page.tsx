@@ -18,7 +18,6 @@ export default function DemoPage() {
   
   // 파일 업로드 관련 기능
   const {
-    isDragging,
     uploadedFile,
     fileName,
     fileInputRef,
