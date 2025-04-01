@@ -76,11 +76,7 @@ export default function DemoPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="w-full h-48 bg-white bg-opacity-5 rounded-xl p-4 text-white placeholder-white placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-              placeholder="여기에 대화 내용을 붙여넣으세요..."
-            />
-            <div className="mt-2 text-sm text-white opacity-50">
-              예시: 
-[김팀장] 안녕하세요, 오늘은 Q2 프로젝트 일정 조정과 신규 기능 개발에 대해 논의하도록 하겠습니다. 
+              placeholder={`[김팀장] 안녕하세요, 오늘은 Q2 프로젝트 일정 조정과 신규 기능 개발에 대해 논의하도록 하겠습니다. 
 먼저 현재 진행 상황을 공유해주시겠어요?
 
 [박개발] 네, 현재 프론트엔드 개발이 70% 정도 진행되었고, 백엔드 API는 80% 완료되었습니다. 
@@ -102,8 +98,8 @@ export default function DemoPage() {
 [정기획] 그럼 5월 1일까지 상세 일정표를 작성하고, 5월 15일까지 UI/UX 개선안을 확정하도록 하겠습니다. 
 테스트 계획은 6월 1일까지 수립하겠습니다.
 
-[김팀장] 네, 모두 수고 많으셨습니다. 다음 주 월요일까지 각자 담당 업무 진행 상황을 공유해주세요.
-            </div>
+[김팀장] 네, 모두 수고 많으셨습니다. 다음 주 월요일까지 각자 담당 업무 진행 상황을 공유해주세요.`}
+            />
           </div>
 
           <div className="flex justify-center">
