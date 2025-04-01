@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import KakaoLoginButton from '@/components/KakaoLoginButton'
+import GoogleLoginButton from '@/components/GoogleLoginButton'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -37,6 +38,17 @@ export default function LoginPage() {
     // TODO: 에러 처리
   }
 
+  const handleGoogleLoginSuccess = (userData: any) => {
+    console.log('구글 로그인 성공:', userData)
+    // TODO: 백엔드에 구글 로그인 정보 전송
+    router.push('/dashboard')
+  }
+
+  const handleGoogleLoginError = (error: any) => {
+    console.error('구글 로그인 실패:', error)
+    // TODO: 에러 처리
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <div className="section-container py-16">
@@ -56,12 +68,19 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-6">
-            {/* 카카오 로그인 */}
-            <div className="flex justify-center">
+            {/* 소셜 로그인 */}
+            <div className="flex flex-col items-center gap-3">
               <div className="w-full sm:w-80">
                 <KakaoLoginButton
                   onSuccess={handleKakaoLoginSuccess}
                   onError={handleKakaoLoginError}
+                  className="btn-secondary w-full"
+                />
+              </div>
+              <div className="w-full sm:w-80">
+                <GoogleLoginButton
+                  onSuccess={handleGoogleLoginSuccess}
+                  onError={handleGoogleLoginError}
                   className="btn-secondary w-full"
                 />
               </div>
