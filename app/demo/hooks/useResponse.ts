@@ -24,8 +24,12 @@ export const useResponse = () => {
     }
   };
 
-  const handleCopyResponse = () => {
-    navigator.clipboard.writeText(editedResponse);
+  const handleCopyResponse = async () => {
+    try {
+      await navigator.clipboard.writeText(editedResponse);
+    } catch (error) {
+      console.error('답변 복사 중 오류가 발생했습니다:', error);
+    }
   };
 
   const handleStyleChange = (style: ResponseStyle) => {
