@@ -12,12 +12,12 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1">
-        <Hero />
-        <Demo />
-        <PersonaProblems />
-        <Features />
-        <SpecialFeatures />
-        <FinalCTA />
+        <Hero /> {/* 홈페이지 첫 화면 */}
+        <Demo /> {/* 데모 영상 */}
+        <PersonaProblems /> {/* 사용자 문제 소개 */}
+        <Features /> {/* 주요 기능 소개 */}
+        <SpecialFeatures /> {/* 특별한 점 소개 */}
+        <FinalCTA /> {/* 최종 초대 호출 */}
       </main>
 
       <Footer />

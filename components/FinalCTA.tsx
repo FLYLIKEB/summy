@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 export default function FinalCTA() {
   return (
@@ -13,12 +14,12 @@ export default function FinalCTA() {
             summy와 함께라면 단 몇 초만에 핵심을 파악할 수 있습니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-secondary">
-              무료로 시작하기
-            </button>
-            <button className="btn-primary">
-              요약 체험하기
-            </button>
+            <Link href="/signup" className="btn-secondary">
+              첫 달 무료로 시작하기
+            </Link>
+            <Link href="/demo" className="btn-primary">
+              실제 대화 요약해보기
+            </Link>
           </div>
           <p className="mt-6 text-sm opacity-70">
             ✨ 첫 달 무료 · 언제든 해지 가능 · 설치 필요 없음
