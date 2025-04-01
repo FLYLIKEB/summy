@@ -20,23 +20,27 @@ export default function DemoPage() {
       
       // 임시 결과 (실제로는 API 응답을 사용)
       setResult(`요약 결과:
-      
+
 1. 주요 내용
-- 대화의 핵심 주제와 결론
-- 중요한 결정사항
-- 다음 단계나 할 일
+- 프로젝트 일정 조정 및 마감일 확정
+- 새로운 기능 개발 우선순위 결정
+- 팀원 역할 재배치 및 책임 명확화
 
 2. 참여자별 발언
-- 각 참여자의 주요 의견
-- 역할과 책임
+- 김팀장: Q2 마감일을 6월 15일로 확정하고, 테스트 기간을 2주 확보
+- 박개발: 사용자 피드백을 바탕으로 검색 기능 개선이 우선순위
+- 이디자인: UI/UX 개선안 제시 및 디자인 시스템 구축 필요성 언급
+- 정기획: 신규 기능 3개 중 2개는 Q2, 1개는 Q3로 연기 제안
 
 3. 감정/분위기 분석
-- 대화의 전반적인 톤
-- 참여자들의 감정 상태
+- 전반적으로 긍정적이고 협력적인 분위기
+- 일정 조정에 대한 팀원들의 이해와 수용
+- 새로운 기능 개발에 대한 열정적인 논의
 
-4. 시간대별 정리
-- 주요 이슈별 시간대
-- 마감일과 약속된 일정`)
+4. 다음 단계
+- 5월 1일까지 상세 일정표 작성
+- 5월 15일까지 UI/UX 개선안 확정
+- 6월 1일까지 테스트 계획 수립`)
     } catch (error) {
       setResult('요약 중 오류가 발생했습니다. 다시 시도해주세요.')
     } finally {
@@ -74,6 +78,10 @@ export default function DemoPage() {
               className="w-full h-48 bg-white bg-opacity-5 rounded-xl p-4 text-white placeholder-white placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
               placeholder="여기에 대화 내용을 붙여넣으세요..."
             />
+            <div className="mt-2 text-sm text-white opacity-50">
+              예시: "안녕하세요, 오늘은 Q2 프로젝트 일정 조정과 신규 기능 개발에 대해 논의하도록 하겠습니다. 
+              먼저 현재 진행 상황을 공유해주시겠어요?"
+            </div>
           </div>
 
           <div className="flex justify-center">
