@@ -24,7 +24,40 @@ export default function Hero() {
   }
 
   return (
-    <>
+    <div className="relative isolate overflow-hidden">
+      <div className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="mb-12 px-4">
+              <h1 className="text-8xl sm:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+                SUMMY
+              </h1>
+            </div>
+            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+              ✨ 대화를 더 쉽게,<br />
+              🚀 요약은 더 빠르게
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+              💬 긴 대화를 AI가 빠르게 요약해드립니다.<br />
+              🎯 핵심만 쏙 뽑아서, 답변까지 제안해드려요.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <Link
+                href="/demo"
+                className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 text-lg font-semibold text-white shadow-lg shadow-purple-500/20 hover:from-purple-600 hover:to-pink-600 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-500"
+              >
+                🎮 첫 달 무료로 시작하기
+              </Link>
+              <Link
+                href="#features"
+                className="rounded-full bg-white/10 backdrop-blur-sm px-6 py-3 text-lg font-semibold text-white hover:bg-white/20 transition-all border border-white border-opacity-20"
+              >
+                🎯 실제 대화 요약해보기
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
       {showScrollButton && (
         <button
           onClick={scrollToTop}
@@ -47,32 +80,6 @@ export default function Hero() {
           </svg>
         </button>
       )}
-      <section className="min-h-[80vh] container mx-auto px-4 flex flex-col items-center justify-center text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-            메신저 대화,<br />
-            요약의 기술
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl mb-8 opacity-90">
-            대화 읽기 귀찮을 땐, summy가 대신 요약해줄게요
-          </p>
-          <p className="text-base sm:text-lg md:text-xl text-gray-800 mb-8 max-w-2xl mx-auto">
-            AI가 대화 내용을 분석하여 핵심 내용을 요약하고, 
-            상황에 맞는 답변을 추천해드려요.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/signup" className="btn-secondary">
-              첫 달 무료로 시작하기
-            </Link>
-            <Link href="/demo" className="btn-primary">
-              실제 대화 요약해보기
-            </Link>
-          </div>
-          <p className="text-sm sm:text-base mt-6 opacity-70">
-            첫 달은 무료! 설치 없이 바로 시작하세요
-          </p>
-        </div>
-      </section>
-    </>
+    </div>
   )
 } 
