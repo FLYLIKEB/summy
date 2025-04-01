@@ -25,11 +25,6 @@ export default function Hero() {
 
   return (
     <>
-      <div className="fixed top-4 left-4 z-50">
-        <h2 className="text-3xl font-black tracking-tight bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
-          summy
-        </h2>
-      </div>
       {showScrollButton && (
         <button
           onClick={scrollToTop}

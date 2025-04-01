@@ -7,8 +7,10 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* 로고 */}
-          <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold text-white">summy</span>
+          <Link href="/" className="flex items-center pl-0">
+            <span className="text-2xl font-black tracking-tight bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text hover:from-purple-500 hover:to-pink-700 transition-all">
+              summy
+            </span>
           </Link>
 
           {/* 로그인/회원가입 버튼 */}
