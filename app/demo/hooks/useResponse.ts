@@ -10,11 +10,6 @@ export const useResponse = () => {
   const [showReason, setShowReason] = useState(false);
 
   const handleSuggestResponse = async (input: string) => {
-    if (!input.trim()) {
-      alert('대화 내용을 입력해주세요.');
-      return;
-    }
-
     setIsSuggesting(true);
     try {
       // TODO: API 호출 구현

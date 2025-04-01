@@ -17,6 +17,20 @@ export const useFileUpload = () => {
     setIsDragging(false);
   };
 
+  const readFile = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target?.result as string;
+        resolve(text);
+      };
+      reader.onerror = (e) => {
+        reject(e);
+      };
+      reader.readAsText(file, 'EUC-KR');
+    });
+  };
+
   const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
@@ -30,7 +44,8 @@ export const useFileUpload = () => {
     }
 
     try {
-      const text = await file.text();
+      const text = await readFile(file);
+      console.log('파일 내용:', text);
       setUploadedFile(text);
       setFileName(file.name);
     } catch (error) {
@@ -49,7 +64,8 @@ export const useFileUpload = () => {
     }
 
     try {
-      const text = await file.text();
+      const text = await readFile(file);
+      console.log('파일 내용:', text);
       setUploadedFile(text);
       setFileName(file.name);
     } catch (error) {

@@ -55,22 +55,21 @@ export default function DemoPage() {
   // 파일 업로드 시 입력값 업데이트
   useEffect(() => {
     if (uploadedFile) {
+      console.log('uploadedFile 변경:', uploadedFile); // 디버깅용 로그
       setInput(uploadedFile);
     }
   }, [uploadedFile]);
 
   // 요약 버튼 클릭 핸들러
   const handleSummarizeClick = () => {
-    if (!input.trim()) {
-      alert('대화 내용을 입력해주세요.');
-      return;
-    }
-    handleSummarize(input);
+    const content = uploadedFile || input;
+    handleSummarize(content);
   }
 
   // 답변 제안 버튼 클릭 핸들러
   const handleSuggestResponseClick = () => {
-    handleSuggestResponse(input);
+    const content = uploadedFile || input;
+    handleSuggestResponse(content);
   }
 
   return (
