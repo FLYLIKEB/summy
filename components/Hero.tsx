@@ -30,7 +30,7 @@ export default function Hero() {
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-8 sm:mb-12 px-2 sm:px-4">
               <h1 className="text-6xl sm:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 tracking-tight">
-                SUMMY
+                summy
               </h1>
             </div>
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">

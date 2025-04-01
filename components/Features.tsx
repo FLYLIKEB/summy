@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Features() {
   return (
-    <section>
+    <section id="features">
       <div className="section-container">
         <h2 className="section-title">
           💬 어떤 대화든 요약해드려요

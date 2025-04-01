@@ -41,14 +41,21 @@ export default function SignupPage() {
           />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-start gap-2">
           <input
             type="checkbox"
             id="terms"
-            className="rounded border-white border-opacity-20 bg-white bg-opacity-5 text-purple-500 focus:ring-purple-500"
+            className="mt-1 rounded border-white border-opacity-20 bg-white bg-opacity-5 text-purple-500 focus:ring-purple-500"
           />
           <label htmlFor="terms" className="text-sm opacity-80">
-            이용약관 및 개인정보처리방침에 동의합니다
+            <Link href="/terms" className="text-purple-400 hover:text-purple-300 underline" prefetch={true}>
+              이용약관
+            </Link>
+            {' '}및{' '}
+            <Link href="/privacy" className="text-purple-400 hover:text-purple-300 underline" prefetch={true}>
+              개인정보처리방침
+            </Link>
+            에 동의합니다
           </label>
         </div>
 
