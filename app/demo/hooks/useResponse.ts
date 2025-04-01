@@ -43,8 +43,8 @@ export const useResponse = () => {
       case 'friendly':
         newResponse = '안녕하세요! 회의 내용 잘 확인했습니다. 제안하신 내용들 정말 좋네요. 다음 주 월요일까지 검토하고 피드백 드릴게요.';
         break;
-      case 'professional':
-        newResponse = '회의 내용을 확인했습니다. 제안하신 사항들에 대해 전문적인 관점에서 검토하여 다음 주 월요일까지 상세한 피드백을 드리도록 하겠습니다.';
+      case 'concise':
+        newResponse = '회의 내용 확인했습니다. 다음 주 월요일까지 피드백 드리겠습니다.';
         break;
     }
     setEditedResponse(newResponse);
