@@ -156,60 +156,72 @@ export default function DemoPage() {
           </div>
 
           {result && (
-            <div className="card mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">요약 결과</h2>
-                  <p className="text-sm text-white/60 mt-1">AI가 분석한 대화 내용</p>
-                </div>
-              </div>
-              
-              <div className="grid gap-6">
-                {result.split('\n\n').map((section, index) => {
-                  const [title, ...points] = section.split('\n')
-                  return (
-                    <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                          <span className="text-lg font-bold text-purple-400">{index + 1}</span>
-                        </div>
-                        <h3 className="text-lg font-semibold text-white">{title}</h3>
-                      </div>
-                      <ul className="space-y-3">
-                        {points.map((point, pointIndex) => (
-                          <li key={pointIndex} className="flex items-start gap-3 text-white/80 group">
-                            <span className="text-purple-400 mt-1 group-hover:text-pink-400 transition-colors">•</span>
-                            <span className="group-hover:text-white transition-colors">{point.trim().replace(/^-\s*/, '')}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )
-                })}
-              </div>
+            <div className="card mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10 relative overflow-hidden">
+              {/* 배경 효과 */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 animate-gradient"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"></div>
 
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-3 text-white/60">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <span>요약 완료</span>
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/20 animate-pulse">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
                   </div>
-                  <div className="flex items-center gap-3 text-white/60">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+                  <div>
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text animate-gradient">요약 결과</h2>
+                    <p className="text-sm text-white/60 mt-1">AI가 분석한 대화 내용</p>
+                  </div>
+                </div>
+                
+                <div className="grid gap-6">
+                  {result.split('\n\n').map((section, index) => {
+                    const [title, ...points] = section.split('\n')
+                    return (
+                      <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/5 hover:border-purple-500/20 transition-all duration-300 group relative overflow-hidden">
+                        {/* 카드 배경 효과 */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        <div className="relative">
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                              <span className="text-lg font-bold text-purple-400">{index + 1}</span>
+                            </div>
+                            <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">{title}</h3>
+                          </div>
+                          <ul className="space-y-3">
+                            {points.map((point, pointIndex) => (
+                              <li key={pointIndex} className="flex items-start gap-3 text-white/80 group/item">
+                                <span className="text-purple-400 mt-1 group-hover/item:text-pink-400 transition-colors duration-300">•</span>
+                                <span className="group-hover/item:text-white transition-colors duration-300">{point.trim().replace(/^-\s*/, '')}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-3 text-white/60 group">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <span className="group-hover:text-white transition-colors duration-300">요약 완료</span>
                     </div>
-                    <span>AI 분석 완료</span>
+                    <div className="flex items-center gap-3 text-white/60 group">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <span className="group-hover:text-white transition-colors duration-300">AI 분석 완료</span>
+                    </div>
                   </div>
                 </div>
               </div>
