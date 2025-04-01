@@ -483,7 +483,7 @@ export default function NewSummaryPage() {
               className="animate-fade-in-up"
             />
 
-            <div className="flex justify-end gap-4">
+            <div className="flex justify-center gap-4">
               <button
                 type="submit"
                 disabled={!file || isLoading}
