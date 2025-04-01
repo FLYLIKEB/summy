@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Link from 'next/link'
 
 const EXAMPLE_CONVERSATION = `[김팀장] 안녕하세요, 오늘은 Q2 프로젝트 일정 조정과 신규 기능 개발에 대해 논의하도록 하겠습니다. 
@@ -78,10 +78,58 @@ const DETAILED_SUMMARY = `1. 주요 내용
 
 export default function DemoPage() {
   const [input, setInput] = useState('')
-  const [isSummarizing, setIsSummarizing] = useState(false)
-  const [isSuggesting, setIsSuggesting] = useState(false)
   const [result, setResult] = useState('')
   const [suggestedResponse, setSuggestedResponse] = useState('')
+  const [isSummarizing, setIsSummarizing] = useState(false)
+  const [isSuggesting, setIsSuggesting] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+  const [fileName, setFileName] = useState('')
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+    
+    const file = e.dataTransfer.files[0]
+    if (file) {
+      handleFileSelect(file)
+    }
+  }
+
+  const handleFileSelect = (file: File) => {
+    if (file.type === 'text/plain' || 
+        file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+        file.type === 'application/vnd.ms-excel') {
+      setUploadedFile(file)
+      setFileName(file.name)
+      setInput('') // 텍스트 입력 초기화
+    } else {
+      alert('지원하지 않는 파일 형식입니다. 텍스트 파일(.txt) 또는 엑셀 파일(.xlsx, .xls)만 업로드 가능합니다.')
+    }
+  }
+
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      handleFileSelect(file)
+    }
+  }
+
+  const handleRemoveFile = () => {
+    setUploadedFile(null)
+    setFileName('')
+  }
 
   const handleSummarize = () => {
     console.log('요약하기 버튼 클릭됨')
