@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import { useFileUpload } from './hooks/useFileUpload'
 import { useSummarize } from './hooks/useSummarize'
 import { useResponse } from './hooks/useResponse'
-import { Header } from './components/Header'
 import { FileUpload } from './components/FileUpload'
 import { TextInput } from './components/TextInput'
 import { ActionButtons } from './components/ActionButtons'
@@ -70,9 +69,7 @@ export default function DemoPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
-        <Header />
-
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
         <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
           <div className="text-center">
             <h1 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
