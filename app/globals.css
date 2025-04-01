@@ -68,13 +68,15 @@ body {
   }
 
   .btn-primary {
-    @apply px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold text-base sm:text-lg 
-           hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25;
+    @apply px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold text-lg sm:text-xl 
+           hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-purple-500/30
+           transform hover:-translate-y-1 rounded-full;
   }
 
   .btn-secondary {
-    @apply px-6 sm:px-8 py-3 sm:py-4 bg-white bg-opacity-10 text-white rounded-full font-bold text-base sm:text-lg 
-           hover:bg-opacity-20 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/25 border border-white border-opacity-20;
+    @apply px-8 sm:px-10 py-4 sm:py-5 bg-white bg-opacity-10 text-white rounded-full font-bold text-lg sm:text-xl 
+           hover:bg-opacity-20 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-white/30
+           transform hover:-translate-y-1 border border-white border-opacity-20 rounded-full;
   }
 }
 
