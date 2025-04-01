@@ -1,3 +1,4 @@
+// 필요한 의존성 모듈 import
 import React from 'react'
 import { Card } from './common/Card'
 import { Icon } from './common/Icon'
@@ -5,19 +6,21 @@ import { Button } from './common/Button'
 import { RESPONSE_STYLES, RESPONSE_REASONS } from '../constants'
 import { ResponseStyle } from '../types'
 
+// 컴포넌트 Props 타입 정의
 interface ResponseSuggestionProps {
-  isEditing: boolean
-  editedResponse: string
-  selectedStyle: ResponseStyle
-  onStyleSelect: (style: ResponseStyle) => void
-  onEdit: () => void
-  onUpdateResponse: (response: string) => void
-  onCancelEditing: () => void
-  onSaveResponse: () => void
-  showReason: boolean
-  onToggleReason: () => void
+  isEditing: boolean                                  // 편집 모드 여부
+  editedResponse: string                              // 편집된 답변 내용
+  selectedStyle: ResponseStyle                        // 선택된 답변 스타일
+  onStyleSelect: (style: ResponseStyle) => void       // 스타일 선택 핸들러
+  onEdit: () => void                                 // 편집 모드 전환 핸들러
+  onUpdateResponse: (response: string) => void        // 답변 내용 업데이트 핸들러
+  onCancelEditing: () => void                        // 편집 취소 핸들러
+  onSaveResponse: () => void                         // 답변 저장 핸들러
+  showReason: boolean                                // 답변 작성 이유 표시 여부
+  onToggleReason: () => void                        // 답변 작성 이유 토글 핸들러
 }
 
+// 답변 제안 컴포넌트
 export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
   isEditing,
   editedResponse,
@@ -31,15 +34,18 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
   onToggleReason
 }) => {
   return (
+    // 메인 카드 컨테이너
     <Card className="mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-lg border border-white/10 relative overflow-hidden">
-      {/* 배경 효과 */}
+      {/* 배경 그라데이션 효과 */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 animate-gradient"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"></div>
 
       <div className="relative">
+        {/* 헤더 섹션: 제목과 복사 버튼 */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
+            {/* 아이콘과 제목 */}
             <div className="relative">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/20 animate-pulse">
                 <Icon name="response" className="w-6 h-6 text-white" />
@@ -54,6 +60,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
               <p className="text-sm text-white/60 mt-1">회의 내용을 바탕으로 적절한 답변을 제안합니다</p>
             </div>
           </div>
+          {/* 복사 버튼 */}
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
@@ -66,7 +73,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
           </div>
         </div>
 
-        {/* 스타일 선택 */}
+        {/* 답변 스타일 선택 섹션 */}
         <div className="flex items-center gap-2 mb-6">
           <span className="text-sm text-white/60">답변 스타일:</span>
           <div className="flex gap-2">
@@ -87,8 +94,10 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
           </div>
         </div>
 
+        {/* 답변 내용 섹션 */}
         <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
           {isEditing ? (
+            // 편집 모드
             <div className="space-y-4">
               <textarea
                 value={editedResponse}
@@ -113,6 +122,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
               </div>
             </div>
           ) : (
+            // 보기 모드
             <div className="relative group">
               <div className="text-white/80 whitespace-pre-line">{editedResponse}</div>
               <div className="flex justify-end gap-2 mt-4">
@@ -124,6 +134,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                   <Icon name="edit" className="w-4 h-4 text-white/60" />
                 </Button>
               </div>
+              {/* 답변 작성 이유 섹션 */}
               {showReason && (
                 <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/5">
                   <h4 className="text-sm font-medium text-purple-300 mb-2">답변 작성 이유</h4>
@@ -141,6 +152,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
           )}
         </div>
 
+        {/* 푸터 섹션 */}
         <div className="mt-8 pt-6 border-t border-white/10">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-3 text-white/60 group">
@@ -154,4 +166,4 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
       </div>
     </Card>
   )
-} 
+}
