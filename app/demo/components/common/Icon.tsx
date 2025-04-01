@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface IconProps {
-  name: 'upload' | 'file' | 'remove' | 'copy' | 'edit' | 'info' | 'users' | 'clock' | 'tag' | 'progress' | 'summary' | 'response'
+  name: 'upload' | 'file' | 'remove' | 'copy' | 'edit' | 'info' | 'users' | 'clock' | 'tag' | 'progress' | 'summary' | 'response' | 'chevronUp' | 'chevronDown'
   className?: string
   size?: 'sm' | 'md' | 'lg'
 }
@@ -72,6 +72,16 @@ export const Icon: React.FC<IconProps> = ({ name, className = '', size = 'md' })
     response: (
       <svg className={`${sizeClasses[size]} ${className}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+      </svg>
+    ),
+    chevronUp: (
+      <svg className={`${sizeClasses[size]} ${className}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+      </svg>
+    ),
+    chevronDown: (
+      <svg className={`${sizeClasses[size]} ${className}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
       </svg>
     )
   }

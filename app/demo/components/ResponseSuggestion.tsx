@@ -129,6 +129,14 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                 <div className="flex justify-end gap-2 mt-4">
                   <Button
                     variant="ghost"
+                    onClick={onToggleReason}
+                    className="px-3 py-1 bg-white/5 text-white/60 rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
+                  >
+                    <Icon name={showReason ? 'chevronUp' : 'chevronDown'} className="w-4 h-4" />
+                    {showReason ? '이유 숨기기' : '이유 보기'}
+                  </Button>
+                  <Button
+                    variant="ghost"
                     onClick={onEdit}
                     className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
                   >
