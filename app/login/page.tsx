@@ -74,14 +74,14 @@ export default function LoginPage() {
                 <KakaoLoginButton
                   onSuccess={handleKakaoLoginSuccess}
                   onError={handleKakaoLoginError}
-                  className="btn-secondary w-full"
+                  className="btn-secondary w-full !bg-yellow-400 hover:!bg-yellow-500 !text-yellow-900"
                 />
               </div>
               <div className="w-full sm:w-80">
                 <GoogleLoginButton
                   onSuccess={handleGoogleLoginSuccess}
                   onError={handleGoogleLoginError}
-                  className="btn-secondary w-full"
+                  className="btn-secondary w-full !bg-slate-50 hover:!bg-slate-100 !text-slate-800 !border-slate-200"
                 />
               </div>
             </div>
