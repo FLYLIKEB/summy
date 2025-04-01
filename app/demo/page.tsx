@@ -84,7 +84,7 @@ export default function DemoPage() {
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="w-full h-48 bg-white bg-opacity-5 rounded-xl p-4 text-white placeholder-white placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+              className="w-full h-48 bg-white bg-opacity-5 rounded-xl p-4 text-white placeholder:text-white/50 placeholder:text-sm placeholder:font-light placeholder:leading-relaxed focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
               placeholder={`[김팀장] 안녕하세요, 오늘은 Q2 프로젝트 일정 조정과 신규 기능 개발에 대해 논의하도록 하겠습니다. 
 먼저 현재 진행 상황을 공유해주시겠어요?
 
