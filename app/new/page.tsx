@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react'
 import { Slack, MessageCircle } from 'lucide-react'
-import FileUpload from '@/components/FileUpload'
 import { useFileUpload } from '@/app/demo/hooks/useFileUpload'
 import { useSummarize } from '@/app/demo/hooks/useSummarize'
 import { useResponse } from '@/app/demo/hooks/useResponse'
 import { SummaryResult } from '@/app/demo/components/SummaryResult'
 import { ResponseSuggestion } from '@/app/demo/components/ResponseSuggestion'
 import { ActionButtons } from '@/app/demo/components/ActionButtons'
+import { FileUpload } from '@/app/demo/components/FileUpload'
 
 const platforms = [
   {
@@ -103,7 +103,7 @@ export default function NewSummaryPage() {
               onClick={() => setSelectedPlatform(platform.id)}
               className={`p-6 rounded-2xl border ${
                 selectedPlatform === platform.id
-                  ? 'border-purple-500 bg-purple-500/10'
+                  ? 'border-blue-500 bg-blue-500/10'
                   : 'border-white/10 hover:border-white/20 bg-white/5'
               } transition-colors text-left`}
             >
