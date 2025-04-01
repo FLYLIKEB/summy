@@ -156,30 +156,35 @@ export default function DemoPage() {
           </div>
 
           {result && (
-            <div className="card mt-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="card mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold">요약 결과</h2>
-                  <p className="text-sm text-white/60">AI가 분석한 대화 내용</p>
+                  <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">요약 결과</h2>
+                  <p className="text-sm text-white/60 mt-1">AI가 분석한 대화 내용</p>
                 </div>
               </div>
               
-              <div className="space-y-6">
+              <div className="grid gap-6">
                 {result.split('\n\n').map((section, index) => {
                   const [title, ...points] = section.split('\n')
                   return (
-                    <div key={index} className="bg-white/5 rounded-lg p-4">
-                      <h3 className="text-lg font-semibold mb-3 text-purple-400">{title}</h3>
-                      <ul className="space-y-2">
+                    <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/5 hover:border-purple-500/20 transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                          <span className="text-lg font-bold text-purple-400">{index + 1}</span>
+                        </div>
+                        <h3 className="text-lg font-semibold text-white">{title}</h3>
+                      </div>
+                      <ul className="space-y-3">
                         {points.map((point, pointIndex) => (
-                          <li key={pointIndex} className="flex items-start gap-2 text-white/80">
-                            <span className="text-purple-400 mt-1">•</span>
-                            <span>{point.trim()}</span>
+                          <li key={pointIndex} className="flex items-start gap-3 text-white/80 group">
+                            <span className="text-purple-400 mt-1 group-hover:text-pink-400 transition-colors">•</span>
+                            <span className="group-hover:text-white transition-colors">{point.trim().replace(/^-\s*/, '')}</span>
                           </li>
                         ))}
                       </ul>
@@ -188,18 +193,22 @@ export default function DemoPage() {
                 })}
               </div>
 
-              <div className="mt-6 pt-6 border-t border-white/10">
-                <div className="flex items-center justify-between text-sm text-white/60">
-                  <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-3 text-white/60">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                      <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
                     <span>요약 완료</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                  <div className="flex items-center gap-3 text-white/60">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                      <svg className="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
                     <span>AI 분석 완료</span>
                   </div>
                 </div>
