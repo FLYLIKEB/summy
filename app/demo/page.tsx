@@ -104,7 +104,7 @@ export default function DemoPage() {
       } finally {
         setIsSummarizing(false)
       }
-    }, 2000)
+    }, 1000)
   }
 
   const handleSuggestResponse = () => {
@@ -129,7 +129,7 @@ export default function DemoPage() {
       } finally {
         setIsSuggesting(false)
       }
-    }, 1500)
+    }, 800)
   }
 
   return (
@@ -346,7 +346,7 @@ export default function DemoPage() {
                     <span className="text-purple-400">75%</span>
                   </div>
                   <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full w-3/4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
+                    <div className="h-full w-3/4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-[pulse_1s_ease-in-out_infinite]"></div>
                   </div>
                 </div>
 
