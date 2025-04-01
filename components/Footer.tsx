@@ -11,22 +11,22 @@ export default function Footer() {
               ✨ Summy
             </h3>
             <p className="text-sm text-white/60">
-              AI로 더 스마트하게 대화를 요약하세요
+              🤖 AI로 더 스마트하게 대화를 요약하세요
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 items-center">
-            <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
-              📝 이용약관
+            <a href="#" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2">
+              <span>📋</span> 이용약관
             </a>
             <div className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
-            <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
-              🔒 개인정보처리방침
+            <a href="#" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2">
+              <span>🔐</span> 개인정보처리방침
             </a>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-white/5 text-center">
           <p className="text-sm text-white/40">
-            © 2024 Summy. All rights reserved.
+            💜 © 2025 Summy. All rights reserved.
           </p>
         </div>
       </div>
