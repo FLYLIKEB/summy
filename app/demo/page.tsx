@@ -191,12 +191,32 @@ export default function DemoPage() {
                             <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">{title}</h3>
                           </div>
                           <ul className="space-y-3">
-                            {points.map((point, pointIndex) => (
-                              <li key={pointIndex} className="flex items-start gap-3 text-white/80 group/item">
-                                <span className="text-purple-400 mt-1 group-hover/item:text-pink-400 transition-colors duration-300">•</span>
-                                <span className="group-hover/item:text-white transition-colors duration-300">{point.trim().replace(/^-\s*/, '')}</span>
-                              </li>
-                            ))}
+                            {points.map((point, pointIndex) => {
+                              // 참여자별 발언 섹션인 경우 특별한 스타일 적용
+                              if (title === '2. 참여자별 발언') {
+                                const [name, ...content] = point.trim().replace(/^-\s*/, '').split(':')
+                                return (
+                                  <li key={pointIndex} className="flex items-start gap-3 text-white/80 group/item">
+                                    <div className="relative">
+                                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover/item:scale-110 transition-transform duration-300">
+                                        <span className="text-lg font-bold text-purple-400">{name[0]}</span>
+                                      </div>
+                                      <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
+                                    </div>
+                                    <div className="flex-1">
+                                      <div className="font-semibold text-purple-400 group-hover/item:text-pink-400 transition-colors duration-300">{name}</div>
+                                      <div className="text-white/80 group-hover/item:text-white transition-colors duration-300">{content.join(':')}</div>
+                                    </div>
+                                  </li>
+                                )
+                              }
+                              return (
+                                <li key={pointIndex} className="flex items-start gap-3 text-white/80 group/item">
+                                  <span className="text-purple-400 mt-1 group-hover/item:text-pink-400 transition-colors duration-300">•</span>
+                                  <span className="group-hover/item:text-white transition-colors duration-300">{point.trim().replace(/^-\s*/, '')}</span>
+                                </li>
+                              )
+                            })}
                           </ul>
                         </div>
                       </div>
