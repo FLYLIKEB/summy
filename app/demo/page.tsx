@@ -89,21 +89,24 @@ export default function DemoPage() {
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
+    e.stopPropagation()
     setIsDragging(true)
   }
 
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault()
+    e.stopPropagation()
     setIsDragging(false)
   }
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
+    e.stopPropagation()
     setIsDragging(false)
     
-    const file = e.dataTransfer.files[0]
-    if (file) {
-      handleFileSelect(file)
+    const files = e.dataTransfer.files
+    if (files && files.length > 0) {
+      handleFileSelect(files[0])
     }
   }
 
@@ -505,6 +508,49 @@ export default function DemoPage() {
               </div>
             </div>
           )}
+
+          {/* 파일 업로드 영역 */}
+          <div 
+            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer ${
+              isDragging 
+                ? 'border-purple-500 bg-purple-500/10' 
+                : 'border-white/20 hover:border-purple-500/50'
+            }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileInputChange}
+              accept=".txt,.xlsx,.xls"
+              className="hidden"
+            />
+            <div className="space-y-4">
+              <div className="flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                </div>
+              </div>
+              <div className="text-white/60">
+                <p className="text-lg font-medium">파일을 드래그하거나 클릭하여 업로드</p>
+                <p className="text-sm mt-2">지원 형식: TXT, XLSX, XLS</p>
+              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  fileInputRef.current?.click()
+                }}
+                className="px-6 py-2 bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors"
+              >
+                파일 선택
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
