@@ -8,7 +8,7 @@ export default function DemoPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState('')
 
-  const handleSummarize = async () => {
+  const handleSummarize = () => {
     console.log('요약하기 버튼 클릭됨')
     if (!input.trim()) {
       console.log('입력값이 비어있음')
@@ -18,13 +18,12 @@ export default function DemoPage() {
     setIsLoading(true)
     setResult('')
 
-    try {
-      console.log('요약 시작')
-      // 실제 API 호출 대신 임시로 지연 시간을 추가
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // 임시 결과 (실제로는 API 응답을 사용)
-      const summary = `요약 결과:
+    // 실제 API 호출 대신 임시로 지연 시간을 추가
+    setTimeout(() => {
+      try {
+        console.log('요약 시작')
+        // 임시 결과 (실제로는 API 응답을 사용)
+        const summary = `요약 결과:
 
 1. 주요 내용
 - 프로젝트 일정 조정 및 마감일 확정
@@ -47,14 +46,15 @@ export default function DemoPage() {
 - 5월 15일까지 UI/UX 개선안 확정
 - 6월 1일까지 테스트 계획 수립`
 
-      console.log('요약 결과 설정')
-      setResult(summary)
-    } catch (error) {
-      console.error('요약 중 오류 발생:', error)
-      setResult('요약 중 오류가 발생했습니다. 다시 시도해주세요.')
-    } finally {
-      setIsLoading(false)
-    }
+        console.log('요약 결과 설정')
+        setResult(summary)
+      } catch (error) {
+        console.error('요약 중 오류 발생:', error)
+        setResult('요약 중 오류가 발생했습니다. 다시 시도해주세요.')
+      } finally {
+        setIsLoading(false)
+      }
+    }, 2000)
   }
 
   return (
@@ -116,7 +116,7 @@ export default function DemoPage() {
               type="button"
               onClick={handleSummarize}
               disabled={isLoading || !input.trim()}
-              className={`btn-primary ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
