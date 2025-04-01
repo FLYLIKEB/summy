@@ -7,9 +7,9 @@ export const RESPONSE_STYLES = {
     label: '😊 친근한',
     description: '편안하고 친근한 어조로 작성된 답변'
   },
-  professional: {
-    label: '💼 전문적인',
-    description: '전문적이고 신뢰감 있는 어조로 작성된 답변'
+  concise: {
+    label: '⚡ 간결한',
+    description: '짧고 핵심적인 내용만 담은 답변'
   }
 } as const;
 
@@ -24,10 +24,10 @@ export const RESPONSE_REASONS = {
     '프론트엔드와 백엔드 팀 간의 협력적인 분위기',
     '긍정적인 진행 상황(80%, 70% 완료)에 대한 공유'
   ],
-  professional: [
-    '기술적인 내용(API, UI, DB)이 포함된 회의',
-    '구체적인 진행률과 테스트 계획이 언급된 상황',
-    '프로젝트 진행 상황에 대한 전문적인 피드백이 필요한 경우'
+  concise: [
+    '짧은 시간 내에 핵심 내용만 전달해야 하는 상황',
+    '이메일이나 메시지로 빠른 피드백이 필요한 경우',
+    '간단한 업데이트나 알림을 전달하는 경우'
   ]
 } as const;
 
