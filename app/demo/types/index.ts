@@ -14,7 +14,7 @@ export interface SummaryState {
 export interface ResponseState {
   isSuggesting: boolean;
   suggestedResponse: string;
-  responseStyle: ResponseStyle;
+  selectedStyle: ResponseStyle;
   isEditing: boolean;
   editedResponse: string;
   showReason: boolean;

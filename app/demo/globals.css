@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+@layer components {
+  .card {
+    @apply relative overflow-hidden rounded-xl backdrop-blur-sm border border-white/10;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all;
+  }
+
+  .btn-outline {
+    @apply px-4 py-2 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-all;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-white/60 hover:text-white transition-all;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 3s ease infinite;
+  background-size: 200% 200%;
+} 
