@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
-import { Upload } from 'lucide-react'
+import React from 'react'
+import { useFileUpload } from '@/hooks/useFileUpload'
+import { Icon } from '@/components/ui/Icon'
 
 interface FileUploadProps {
   onFileChange: (file: File | null) => void
@@ -9,48 +10,36 @@ interface FileUploadProps {
 }
 
 export default function FileUpload({ onFileChange, className = '' }: FileUploadProps) {
-  const [isDragging, setIsDragging] = useState(false)
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
-  const [fileName, setFileName] = useState<string | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-  }
+  const {
+    isDragging,
+    uploadedFile,
+    fileName,
+    fileInputRef,
+    handleDragOver,
+    handleDragLeave,
+    handleDrop: handleDropBase,
+    handleFileInputChange: handleFileInputChangeBase,
+    handleRemoveFile: handleRemoveFileBase
+  } = useFileUpload()
 
   const handleDrop = async (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-
+    handleDropBase(e)
     const file = e.dataTransfer.files[0]
-    if (!file) return
-
-    setUploadedFile(file)
-    setFileName(file.name)
-    onFileChange(file)
+    if (file) {
+      onFileChange(file)
+    }
   }
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleFileInputChangeBase(e)
     const file = e.target.files?.[0]
-    if (!file) return
-
-    setUploadedFile(file)
-    setFileName(file.name)
-    onFileChange(file)
+    if (file) {
+      onFileChange(file)
+    }
   }
 
   const handleRemoveFile = () => {
-    setUploadedFile(null)
-    setFileName(null)
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ''
-    }
+    handleRemoveFileBase()
     onFileChange(null)
   }
 
@@ -75,21 +64,19 @@ export default function FileUpload({ onFileChange, className = '' }: FileUploadP
       {uploadedFile ? (
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Upload className="w-6 h-6 text-purple-400" />
+            <Icon name="file" className="text-purple-400" />
             <span className="text-white/80">{fileName}</span>
           </div>
           <button
             onClick={handleRemoveFile}
             className="text-white/60 hover:text-white"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <Icon name="remove" size="sm" />
           </button>
         </div>
       ) : (
         <div className="flex flex-col items-center gap-4">
-          <Upload className="w-12 h-12 text-purple-400" />
+          <Icon name="upload" size="lg" className="text-purple-400" />
           <div className="text-center">
             <p className="text-white/80 mb-1">
               파일을 드래그하거나{' '}

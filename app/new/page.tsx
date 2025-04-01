@@ -81,7 +81,10 @@ export default function NewSummaryPage() {
         {/* 파일 업로드 */}
         {selectedPlatform && (
           <form onSubmit={handleSubmit} className="space-y-6">
-            <FileUpload onFileChange={setFile} />
+            <FileUpload
+              onFileChange={setFile}
+              className="animate-fade-in-up"
+            />
 
             <div className="flex justify-end">
               <button
