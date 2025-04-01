@@ -27,9 +27,7 @@ const EXAMPLE_CONVERSATION = `[김팀장] 안녕하세요, 오늘은 Q2 프로�
 
 [김팀장] 네, 모두 수고 많으셨습니다. 다음 주 월요일까지 각자 담당 업무 진행 상황을 공유해주세요.`
 
-const EXAMPLE_SUMMARY = `요약 결과:
-
-1. 주요 내용
+const EXAMPLE_SUMMARY = `1. 주요 내용
 - Q2 프로젝트 일정 조정 논의
 - 신규 기능 개발 계획 수립
 - 팀원별 진행 상황 공유
@@ -51,9 +49,7 @@ const EXAMPLE_SUMMARY = `요약 결과:
 - 6월 1일: 테스트 계획 수립
 - 다음 주 월요일: 팀원별 진행 상황 공유`
 
-const DETAILED_SUMMARY = `요약 결과:
-
-1. 주요 내용
+const DETAILED_SUMMARY = `1. 주요 내용
 - 프로젝트 일정 조정 및 마감일 확정
 - 새로운 기능 개발 우선순위 결정
 - 팀원 역할 재배치 및 책임 명확화
