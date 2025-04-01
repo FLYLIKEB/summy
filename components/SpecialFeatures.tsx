@@ -5,7 +5,7 @@ export default function SpecialFeatures() {
     <section>
       <div className="section-container">
         <h2 className="section-title">
-          summy의 특별한 점
+          ✨ summy의 특별한 점
         </h2>
         <div className="card">
           <div className="space-y-6">
