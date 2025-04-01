@@ -45,4 +45,11 @@ export interface Participant {
 export interface TimelineItem {
   date: string;
   content: string;
+}
+
+export interface ActionButtonsProps {
+  isSummarizing: boolean
+  isSuggesting: boolean
+  onSummarize: () => void
+  onSuggestResponse: () => void
 } 
