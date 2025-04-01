@@ -104,7 +104,7 @@ export default function DemoPage() {
       } finally {
         setIsSummarizing(false)
       }
-    }, 1000)
+    }, 500)
   }
 
   const handleSuggestResponse = () => {
@@ -129,7 +129,7 @@ export default function DemoPage() {
       } finally {
         setIsSuggesting(false)
       }
-    }, 800)
+    }, 400)
   }
 
   return (
