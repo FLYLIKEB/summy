@@ -7,18 +7,6 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <Link href="/" className="text-2xl font-black tracking-tight bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
-            summy
-          </Link>
-          <Link 
-            href="/" 
-            className="px-4 py-2 rounded-full border border-white border-opacity-20 hover:bg-white hover:bg-opacity-10 transition-all"
-          >
-            돌아가기
-          </Link>
-        </div>
-
         <div className="max-w-md mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-center">
             로그인

@@ -1,4 +1,4 @@
-export type ResponseStyle = 'formal' | 'friendly' | 'professional';
+export type ResponseStyle = 'formal' | 'friendly' | 'concise';
 
 export interface FileUploadState {
   isDragging: boolean;
