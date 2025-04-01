@@ -86,6 +86,7 @@ export default function DemoPage() {
     console.log('요약하기 버튼 클릭됨')
     setIsLoading(true)
     setResult('')
+    setSuggestedResponse('')
 
     // 실제 API 호출 대신 임시로 지연 시간을 추가
     setTimeout(() => {
@@ -108,6 +109,7 @@ export default function DemoPage() {
   const handleSuggestResponse = () => {
     setIsLoading(true)
     setSuggestedResponse('')
+    setResult('')
 
     // 실제 API 호출 대신 임시로 지연 시간을 추가
     setTimeout(() => {
