@@ -6,26 +6,15 @@ import Link from 'next/link'
 
 export default function Hero() {
   const [showScrollButton, setShowScrollButton] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      // 스크롤 버튼 표시 여부 설정
-      setShowScrollButton(currentScrollY > 300)
-
-      // 모바일에서 위로 스크롤 시 새로고침
-      if (currentScrollY < lastScrollY && currentScrollY < 50) {
-        window.location.reload()
-      }
-
-      setLastScrollY(currentScrollY)
+      setShowScrollButton(window.scrollY > 300)
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   const scrollToTop = () => {
     window.scrollTo({
