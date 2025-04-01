@@ -140,7 +140,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                   <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/5">
                     <h4 className="text-sm font-medium text-purple-300 mb-2">답변 작성 이유</h4>
                     <div className="text-sm text-white/60 space-y-2">
-                      {RESPONSE_REASONS[selectedStyle].map((reason, index) => (
+                      {RESPONSE_REASONS[selectedStyle as ResponseStyle].map((reason, index) => (
                         <div key={index} className="flex items-start gap-2">
                           <Icon name="info" className="w-4 h-4 text-purple-400 mt-0.5" />
                           <span>{reason}</span>
