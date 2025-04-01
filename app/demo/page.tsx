@@ -157,9 +157,52 @@ export default function DemoPage() {
 
           {result && (
             <div className="card mt-8">
-              <h2 className="text-xl font-bold mb-4">요약 결과</h2>
-              <div className="text-white opacity-80 whitespace-pre-line">
-                {result}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold">요약 결과</h2>
+                  <p className="text-sm text-white/60">AI가 분석한 대화 내용</p>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                {result.split('\n\n').map((section, index) => {
+                  const [title, ...points] = section.split('\n')
+                  return (
+                    <div key={index} className="bg-white/5 rounded-lg p-4">
+                      <h3 className="text-lg font-semibold mb-3 text-purple-400">{title}</h3>
+                      <ul className="space-y-2">
+                        {points.map((point, pointIndex) => (
+                          <li key={pointIndex} className="flex items-start gap-2 text-white/80">
+                            <span className="text-purple-400 mt-1">•</span>
+                            <span>{point.trim()}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="flex items-center justify-between text-sm text-white/60">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>요약 완료</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>AI 분석 완료</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}
