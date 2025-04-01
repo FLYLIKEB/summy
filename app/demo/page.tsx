@@ -78,13 +78,14 @@ const DETAILED_SUMMARY = `1. 주요 내용
 
 export default function DemoPage() {
   const [input, setInput] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isSummarizing, setIsSummarizing] = useState(false)
+  const [isSuggesting, setIsSuggesting] = useState(false)
   const [result, setResult] = useState('')
   const [suggestedResponse, setSuggestedResponse] = useState('')
 
   const handleSummarize = () => {
     console.log('요약하기 버튼 클릭됨')
-    setIsLoading(true)
+    setIsSummarizing(true)
     setResult('')
     setSuggestedResponse('')
 
@@ -101,13 +102,13 @@ export default function DemoPage() {
         console.error('요약 중 오류 발생:', error)
         setResult('요약 중 오류가 발생했습니다. 다시 시도해주세요.')
       } finally {
-        setIsLoading(false)
+        setIsSummarizing(false)
       }
     }, 2000)
   }
 
   const handleSuggestResponse = () => {
-    setIsLoading(true)
+    setIsSuggesting(true)
     setSuggestedResponse('')
     setResult('')
 
@@ -126,7 +127,7 @@ export default function DemoPage() {
         console.error('답변 제안 중 오류 발생:', error)
         setSuggestedResponse('답변 제안 중 오류가 발생했습니다. 다시 시도해주세요.')
       } finally {
-        setIsLoading(false)
+        setIsSuggesting(false)
       }
     }, 1500)
   }
@@ -167,10 +168,10 @@ export default function DemoPage() {
             <button 
               type="button"
               onClick={handleSummarize}
-              disabled={isLoading}
+              disabled={isSummarizing || isSuggesting}
               className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? (
+              {isSummarizing ? (
                 <div className="flex items-center gap-2">
                   <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
@@ -185,10 +186,10 @@ export default function DemoPage() {
             <button 
               type="button"
               onClick={handleSuggestResponse}
-              disabled={isLoading}
+              disabled={isSummarizing || isSuggesting}
               className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? (
+              {isSuggesting ? (
                 <div className="flex items-center gap-2">
                   <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
