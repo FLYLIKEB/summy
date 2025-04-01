@@ -54,7 +54,7 @@ export default function GoogleLoginButton({
           fill="#EA4335"
         />
       </svg>
-      구글로 시작하기
+      구글로 로그인
     </button>
   )
 } 

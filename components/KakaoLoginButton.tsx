@@ -49,7 +49,7 @@ export default function KakaoLoginButton({
             fill="currentColor"
           />
         </svg>
-        카카오로 시작하기
+        카카오로 로그인
       </button>
     </>
   )
