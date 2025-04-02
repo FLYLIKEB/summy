@@ -25,7 +25,7 @@ const Logo: React.FC<LogoProps> = ({
     sm: 'text-xl',
     md: 'text-2xl',
     lg: 'text-4xl',
-    xl: 'text-6xl sm:text-[12rem]'
+    xl: 'text-6xl sm:text-[6rem]'
   }
 
   const iconSize = {

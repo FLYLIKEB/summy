@@ -13,12 +13,12 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
       <Card 
         variant="glass"
         padding="lg"
-        className="bg-white/[0.02] border-white/[0.06] shadow-sm overflow-hidden"
+        className="apple-card overflow-hidden"
       >
         <div className="mb-5 sm:mb-6">
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] flex items-center justify-center">
-              <Icon name="summary" className="w-4 h-4 sm:w-5 sm:h-5 text-white/80" />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#2c2c30] flex items-center justify-center">
+              <span className="text-lg">📝</span>
             </div>
             <div>
               <h2 className="text-lg sm:text-xl font-medium">요약 결과</h2>
@@ -29,10 +29,10 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
         
         {/* 통계 정보 섹션 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-5 sm:mb-6">
-          <div className="bg-white/[0.02] rounded-lg p-3 border border-white/[0.04]">
+          <div className="bg-[#1c1c1e] rounded-lg p-3 border border-white/[0.04]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/[0.04] flex items-center justify-center">
-                <Icon name="users" className="w-4 h-4 text-white/70" />
+              <div className="w-8 h-8 rounded-full bg-[#2c2c30] flex items-center justify-center">
+                <span className="text-base">👥</span>
               </div>
               <div>
                 <div className="text-xs text-white/50">참여자</div>
@@ -40,10 +40,10 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
               </div>
             </div>
           </div>
-          <div className="bg-white/[0.02] rounded-lg p-3 border border-white/[0.04]">
+          <div className="bg-[#1c1c1e] rounded-lg p-3 border border-white/[0.04]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/[0.04] flex items-center justify-center">
-                <Icon name="clock" className="w-4 h-4 text-white/70" />
+              <div className="w-8 h-8 rounded-full bg-[#2c2c30] flex items-center justify-center">
+                <span className="text-base">⏱️</span>
               </div>
               <div>
                 <div className="text-xs text-white/50">시간</div>
@@ -51,10 +51,10 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
               </div>
             </div>
           </div>
-          <div className="bg-white/[0.02] rounded-lg p-3 border border-white/[0.04]">
+          <div className="bg-[#1c1c1e] rounded-lg p-3 border border-white/[0.04]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/[0.04] flex items-center justify-center">
-                <Icon name="tag" className="w-4 h-4 text-white/70" />
+              <div className="w-8 h-8 rounded-full bg-[#2c2c30] flex items-center justify-center">
+                <span className="text-base">🏷️</span>
               </div>
               <div>
                 <div className="text-xs text-white/50">키워드</div>
@@ -62,10 +62,10 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
               </div>
             </div>
           </div>
-          <div className="bg-white/[0.02] rounded-lg p-3 border border-white/[0.04]">
+          <div className="bg-[#1c1c1e] rounded-lg p-3 border border-white/[0.04]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/[0.04] flex items-center justify-center">
-                <Icon name="progress" className="w-4 h-4 text-white/70" />
+              <div className="w-8 h-8 rounded-full bg-[#2c2c30] flex items-center justify-center">
+                <span className="text-base">📊</span>
               </div>
               <div>
                 <div className="text-xs text-white/50">진행률</div>
@@ -80,7 +80,7 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
           {DEFAULT_KEYWORDS.map((keyword, index) => (
             <span 
               key={index} 
-              className="px-3 py-1 rounded-full text-xs bg-white/[0.04] text-white/70"
+              className="px-3 py-1 rounded-full text-xs bg-[#2c2c30] text-white/70"
             >
               {keyword}
             </span>
@@ -93,8 +93,8 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
             <span className="text-white/50">프로젝트 진행률</span>
             <span className="text-white/80">75%</span>
           </div>
-          <div className="h-1.5 bg-white/[0.02] rounded-full overflow-hidden">
-            <div className="h-full w-3/4 bg-white/20 rounded-full"></div>
+          <div className="h-1.5 bg-[#2c2c30] rounded-full overflow-hidden">
+            <div className="h-full w-3/4 bg-gradient-to-r from-purple-500 to-mint-500 rounded-full"></div>
           </div>
         </div>
 
@@ -106,11 +106,11 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
                 key={index} 
                 variant="outline" 
                 padding="md" 
-                className="bg-white/[0.01] border-white/[0.04]"
+                className="bg-[#1c1c1e] border-white/[0.04]"
               >
                 {/* 카드 내용 */}
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-6 h-6 rounded-full bg-white/[0.04] flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-full bg-[#2c2c30] flex items-center justify-center">
                     <span className="text-xs font-medium text-white/70">{index + 1}</span>
                   </div>
                   <h3 className="text-sm font-medium">{title}</h3>
@@ -133,8 +133,8 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
         <div className="mt-5 sm:mt-6 pt-4 border-t border-white/[0.04]">
           <div className="flex items-center justify-between text-xs text-white/50">
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-white/[0.04] flex items-center justify-center">
-                <Icon name="clock" className="w-3 h-3 text-white/70" />
+              <div className="w-5 h-5 rounded-full bg-[#2c2c30] flex items-center justify-center">
+                <span className="text-xs">⏱️</span>
               </div>
               <span>방금 생성됨</span>
             </div>

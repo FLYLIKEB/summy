@@ -78,7 +78,7 @@ export default function Footer() {
                 type="email" 
                 name="email"
                 placeholder="이메일 주소" 
-                className="w-full px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10  text-sm"
+                className="w-full px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10 text-sm"
                 required
               />
               <button type="submit" className="apple-button apple-button-primary whitespace-nowrap text-sm">

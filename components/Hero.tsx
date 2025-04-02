@@ -56,7 +56,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight"
             >
-              summy
+              <Logo variant="text" size="xl" />
             </motion.h1>
 
             {/* 주요 특징 설명: 순차적 페이드인 애니메이션 */}
