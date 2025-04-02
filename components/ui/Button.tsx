@@ -1,5 +1,7 @@
 // components/ui/button.tsx
 
+'use client'
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { THEME_VARIANTS, ButtonVariant, SizeVariant } from "@/components/ui/theme"
@@ -11,10 +13,32 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   startIcon?: React.ReactNode
   endIcon?: React.ReactNode
   isLoading?: boolean
+  /**
+   * 호버 효과 애니메이션 스타일
+   * - pulse: 부드러운 숨쉬기 효과
+   * - float: 위로 떠오르는 효과
+   * - shine: 반짝이는 효과
+   * - jelly: 젤리처럼 튕기는 효과
+   * - none: 효과 없음
+   */
+  hoverEffect?: 'pulse' | 'float' | 'shine' | 'jelly' | 'none'
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, children, variant = 'primary', size = 'md', fullWidth = false, startIcon, endIcon, isLoading, disabled, ...props }, ref) => {
+  ({ 
+    className, 
+    children, 
+    variant = 'primary', 
+    size = 'md', 
+    fullWidth = false, 
+    startIcon, 
+    endIcon, 
+    isLoading, 
+    disabled,
+    hoverEffect = 'none',
+    onClick,
+    ...props 
+  }, ref) => {
     // 버튼 변형에 따른 스타일
     const variantStyles = {
       primary: "bg-primary-600 hover:bg-primary-700 text-white shadow-sm",
@@ -40,6 +64,36 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const stateStyles = isLoading || disabled
       ? "opacity-70 cursor-not-allowed"
       : ""
+      
+    // 호버 효과 스타일
+    const getHoverEffectStyles = () => {
+      switch (hoverEffect) {
+        case 'pulse':
+          return 'btn-hover-effect hover:animate-pulse';
+        case 'float':
+          return 'btn-hover-effect hover:animate-float';
+        case 'shine':
+          return 'btn-hover-effect hover:animate-shine';
+        case 'jelly':
+          return 'btn-hover-effect';
+        default:
+          return 'btn-hover-effect';
+      }
+    };
+    
+    // 클릭 애니메이션 효과
+    const [isAnimating, setIsAnimating] = React.useState(false);
+    
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (hoverEffect === 'jelly' && !isLoading && !disabled) {
+        setIsAnimating(true);
+        setTimeout(() => setIsAnimating(false), 800);
+      }
+      
+      if (onClick) {
+        onClick(e);
+      }
+    };
 
     return (
       <button
@@ -50,9 +104,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           sizeStyles[size],
           widthStyles,
           stateStyles,
+          getHoverEffectStyles(),
+          isAnimating && hoverEffect === 'jelly' ? 'animate-jelly' : '',
           className
         )}
         disabled={isLoading || disabled}
+        onClick={handleClick}
         {...props}
       >
         {isLoading && (
@@ -62,11 +119,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </svg>
         )}
         {!isLoading && startIcon && (
-          <span className="mr-2">{startIcon}</span>
+          <span className="mr-2 transition-transform group-hover:scale-110">{startIcon}</span>
         )}
-        {children}
+        <span className="transition-transform duration-150">{children}</span>
         {!isLoading && endIcon && (
-          <span className="ml-2">{endIcon}</span>
+          <span className="ml-2 transition-transform group-hover:translate-x-0.5">{endIcon}</span>
         )}
       </button>
     )

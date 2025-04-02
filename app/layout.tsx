@@ -1,28 +1,26 @@
-import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
-import "./globals.css";
+import '../styles/globals.css'
+import '../styles/animations.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { ToastProvider } from '@/components/ui/Toast'
+import { PageTransition } from '@/components/ui/PageTransition'
 import { Navbar } from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const notoSansKr = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: '--font-noto-sans-kr',
-  display: 'swap',
-});
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Summy - 스마트 요약 서비스",
-  description: "복잡하고 방대한 정보를 빠르고 쉽게 이해할 수 있도록 요약해주는 AI 기반 스마트 요약 서비스",
-};
+  title: 'Summy - AI 대화 요약',
+  description: 'AI로 대화를 더 스마트하게 요약하세요',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="ko" className={notoSansKr.variable}>
+    <html lang="ko">
       <head>
         <link
           rel="stylesheet"
@@ -30,15 +28,19 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
       </head>
-      <body className="font-sans antialiased">
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-grow pt-16">
-            {children}
-          </main>
-          <Footer />
-        </div>
+      <body className={inter.className}>
+        <ToastProvider>
+          <PageTransition type="fade" duration={300}>
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-grow pt-16">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </PageTransition>
+        </ToastProvider>
       </body>
     </html>
-  );
+  )
 } 
