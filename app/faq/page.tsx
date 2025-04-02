@@ -100,13 +100,13 @@ export default function FAQPage() {
   })
 
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-black text-white">
-      <div className="section-container py-16">
+    <div className="bg-apple-dark text-white">
+      <div className="apple-section-container py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black mb-4">
+          <h1 className="apple-section-title text-4xl mb-4">
             ❓ 자주 묻는 질문
           </h1>
-          <p className="text-xl text-white/80">
+          <p className="apple-section-description text-xl">
             궁금하신 점을 찾아보세요
           </p>
         </div>
@@ -120,13 +120,13 @@ export default function FAQPage() {
                 placeholder="검색어를 입력하세요..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-3 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10"
               />
             </div>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-purple-500"
+              className="px-4 py-3 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white focus:outline-none focus:border-white-opacity-10"
             >
               <option value="all">전체 카테고리</option>
               {faqCategories.map(category => (
@@ -143,13 +143,13 @@ export default function FAQPage() {
           {filteredFaqs.length > 0 ? (
             <div className="space-y-4">
               {filteredFaqs.map((faq, index) => (
-                <div key={index} className="card p-6">
+                <div key={index} className="apple-card apple-card-content">
                   <div className="flex items-start gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-sm text-purple-400">{faq.categoryTitle}</span>
+                        <span className="apple-tag">{faq.categoryTitle}</span>
                       </div>
-                      <h3 className="text-lg font-semibold mb-3">{faq.q}</h3>
+                      <h3 className="text-lg font-medium mb-3">{faq.q}</h3>
                       <p className="text-white/80">{faq.a}</p>
                     </div>
                   </div>
@@ -165,13 +165,13 @@ export default function FAQPage() {
 
         {/* 추가 문의 CTA */}
         <div className="text-center mt-16">
-          <h2 className="text-2xl font-bold mb-4">더 자세한 정보가 필요하신가요?</h2>
+          <h2 className="text-2xl font-medium mb-4">더 자세한 정보가 필요하신가요?</h2>
           <p className="text-white/80 mb-8">
             원하시는 답변을 찾지 못하셨다면 문의해주세요
           </p>
           <a 
             href="/contact" 
-            className="inline-block px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+            className="apple-button apple-button-primary"
           >
             문의하기
           </a>

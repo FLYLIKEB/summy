@@ -6,13 +6,13 @@ import { PRICING_PLANS, FAQ_ITEMS } from '../constants/pricing'
 
 export default function PricingPage() {
   return (
-    <div className="bg-gradient-to-b from-purple-600 to-mint-600 text-white">
-      <div className="section-container py-16">
+    <div className="bg-apple-dark text-white">
+      <div className="apple-section-container py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black mb-4">
-            💜 합리적인 요금제로 시작하세요
+          <h1 className="apple-section-title text-4xl mb-4">
+            합리적인 요금제로 시작하세요
           </h1>
-          <p className="text-xl text-white/80">
+          <p className="apple-section-description text-xl">
             필요에 맞는 요금제를 선택하세요
           </p>
         </div>
