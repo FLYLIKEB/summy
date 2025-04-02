@@ -7,6 +7,16 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './stories/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'hover:shadow-xl',
+    'hover:shadow-lg',
+    'hover:shadow-purple-500/50',
+    'hover:shadow-white/40',
+    'from-purple-500/5',
+    'to-mint-500/5',
+    'bg-gradient-to-br',
+    'hover:border-purple-500/20',
+  ],
   theme: {
     container: {
       center: true,
