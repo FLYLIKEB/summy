@@ -6,7 +6,7 @@ import { PRICING_PLANS, FAQ_ITEMS } from '../constants/pricing'
 
 export default function PricingPage() {
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="bg-gradient-to-b from-purple-600 to-mint-600 text-white">
       <div className="section-container py-16">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-black mb-4">

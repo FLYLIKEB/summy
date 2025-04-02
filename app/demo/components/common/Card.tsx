@@ -18,9 +18,9 @@ export const Card: React.FC<CardProps> = ({ children, className = '', gradient =
       {/* 배경 효과 */}
       {gradient && (
         <>
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 animate-gradient"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-mint-500/5 animate-gradient"></div>
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-mint-500/10 rounded-full blur-3xl"></div>
         </>
       )}
       <div className="relative">

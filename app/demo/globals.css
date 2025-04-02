@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-900 text-white;
+    @apply bg-gradient-to-b from-purple-600 to-mint-600 text-white;
   }
 }
 
@@ -14,8 +14,8 @@
   }
 
   .btn-primary {
-    @apply px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold text-lg sm:text-xl 
-           hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-purple-500/30
+    @apply px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-mint-500 text-white rounded-full font-bold text-lg sm:text-xl 
+           hover:from-purple-600 hover:to-mint-600 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-purple-500/30
            transform hover:-translate-y-1 rounded-full;
   }
 

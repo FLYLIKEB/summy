@@ -95,9 +95,9 @@ export const DEFAULT_STATISTICS = {
 
 export const DEFAULT_KEYWORDS = [
   { text: '일정 조정', color: 'purple' },
-  { text: '기능 개발', color: 'purple' },
+  { text: '기능 개발', color: 'mint' },
   { text: 'UI/UX 개선', color: 'purple' },
-  { text: '프로젝트 관리', color: 'purple' }
+  { text: '프로젝트 관리', color: 'mint' }
 ];
 
 export const RESPONSE_STYLES = {

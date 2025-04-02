@@ -12,14 +12,17 @@ const config: Config = {
         sans: ['var(--font-noto-sans-kr)'],
       },
       colors: {
+        mint: {
+          300: '#5EEAD4',
+          400: '#2DD4BF',
+          500: '#14B8A6',
+          600: '#0D9488',
+        },
         purple: {
+          300: '#C4B5FD',
           400: '#A78BFA',
           500: '#8B5CF6',
           600: '#7C3AED',
-        },
-        pink: {
-          500: '#EC4899',
-          600: '#DB2777',
         },
       },
       animation: {

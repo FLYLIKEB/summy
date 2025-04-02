@@ -3,6 +3,27 @@
     "require_user_approval": {
       "git": true,
       "delete": true,
+      "rm": true,
+      "rmdir": true,
+      "rm -rf": true,
+      "sudo": true,
+      "chmod": true,
+      "chown": true,
+      "mkfs": true,
+      "dd": true,
+      "curl": true,
+      "wget": true,
+      "scp": true,
+      "sftp": true,
+      "kill": true,
+      "pkill": true,
+      "killall": true,
+      "nohup": true,
+      "screen": true,
+      "tmux": true,
+      "export": true,
+      "setenv": true,
+      "source": true,
       "default": true
     }
   }

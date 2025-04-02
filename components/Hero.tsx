@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import Logo from './ui/Logo'
 
 export default function Hero() {
   const [showScrollButton, setShowScrollButton] = useState(false)
@@ -52,9 +53,7 @@ export default function Hero() {
               transition={{ duration: 0.8 }}
               className="mb-8 sm:mb-12 px-2 sm:px-4"
             >
-              <h1 className="text-6xl sm:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 tracking-tight">
-                summy
-              </h1>
+              <Logo variant="text" size="xl" />
             </motion.div>
 
             {/* 메인 텍스트 */}
@@ -88,7 +87,7 @@ export default function Hero() {
               >
                 <span className="relative z-10">🎮 첫 달 무료로 시작하기</span>
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"
+                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-mint-600"
                   initial={{ x: '-100%' }}
                   whileHover={{ x: '0%' }}
                   transition={{ duration: 0.3 }}

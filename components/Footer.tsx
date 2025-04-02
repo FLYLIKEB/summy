@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Logo from './ui/Logo'
 
 export default function Footer() {
   return (
@@ -8,9 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="text-center md:text-left">
             <Link href="/" className="block">
-              <h3 className="text-2xl font-black tracking-tight bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text mb-3">
-                ✨ Summy
-              </h3>
+              <Logo variant="text" size="md" />
             </Link>
             <p className="text-sm text-white/60">
               🤖 AI로 더 스마트하게 대화를 요약하세요
@@ -59,7 +58,7 @@ export default function Footer() {
                 className="flex-1 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
                 required
               />
-              <button type="submit" className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors whitespace-nowrap">
+              <button type="submit" className="px-4 py-2 bg-gradient-to-r from-purple-600 to-mint-600 hover:from-purple-700 hover:to-mint-700 text-white rounded-lg transition-colors whitespace-nowrap">
                 구독하기
               </button>
             </form>

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import KakaoLoginButton from '@/components/KakaoLoginButton'
 import GoogleLoginButton from '@/components/GoogleLoginButton'
+import Logo from '@/components/ui/Logo'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -54,11 +55,7 @@ export default function LoginPage() {
       <div className="section-container py-16">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
-            <Link href="/" className="inline-block">
-              <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
-                ✨ Summy
-              </h1>
-            </Link>
+            <Logo variant="text" size="lg" className="mb-4" />
             <h2 className="mt-4 text-2xl font-bold">
               로그인
             </h2>
@@ -130,13 +127,13 @@ export default function LoginPage() {
                   <input
                     id="remember"
                     type="checkbox"
-                    className="h-4 w-4 rounded border-white/10 bg-white/5 text-purple-600 focus:ring-purple-600"
+                    className="h-4 w-4 rounded border-white/10 bg-white/5 text-mint-600 focus:ring-mint-600"
                   />
                   <label htmlFor="remember" className="ml-2 block text-sm text-gray-400">
                     로그인 상태 유지
                   </label>
                 </div>
-                <Link href="/forgot-password" className="text-sm text-purple-400 hover:text-purple-300">
+                <Link href="/forgot-password" className="text-sm text-mint-400 hover:text-mint-300">
                   비밀번호 찾기
                 </Link>
               </div>
@@ -155,7 +152,7 @@ export default function LoginPage() {
 
             <p className="text-center text-sm text-gray-400">
               아직 계정이 없으신가요?{' '}
-              <Link href="/signup" className="text-purple-400 hover:text-purple-300">
+              <Link href="/signup" className="text-mint-400 hover:text-mint-300">
                 회원가입
               </Link>
             </p>

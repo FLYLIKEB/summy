@@ -69,7 +69,7 @@ export default function SettingsPage() {
   const [activeItem, setActiveItem] = useState<string | null>(null)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-b from-purple-600 to-mint-600 text-white">
       <div className="section-container py-8">
         {/* 헤더 */}
         <div className="mb-8">

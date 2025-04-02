@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import KakaoLoginButton from '@/components/KakaoLoginButton'
 import GoogleLoginButton from '@/components/GoogleLoginButton'
+import Logo from '@/components/ui/Logo'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -55,11 +56,7 @@ export default function SignupPage() {
       <div className="section-container py-16">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
-            <Link href="/" className="inline-block">
-              <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
-                ✨ Summy
-              </h1>
-            </Link>
+            <Logo variant="text" size="lg" className="mb-4" />
             <h2 className="mt-4 text-2xl font-bold">
               회원가입
             </h2>
@@ -107,7 +104,7 @@ export default function SignupPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-mint-500"
                   placeholder="name@company.com"
                   required
                 />
@@ -121,7 +118,7 @@ export default function SignupPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-mint-500"
                   placeholder="••••••••"
                   required
                 />
@@ -135,7 +132,7 @@ export default function SignupPage() {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-mint-500"
                   placeholder="••••••••"
                   required
                 />
@@ -155,7 +152,7 @@ export default function SignupPage() {
 
             <p className="text-center text-sm text-gray-400">
               이미 계정이 있으신가요?{' '}
-              <Link href="/login" className="text-purple-400 hover:text-purple-300">
+              <Link href="/login" className="text-mint-400 hover:text-mint-300">
                 로그인
               </Link>
             </p>
