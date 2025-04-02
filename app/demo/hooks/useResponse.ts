@@ -1,14 +1,32 @@
 import { useState } from 'react';
 import { ResponseStyle } from '../types';
 
+/**
+ * 답변 제안 기능을 관리하는 커스텀 훅
+ * 답변 생성, 스타일 변경, 편집 기능을 제공합니다.
+ * 
+ * @returns {Object} 답변 제안 관련 상태와 핸들러
+ */
 export const useResponse = () => {
+  // 답변 제안 로딩 상태
   const [isSuggesting, setIsSuggesting] = useState(false);
+  // 제안된 답변 내용
   const [suggestedResponse, setSuggestedResponse] = useState<string>('');
+  // 선택된 답변 스타일 (정중한, 친근한, 간결한)
   const [selectedStyle, setSelectedStyle] = useState<ResponseStyle>('formal');
+  // 답변 편집 모드 상태
   const [isEditing, setIsEditing] = useState(false);
+  // 편집 중인 답변 내용
   const [editedResponse, setEditedResponse] = useState<string>('');
+  // 답변 작성 이유 표시 여부
   const [showReason, setShowReason] = useState(false);
 
+  /**
+   * 답변을 제안하는 함수
+   * AI를 통해 입력된 내용에 대한 적절한 답변을 생성합니다.
+   * 
+   * @param input - 답변을 생성할 입력 텍스트
+   */
   const handleSuggestResponse = async (input: string) => {
     setIsSuggesting(true);
     try {
@@ -24,6 +42,9 @@ export const useResponse = () => {
     }
   };
 
+  /**
+   * 현재 답변을 클립보드에 복사하는 함수
+   */
   const handleCopyResponse = async () => {
     try {
       await navigator.clipboard.writeText(editedResponse);
@@ -32,6 +53,12 @@ export const useResponse = () => {
     }
   };
 
+  /**
+   * 답변 스타일을 변경하는 함수
+   * 선택된 스타일에 따라 답변 내용이 자동으로 변경됩니다.
+   * 
+   * @param style - 변경할 답변 스타일
+   */
   const handleStyleChange = (style: ResponseStyle) => {
     setSelectedStyle(style);
     // 스타일에 따라 답변 내용 변경
@@ -51,23 +78,40 @@ export const useResponse = () => {
     setSuggestedResponse(newResponse);
   };
 
+  /**
+   * 답변 편집 모드를 활성화하는 함수
+   */
   const handleEditResponse = () => {
     setIsEditing(true);
   };
 
+  /**
+   * 편집된 답변을 저장하는 함수
+   */
   const handleSaveResponse = () => {
     setIsEditing(false);
     setSuggestedResponse(editedResponse);
   };
 
+  /**
+   * 답변 작성 이유 표시 여부를 토글하는 함수
+   */
   const toggleReason = () => {
     setShowReason(!showReason);
   };
 
+  /**
+   * 편집 중인 답변 내용을 업데이트하는 함수
+   * 
+   * @param response - 새로운 답변 내용
+   */
   const updateEditedResponse = (response: string) => {
     setEditedResponse(response);
   };
 
+  /**
+   * 답변 편집을 취소하고 원래 답변으로 되돌리는 함수
+   */
   const cancelEditing = () => {
     setIsEditing(false);
     setEditedResponse(suggestedResponse);
