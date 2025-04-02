@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card } from '@/components/ui/card'
 
 export default function HowItWorks() {
   return (
@@ -7,7 +8,7 @@ export default function HowItWorks() {
         <h2 className="section-title">
           🎯 이렇게 사용하세요
         </h2>
-        <div className="card">
+        <Card variant="glass" padding="lg" hover>
           <div className="space-y-8">
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl">
@@ -36,14 +37,25 @@ export default function HowItWorks() {
                 3️⃣
               </div>
               <div>
-                <h3 className="font-bold text-lg sm:text-xl mb-2">📝 요약 결과 확인</h3>
+                <h3 className="font-bold text-lg sm:text-xl mb-2">📋 요약 결과 확인</h3>
                 <p className="text-sm sm:text-base opacity-90">
-                  핵심 내용이 요약된 결과를 확인하고, 필요한 경우 답변을 생성할 수 있습니다.
+                  주요 내용, 키워드, 액션 아이템 등이 포함된 요약을 확인하세요.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl">
+                4️⃣
+              </div>
+              <div>
+                <h3 className="font-bold text-lg sm:text-xl mb-2">📤 결과 공유</h3>
+                <p className="text-sm sm:text-base opacity-90">
+                  요약 내용을 다운로드하거나 팀원과 공유하세요.
                 </p>
               </div>
             </div>
           </div>
-        </div>
+        </Card>
       </div>
     </section>
   )

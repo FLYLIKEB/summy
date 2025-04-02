@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Card } from './common/Card'
+import { Card } from '@/components/ui/card'
 import { Icon } from './common/Icon'
 import { Button } from '@/components/ui/Button'
 
@@ -56,7 +56,11 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, className 
   const fileName = uploadedFile?.name
 
   return (
-    <Card className={`relative ${className}`}>
+    <Card 
+      variant="glass" 
+      padding="none" 
+      className={className}
+    >
       <input
         type="file"
         ref={fileInputRef}

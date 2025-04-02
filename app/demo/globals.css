@@ -8,11 +8,20 @@
   }
 }
 
-@layer components {
-  /* 데모 페이지에서만 사용되는 카드 스타일 확장 */
-  .card {
-    @apply rounded-xl;
+/* 데모 페이지에만 필요한 추가 애니메이션 */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
 }
 
 @keyframes gradient {

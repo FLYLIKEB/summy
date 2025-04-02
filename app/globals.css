@@ -43,8 +43,10 @@ body {
     @apply text-3xl font-bold text-center mb-8;
   }
 
+  /* 레거시 카드 스타일 (컴포넌트로 점진적 마이그레이션을 위해 유지) */
+  /* @deprecated - 대신 <Card> 컴포넌트를 사용하세요 */
   .card {
-    @apply bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden;
+    @apply bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 relative overflow-hidden;
   }
 
   .card-title {
@@ -97,6 +99,23 @@ body {
   .btn-ghost {
     @apply px-4 py-2 text-white/60 hover:text-white transition-all;
   }
+}
+
+/* 카드 변형 - 레거시 코드 */
+/* @deprecated - 대신 <Card gradient> 컴포넌트를 사용하세요 */
+.card-gradient {
+  @apply relative;
+}
+
+.card-gradient::before {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-br from-purple-500/5 to-mint-500/5 animate-gradient;
+  z-index: -1;
+}
+
+/* @deprecated - 대신 <Card hover> 컴포넌트를 사용하세요 */
+.card-hover {
+  @apply transition-all duration-300 hover:border-purple-500/20 hover:bg-white/10;
 }
 
 .interview-card {
