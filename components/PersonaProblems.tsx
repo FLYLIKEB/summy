@@ -56,20 +56,20 @@ const item = {
 
 export default function PersonaProblems() {
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
-      <div className="section-container">
+    <section className="py-12 sm:py-24 bg-gradient-to-b from-gray-900 to-black">
+      <div className="section-container px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">
-            <span className="inline-block mr-4">🎯</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">
+            <span className="inline-block mr-2 sm:mr-4">🎯</span>
             누구에게 필요할까요?
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-base sm:text-lg">
             summy와 함께 대화의 고민을 해결해보세요
           </p>
         </motion.div>
@@ -79,44 +79,44 @@ export default function PersonaProblems() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid gap-8"
+          className="grid gap-4 sm:gap-8"
         >
           {personas.map((persona, index) => (
             <motion.div
               key={index}
               variants={item}
-              className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-300"
+              className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-300"
             >
-              <div className="p-8">
-                <div className="flex items-start gap-6">
+              <div className="p-4 sm:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
                   {/* 캐릭터 이미지 */}
-                  <div className="relative w-32 h-32 rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                  <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 mx-auto sm:mx-0">
                     <Image
                       src={persona.image}
                       alt={persona.name}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 128px"
+                      sizes="(max-width: 640px) 96px, 128px"
                     />
                   </div>
 
                   {/* 내용 */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-3xl">{persona.emoji}</span>
-                      <h3 className="text-2xl font-bold text-white">{persona.name}</h3>
+                  <div className="flex-1 text-center sm:text-left">
+                    <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <span className="text-2xl sm:text-3xl">{persona.emoji}</span>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white">{persona.name}</h3>
                     </div>
                     
-                    <p className="text-gray-300 text-lg mb-4">
+                    <p className="text-gray-300 text-base sm:text-lg mb-3 sm:mb-4">
                       "{persona.problem}"
                     </p>
 
                     {/* 태그 */}
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-4 sm:mb-6">
                       {persona.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-3 py-1 rounded-full text-sm font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                          className="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20"
                         >
                           {tag}
                         </span>
@@ -124,12 +124,12 @@ export default function PersonaProblems() {
                     </div>
 
                     {/* 해결책 */}
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">✨</span>
+                    <div className="bg-white/5 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/10">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <span className="text-xl sm:text-2xl">✨</span>
                         <div>
-                          <p className="text-white font-medium mb-1">summy의 해결책</p>
-                          <p className="text-gray-300">{persona.solution}</p>
+                          <p className="text-white text-sm sm:text-base font-medium mb-1">summy의 해결책</p>
+                          <p className="text-gray-300 text-sm sm:text-base">{persona.solution}</p>
                         </div>
                       </div>
                     </div>
