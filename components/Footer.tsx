@@ -6,8 +6,8 @@ import Logo from './ui/Logo'
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black border-t border-white/10">
-      <div className="section-container py-12">
+    <footer className="bg-apple-dark border-t border-white-opacity-04">
+      <div className="apple-section-container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="text-center md:text-left">
             <Logo variant="text" size="md" href="/" className="block" />
@@ -17,7 +17,7 @@ export default function Footer() {
           </div>
           
           <div className="text-center md:text-left">
-            <h4 className="text-white font-semibold mb-4">빠른 링크</h4>
+            <h4 className="text-white font-medium mb-4">빠른 링크</h4>
             <ul className="space-y-2">
               <li><Link href="/features" className="text-sm text-white/60 hover:text-white transition-colors">상세 기능 소개</Link></li>
               <li><Link href="/pricing" className="text-sm text-white/60 hover:text-white transition-colors">요금제</Link></li>
@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
 
           <div className="text-center md:text-left">
-            <h4 className="text-white font-semibold mb-4">연락처</h4>
+            <h4 className="text-white font-medium mb-4">연락처</h4>
             <ul className="space-y-2">
               <li>
                 <a href="mailto:support@summy.ai" className="text-sm text-white/60 hover:text-white transition-colors flex items-center justify-center md:justify-start gap-2">
@@ -48,29 +48,29 @@ export default function Footer() {
           </div>
 
           <div className="text-center md:text-left">
-            <h4 className="text-white font-semibold mb-4">뉴스레터 구독</h4>
+            <h4 className="text-white font-medium mb-4">뉴스레터 구독</h4>
             <p className="text-sm text-white/60 mb-4">새로운 기능과 업데이트를 받아보세요</p>
             <form action="/api/newsletter" method="POST" className="flex flex-col sm:flex-row gap-2">
               <input 
                 type="email" 
                 name="email"
                 placeholder="이메일 주소" 
-                className="flex-1 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                className="flex-1 px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10"
                 required
               />
-              <button type="submit" className="px-4 py-2 bg-gradient-to-r from-purple-600 to-mint-600 hover:from-purple-700 hover:to-mint-700 text-white rounded-lg transition-colors whitespace-nowrap">
+              <button type="submit" className="apple-button apple-button-primary whitespace-nowrap">
                 구독하기
               </button>
             </form>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white/5 pt-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white-opacity-04 pt-8">
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             <Link href="/terms" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2">
               <span>📋</span> 이용약관
             </Link>
-            <div className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
+            <div className="hidden sm:block w-1 h-1 rounded-full bg-white-opacity-10" />
             <Link href="/privacy" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2">
               <span>🔐</span> 개인정보처리방침
             </Link>
@@ -106,7 +106,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/5 text-center">
+        <div className="mt-8 pt-8 border-t border-white-opacity-04 text-center">
           <p className="text-sm text-white/40">
             💜 © 2025 Summy. All rights reserved.
           </p>

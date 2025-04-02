@@ -4,7 +4,7 @@ import Logo from './ui/Logo'
 
 export const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-white/10">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-apple-dark backdrop-blur-md border-b border-white-opacity-06">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* 로고 */}
@@ -14,13 +14,13 @@ export const Navbar = () => {
           <div className="flex items-center space-x-4">
             <Link
               href="/login"
-              className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
+              className="apple-button apple-button-secondary"
             >
               로그인
             </Link>
             <Link
               href="/signup"
-              className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-mint-500 rounded-full hover:from-purple-600 hover:to-mint-600 transition-all shadow-lg shadow-purple-500/20"
+              className="apple-button apple-button-primary"
             >
               회원가입
             </Link>
