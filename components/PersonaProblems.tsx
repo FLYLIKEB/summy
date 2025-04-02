@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 
 const personas = [
   {
@@ -56,7 +57,7 @@ const item = {
 
 export default function PersonaProblems() {
   return (
-    <section className="py-12 sm:py-24 bg-gradient-to-b from-gray-900 to-black">
+    <section className="relative py-12 sm:py-24 bg-gradient-to-b from-gray-900 to-black">
       <div className="section-container px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -74,49 +75,119 @@ export default function PersonaProblems() {
           </p>
         </motion.div>
 
+        {/* 모바일 스냅 스크롤 컨테이너 */}
+        <div className="sm:hidden overflow-x-auto snap-x snap-mandatory -mx-4 px-4 pb-4">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex gap-4 w-max"
+          >
+            {personas.map((persona, index) => (
+              <motion.div
+                key={index}
+                variants={item}
+                className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-300 w-[85vw] snap-center flex-shrink-0"
+              >
+                <div className="p-4">
+                  <div className="flex flex-col items-center gap-4">
+                    {/* 캐릭터 이미지 */}
+                    <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                      <Image
+                        src={persona.image}
+                        alt={persona.name}
+                        fill
+                        className="object-cover"
+                        sizes="96px"
+                      />
+                    </div>
+
+                    {/* 내용 */}
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-2 mb-3">
+                        <span className="text-2xl">{persona.emoji}</span>
+                        <h3 className="text-xl font-bold text-white">{persona.name}</h3>
+                      </div>
+                      
+                      <p className="text-gray-300 text-base mb-3">
+                        "{persona.problem}"
+                      </p>
+
+                      {/* 태그 */}
+                      <div className="flex flex-wrap justify-center gap-2 mb-4">
+                        {persona.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="px-2 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* 해결책 */}
+                      <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xl">✨</span>
+                          <div>
+                            <p className="text-white text-sm font-medium mb-1">summy의 해결책</p>
+                            <p className="text-gray-300 text-sm">{persona.solution}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* 데스크톱 그리드 레이아웃 */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid gap-4 sm:gap-8"
+          className="hidden sm:grid gap-8"
         >
           {personas.map((persona, index) => (
             <motion.div
               key={index}
               variants={item}
-              className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-300"
+              className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-300"
             >
-              <div className="p-4 sm:p-8">
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
+              <div className="p-8">
+                <div className="flex items-start gap-6">
                   {/* 캐릭터 이미지 */}
-                  <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 mx-auto sm:mx-0">
+                  <div className="relative w-32 h-32 rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20">
                     <Image
                       src={persona.image}
                       alt={persona.name}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 640px) 96px, 128px"
+                      sizes="128px"
                     />
                   </div>
 
                   {/* 내용 */}
-                  <div className="flex-1 text-center sm:text-left">
-                    <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 mb-3 sm:mb-4">
-                      <span className="text-2xl sm:text-3xl">{persona.emoji}</span>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white">{persona.name}</h3>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-3xl">{persona.emoji}</span>
+                      <h3 className="text-2xl font-bold text-white">{persona.name}</h3>
                     </div>
                     
-                    <p className="text-gray-300 text-base sm:text-lg mb-3 sm:mb-4">
+                    <p className="text-gray-300 text-lg mb-4">
                       "{persona.problem}"
                     </p>
 
                     {/* 태그 */}
-                    <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-4 sm:mb-6">
+                    <div className="flex flex-wrap gap-2 mb-6">
                       {persona.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                          className="px-3 py-1 rounded-full text-sm font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20"
                         >
                           {tag}
                         </span>
@@ -124,12 +195,12 @@ export default function PersonaProblems() {
                     </div>
 
                     {/* 해결책 */}
-                    <div className="bg-white/5 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/10">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <span className="text-xl sm:text-2xl">✨</span>
+                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">✨</span>
                         <div>
-                          <p className="text-white text-sm sm:text-base font-medium mb-1">summy의 해결책</p>
-                          <p className="text-gray-300 text-sm sm:text-base">{persona.solution}</p>
+                          <p className="text-white font-medium mb-1">summy의 해결책</p>
+                          <p className="text-gray-300">{persona.solution}</p>
                         </div>
                       </div>
                     </div>
@@ -140,6 +211,23 @@ export default function PersonaProblems() {
           ))}
         </motion.div>
       </div>
+
+      {/* 모바일 CTA 버튼 */}
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          className="sm:hidden fixed bottom-6 right-4 z-50"
+        >
+          <Link
+            href="/signup"
+            className="flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-medium shadow-lg shadow-purple-500/20"
+          >
+            <span>🎮 시작하기</span>
+          </Link>
+        </motion.div>
+      </AnimatePresence>
     </section>
   )
 } 
