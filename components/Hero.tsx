@@ -68,10 +68,10 @@ export default function Hero() {
             >
               <div className="flex flex-col gap-1 sm:gap-2">
                 <div className="flex items-center justify-center gap-2 sm:gap-3">
-                  <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white/90">대화를 더 쉽게</span>
+                  <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white/90">메시지 부담은 줄이고</span>
                 </div>
                 <div className="flex items-center justify-center gap-2 sm:gap-3">
-                  <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white/90">요약은 더 빠르게</span>
+                  <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white/90">소통 효율은 높이고</span>
                 </div>
               </div>
             </motion.div>
@@ -85,11 +85,11 @@ export default function Hero() {
             >
               <div className="flex items-center justify-center gap-2 sm:gap-3">
                 <span className="text-xl">💬</span>
-                <span className="text-sm sm:text-base text-white/70">긴 대화를 AI가 빠르게 요약</span>
+                <span className="text-sm sm:text-base text-white/70">수백 개의 메시지를 단 몇 줄로 압축</span>
               </div>
               <div className="flex items-center justify-center gap-2 sm:gap-3">
                 <span className="text-xl">✨</span>
-                <span className="text-sm sm:text-base text-white/70">핵심만 쏙 뽑아서, 답변까지 제안</span>
+                <span className="text-sm sm:text-base text-white/70">상황에 최적화된 답장까지 AI가 제안</span>
               </div>
             </motion.div>
           </div>
@@ -105,7 +105,7 @@ export default function Hero() {
               href="/signup" 
               className="apple-button apple-button-primary w-full sm:w-auto min-w-[180px]"
             >
-              첫 달 무료로 시작하기
+              14일 무료로 시작하기
             </Link>
             <Link 
               href="/demo" 

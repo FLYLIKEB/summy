@@ -30,9 +30,9 @@ export default function Demo() {
     <section className="apple-section">
       <div className="apple-section-container">
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 animate-fade-in">
-          <h2 className="apple-section-title">데모 보기</h2>
+          <h2 className="apple-section-title">서비스 미리보기</h2>
           <p className="text-white/60 text-sm sm:text-base">
-            Summy가 어떻게 작동하는지 직접 확인해보세요
+            요약부터 답장 제안까지, summy의 핵심 기능을 직접 체험해보세요
           </p>
         </div>
 
@@ -74,9 +74,9 @@ export default function Demo() {
 
           <div className="apple-card-content flex flex-col md:flex-row items-center justify-between">
             <div className="animate-slide-in-up mb-4 md:mb-0" style={{ animationDelay: '0.2s' }}>
-              <h3 className="text-lg sm:text-xl font-medium mb-1">복잡한 대화를 한눈에 요약</h3>
+              <h3 className="text-lg sm:text-xl font-medium mb-1">대화의 바다에서 인사이트를 발굴</h3>
               <p className="text-white/60 text-sm">
-                30분 회의를 30초 요약으로, 핵심만 추출합니다
+                2시간 미팅 요약과 완벽한 답장까지, 커뮤니케이션의 새로운 경험
               </p>
             </div>
             <div>

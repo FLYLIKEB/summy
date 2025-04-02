@@ -23,33 +23,38 @@ export default function Features() {
   const features: FeatureProps[] = [
     {
       icon: <span className="text-4xl">💻</span>,
-      title: '멀티 플랫폼 지원',
-      description: '모바일, 테블릿, 데스크탑 모두 최적화된 경험을 제공합니다.'
+      title: '어디서나 접근 가능',
+      description: '웹, 모바일, 데스크톱에서 언제 어디서나 대화 요약을 확인하세요.'
     },
     {
       icon: <span className="text-4xl">🎯</span>,
-      title: '맞춤형 요약',
-      description: '사용자가 원하는 키워드와 주제를 중심으로 맞춤형 요약을 제공합니다.'
+      title: '목적별 맞춤 요약',
+      description: '비즈니스, 학습, 개인 대화 등 상황에 맞는 맞춤형 요약을 제공합니다.'
     },
     {
       icon: <span className="text-4xl">🌍</span>,
-      title: '다국어 지원',
-      description: '한국어, 영어는 물론 다양한 언어로 요약을 제공합니다.'
+      title: '다국어 커뮤니케이션',
+      description: '한국어는 물론 영어, 일본어, 중국어 등 10개 이상의 언어를 지원합니다.'
     },
     {
       icon: <span className="text-4xl">⚡</span>,
-      title: '실시간 처리',
-      description: '대용량 대화도 즉시 처리하여 빠른 결과를 제공합니다.'
+      title: '초고속 AI 처리',
+      description: '1,000개 이상의 메시지도 단 몇 초 내에 분석하고 요약합니다.'
     },
     {
       icon: <span className="text-4xl">🔍</span>,
-      title: '키워드 추출',
-      description: '중요 키워드를 자동으로 추출하여 핵심 내용을 한눈에 파악할 수 있습니다.'
+      title: '인사이트 추출',
+      description: '중요 키워드, 결정사항, 할 일 등을 자동으로 분류하여 제공합니다.'
+    },
+    {
+      icon: <span className="text-4xl">💬</span>,
+      title: '맞춤형 답장 제안',
+      description: '대화 맥락과 상황을 분석해 가장 적절한 답변을 여러 스타일로 제안합니다.'
     },
     {
       icon: <span className="text-4xl">🔒</span>,
-      title: '안전한 데이터 관리',
-      description: '모든 대화 내용은 암호화되어 안전하게 처리됩니다.'
+      title: '엔터프라이즈급 보안',
+      description: '군사급 암호화와 데이터 보호 정책으로 모든 대화를 안전하게 보호합니다.'
     }
   ]
 
@@ -57,9 +62,9 @@ export default function Features() {
     <section className="apple-section">
       <div className="apple-section-container">
         <div className="text-center mb-8 sm:mb-10">
-          <h2 className="apple-section-title">주요 기능</h2>
+          <h2 className="apple-section-title">summy의 강력한 기능</h2>
           <p className="apple-section-description">
-            대화 요약부터 키워드 추출까지, 효율적인 커뮤니케이션을 위한 모든 기능
+            요약과 답장 제안으로 커뮤니케이션 효율을 극대화하는 솔루션
           </p>
         </div>
         

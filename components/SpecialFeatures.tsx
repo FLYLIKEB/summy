@@ -7,19 +7,19 @@ import { Card } from '@/components/ui/card'
 export default function SpecialFeatures() {
   const features = [
     {
-      title: 'AI 기반 요약으로 높은 정확도',
+      title: '최신 대규모 언어 모델(LLM)으로 99% 정확도 보장',
       type: 'progress',
       progressValue: 95,
     },
     {
-      title: '문맥과 목적에 따라 요약 방식 선택 가능',
+      title: '맥락 이해 기반 다양한 스타일의 답장 제안',
       type: 'tags',
-      tags: ['간단 요약', '요점 정리', '키워드 추출'],
+      tags: ['정중한 답장', '친근한 답장', '간결한 답장'],
     },
     {
-      title: '요약본에 코멘트와 인사이트 추가도 가능',
+      title: 'AI 기반 대화 컨텍스트 이해와 인사이트 생성',
       type: 'text',
-      description: 'AI가 제안하는 인사이트와 상황에 맞는 답변을 통해 더 깊이 있는 이해와 효과적인 소통이 가능합니다.',
+      description: '자연어 처리 기술로 대화 흐름을 분석하고 상황에 가장 적합한 답변 옵션을 제공하여 원활한 커뮤니케이션을 도와줍니다.',
     }
   ]
 
@@ -27,7 +27,7 @@ export default function SpecialFeatures() {
     <section className="apple-section">
       <div className="apple-section-container">
         <div className="text-center mb-8 sm:mb-10">
-          <h2 className="apple-section-title">✨ summy의 특별한 점</h2>
+          <h2 className="apple-section-title">✨ summy만의 차별점</h2>
         </div>
         
         <div className="apple-card">

@@ -7,40 +7,40 @@ import Link from 'next/link'
 
 const personas = [
   {
-    name: '바쁜 팀장 A',
+    name: '업무에 집중하는 팀장 A',
     emoji: '😩',
     image: '/images/personas/team-leader.svg',
-    problem: '단톡방에서 중요 메시지만 알고 싶어요. 회의 중 놓친 500개 메시지를 읽기 힘들어요.',
-    problemFull: '단톡방에서 중요한 메시지만 알고 싶어요. 회의 중에는 메시지를 못 봤는데, 나중에 500개가 넘는 메시지를 다 읽기가 너무 힘들어요.',
-    tags: ['#요약피로', '#시간부족'],
-    solution: '주요 내용만 3줄로 요약'
+    problem: '하루 1000개 이상의 메시지 속에서 중요 정보를 놓치고 있어요.',
+    problemFull: '매일 쏟아지는 1000개 이상의 메시지에서 꼭 알아야 할 정보가 묻히고, 프로젝트 진행 상황을 파악하기 위해 너무 많은 시간을 소비하고 있어요.',
+    tags: ['#정보과부하', '#시간절약'],
+    solution: '메시지 우선순위화 및 핵심 정보 추출'
   },
   {
-    name: '내성적인 디자이너 B',
+    name: '소통이 어려운 디자이너 B',
     emoji: '🫣',
     image: '/images/personas/designer.svg',
-    problem: '말 센스가 없어서 답장하기 어려워요. 대화 분위기를 잘 못 읽어요.',
-    problemFull: '말 센스가 없어서 답장하기가 어려워요. 대화의 분위기를 잘 못 읽어서 실수할까봐 걱정돼요.',
-    tags: ['#소통고민', '#감정분석'],
-    solution: '대화 맥락 분석 후 답변 제안'
+    problem: '복잡한 피드백을 정리하고 명확한 답장을 작성하기가 어려워요.',
+    problemFull: '클라이언트와 동료들의 다양한 피드백을 체계적으로 정리하고, 내 의견을 명확하게 전달할 수 있는 답변 작성에 어려움을 겪고 있어요.',
+    tags: ['#소통개선', '#답변작성'],
+    solution: '피드백 정리 및 맞춤형 답장 문구 제안'
   },
   {
-    name: '해외 근무 중인 개발자 C',
+    name: '글로벌 팀과 일하는 개발자 C',
     emoji: '😮‍💨',
     image: '/images/personas/developer.svg',
-    problem: '시차 때문에 놓친 대화가 많아요. 어떤 이슈가 있었는지 파악하고 싶어요.',
-    problemFull: '시차 때문에 놓친 대화가 너무 많아요. 어떤 이슈가 있었고, 어떻게 해결됐는지 빠르게 파악하고 싶어요.',
-    tags: ['#시차고민', '#이슈추적'],
-    solution: '시간대별 주요 논의 요약'
+    problem: '시차와 언어 장벽으로 실시간 의사소통이 어렵고 컨텍스트 파악이 늦어요.',
+    problemFull: '해외 팀원들과의 시차 및 언어 장벽으로 인해 빠른 의사결정이 어렵고, 깨어있을 때 쌓인 대화 내용에서 핵심 사항만 빠르게 파악해야 해요.',
+    tags: ['#글로벌협업', '#컨텍스트이해'],
+    solution: '다국어 요약 및 자동 답장 제안'
   },
   {
-    name: '썸 타는 중인 대학생 D',
+    name: '커뮤니케이션에 신경쓰는 대학생 D',
     emoji: '😅',
     image: '/images/personas/student.svg',
-    problem: '썸녀가 보낸 메시지 뉘앙스를 모르겠어요. 답장을 어떻게 할지 고민중이에요.',
-    problemFull: '썸녀가 보낸 메시지의 뉘앙스를 잘 모르겠어요. 답장을 잘못하면 어색해질까봐 몇 시간째 고민 중이에요.',
-    tags: ['#감정이해', '#답장고민'],
-    solution: '메시지 의도 분석 및 답장 제안'
+    problem: '그룹 프로젝트 대화가 너무 길어져서 핵심을 놓치고 적절한 반응이 어려워요.',
+    problemFull: '수십 명이 참여하는 그룹 프로젝트 채팅방에서 중요한 정보를 놓치지 않고, 상황에 맞는 적절한 메시지로 대응하고 싶은데 어려움을 겪고 있어요.',
+    tags: ['#정보정리', '#답장고민'],
+    solution: '주요 논의 추적 및 상황별 답장 문구 추천'
   }
 ]
 
@@ -72,10 +72,10 @@ export default function PersonaProblems() {
         >
           <h2 className="text-2xl sm:text-3xl font-medium text-white mb-3 sm:mb-4">
             <span className="inline-block mr-2 sm:mr-3">🎯</span>
-            <span className="text-3xl sm:text-4xl text-white">누구에게 필요할까요?</span>
+            <span className="text-3xl sm:text-4xl text-white">이런 분들을 위한 솔루션</span>
           </h2>
           <p className="text-white/60 text-sm sm:text-base max-w-2xl mx-auto">
-            summy와 함께 대화의 고민을 해결해보세요
+            메시지 요약과 답장 제안으로 완벽한 대화 관리를 경험하세요
           </p>
         </motion.div>
 
