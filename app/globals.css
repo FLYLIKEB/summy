@@ -69,14 +69,20 @@ body {
 
   .btn-primary {
     @apply px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-mint-500 text-white rounded-full font-bold text-lg sm:text-xl 
-           hover:from-purple-600 hover:to-mint-600 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-purple-500/30
-           transform hover:-translate-y-1 rounded-full;
+           hover:from-purple-600 hover:to-mint-600 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/50
+           transform hover:-translate-y-1 rounded-full relative;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
   }
 
   .btn-secondary {
-    @apply px-8 sm:px-10 py-4 sm:py-5 bg-white bg-opacity-10 text-white rounded-full font-bold text-lg sm:text-xl 
-           hover:bg-opacity-20 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-white/30
-           transform hover:-translate-y-1 border border-white border-opacity-20 rounded-full;
+    @apply px-8 sm:px-10 py-4 sm:py-5 bg-white/15 text-white rounded-full font-bold text-lg sm:text-xl 
+           hover:bg-white/25 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/40
+           transform hover:-translate-y-1 border border-white/30 rounded-full relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
   }
 }
 
