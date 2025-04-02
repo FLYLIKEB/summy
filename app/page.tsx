@@ -6,8 +6,8 @@ import PersonaProblems from '@/components/PersonaProblems'
 import Features from '@/components/Features'
 import SpecialFeatures from '@/components/SpecialFeatures'
 import FinalCTA from '@/components/FinalCTA'
-import Footer from '@/components/Footer'
 
+// 홈페이지 메인 화면
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">

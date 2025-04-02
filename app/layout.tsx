@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Inter } from 'next/font/google'
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
@@ -11,8 +10,6 @@ const notoSansKr = Noto_Sans_KR({
   variable: '--font-noto-sans-kr',
   display: 'swap',
 });
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "Summy - 스마트 요약 서비스",
@@ -25,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${notoSansKr.variable} ${inter.className}`}>
+    <html lang="ko" className={notoSansKr.variable}>
       <head>
         <link
           rel="stylesheet"
@@ -35,11 +32,9 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <div className="flex flex-col min-h-screen">
-          <main className="flex-grow">
-            <Navbar />
-            <div className="pt-16">
-              {children}
-            </div>
+          <Navbar />
+          <main className="flex-grow pt-16">
+            {children}
           </main>
           <Footer />
         </div>
