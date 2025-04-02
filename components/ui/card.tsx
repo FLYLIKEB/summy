@@ -1,169 +1,106 @@
-import * as React from "react"
+'use client'
 
-import { cn } from "@/lib/utils"
+import React from 'react'
+import { cn } from '@/lib/utils'
 
-export interface CardProps extends React.ComponentProps<"div"> {
-  gradient?: boolean
+interface CardProps {
+  children: React.ReactNode
+  className?: string
+  variant?: 'default' | 'glass' | 'outline' | 'feature'
+  padding?: 'none' | 'sm' | 'md' | 'lg'
   hover?: boolean
-  animate?: boolean
-  blur?: boolean
-  variant?: "default" | "elevated" | "outline" | "glass" | "dark"
-  padding?: "none" | "sm" | "md" | "lg"
+  animation?: 'fade-in' | 'slide-up' | 'none'
+  delay?: number
 }
 
-function Card({ 
-  className, 
-  gradient = false, 
-  hover = false, 
-  animate = false,
-  blur = true,
-  variant = "default",
-  padding = "md",
+export const Card: React.FC<CardProps> = ({
   children,
-  ...props 
-}: CardProps) {
-  // 기본 스타일
-  const baseStyles = "relative overflow-hidden rounded-xl"
-  
-  // 변형 스타일
-  const variantStyles = {
-    default: "bg-white/5 border border-white/10",
-    elevated: "bg-white/10 border border-white/20 shadow-lg shadow-black/5",
-    outline: "bg-transparent border border-white/20",
-    glass: "backdrop-blur-sm bg-white/5 border border-white/10",
-    dark: "bg-gradient-to-br from-gray-900/80 to-black/80 border border-white/10"
+  className,
+  variant = 'default',
+  padding = 'md',
+  hover = false,
+  animation = 'none',
+  delay = 0,
+}) => {
+  const variantClasses = {
+    'default': 'bg-white/5 border border-white/10',
+    'glass': 'bg-white/5 backdrop-blur-sm border border-white/10',
+    'outline': 'bg-transparent border border-white/20',
+    'feature': 'bg-white/5 backdrop-blur-sm border border-white/10',
   }
-  
-  // 패딩 스타일
-  const paddingStyles = {
-    none: "p-0",
-    sm: "p-3",
-    md: "p-6",
-    lg: "p-8"
-  }
-  
-  // 그라데이션 배경 스타일
-  const gradientStyles = gradient 
-    ? "bg-gradient-to-br from-gray-900/50 to-black/50" 
-    : ""
-  
-  // 호버 효과
-  const hoverStyles = hover 
-    ? "transition-all duration-300 hover:border-purple-500/20 hover:bg-white/10" 
-    : ""
 
-  // 블러 효과
-  const blurStyles = blur && variant !== 'glass'
-    ? "backdrop-blur-sm"
-    : ""
+  const paddingClasses = {
+    'none': '',
+    'sm': 'p-4',
+    'md': 'card-padding',
+    'lg': 'p-6 md:p-8',
+  }
+
+  const hoverClasses = hover ? 
+    'hover:border-purple-500/30 transition-all duration-300 hover:bg-white/10' : 
+    ''
+
+  const animationClasses = {
+    'fade-in': 'animate-fade-in',
+    'slide-up': 'animate-slide-in-up',
+    'none': '',
+  }
+
+  const animationStyle = delay > 0 ? { animationDelay: `${delay}s` } : {}
 
   return (
-    <div
-      data-slot="card"
+    <div 
       className={cn(
-        baseStyles,
-        variantStyles[variant],
-        paddingStyles[padding],
-        gradientStyles,
-        hoverStyles,
-        blurStyles,
+        'rounded-xl overflow-hidden shadow-lg',
+        variantClasses[variant],
+        paddingClasses[padding],
+        hoverClasses,
+        animationClasses[animation],
         className
       )}
-      {...props}
+      style={animationStyle}
     >
-      {/* 배경 효과 */}
-      {gradient && (
-        <>
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-mint-500/5 animate-gradient"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-mint-500/10 rounded-full blur-3xl"></div>
-        </>
-      )}
-      
-      {/* 애니메이션 효과 */}
-      {animate && (
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-mint-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      )}
-      
-      <div className={cn("relative flex flex-col", padding === "none" ? "" : "gap-6")}>
-        {children}
-      </div>
+      {children}
     </div>
   )
 }
 
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-header"
-      className={cn(
-        "flex flex-col gap-1.5 has-data-[slot=card-action]:grid-cols-[1fr_auto]",
-        className
-      )}
-      {...props}
-    />
-  )
-}
+// 카드 헤더 컴포넌트
+export const CardHeader: React.FC<{
+  children: React.ReactNode
+  className?: string
+}> = ({ children, className }) => (
+  <div className={cn('mb-4', className)}>
+    {children}
+  </div>
+)
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-title"
-      className={cn("text-xl font-bold", className)}
-      {...props}
-    />
-  )
-}
+// 카드 타이틀 컴포넌트
+export const CardTitle: React.FC<{
+  children: React.ReactNode
+  className?: string
+}> = ({ children, className }) => (
+  <h3 className={cn('text-xl font-bold mb-2', className)}>
+    {children}
+  </h3>
+)
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-description"
-      className={cn("text-white/60 text-sm", className)}
-      {...props}
-    />
-  )
-}
+// 카드 콘텐츠 컴포넌트
+export const CardContent: React.FC<{
+  children: React.ReactNode
+  className?: string
+}> = ({ children, className }) => (
+  <div className={cn('text-white/70', className)}>
+    {children}
+  </div>
+)
 
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-action"
-      className={cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-content"
-      className={cn("", className)}
-      {...props}
-    />
-  )
-}
-
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-footer"
-      className={cn("flex items-center mt-auto pt-4 border-t border-white/10", className)}
-      {...props}
-    />
-  )
-}
-
-export {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardAction,
-  CardDescription,
-  CardContent,
-}
+// 카드 푸터 컴포넌트
+export const CardFooter: React.FC<{
+  children: React.ReactNode
+  className?: string
+}> = ({ children, className }) => (
+  <div className={cn('mt-4 pt-4 border-t border-white/10', className)}>
+    {children}
+  </div>
+)
