@@ -25,7 +25,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Pretendard', 'sans-serif'],
-        handwriting: ['Nanum Pen Script', 'cursive'],
       },
       colors: {
         primary: {

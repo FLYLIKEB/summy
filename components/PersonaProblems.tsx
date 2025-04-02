@@ -68,7 +68,7 @@ export default function PersonaProblems() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">
             <span className="inline-block mr-2 sm:mr-4">🎯</span>
-            <span className="font-handwriting text-4xl sm:text-5xl text-secondary-300">누구에게 필요할까요?</span>
+            <span className="text-4xl sm:text-5xl text-secondary-300">누구에게 필요할까요?</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             summy와 함께 대화의 고민을 해결해보세요
@@ -107,7 +107,7 @@ export default function PersonaProblems() {
                     <div className="text-center">
                       <div className="flex items-center justify-center gap-2 mb-3">
                         <span className="text-2xl">{persona.emoji}</span>
-                        <h3 className="text-xl font-bold text-white font-handwriting">{persona.name}</h3>
+                        <h3 className="text-xl font-bold text-white">{persona.name}</h3>
                       </div>
                       
                       <p className="text-gray-300 text-base mb-3">
@@ -175,7 +175,7 @@ export default function PersonaProblems() {
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-3xl">{persona.emoji}</span>
-                      <h3 className="text-2xl font-bold text-white font-handwriting">{persona.name}</h3>
+                      <h3 className="text-2xl font-bold text-white">{persona.name}</h3>
                     </div>
                     
                     <p className="text-gray-300 text-lg mb-4">
