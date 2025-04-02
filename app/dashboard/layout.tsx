@@ -32,17 +32,17 @@ export default function DashboardLayout({
   const pathname = usePathname()
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-[#1a1a1f]">
       {/* 사이드바 */}
-      <div className="w-64 bg-black border-r border-white/10">
+      <div className="hidden sm:block w-64 bg-[#1a1a1f] border-r border-white/[0.04]">
         <div className="flex flex-col h-full">
           {/* 로고 */}
-          <div className="p-6">
+          <div className="p-5">
             <Logo variant="text" size="md" />
           </div>
 
           {/* 네비게이션 */}
-          <nav className="flex-1 px-4 pb-4">
+          <nav className="flex-1 px-3 pb-4">
             <ul className="space-y-1">
               {navigation.map((item) => {
                 const isActive = pathname === item.href
@@ -50,13 +50,13 @@ export default function DashboardLayout({
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className={`flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium ${
+                      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                         isActive
-                          ? 'bg-gradient-to-r from-purple-500/20 to-mint-500/20 text-white'
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
+                          ? 'bg-white/[0.06] text-white'
+                          : 'text-white/60 hover:text-white hover:bg-white/[0.03]'
                       }`}
                     >
-                      <item.icon className={`w-5 h-5 ${isActive ? 'text-mint-400' : ''}`} />
+                      <item.icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-white/60'}`} />
                       {item.name}
                     </Link>
                   </li>
@@ -66,8 +66,8 @@ export default function DashboardLayout({
           </nav>
 
           {/* 로그아웃 */}
-          <div className="p-4 border-t border-white/10">
-            <button className="flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 w-full">
+          <div className="p-3 border-t border-white/[0.04]">
+            <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/[0.03] w-full transition-all">
               <LogOut className="w-5 h-5" />
               로그아웃
             </button>

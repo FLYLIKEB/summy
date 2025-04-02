@@ -55,38 +55,41 @@ const stats = [
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      <div className="section-container py-8">
+    <div className="min-h-screen bg-[#1a1a1f]/90 text-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-5xl">
         {/* 헤더 */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 sm:mb-8">
           <div>
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-xl sm:text-2xl font-medium">
               안녕하세요, 홍길동님 👋
             </h1>
-            <p className="text-gray-400 mt-1">
+            <p className="text-sm text-white/60 mt-1">
               오늘도 Summy와 함께 효율적인 하루 보내세요
             </p>
           </div>
-          <Link href="/settings" className="btn-secondary">
+          <Link 
+            href="/settings" 
+            className="px-4 py-2 bg-white/[0.06] text-white/90 rounded-lg text-sm font-medium transition-all hover:bg-white/[0.1] inline-flex items-center gap-2"
+          >
             <Settings className="w-4 h-4" />
             <span>설정</span>
           </Link>
         </div>
 
         {/* 통계 카드 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {stats.map((stat) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+          {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className="p-6 rounded-2xl bg-white/5 border border-white/10"
+              className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/[0.04] backdrop-blur-md transition-all hover:bg-white/[0.04]"
             >
               <div className="flex items-center gap-4">
-                <div className={`p-3 rounded-xl ${stat.color}`}>
-                  <stat.icon className="w-6 h-6" />
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white/[0.06]">
+                  <stat.icon className="w-5 h-5 text-white/80" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold">{stat.value}</h3>
-                  <p className="text-sm text-gray-400">{stat.label}</p>
+                  <h3 className="text-base sm:text-lg font-medium">{stat.value}</h3>
+                  <p className="text-xs sm:text-sm text-white/60">{stat.label}</p>
                 </div>
               </div>
             </div>
@@ -94,39 +97,39 @@ export default function DashboardPage() {
         </div>
 
         {/* 요약 내역 */}
-        <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
-          <div className="p-6 border-b border-white/10">
-            <h2 className="text-xl font-semibold">최근 요약 내역</h2>
+        <div className="rounded-xl bg-white/[0.03] border border-white/[0.04] backdrop-blur-md overflow-hidden mb-6 sm:mb-8">
+          <div className="p-4 sm:p-5 border-b border-white/[0.04]">
+            <h2 className="text-lg sm:text-xl font-medium">최근 요약 내역</h2>
           </div>
-          <div className="divide-y divide-white/10">
+          <div className="divide-y divide-white/[0.03]">
             {summaries.map((summary) => (
-              <div key={summary.id} className="p-6 hover:bg-white/5">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-medium">{summary.title}</h3>
-                  <span className="text-sm text-gray-400">{summary.date}</span>
+              <div key={summary.id} className="p-4 sm:p-5 hover:bg-white/[0.02] transition-all">
+                <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
+                  <h3 className="font-medium mb-1 sm:mb-0">{summary.title}</h3>
+                  <span className="text-xs sm:text-sm text-white/50">{summary.date}</span>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-gray-400">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/50">
                   <span>{summary.platform}</span>
-                  <span>•</span>
+                  <span className="hidden sm:inline">•</span>
                   <span>{summary.messageCount}개의 메시지</span>
-                  <span>•</span>
+                  <span className="hidden sm:inline">•</span>
                   <span>{summary.summaryLength} 분량</span>
                 </div>
               </div>
             ))}
           </div>
-          <div className="p-6 border-t border-white/10 text-center">
-            <Link href="/summaries" className="text-purple-400 hover:text-purple-300">
+          <div className="p-4 sm:p-5 border-t border-white/[0.04] text-center">
+            <Link href="/summaries" className="text-white/70 hover:text-white/90 transition-all text-sm">
               모든 요약 보기
             </Link>
           </div>
         </div>
 
         {/* 새 요약 시작 버튼 */}
-        <div className="mt-8 text-center">
+        <div className="mt-6 sm:mt-8 text-center">
           <Link
             href="/new"
-            className="btn-primary inline-flex items-center gap-2"
+            className="px-5 py-2.5 bg-white/10 text-white rounded-lg transition-all hover:bg-white/15 backdrop-blur-sm inline-flex items-center justify-center gap-2 text-sm font-medium"
           >
             <MessageSquare className="w-4 h-4" />
             새로운 대화 요약하기
