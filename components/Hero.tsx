@@ -48,7 +48,7 @@ export default function Hero() {
       {/* 주요 콘텐츠 영역 */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          <div className="space-y-8 md:space-y-12 mb-8">
+          <div className="space-y-6 md:space-y-8 mb-6">
             {/* 로고 영역: 애니메이션 효과와 그라데이션 적용 */}
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -63,9 +63,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="space-y-6"
+              className="space-y-4"
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-center gap-3">
                   <span className="text-2xl md:text-3xl lg:text-4xl font-medium">대화를 더 쉽게</span>
                 </div>
@@ -80,15 +80,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="space-y-4"
+              className="space-y-2"
             >
               <div className="flex items-center justify-center gap-3">
                 <span className="text-2xl">💬</span>
-                <span className="text-lg md:text-xl text-white/80">긴 대화를 AI가 빠르게 요약</span>
+                <span className="text-base md:text-lg text-white/80">긴 대화를 AI가 빠르게 요약</span>
               </div>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-2xl">✨</span>
-                <span className="text-lg md:text-xl text-white/80">핵심만 쏙 뽑아서, 답변까지 제안</span>
+                <span className="text-base md:text-lg text-white/80">핵심만 쏙 뽑아서, 답변까지 제안</span>
               </div>
             </motion.div>
           </div>
