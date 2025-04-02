@@ -10,9 +10,7 @@ export default function Footer() {
       <div className="section-container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="text-center md:text-left">
-            <Link href="/" className="block">
-              <Logo variant="text" size="md" />
-            </Link>
+            <Logo variant="text" size="md" href="/" className="block" />
             <p className="text-sm text-white/60">
               🤖 AI로 더 스마트하게 대화를 요약하세요
             </p>
