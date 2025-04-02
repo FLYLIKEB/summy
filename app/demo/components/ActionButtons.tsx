@@ -12,7 +12,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
       <button
         onClick={onSummarize}
         disabled={isSummarizing}
-        className="px-5 py-2 bg-white/10 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto transition-all hover:bg-white/15 backdrop-blur-sm"
+        className="apple-button apple-button-primary w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className="flex items-center justify-center gap-2 text-sm font-medium">
           {isSummarizing ? (
@@ -34,7 +34,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
       <button
         onClick={onSuggestResponse}
         disabled={isSuggesting}
-        className="px-5 py-2 bg-white/5 text-white rounded-lg border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto transition-all hover:bg-white/8 backdrop-blur-sm"
+        className="apple-button apple-button-secondary w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className="flex items-center justify-center gap-2 text-sm font-medium">
           {isSuggesting ? (
