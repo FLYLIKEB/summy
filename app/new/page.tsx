@@ -85,7 +85,7 @@ export default function NewSummaryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-apple-dark text-white">
       <div className="section-container py-8">
         {/* 헤더 */}
         <div className="mb-8">
