@@ -2,21 +2,21 @@ import React from 'react'
 
 export default function ContactPage() {
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-black text-white">
-      <div className="section-container py-16">
+    <div className="bg-apple-dark text-white">
+      <div className="apple-section-container py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black mb-4">
+          <h1 className="apple-section-title text-4xl mb-4">
             💬 문의하기
           </h1>
-          <p className="text-xl text-white/80">
+          <p className="apple-section-description text-xl">
             궁금한 점이 있으시다면 언제든 문의해주세요
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* 문의 양식 */}
-          <div className="card p-8">
-            <h2 className="text-2xl font-bold mb-6">문의 양식</h2>
+          <div className="apple-card apple-card-content">
+            <h2 className="text-2xl font-medium mb-6">문의 양식</h2>
             <form action="/api/contact" method="POST" className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -27,7 +27,7 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10"
                   placeholder="홍길동"
                 />
               </div>
@@ -41,7 +41,7 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10"
                   placeholder="example@email.com"
                 />
               </div>
@@ -54,7 +54,7 @@ export default function ContactPage() {
                   id="type"
                   name="type"
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white focus:outline-none focus:border-white-opacity-10"
                 >
                   <option value="">선택해주세요</option>
                   <option value="general">일반 문의</option>
@@ -74,14 +74,14 @@ export default function ContactPage() {
                   name="message"
                   required
                   rows={6}
-                  className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-purple-500"
+                  className="w-full px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10"
                   placeholder="문의하실 내용을 자세히 작성해주세요"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                className="apple-button apple-button-primary w-full py-3"
               >
                 문의하기
               </button>
@@ -90,11 +90,11 @@ export default function ContactPage() {
 
           {/* 연락처 정보 */}
           <div className="space-y-8">
-            <div className="card p-6">
-              <h2 className="text-2xl font-bold mb-6">연락처 정보</h2>
+            <div className="apple-card apple-card-content">
+              <h2 className="text-2xl font-medium mb-6">연락처 정보</h2>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl">📧</span>
+                  <span className="w-8 h-8 flex items-center justify-center bg-white-opacity-04 rounded-md">📧</span>
                   <div>
                     <h3 className="font-medium">이메일</h3>
                     <a 
@@ -106,7 +106,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl">💬</span>
+                  <span className="w-8 h-8 flex items-center justify-center bg-white-opacity-04 rounded-md">💬</span>
                   <div>
                     <h3 className="font-medium">카카오톡</h3>
                     <a 
@@ -120,7 +120,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl">📍</span>
+                  <span className="w-8 h-8 flex items-center justify-center bg-white-opacity-04 rounded-md">📍</span>
                   <div>
                     <h3 className="font-medium">주소</h3>
                     <p className="text-white/80">
@@ -131,12 +131,12 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="card p-6">
-              <h2 className="text-2xl font-bold mb-6">자주 묻는 문의</h2>
+            <div className="apple-card apple-card-content">
+              <h2 className="text-2xl font-medium mb-6">자주 묻는 문의</h2>
               <div className="space-y-4">
                 <a 
                   href="/faq#billing" 
-                  className="block p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-4 rounded-lg bg-white-opacity-03 hover:bg-white-opacity-04 transition-all"
                 >
                   <h3 className="font-medium mb-2">결제 관련 문의</h3>
                   <p className="text-sm text-white/60">
@@ -145,7 +145,7 @@ export default function ContactPage() {
                 </a>
                 <a 
                   href="/faq#technical" 
-                  className="block p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-4 rounded-lg bg-white-opacity-03 hover:bg-white-opacity-04 transition-all"
                 >
                   <h3 className="font-medium mb-2">기술 지원</h3>
                   <p className="text-sm text-white/60">
@@ -154,7 +154,7 @@ export default function ContactPage() {
                 </a>
                 <a 
                   href="/faq#business" 
-                  className="block p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block p-4 rounded-lg bg-white-opacity-03 hover:bg-white-opacity-04 transition-all"
                 >
                   <h3 className="font-medium mb-2">비즈니스 문의</h3>
                   <p className="text-sm text-white/60">
@@ -164,8 +164,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="card p-6">
-              <h2 className="text-2xl font-bold mb-6">응답 시간</h2>
+            <div className="apple-card apple-card-content">
+              <h2 className="text-2xl font-medium mb-6">응답 시간</h2>
               <div className="space-y-2">
                 <p className="text-white/80">
                   일반 문의: 24시간 이내
