@@ -31,15 +31,15 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ToastProvider>
-          <PageTransition type="fade" duration={300}>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow pt-16">
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow pt-16">
+              <PageTransition type="fade" duration={300}>
                 {children}
-              </main>
-              <Footer />
-            </div>
-          </PageTransition>
+              </PageTransition>
+            </main>
+            <Footer />
+          </div>
         </ToastProvider>
       </body>
     </html>

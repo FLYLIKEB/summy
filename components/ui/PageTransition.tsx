@@ -42,15 +42,15 @@ const PageTransition: React.FC<PageTransitionProps> = ({
         }
       case 'slide':
         return {
-          initial: { x: 100, opacity: 0 },
+          initial: { x: 20, opacity: 0 },
           animate: { x: 0, opacity: 1 },
-          exit: { x: -100, opacity: 0 }
+          exit: { x: -20, opacity: 0 }
         }
       case 'scale':
         return {
-          initial: { scale: 0.95, opacity: 0 },
+          initial: { scale: 0.98, opacity: 0 },
           animate: { scale: 1, opacity: 1 },
-          exit: { scale: 0.95, opacity: 0 }
+          exit: { scale: 0.98, opacity: 0 }
         }
       default:
         return {
@@ -77,7 +77,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({
         exit={variants.exit}
         transition={{ 
           duration: duration / 1000, // framer-motion은 초 단위
-          ease: [0.22, 1, 0.36, 1] // 부드러운 ease-out-cubic
+          ease: [0.25, 0.1, 0.25, 1] // 더 부드러운 커브
         }}
         className="w-full h-full"
       >
