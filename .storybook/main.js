@@ -7,7 +7,8 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
     "@chromatic-com/storybook",
-    "@storybook/experimental-addon-test"
+    "@storybook/experimental-addon-test",
+    "@storybook/addon-a11y"
   ],
   "framework": {
     "name": "@storybook/nextjs",
@@ -17,7 +18,23 @@ module.exports = {
     "../public"
   ],
   "webpackFinal": async (config) => {
-    // 필요한 경우 여기에 웹팩 설정 추가
+    // SVG 파일 처리 개선
+    const fileLoaderRule = config.module.rules.find(
+      (rule) => rule.test && rule.test.test(".svg")
+    );
+    fileLoaderRule.exclude = /\.svg$/;
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack", "url-loader"],
+    });
+
+    // Next.js 절대 경로 지원
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": require("path").resolve(__dirname, "../"),
+    };
+
     return config;
   },
   "env": (config) => ({
