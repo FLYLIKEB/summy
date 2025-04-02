@@ -52,7 +52,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen text-white">
       <div className="section-container py-16">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
@@ -89,7 +89,7 @@ export default function SignupPage() {
                 <div className="w-full border-t border-white/10"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-black text-gray-400">또는</span>
+                <span className="px-2 bg-transparent text-gray-400">또는</span>
               </div>
             </div>
 
