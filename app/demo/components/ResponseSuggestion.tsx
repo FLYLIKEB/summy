@@ -129,7 +129,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                     취소
                   </Button>
                   <Button
-                    variant="default"
+                    variant="primary"
                     onClick={onSaveResponse}
                     className="w-full sm:w-auto px-4 py-2 bg-mint-500/30 text-mint-300 rounded-lg hover:bg-mint-500/40 transition-colors"
                   >

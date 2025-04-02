@@ -25,8 +25,8 @@ const Toast: React.FC<ToastProps> = ({
 }) => {
   const [isVisible, setIsVisible] = React.useState(true)
   const [progress, setProgress] = React.useState(100)
-  const timerRef = React.useRef<number | null>(null)
-  const progressTimerRef = React.useRef<number | null>(null)
+  const timerRef = React.useRef<NodeJS.Timeout | null>(null)
+  const progressTimerRef = React.useRef<NodeJS.Timeout | null>(null)
 
   const positionClasses = {
     'top-right': 'top-4 right-4',
@@ -51,21 +51,29 @@ const Toast: React.FC<ToastProps> = ({
     warning: <AlertTriangle className="h-5 w-5" />
   }
 
+  const handleClose = React.useCallback(() => {
+    setIsVisible(false)
+    setTimeout(() => {
+      onClose && onClose()
+    }, 300) // 페이드 아웃 시간
+  }, [onClose]);
+
   React.useEffect(() => {
-    // 토스트 자동 닫기 타이머
-    timerRef.current = window.setTimeout(() => {
-      handleClose()
-    }, duration)
+    if (duration !== Infinity) {
+      timerRef.current = setTimeout(() => {
+        handleClose()
+      }, duration)
 
-    // 프로그레스 바 업데이트 타이머 (100ms 마다)
-    if (showProgress) {
-      const interval = 100
-      const steps = duration / interval
-      const decrement = 100 / steps
-
-      progressTimerRef.current = window.setInterval(() => {
-        setProgress(prev => Math.max(prev - decrement, 0))
-      }, interval)
+      if (showProgress) {
+        let elapsed = 0
+        const interval = 10 // 10ms마다 업데이트
+        const steps = duration / interval
+        
+        progressTimerRef.current = setInterval(() => {
+          elapsed += interval
+          setProgress(100 - (elapsed / duration) * 100)
+        }, interval)
+      }
     }
 
     return () => {
@@ -76,14 +84,7 @@ const Toast: React.FC<ToastProps> = ({
         clearInterval(progressTimerRef.current)
       }
     }
-  }, [duration, showProgress])
-
-  const handleClose = () => {
-    setIsVisible(false)
-    setTimeout(() => {
-      onClose && onClose()
-    }, 300) // 페이드 아웃 시간
-  }
+  }, [duration, showProgress, handleClose])
 
   if (!isVisible) {
     return null

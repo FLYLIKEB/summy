@@ -73,8 +73,8 @@ export default function DemoPage() {
   }
 
   return (
-    // 메인 컨테이너
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    // 메인 컨테이너 - 배경색 스타일 제거
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
         <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
           {/* 페이지 헤더 */}
@@ -96,7 +96,7 @@ export default function DemoPage() {
               <div className="w-full border-t border-white/10"></div>
             </div>
             <div className="relative flex justify-center">
-              <span className="px-4 text-sm text-white/60 bg-gradient-to-b from-gray-900 to-black">
+              <span className="px-4 text-sm text-white/60">
                 또는
               </span>
             </div>

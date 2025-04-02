@@ -2,16 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 애니메이션 */
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .animate-gradient {
@@ -24,35 +19,126 @@
 }
 
 :root {
+  /* 배경 */
   --background-start: #7C3AED;
   --background-end: #14B8A6;
-  --color-primary-50: rgb(250, 245, 255);
-  --color-primary-100: rgb(243, 232, 255);
-  --color-primary-200: rgb(233, 213, 255);
-  --color-primary-300: rgb(216, 180, 254);
-  --color-primary-400: rgb(192, 132, 252);
-  --color-primary-500: rgb(168, 85, 247);
-  --color-primary-500-rgb: 168, 85, 247;
-  --color-primary-600: rgb(147, 51, 234);
-  --color-primary-700: rgb(126, 34, 206);
-  --color-primary-800: rgb(107, 33, 168);
-  --color-primary-900: rgb(88, 28, 135);
+  
+  /* 색상 시스템 */
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+  
+  --color-secondary-50: #f0fdfa;
+  --color-secondary-100: #ccfbf1;
+  --color-secondary-200: #99f6e4;
+  --color-secondary-300: #5eead4;
+  --color-secondary-400: #2dd4bf;
+  --color-secondary-500: #14b8a6;
+  --color-secondary-600: #0d9488;
+  --color-secondary-700: #0f766e;
+  --color-secondary-800: #115e59;
+  --color-secondary-900: #134e4a;
+  
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  /* 간격 시스템 */
+  --spacing-none: 0;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* 테두리 반경 */
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+  
+  /* 그림자 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* 폰트 크기 */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* 폰트 두께 */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  
+  /* 애니메이션 타이밍 */
   --transition-fast: 0.15s;
   --transition-normal: 0.3s;
   --transition-slow: 0.5s;
+  
+  /* 레이아웃 */
+  --container-max-width: 1280px;
+  --header-height: 64px;
+  --sidebar-width: 256px;
+  
+  /* 그라데이션 */
   --gradient-primary: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-500) 100%);
   --gradient-secondary: linear-gradient(135deg, var(--color-secondary-600) 0%, var(--color-secondary-400) 100%);
   --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0.1) 100%);
 }
 
-body {
-  background: linear-gradient(135deg, var(--background-start), var(--background-end));
-  min-height: 100vh;
-  color: #fff;
+/* 기본 배경색 설정 */
+@layer base {
+  body {
+    background: linear-gradient(135deg, var(--background-start), var(--background-end)) fixed;
+    background-size: 100% 100%;
+    background-position: 0% 0%;
+    min-height: 100vh;
+    color: #fff;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
 @layer components {
+  /* 섹션 컴포넌트 */
   .section-container {
     @apply py-12 container mx-auto px-4 max-w-3xl;
   }
@@ -61,8 +147,7 @@ body {
     @apply text-3xl font-bold text-center mb-8;
   }
 
-  /* 레거시 카드 스타일 (컴포넌트로 점진적 마이그레이션을 위해 유지) */
-  /* @deprecated - 대신 <Card> 컴포넌트를 사용하세요 */
+  /* 카드 스타일 */
   .card {
     @apply bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 relative overflow-hidden;
   }
@@ -79,6 +164,7 @@ body {
     @apply text-xl font-bold;
   }
 
+  /* 태그 및 UI 요소 */
   .tag {
     @apply px-3 py-1 bg-white/10 rounded-full text-sm;
   }
@@ -91,47 +177,29 @@ body {
     @apply h-full rounded-full transition-all duration-300;
   }
 
-  /* 레거시 버튼 스타일 (컴포넌트로 점진적 마이그레이션을 위해 유지) */
+  /* 버튼 스타일 */
   .btn-primary {
-    @apply px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-mint-500 text-white rounded-full font-bold text-lg sm:text-xl 
+    @apply px-8 py-4 bg-gradient-to-r from-purple-500 to-mint-500 text-white rounded-full font-bold text-lg sm:text-xl 
            hover:from-purple-600 hover:to-mint-600 transition-all duration-300 hover:scale-105 hover:shadow-xl
-           transform hover:-translate-y-1 rounded-full relative;
+           transform hover:-translate-y-1 active:scale-95 cursor-pointer select-none;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.6), 
-                inset 0 1px 3px rgba(255, 255, 255, 0.5), 
-                0 0 0 2px rgba(255, 255, 255, 0.3),
-                0 0 0 4px rgba(124, 58, 237, 0.3);
-    background-size: 200% 200%;
-    animation: gradient 3s ease infinite;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
   }
   
-  /* 버튼 호버 효과 추가 */
   .btn-primary:hover {
-    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.7), 
-                0 0 0 2px rgba(255, 255, 255, 0.5),
-                0 0 0 5px rgba(124, 58, 237, 0.4);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
   }
 
   .btn-secondary {
-    @apply px-8 sm:px-10 py-4 sm:py-5 bg-white/20 text-white rounded-full font-bold text-lg sm:text-xl 
-           hover:bg-white/30 transition-all duration-300 hover:scale-105 hover:shadow-lg
-           transform hover:-translate-y-1 border-2 border-white/30 rounded-full relative;
+    @apply px-8 py-4 bg-white/10 text-white rounded-full font-bold text-lg sm:text-xl 
+           hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:shadow-lg
+           transform hover:-translate-y-1 active:scale-95 cursor-pointer select-none;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3), 
-                inset 0 1px 3px rgba(255, 255, 255, 0.3), 
-                0 0 0 2px rgba(255, 255, 255, 0.2),
-                0 0 0 4px rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
   }
   
-  /* 버튼 호버 효과 추가 */
   .btn-secondary:hover {
-    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5), 
-                0 0 0 2px rgba(255, 255, 255, 0.4),
-                0 0 0 5px rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
   }
 
   .btn-outline {
@@ -142,8 +210,7 @@ body {
     @apply px-4 py-2 text-white/60 hover:text-white transition-all;
   }
 
-  /* 카드 변형 - 레거시 코드 */
-  /* @deprecated - 대신 <Card gradient> 컴포넌트를 사용하세요 */
+  /* 카드 변형 */
   .card-gradient {
     @apply relative;
   }
@@ -157,7 +224,6 @@ body {
     z-index: -1;
   }
 
-  /* @deprecated - 대신 <Card hover> 컴포넌트를 사용하세요 */
   .card-hover {
     @apply transition-all duration-300 hover:bg-white/10;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -165,6 +231,15 @@ body {
 
   .card-hover:hover {
     border-color: rgba(124, 58, 237, 0.2);
+  }
+  
+  /* 재사용 가능한 컴포넌트 스타일 */
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-400 to-mint-400 bg-clip-text text-transparent;
+  }
+  
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900;
   }
 }
 
@@ -190,13 +265,26 @@ body {
   .to-mint-500\/5 {
     --tw-gradient-to: rgba(20, 184, 166, 0.05) var(--tw-gradient-to-position);
   }
+  
+  /* 고정된 그라데이션 배경 */
+  .bg-gradient-fixed {
+    background: linear-gradient(135deg, var(--background-start), var(--background-end)) fixed;
+    background-size: 100% 100%;
+    background-position: 0% 0%;
+  }
 
   /* 불투명도가 있는 테두리 유틸리티 */
   .hover\:border-purple-500\/20:hover {
     border-color: rgba(124, 58, 237, 0.2);
   }
+  
+  /* 추가 유틸리티 클래스 */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-item-width, 250px), 1fr));
+  }
 }
 
+/* 카드 컴포넌트 */
 .interview-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);

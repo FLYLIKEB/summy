@@ -132,7 +132,7 @@ export default function PersonaProblems() {
                     {/* 내용 */}
                     <div className="text-left w-full">
                       <p className="text-gray-300 text-sm mb-3">
-                        "{persona.problem}"
+                        &quot;{persona.problem}&quot;
                       </p>
 
                       {/* 해결책 */}
@@ -185,7 +185,7 @@ export default function PersonaProblems() {
                     </div>
                     
                     <p className="text-gray-300 text-lg mb-4">
-                      "{persona.problemFull}"
+                      &quot;{persona.problemFull}&quot;
                     </p>
 
                     {/* 태그 */}

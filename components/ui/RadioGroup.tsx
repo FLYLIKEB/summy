@@ -137,7 +137,6 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
                       variantStyles[variant],
                       stateStyles
                     )}
-                    aria-invalid={error ? "true" : undefined}
                   />
                 </div>
                 <div className="ml-3 text-sm">

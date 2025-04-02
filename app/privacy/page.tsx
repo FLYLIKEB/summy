@@ -78,7 +78,7 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-semibold mb-4">7. 개인정보 자동 수집 장치의 설치/운영 및 거부</h2>
         <p>
           summy는 이용자에게 개별적인 맞춤서비스를 제공하기 위해 이용정보를 저장하고
-          수시로 불러오는 '쿠키(cookie)'를 사용합니다.
+          수시로 불러오는 &apos;쿠키(cookie)&apos;를 사용합니다.
         </p>
       </section>
     </LegalLayout>

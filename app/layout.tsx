@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import './globals.css'
 import '../styles/animations.css'
 import '../styles/spacing.css'
 import type { Metadata } from 'next'

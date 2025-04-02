@@ -11,10 +11,10 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
   return (
     <div className="animate-fade-in-up py-8">
       <Card 
-        variant="dark"
-        gradient
+        variant="glass"
+        hover
         padding="lg"
-        className="mt-8 relative overflow-hidden"
+        className="mt-8 relative overflow-hidden bg-white/5 border-white/10"
       >
         {/* 배경 효과는 Card 컴포넌트에서 자동으로 처리 */}
 
@@ -84,10 +84,17 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result }) => {
 
         {/* 키워드 태그 */}
         <div className="flex flex-wrap gap-2 mb-8">
-          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-300 text-sm">일정 조정</span>
-          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-mint-500/20 to-mint-600/20 text-mint-300 text-sm">기능 개발</span>
-          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-300 text-sm">UI/UX 개선</span>
-          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-mint-500/20 to-mint-600/20 text-mint-300 text-sm">프로젝트 관리</span>
+          {DEFAULT_KEYWORDS.map((keyword, index) => (
+            <span 
+              key={index} 
+              className={`px-3 py-1 rounded-full ${index % 2 === 0 
+                ? 'bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-300' 
+                : 'bg-gradient-to-r from-mint-500/20 to-mint-600/20 text-mint-300'} text-sm`
+              }
+            >
+              {keyword}
+            </span>
+          ))}
         </div>
 
         {/* 진행 상태 바 */}
