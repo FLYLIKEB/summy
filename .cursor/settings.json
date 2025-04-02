@@ -3,7 +3,7 @@
     "require_user_approval": {
       "git": true,
       "delete": true,
-      "default": false
+      "default": true
     }
   }
 } 
