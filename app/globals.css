@@ -259,7 +259,19 @@
   }
 
   .apple-button-primary {
-    @apply bg-white-opacity-15 hover:bg-white-opacity-20;
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(20, 184, 166, 0.8));
+    box-shadow: 0 1px 3px rgba(124, 58, 237, 0.2);
+  }
+  
+  .apple-button-primary:hover {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(20, 184, 166, 0.9));
+    box-shadow: 0 2px 5px rgba(124, 58, 237, 0.3);
+  }
+  
+  .apple-button-primary:active {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 1), rgba(20, 184, 166, 1));
+    transform: translateY(1px);
   }
 
   .apple-button-secondary {

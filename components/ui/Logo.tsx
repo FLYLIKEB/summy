@@ -39,24 +39,24 @@ const Logo: React.FC<LogoProps> = ({
     switch (variant) {
       case 'icon':
         return (
-          <div className={`rounded-lg bg-gradient-to-br from-purple-500 to-mint-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300 ${iconSize[size]}`}>
-            <span className="text-white font-black text-center">S</span>
+          <div className={`rounded-lg flex items-center justify-center shadow-sm ${iconSize[size]} bg-[#7c3aed] bg-opacity-90`}>
+            <span className="text-white font-medium text-center">S</span>
           </div>
         )
       case 'text':
         return (
-          <span className={`font-black tracking-tight bg-gradient-to-r from-purple-400 to-mint-500 text-transparent bg-clip-text ${sizeClasses[size]} group-hover:from-purple-500 group-hover:to-mint-600 transition-all duration-300 drop-shadow-sm`}>
-            {size === 'xl' ? 'summy' : '✨ Summy'}
+          <span className={`font-medium tracking-tight text-white ${sizeClasses[size]} transition-all duration-200`}>
+            {size === 'xl' ? 'summy' : 'Summy'}
           </span>
         )
       case 'full':
         return (
           <div className="flex items-center gap-2">
-            <div className={`rounded-lg bg-gradient-to-br from-purple-500 to-mint-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300 ${iconSize[size]}`}>
-              <span className="text-white font-black text-center">S</span>
+            <div className={`rounded-lg flex items-center justify-center shadow-sm ${iconSize[size]} bg-[#7c3aed] bg-opacity-90`}>
+              <span className="text-white font-medium text-center">S</span>
             </div>
-            <span className={`font-black tracking-tight bg-gradient-to-r from-purple-400 to-mint-500 text-transparent bg-clip-text ${sizeClasses[size]} group-hover:from-purple-500 group-hover:to-mint-600 transition-all duration-300 drop-shadow-sm`}>
-              {size === 'xl' ? 'summy' : '✨ Summy'}
+            <span className={`font-medium tracking-tight text-white ${sizeClasses[size]} transition-all duration-200`}>
+              {size === 'xl' ? 'summy' : 'Summy'}
             </span>
           </div>
         )
