@@ -2,7 +2,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ToastProvider } from '@/components/ui/Toast'
-import { PageTransition } from '@/components/ui/PageTransition'
 import { Navbar } from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -32,9 +31,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow pt-16">
-              <PageTransition type="fade" duration={300}>
-                {children}
-              </PageTransition>
+              {children}
             </main>
             <Footer />
           </div>

@@ -287,13 +287,13 @@
 
   /* 버튼 스타일 */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-2.5 bg-purple-500 text-white rounded-button font-medium text-sm 
-           hover:bg-purple-600 transition-all duration-200
+    @apply inline-flex items-center justify-center px-6 py-2.5 bg-white-opacity-15 text-white rounded-button font-medium text-sm 
+           hover:bg-white-opacity-20 transition-all duration-200
            cursor-pointer select-none;
   }
   
   .btn-primary:active {
-    @apply transform scale-[0.98];
+    @apply bg-white-opacity-20;
   }
 
   .btn-secondary {
@@ -303,7 +303,7 @@
   }
   
   .btn-secondary:active {
-    @apply transform scale-[0.98];
+    @apply bg-white-opacity-12;
   }
 
   .btn-outline {
@@ -313,8 +313,8 @@
   }
 
   .btn-link {
-    @apply inline-flex items-center justify-center px-2 py-1 bg-transparent text-purple-400 rounded-button font-medium text-sm
-           hover:text-purple-300 hover:underline transition-all duration-200
+    @apply inline-flex items-center justify-center px-2 py-1 bg-transparent text-white-opacity-70 rounded-button font-medium text-sm
+           hover:text-white hover:underline transition-all duration-200
            cursor-pointer select-none;
   }
 
@@ -323,18 +323,18 @@
     @apply opacity-50 cursor-not-allowed;
   }
 
-  /* Focus state for better accessibility */
+  /* 애플 스타일 포커스 링 */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-white-opacity-15 focus:ring-offset-2 focus:ring-offset-gray-900;
+  }
+
+  /* 포커스 링 스타일 - 보라색에서 화이트로 변경 */
   .btn-primary:focus-visible,
   .btn-secondary:focus-visible,
   .btn-outline:focus-visible,
   .btn-link:focus-visible {
     outline: none;
-    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-    --tw-ring-opacity: 0.3;
-    --tw-ring-color: rgba(124, 58, 237, var(--tw-ring-opacity));
-    --tw-ring-offset-width: 2px;
+    box-shadow: 0 0 0 2px var(--apple-bg-color), 0 0 0 4px var(--apple-white-opacity-20);
   }
 
   /* 카드 변형 */
@@ -362,11 +362,7 @@
   
   /* 재사용 가능한 컴포넌트 스타일 */
   .gradient-text {
-    @apply bg-gradient-to-r from-purple-400 to-mint-400 bg-clip-text text-transparent;
-  }
-  
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900;
+    @apply text-white font-medium;
   }
 }
 
@@ -462,10 +458,10 @@
     border-color: var(--apple-white-opacity-12);
   }
   
-  /* 불투명도가 있는 그림자 유틸리티 */
+  /* 보라색 그림자 유틸리티를 화이트 그림자로 변경 */
   .shadow-purple-500\/50 {
-    --tw-shadow-color: rgba(124, 58, 237, 0.5);
-    --tw-shadow: var(--tw-shadow-colored);
+    --tw-shadow-color: var(--apple-white-opacity-15);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
   
   .shadow-white\/40 {
@@ -473,15 +469,15 @@
     --tw-shadow: var(--tw-shadow-colored);
   }
 
-  /* 투명도가 있는 ring 컬러 */
+  /* 보라색 링 유틸리티를 화이트 링으로 변경 */
   .ring-purple-500\/30 {
-    --tw-ring-color: rgba(124, 58, 237, 0.3);
+    --tw-ring-color: var(--apple-white-opacity-15);
   }
 
-  /* 불투명도가 있는 그라데이션 유틸리티 */
+  /* 보라색 그라데이션 시작 유틸리티를 수정 */
   .from-purple-500\/5 {
-    --tw-gradient-from: rgba(124, 58, 237, 0.05) var(--tw-gradient-from-position);
-    --tw-gradient-to: rgba(124, 58, 237, 0) var(--tw-gradient-to-position);
+    --tw-gradient-from: var(--apple-white-opacity-05);
+    --tw-gradient-to: rgba(255, 255, 255, 0);
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
   }
   
@@ -496,14 +492,39 @@
     background-position: 0% 0%;
   }
 
-  /* 불투명도가 있는 테두리 유틸리티 */
+  /* 보라색 테두리 호버 유틸리티를 수정 */
   .hover\:border-purple-500\/20:hover {
-    border-color: rgba(124, 58, 237, 0.2);
+    border-color: var(--apple-white-opacity-10);
   }
   
   /* 추가 유틸리티 클래스 */
   .grid-auto-fit {
     grid-template-columns: repeat(auto-fit, minmax(var(--min-item-width, 250px), 1fr));
+  }
+
+  /* 링 투명도 유틸리티 */
+  .ring-white-opacity-15 {
+    --tw-ring-color: var(--apple-white-opacity-15);
+  }
+  
+  .focus\:ring-white-opacity-15:focus {
+    --tw-ring-color: var(--apple-white-opacity-15);
+  }
+  
+  .ring-white-opacity-10 {
+    --tw-ring-color: var(--apple-white-opacity-10);
+  }
+  
+  .focus\:ring-white-opacity-10:focus {
+    --tw-ring-color: var(--apple-white-opacity-10);
+  }
+  
+  .ring-white-opacity-20 {
+    --tw-ring-color: var(--apple-white-opacity-20);
+  }
+  
+  .focus\:ring-white-opacity-20:focus {
+    --tw-ring-color: var(--apple-white-opacity-20);
   }
 }
 
@@ -739,7 +760,7 @@
   }
 }
 
-/* 페이지 전환 애니메이션 */
+/* 페이지 전환 애니메이션 - 더 부드럽게 수정 */
 @keyframes fadeInPage {
   from {
     opacity: 0;
@@ -752,7 +773,7 @@
 @keyframes scaleUp {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
   to {
     opacity: 1;
@@ -816,12 +837,13 @@
   animation: checkmark 0.4s ease-in-out forwards;
 }
 
+/* 페이지 전환 클래스 */
 .page-enter {
-  animation: fadeInPage 0.3s ease-in-out;
+  animation: fadeInPage 0.2s ease-out;
 }
 
 .page-exit {
-  animation: fadeOut 0.3s ease-in-out;
+  animation: fadeOut 0.1s ease-in;
 }
 
 .scale-up-enter {
