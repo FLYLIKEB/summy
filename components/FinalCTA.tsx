@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function FinalCTA() {
   return (
-    <section className="apple-section bg-[#1a1a1f]">
+    <section className="apple-section">
       <div className="apple-section-container">
         <div className="apple-card apple-card-content text-center">
           <div>

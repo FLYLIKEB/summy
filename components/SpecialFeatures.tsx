@@ -24,7 +24,7 @@ export default function SpecialFeatures() {
   ]
 
   return (
-    <section className="apple-section bg-[#1a1a1f]">
+    <section className="apple-section">
       <div className="apple-section-container">
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="apple-section-title">✨ summy의 특별한 점</h2>
@@ -33,7 +33,7 @@ export default function SpecialFeatures() {
         <div className="apple-card">
           <div className="apple-card-content space-y-4">
             {features.map((feature, index) => (
-              <div key={index} className="apple-card bg-white/[0.01] apple-card-content">
+              <div key={index} className="apple-card bg-white-opacity-01 apple-card-content">
                 <h3 className="text-base sm:text-lg font-medium mb-3">{feature.title}</h3>
                 
                 {feature.type === 'progress' && (

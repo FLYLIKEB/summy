@@ -54,7 +54,7 @@ export default function Features() {
   ]
 
   return (
-    <section className="apple-section bg-[#1a1a1f]">
+    <section className="apple-section">
       <div className="apple-section-container">
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="apple-section-title">주요 기능</h2>
@@ -76,7 +76,7 @@ export default function Features() {
               <div className="apple-card apple-card-hover">
                 <div className="apple-card-content">
                   <div className="flex gap-3 items-start">
-                    <div className="bg-white/[0.04] p-2.5 rounded-lg">
+                    <div className="bg-white-opacity-04 p-2.5 rounded-lg">
                       {feature.icon}
                     </div>
                     <div>
@@ -102,7 +102,7 @@ export default function Features() {
             >
               <div className="apple-card apple-card-hover h-full">
                 <div className="apple-card-content flex flex-col h-full">
-                  <div className="bg-white/[0.04] p-2.5 rounded-lg inline-block mb-3">
+                  <div className="bg-white-opacity-04 p-2.5 rounded-lg inline-block mb-3">
                     {feature.icon}
                   </div>
                   <h3 className="text-lg font-medium mb-2">{feature.title}</h3>

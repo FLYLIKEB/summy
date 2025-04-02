@@ -27,7 +27,7 @@ export default function Demo() {
   }
 
   return (
-    <section className="apple-section bg-[#1a1a1f]">
+    <section className="apple-section">
       <div className="apple-section-container">
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 animate-fade-in">
           <h2 className="apple-section-title">데모 보기</h2>

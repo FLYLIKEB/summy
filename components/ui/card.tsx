@@ -51,7 +51,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div 
       className={cn(
-        'rounded-xl overflow-hidden shadow-lg',
+        'shadow-lg overflow-hidden rounded-card',
         variantClasses[variant],
         paddingClasses[padding],
         hoverClasses,

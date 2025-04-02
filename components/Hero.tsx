@@ -45,7 +45,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative h-screen flex flex-col justify-center overflow-hidden bg-[#1a1a1f]">
+    <section className="relative h-screen flex flex-col justify-center overflow-hidden bg-apple-dark">
       {/* 주요 콘텐츠 영역 */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
@@ -133,7 +133,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-6 right-6 z-50 p-2.5 bg-white/[0.06] backdrop-blur-md rounded-full text-white hover:bg-white/[0.1] transition-all border border-white/[0.04]"
+            className="fixed bottom-6 right-6 z-50 p-2.5 bg-white-opacity-06 backdrop-blur-md rounded-full text-white hover:bg-white-opacity-10 transition-all border border-white-opacity-04"
             aria-label="맨 위로 스크롤"
           >
             <svg
