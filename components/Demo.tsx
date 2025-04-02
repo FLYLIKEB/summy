@@ -10,21 +10,23 @@ export default function Demo() {
           <p className="text-gray-400">실제로 summy를 사용해보고 경험해보세요</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="relative aspect-[3/2]">
+          <div className="relative aspect-[840/1278]">
             <Image
               src="/images/mockups/demo_1.png"
               alt="summy 데모 1"
               fill
-              className="rounded-lg shadow-xl object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="rounded-lg shadow-xl object-contain"
               priority
             />
           </div>
-          <div className="relative aspect-[3/2]">
+          <div className="relative aspect-[840/1278]">
             <Image
               src="/images/mockups/demo_2.png"
               alt="summy 데모 2"
               fill
-              className="rounded-lg shadow-xl object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="rounded-lg shadow-xl object-contain"
               priority
             />
           </div>
