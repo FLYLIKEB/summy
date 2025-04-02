@@ -9,7 +9,7 @@ interface TextInputProps {
 
 export const TextInput: React.FC<TextInputProps> = ({ value, onChange, onResetFileUpload }) => {
   return (
-    <div className="mt-6">
+    <div>
       <textarea
         value={value}
         onChange={(e) => {
@@ -17,7 +17,7 @@ export const TextInput: React.FC<TextInputProps> = ({ value, onChange, onResetFi
           onResetFileUpload()
         }}
         placeholder={EXAMPLE_CONVERSATION}
-        className="w-full h-64 p-4 bg-white/5 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+        className="w-full h-48 sm:h-60 p-3 bg-white/[0.01] border border-white/[0.08] rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-white/10 resize-none transition-all text-sm leading-relaxed"
       />
     </div>
   )

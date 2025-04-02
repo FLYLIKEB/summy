@@ -73,70 +73,79 @@ export default function DemoPage() {
   }
 
   return (
-    // 메인 컨테이너 - 배경색 스타일 제거
-    <div className="min-h-screen">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+    <div className="min-h-screen bg-[#1a1a1f]/90">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
           {/* 페이지 헤더 */}
-          <div className="text-center">
-            <h1 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
+          <div className="text-center mb-4 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl font-medium mb-3 sm:mb-4">
               요약 체험하기
             </h1>
-            <p className="text-sm sm:text-base opacity-80">
-              실제 대화를 입력하거나 파일을 업로드하세요. AI가 요약해드립니다.
+            <p className="text-sm sm:text-base opacity-70 max-w-md mx-auto">
+              실제 대화를 입력하거나 파일을 업로드하세요. AI가 빠르게 분석하여 요약해드립니다.
             </p>
           </div>
 
-          {/* 파일 업로드 섹션 */}
-          <FileUpload />
-
-          {/* 구분선 */}
-          <div className="relative py-4">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10"></div>
+          {/* 입력 컨테이너 */}
+          <div className="bg-white/[0.04] backdrop-blur-md rounded-xl border border-white/[0.06] shadow-sm overflow-hidden">
+            {/* 파일 업로드 섹션 */}
+            <div className="p-4 sm:p-6">
+              <FileUpload />
             </div>
-            <div className="relative flex justify-center">
-              <span className="px-4 text-sm text-white/60">
+
+            {/* 구분선 */}
+            <div className="relative py-2 sm:py-3 px-4 sm:px-6">
+              <div className="w-full border-t border-white/[0.04]"></div>
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2d2d3a] px-3 sm:px-4 text-xs sm:text-sm text-white/40 rounded-full">
                 또는
-              </span>
+              </div>
+            </div>
+
+            {/* 텍스트 입력 섹션 */}
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+              <TextInput
+                value={input}
+                onChange={setInput}
+                onResetFileUpload={resetFileUpload}
+              />
             </div>
           </div>
 
-          {/* 텍스트 입력 섹션 */}
-          <TextInput
-            value={input}
-            onChange={setInput}
-            onResetFileUpload={resetFileUpload}
-          />
-
-          {/* 액션 버튼 섹션 */}
-          <ActionButtons
-            isSummarizing={isSummarizing}
-            isSuggesting={isSuggesting}
-            onSummarize={handleSummarizeClick}
-            onSuggestResponse={handleSuggestResponseClick}
-          />
-
-          {/* 답변 제안 결과 섹션 */}
-          {suggestedResponse && (
-            <ResponseSuggestion
-              isEditing={isEditing}
-              editedResponse={editedResponse}
-              selectedStyle={selectedStyle}
-              onStyleSelect={handleStyleChange}
-              onEdit={handleEditResponse}
-              onUpdateResponse={updateEditedResponse}
-              onCancelEditing={cancelEditing}
-              onSaveResponse={handleSaveResponse}
-              showReason={showReason}
-              onToggleReason={toggleReason}
+          {/* 액션 버튼 섹션 - 더 깔끔하게 중앙 배치 */}
+          <div className="flex justify-center mt-6 sm:mt-8">
+            <ActionButtons
+              isSummarizing={isSummarizing}
+              isSuggesting={isSuggesting}
+              onSummarize={handleSummarizeClick}
+              onSuggestResponse={handleSuggestResponseClick}
             />
-          )}
+          </div>
 
-          {/* 요약 결과 섹션 */}
-          {result && (
-            <SummaryResult result={result} />
-          )}
+          {/* 응답 컨테이너 */}
+          <div className="mt-8 sm:mt-10">
+            {/* 답변 제안 결과 섹션 */}
+            {suggestedResponse && (
+              <div className="mb-6 sm:mb-10">
+                <ResponseSuggestion
+                  isEditing={isEditing}
+                  editedResponse={editedResponse}
+                  selectedStyle={selectedStyle}
+                  onStyleSelect={handleStyleChange}
+                  onEdit={handleEditResponse}
+                  onUpdateResponse={updateEditedResponse}
+                  onCancelEditing={cancelEditing}
+                  onSaveResponse={handleSaveResponse}
+                  showReason={showReason}
+                  onToggleReason={toggleReason}
+                />
+              </div>
+            )}
+
+            {/* 요약 결과 섹션 */}
+            {result && (
+              <SummaryResult result={result} />
+            )}
+          </div>
         </div>
       </div>
     </div>

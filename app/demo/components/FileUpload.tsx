@@ -56,11 +56,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, className 
   const fileName = uploadedFile?.name
 
   return (
-    <Card 
-      variant="glass" 
-      padding="none" 
-      className={className}
-    >
+    <div className={className}>
       <input
         type="file"
         ref={fileInputRef}
@@ -72,17 +68,19 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, className 
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={handleAreaClick}
-        className={`p-8 rounded-xl border-2 border-dashed transition-all cursor-pointer
+        className={`p-4 sm:p-6 border border-dashed rounded-lg transition-all cursor-pointer
           ${isDragging 
-            ? 'border-blue-500 bg-blue-500/5' 
-            : 'border-white/10 hover:border-blue-500/50 hover:bg-white/5'
+            ? 'border-white/30 bg-white/[0.02]' 
+            : 'border-white/[0.12] hover:border-white/20 hover:bg-white/[0.01]'
           }`}
       >
         {uploadedFile ? (
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Icon name="file" className="w-6 h-6 text-blue-400" />
-              <span className="text-white/80">{fileName}</span>
+              <div className="w-8 h-8 flex items-center justify-center bg-white/[0.06] rounded-full">
+                <Icon name="file" className="w-4 h-4 text-white/80" />
+              </div>
+              <span className="text-white/80 text-sm sm:text-base truncate max-w-[16rem] sm:max-w-[24rem]">{fileName}</span>
             </div>
             <Button
               variant="ghost"
@@ -97,19 +95,21 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, className 
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-4">
-            <Icon name="upload" className="w-12 h-12 text-blue-400" />
+          <div className="flex flex-col items-center gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-white/[0.06] rounded-full">
+              <Icon name="upload" className="w-5 h-5 sm:w-6 sm:h-6 text-white/70" />
+            </div>
             <div className="text-center">
-              <p className="text-white/80 mb-1">
+              <p className="text-white/70 mb-1 text-xs sm:text-sm">
                 파일을 드래그하거나 클릭하여 업로드하세요
               </p>
-              <p className="text-sm text-white/60">
-                모든 파일 형식을 지원합니다
+              <p className="text-xs text-white/40">
+                텍스트 파일, 이미지 또는 PDF 파일 지원
               </p>
             </div>
           </div>
         )}
       </div>
-    </Card>
+    </div>
   )
 } 

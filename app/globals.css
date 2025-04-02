@@ -19,9 +19,9 @@
 }
 
 :root {
-  /* 배경 */
-  --background-start: #7C3AED;
-  --background-end: #14B8A6;
+  /* 배경 - 애플 스타일로 변경 */
+  --background-start: #1a1a1f;
+  --background-end: #2d2d3a;
   
   /* 색상 시스템 */
   --color-primary-50: #f5f3ff;
