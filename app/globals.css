@@ -158,6 +158,21 @@
 }
 
 @layer components {
+  /* 로고 스타일 */
+  .logo-text {
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  
+  .logo-icon {
+    background: linear-gradient(135deg, #0077ED, #0071e3);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   /* 공통 라운드 코너 클래스 */
   .rounded-default {
     border-radius: var(--radius-default);
