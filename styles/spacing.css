@@ -1,0 +1,199 @@
+/* 공통 여백 시스템 */
+:root {
+  /* 컨테이너 여백 - 반응형 */
+  --container-padding-mobile: 1rem;
+  --container-padding-tablet: 2rem;
+  --container-padding-desktop: 3rem;
+  
+  /* 섹션 간 간격 - 반응형 */
+  --section-spacing-mobile: 3rem;
+  --section-spacing-tablet: 4rem;
+  --section-spacing-desktop: 5rem;
+  
+  /* 컴포넌트 내부 간격 - 반응형 */
+  --component-spacing-mobile: 1rem;
+  --component-spacing-tablet: 1.5rem;
+  --component-spacing-desktop: 2rem;
+  
+  /* 카드 내부 패딩 - 반응형 */
+  --card-padding-mobile: 1rem;
+  --card-padding-tablet: 1.5rem;
+  --card-padding-desktop: 2rem;
+}
+
+/* 반응형 컨테이너 여백 */
+.container-padding {
+  padding-left: var(--container-padding-mobile);
+  padding-right: var(--container-padding-mobile);
+}
+
+@media (min-width: 640px) {
+  .container-padding {
+    padding-left: var(--container-padding-tablet);
+    padding-right: var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-padding {
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+}
+
+/* 반응형 섹션 간격 */
+.section-spacing {
+  margin-top: var(--section-spacing-mobile);
+  margin-bottom: var(--section-spacing-mobile);
+}
+
+@media (min-width: 640px) {
+  .section-spacing {
+    margin-top: var(--section-spacing-tablet);
+    margin-bottom: var(--section-spacing-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    margin-top: var(--section-spacing-desktop);
+    margin-bottom: var(--section-spacing-desktop);
+  }
+}
+
+/* 섹션 내부 여백 */
+.section-padding {
+  padding-top: var(--section-spacing-mobile);
+  padding-bottom: var(--section-spacing-mobile);
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding-top: var(--section-spacing-tablet);
+    padding-bottom: var(--section-spacing-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: var(--section-spacing-desktop);
+    padding-bottom: var(--section-spacing-desktop);
+  }
+}
+
+/* 컴포넌트 간격 */
+.component-spacing {
+  margin-bottom: var(--component-spacing-mobile);
+}
+
+@media (min-width: 640px) {
+  .component-spacing {
+    margin-bottom: var(--component-spacing-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .component-spacing {
+    margin-bottom: var(--component-spacing-desktop);
+  }
+}
+
+/* 카드 패딩 */
+.card-padding {
+  padding: var(--card-padding-mobile);
+}
+
+@media (min-width: 640px) {
+  .card-padding {
+    padding: var(--card-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-padding {
+    padding: var(--card-padding-desktop);
+  }
+}
+
+/* 콘텐츠 최대 너비 제한 */
+.content-narrow {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-medium {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-wide {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-extra-wide {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 그리드 및 플렉스 갭 - 반응형 */
+.grid-gap-mobile {
+  gap: 1rem;
+}
+
+.grid-gap-tablet {
+  gap: 1.5rem;
+}
+
+.grid-gap-desktop {
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .grid-gap-responsive {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-gap-responsive {
+    gap: 2rem;
+  }
+}
+
+/* 텍스트 요소 간 간격 */
+.text-spacing h1, 
+.text-spacing h2, 
+.text-spacing h3, 
+.text-spacing h4, 
+.text-spacing h5, 
+.text-spacing h6 {
+  margin-bottom: 0.75rem;
+}
+
+.text-spacing p {
+  margin-bottom: 1rem;
+}
+
+.text-spacing ul, 
+.text-spacing ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+/* 모바일 최적화 마진 리셋 */
+@media (max-width: 639px) {
+  .mobile-margin-reset {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .mobile-padding-reset {
+    padding-left: var(--container-padding-mobile) !important;
+    padding-right: var(--container-padding-mobile) !important;
+  }
+} 

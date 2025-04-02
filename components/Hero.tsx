@@ -31,115 +31,47 @@ export default function Hero() {
   }
 
   return (
-    <div className="relative isolate overflow-hidden bg-gradient-to-b from-gray-900 to-black">
-      {/* 배경 요소 */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
-        <motion.div
-          initial={{ opacity: 0, scale: 1.2 }}
-          animate={{ opacity: 0.1, scale: 1 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
-        />
-      </div>
+    <section className="section-padding relative overflow-hidden">
+      <div className="container-padding content-extra-wide">
+        <div className="flex flex-col gap-8 md:gap-12 items-center text-center">
+          <div className="component-spacing">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-purple-400 to-mint-400 bg-clip-text text-transparent animate-fade-in">
+              복잡한 대화도<br className="hidden sm:block" /> AI로 한눈에 요약
+            </h1>
+            <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              회의, 채팅, 메일 등 모든 형태의 대화를<br className="hidden sm:block" /> 
+              빠르고 정확하게 요약해 드립니다
+            </p>
+          </div>
 
-      <div className="relative py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl text-center">
-            {/* 로고 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-8 sm:mb-12 px-2 sm:px-4"
-            >
-              <Logo variant="text" size="xl" />
-            </motion.div>
+          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <a href="/signup" className="btn-primary">
+              무료로 시작하기
+            </a>
+            <a href="/demo" className="btn-secondary">
+              데모 둘러보기
+            </a>
+          </div>
 
-            {/* 메인 텍스트 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl leading-tight">
-                <span className="inline-block mb-2">✨ 대화를 더 쉽게</span>
-                <br />
-                <span className="inline-block">🚀 요약은 더 빠르게</span>
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-gray-300 max-w-2xl mx-auto">
-                <span className="inline-block mb-2">💬 긴 대화를 AI가 빠르게 요약해드립니다</span>
-                <br />
-                <span className="inline-block">🎯 핵심만 쏙 뽑아서, 답변까지 제안해드려요</span>
-              </p>
-            </motion.div>
-
-            {/* CTA 버튼 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-y-4 sm:gap-y-0 sm:gap-x-6"
-            >
-              <Link
-                href="/signup"
-                className="btn-primary w-full sm:w-auto group relative overflow-hidden"
-              >
-                <span className="relative z-10">🎮 첫 달 무료로 시작하기</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-mint-600"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '0%' }}
-                  transition={{ duration: 0.3 }}
+          <div className="w-full max-w-4xl mx-auto mt-4 md:mt-8 relative animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+              <div className="aspect-video relative">
+                <img 
+                  src="/images/hero-preview.jpg" 
+                  alt="Summy 앱 미리보기" 
+                  className="w-full h-full object-cover"
                 />
-              </Link>
-              <Link
-                href="/demo"
-                className="btn-secondary w-full sm:w-auto group relative overflow-hidden"
-              >
-                <span className="relative z-10">🎯 실제 대화 요약해보기</span>
-                <motion.div
-                  className="absolute inset-0 bg-white/10"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '0%' }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            </motion.div>
-
-            {/* 스크롤 인디케이터 */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="mt-16 flex justify-center"
-            >
-              <div className="flex flex-col items-center gap-2">
-                <span className="text-sm text-gray-400">스크롤하여 더 알아보기</span>
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                    />
-                  </svg>
-                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
-            </motion.div>
+              <div className="p-4 md:p-6 text-left">
+                <h3 className="text-lg md:text-xl font-semibold">30분 회의를 30초로 요약</h3>
+                <p className="text-white/70 text-sm md:text-base">핵심 주제와 결정 사항만 확인하세요</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.15),transparent_70%)]"></div>
 
       {/* 스크롤 버튼 */}
       <AnimatePresence>
@@ -169,6 +101,6 @@ export default function Hero() {
           </motion.button>
         )}
       </AnimatePresence>
-    </div>
+    </section>
   )
 } 

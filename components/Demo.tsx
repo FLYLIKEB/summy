@@ -27,16 +27,16 @@ export default function Demo() {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-b from-purple-900/30 to-transparent backdrop-blur-sm">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto mb-12 animate-fade-in">
+    <section className="section-padding bg-gradient-to-b from-purple-900/30 to-transparent backdrop-blur-sm">
+      <div className="container-padding content-wide">
+        <div className="text-center max-w-2xl mx-auto component-spacing animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">데모 보기</h2>
-          <p className="text-xl text-white/70">
+          <p className="text-lg md:text-xl text-white/70">
             Summy가 어떻게 작동하는지 직접 확인해보세요
           </p>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 shadow-lg max-w-4xl mx-auto">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 shadow-lg mx-auto">
           <div className="relative aspect-video rounded-t-2xl overflow-hidden animate-fade-in">
             <video 
               src="/videos/demo.mp4" 
@@ -46,7 +46,7 @@ export default function Demo() {
             />
             {/* 비디오 오버레이 컨트롤 */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/40">
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   variant="primary"
                   size="lg"
@@ -71,14 +71,14 @@ export default function Demo() {
             </div>
           </div>
 
-          <div className="p-6 flex flex-col md:flex-row items-center justify-between">
-            <div className="animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="card-padding flex flex-col md:flex-row items-center justify-between">
+            <div className="animate-slide-in-up mb-4 md:mb-0" style={{ animationDelay: '0.2s' }}>
               <h3 className="text-xl font-bold mb-1">복잡한 대화를 한눈에 요약</h3>
               <p className="text-white/70">
                 30분 회의를 30초 요약으로, 핵심만 추출합니다
               </p>
             </div>
-            <div className="mt-4 md:mt-0">
+            <div>
               <Button
                 variant="ghost"
                 size="md"
