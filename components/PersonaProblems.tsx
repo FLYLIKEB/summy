@@ -61,8 +61,8 @@ const item = {
 
 export default function PersonaProblems() {
   return (
-    <section className="relative py-16 sm:py-24 bg-gradient-to-b from-gray-900 via-primary-900/40 to-black">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+    <section className="relative py-16 sm:py-24 bg-[#1a1a1f]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,11 +70,11 @@ export default function PersonaProblems() {
           transition={{ duration: 0.8 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">
-            <span className="inline-block mr-2 sm:mr-4">🎯</span>
-            <span className="text-4xl sm:text-5xl text-secondary-300">누구에게 필요할까요?</span>
+          <h2 className="text-2xl sm:text-3xl font-medium text-white mb-3 sm:mb-4">
+            <span className="inline-block mr-2 sm:mr-3">🎯</span>
+            <span className="text-3xl sm:text-4xl text-white">누구에게 필요할까요?</span>
           </h2>
-          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="text-white/60 text-sm sm:text-base max-w-2xl mx-auto">
             summy와 함께 대화의 고민을 해결해보세요
           </p>
         </motion.div>
@@ -86,33 +86,33 @@ export default function PersonaProblems() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex gap-5 w-max"
+            className="flex gap-4 w-max"
           >
             {personas.map((persona, index) => (
               <motion.div
                 key={index}
                 variants={item}
-                className="group relative overflow-hidden rounded-2xl bg-gray-900/90 backdrop-blur-sm border border-gray-700 hover:border-primary-500/30 transition-all duration-300 w-[85vw] max-w-sm snap-center flex-shrink-0 shadow-lg"
+                className="group relative overflow-hidden rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/[0.04] transition-all duration-300 w-[85vw] max-w-sm snap-center flex-shrink-0 shadow-sm"
               >
-                <div className="p-5">
-                  <div className="flex flex-col items-center gap-4">
+                <div className="p-4">
+                  <div className="flex flex-col items-center gap-3">
                     {/* 캐릭터 이미지와 이름을 나란히 배치 */}
                     <div className="flex items-center gap-3 w-full">
                       {/* 캐릭터 이미지 */}
-                      <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-gray-800 border border-gray-700 shadow-md flex-shrink-0">
+                      <div className="relative w-14 h-14 rounded-lg overflow-hidden bg-white/[0.04] border border-white/[0.06] shadow-sm flex-shrink-0">
                         <Image
                           src={persona.image}
                           alt={persona.name}
                           fill
                           className="object-cover"
-                          sizes="64px"
+                          sizes="56px"
                         />
                       </div>
                       
                       <div className="flex flex-col">
                         <div className="flex items-center gap-2">
-                          <span className="text-xl">{persona.emoji}</span>
-                          <h3 className="text-lg font-bold text-white">{persona.name}</h3>
+                          <span className="text-lg">{persona.emoji}</span>
+                          <h3 className="text-base font-medium text-white">{persona.name}</h3>
                         </div>
                         
                         {/* 태그 */}
@@ -120,7 +120,7 @@ export default function PersonaProblems() {
                           {persona.tags.map((tag, tagIndex) => (
                             <span
                               key={tagIndex}
-                              className="px-2 py-0.5 rounded-full text-xs font-medium bg-secondary-500/10 text-secondary-300 border border-secondary-500/20"
+                              className="px-2 py-0.5 rounded-full text-xs font-medium bg-white/[0.04] text-white/70 border border-white/[0.06]"
                             >
                               {tag}
                             </span>
@@ -131,15 +131,15 @@ export default function PersonaProblems() {
 
                     {/* 내용 */}
                     <div className="text-left w-full">
-                      <p className="text-gray-300 text-sm mb-3">
+                      <p className="text-white/80 text-xs mb-3">
                         &quot;{persona.problem}&quot;
                       </p>
 
                       {/* 해결책 */}
-                      <div className="bg-gray-800/80 rounded-xl p-3 border border-gray-700 shadow-md">
+                      <div className="bg-white/[0.02] rounded-lg p-3 border border-white/[0.04] shadow-sm">
                         <div className="flex items-center gap-2">
-                          <span className="text-lg">✨</span>
-                          <p className="text-gray-300 text-xs">{persona.solution}</p>
+                          <span className="text-base">✨</span>
+                          <p className="text-white/70 text-xs">{persona.solution}</p>
                         </div>
                       </div>
                     </div>
@@ -156,44 +156,44 @@ export default function PersonaProblems() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="hidden sm:grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          className="hidden sm:grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6"
         >
           {personas.map((persona, index) => (
             <motion.div
               key={index}
               variants={item}
-              className="group relative overflow-hidden rounded-2xl bg-gray-900/90 backdrop-blur-sm border border-gray-700 hover:border-primary-500/30 transition-all duration-500 shadow-lg hover:shadow-primary-800/20 hover:translate-y-[-4px]"
+              className="group relative overflow-hidden rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/[0.04] transition-all duration-300 shadow-sm hover:bg-white/[0.04]"
             >
-              <div className="p-6 lg:p-8">
-                <div className="flex items-start gap-6">
+              <div className="p-5 lg:p-6">
+                <div className="flex items-start gap-5">
                   {/* 캐릭터 이미지 */}
-                  <div className="relative w-28 h-28 lg:w-32 lg:h-32 rounded-xl overflow-hidden bg-gray-800 border border-gray-700 shadow-md">
+                  <div className="relative w-24 h-24 lg:w-28 lg:h-28 rounded-lg overflow-hidden bg-white/[0.04] border border-white/[0.06] shadow-sm">
                     <Image
                       src={persona.image}
                       alt={persona.name}
                       fill
                       className="object-cover"
-                      sizes="128px"
+                      sizes="112px"
                     />
                   </div>
 
                   {/* 내용 */}
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-3xl">{persona.emoji}</span>
-                      <h3 className="text-2xl font-bold text-white">{persona.name}</h3>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-2xl">{persona.emoji}</span>
+                      <h3 className="text-xl font-medium text-white">{persona.name}</h3>
                     </div>
                     
-                    <p className="text-gray-300 text-lg mb-4">
+                    <p className="text-white/80 text-sm mb-3">
                       &quot;{persona.problemFull}&quot;
                     </p>
 
                     {/* 태그 */}
-                    <div className="flex flex-wrap gap-2 mb-5">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {persona.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-3 py-1 rounded-full text-sm font-medium bg-secondary-500/10 text-secondary-300 border border-secondary-500/20 backdrop-blur-sm"
+                          className="px-2 py-0.5 rounded-full text-xs font-medium bg-white/[0.04] text-white/70 border border-white/[0.06]"
                         >
                           {tag}
                         </span>
@@ -201,21 +201,18 @@ export default function PersonaProblems() {
                     </div>
 
                     {/* 해결책 */}
-                    <div className="bg-gray-800/80 rounded-xl p-4 border border-gray-700 shadow-md">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">✨</span>
+                    <div className="bg-white/[0.02] rounded-lg p-3 border border-white/[0.04] shadow-sm">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">✨</span>
                         <div>
-                          <p className="text-white font-medium mb-1">summy의 해결책</p>
-                          <p className="text-gray-300">{persona.solution}</p>
+                          <p className="text-white font-medium text-xs mb-1">summy의 해결책</p>
+                          <p className="text-white/70 text-sm">{persona.solution}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* 카드 호버 효과를 위한 그라데이션 오버레이 */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </motion.div>
           ))}
         </motion.div>
@@ -231,12 +228,10 @@ export default function PersonaProblems() {
         >
           <Link
             href="/signup"
-            className="btn-primary py-3 px-6 flex items-center"
+            className="px-4 py-2.5 bg-white/10 text-white rounded-lg text-sm font-medium transition-all hover:bg-white/15 backdrop-blur-md inline-flex items-center gap-2"
           >
-            <span className="inline-flex items-center">
-              <span className="bg-white/20 p-1.5 rounded-full mr-2 text-base">🎮</span>
-              시작하기
-            </span>
+            <span className="bg-white/10 p-1.5 rounded-full text-sm">🎮</span>
+            시작하기
           </Link>
         </motion.div>
       </AnimatePresence>
