@@ -57,7 +57,7 @@ const item = {
 
 export default function PersonaProblems() {
   return (
-    <section className="relative py-12 sm:py-24 bg-gradient-to-b from-gray-900 to-black">
+    <section className="relative py-12 sm:py-24 bg-gradient-to-b from-primary-900 to-black">
       <div className="section-container px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -68,7 +68,7 @@ export default function PersonaProblems() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">
             <span className="inline-block mr-2 sm:mr-4">🎯</span>
-            누구에게 필요할까요?
+            <span className="font-handwriting text-4xl sm:text-5xl text-secondary-300">누구에게 필요할까요?</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
             summy와 함께 대화의 고민을 해결해보세요
@@ -88,12 +88,12 @@ export default function PersonaProblems() {
               <motion.div
                 key={index}
                 variants={item}
-                className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-300 w-[85vw] snap-center flex-shrink-0"
+                className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-900/50 to-secondary-900/50 backdrop-blur-sm border border-primary-500/20 hover:border-secondary-400/50 transition-all duration-300 w-[85vw] snap-center flex-shrink-0"
               >
                 <div className="p-4">
                   <div className="flex flex-col items-center gap-4">
                     {/* 캐릭터 이미지 */}
-                    <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                    <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-gradient-to-br from-primary-500/20 to-secondary-500/20">
                       <Image
                         src={persona.image}
                         alt={persona.name}
@@ -107,7 +107,7 @@ export default function PersonaProblems() {
                     <div className="text-center">
                       <div className="flex items-center justify-center gap-2 mb-3">
                         <span className="text-2xl">{persona.emoji}</span>
-                        <h3 className="text-xl font-bold text-white">{persona.name}</h3>
+                        <h3 className="text-xl font-bold text-white font-handwriting">{persona.name}</h3>
                       </div>
                       
                       <p className="text-gray-300 text-base mb-3">
@@ -119,7 +119,7 @@ export default function PersonaProblems() {
                         {persona.tags.map((tag, tagIndex) => (
                           <span
                             key={tagIndex}
-                            className="px-2 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                            className="px-2 py-1 rounded-full text-xs font-medium bg-secondary-500/10 text-secondary-300 border border-secondary-500/20"
                           >
                             {tag}
                           </span>
@@ -127,7 +127,7 @@ export default function PersonaProblems() {
                       </div>
 
                       {/* 해결책 */}
-                      <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+                      <div className="bg-gradient-to-br from-primary-800/30 to-secondary-800/30 rounded-lg p-3 border border-primary-500/20">
                         <div className="flex items-center gap-2">
                           <span className="text-xl">✨</span>
                           <div>
@@ -156,12 +156,12 @@ export default function PersonaProblems() {
             <motion.div
               key={index}
               variants={item}
-              className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-300"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-900/50 to-secondary-900/50 backdrop-blur-sm border border-primary-500/20 hover:border-secondary-400/50 transition-all duration-300"
             >
               <div className="p-8">
                 <div className="flex items-start gap-6">
                   {/* 캐릭터 이미지 */}
-                  <div className="relative w-32 h-32 rounded-xl overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                  <div className="relative w-32 h-32 rounded-xl overflow-hidden bg-gradient-to-br from-primary-500/20 to-secondary-500/20">
                     <Image
                       src={persona.image}
                       alt={persona.name}
@@ -175,7 +175,7 @@ export default function PersonaProblems() {
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-3xl">{persona.emoji}</span>
-                      <h3 className="text-2xl font-bold text-white">{persona.name}</h3>
+                      <h3 className="text-2xl font-bold text-white font-handwriting">{persona.name}</h3>
                     </div>
                     
                     <p className="text-gray-300 text-lg mb-4">
@@ -187,7 +187,7 @@ export default function PersonaProblems() {
                       {persona.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-3 py-1 rounded-full text-sm font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                          className="px-3 py-1 rounded-full text-sm font-medium bg-secondary-500/10 text-secondary-300 border border-secondary-500/20"
                         >
                           {tag}
                         </span>
@@ -195,7 +195,7 @@ export default function PersonaProblems() {
                     </div>
 
                     {/* 해결책 */}
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div className="bg-gradient-to-br from-primary-800/30 to-secondary-800/30 rounded-xl p-4 border border-primary-500/20">
                       <div className="flex items-center gap-3">
                         <span className="text-2xl">✨</span>
                         <div>
@@ -222,7 +222,7 @@ export default function PersonaProblems() {
         >
           <Link
             href="/signup"
-            className="flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-medium shadow-lg shadow-purple-500/20"
+            className="flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full text-white font-medium shadow-lg shadow-primary-500/20"
           >
             <span>🎮 시작하기</span>
           </Link>
