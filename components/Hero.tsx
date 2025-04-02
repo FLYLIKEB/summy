@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import Logo from './ui/Logo'
+import ScrollDownButton from './ui/ScrollDownButton'
 
 /**
  * 히어로 섹션 컴포넌트
@@ -116,51 +117,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 스크롤 다운 버튼: 사용자가 더 아래 콘텐츠로 이동할 수 있도록 안내 */}
-      <div className="absolute bottom-8 inset-x-0 flex justify-center">
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          onClick={() => {
-            window.scrollTo({
-              top: window.innerHeight,
-              behavior: 'smooth'
-            });
-          }}
-          className="flex flex-col items-center gap-2 text-white/60 hover:text-white/90 transition-colors group"
-          aria-label="페이지 아래로 스크롤"
-        >
-          <span className="text-sm font-medium tracking-wide">더 알아보기</span>
-          {/* 무한 반복 애니메이션 적용된 화살표 아이콘 */}
-          <motion.div
-            animate={{
-              y: [0, 5, 0] // 위아래로 움직이는 애니메이션
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="bg-white/10 p-2 rounded-full backdrop-blur-sm border border-white/10 group-hover:bg-white/20 group-hover:border-white/20 transition-all"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </motion.div>
-        </motion.button>
-      </div>
+      {/* 스크롤 다운 버튼 컴포넌트 */}
+      <ScrollDownButton delay={0.8} />
 
       {/* 배경 효과: 그라데이션 및 블러 효과로 깊이감 추가 */}
       <div className="absolute inset-0 -z-10">

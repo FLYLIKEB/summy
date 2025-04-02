@@ -322,4 +322,57 @@
   margin: 0.25rem;
   display: inline-block;
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 스크롤 다운 버튼 컴포넌트 */
+/**
+ * 스크롤 다운 버튼 관련 스타일
+ * 
+ * - scroll-down-container: 컨테이너로 절대 위치 지정 및 중앙 정렬
+ * - scroll-down-button: 버튼 자체의 스타일 (색상, 투명도, 호버 효과)
+ * - scroll-down-text: 텍스트 스타일
+ * - scroll-down-icon: 아이콘 컨테이너 스타일 (배경, 테두리, 효과)
+ */
+.scroll-down-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.scroll-down-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.scroll-down-button:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.scroll-down-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.scroll-down-icon {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.scroll-down-button:hover .scroll-down-icon {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
 } 
