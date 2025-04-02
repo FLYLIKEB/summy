@@ -73,16 +73,16 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <h4 className="text-white font-medium mb-4">뉴스레터 구독</h4>
             <p className="text-sm text-white/60 mb-4">새로운 기능과 업데이트를 받아보세요</p>
-            <form action="/api/newsletter" method="POST" className="flex flex-col sm:flex-row gap-2">
+            <form action="/api/newsletter" method="POST" className="flex flex-col sm:flex-row gap-2 max-w-xs sm:max-w-md mx-auto md:mx-0">
               <input 
                 type="email" 
                 name="email"
                 placeholder="이메일 주소" 
-                className="flex-1 px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10"
+                className="w-full px-4 py-2 rounded-lg bg-white-opacity-04 border border-white-opacity-06 text-white placeholder-white/40 focus:outline-none focus:border-white-opacity-10  text-sm"
                 required
               />
-              <button type="submit" className="apple-button apple-button-primary whitespace-nowrap">
-                구독하기
+              <button type="submit" className="apple-button apple-button-primary whitespace-nowrap text-sm">
+                구독
               </button>
             </form>
           </div>
