@@ -51,27 +51,19 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
   return (
     <div className="animate-fade-in-up py-8">
       {/* 메인 카드 컨테이너 */}
-      <Card className="mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-lg border border-white/10 relative overflow-hidden">
-        {/* 배경 그라데이션 효과 */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-mint-500/5 animate-gradient"></div>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-mint-500/10 rounded-full blur-3xl"></div>
-
-        <div className="relative p-4 sm:p-8">
+      <Card className="mt-8 apple-card border-white/10 relative overflow-hidden">
+        <div className="relative p-4 sm:p-6">
           {/* 헤더 섹션: 제목과 복사 버튼 */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-8 mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 mb-6">
             <div className="flex items-center gap-4">
               {/* 아이콘과 제목 */}
-              <div className="relative">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-purple-500 to-mint-500 flex items-center justify-center shadow-lg shadow-purple-500/20 animate-pulse">
-                  <Icon name="response" className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-mint-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#2c2c30] flex items-center justify-center">
+                <span className="text-lg">💬</span>
               </div>
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-mint-400 text-transparent bg-clip-text animate-gradient">답변 제안</h2>
-                  <span className="px-2 py-1 text-xs font-medium bg-gradient-to-r from-purple-500/20 to-mint-500/20 rounded-full text-purple-300">AI 제안</span>
+                  <h2 className="text-lg sm:text-xl font-medium">답변 제안</h2>
+                  <span className="px-2 py-1 text-xs font-medium bg-[#2c2c30] rounded-full text-white/70">AI 제안</span>
                 </div>
                 <p className="text-sm text-white/60 mt-1">회의 내용을 바탕으로 적절한 답변을 제안합니다</p>
               </div>
@@ -79,12 +71,13 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
             {/* 복사 버튼 */}
             <div className="flex items-center gap-2">
               <Button
-                variant="ghost"
+                variant="primary"
+                size="sm"
                 onClick={() => navigator.clipboard.writeText(editedResponse)}
-                className="w-full sm:w-auto px-3 py-1 bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors flex items-center justify-center gap-2"
+                className="apple-button apple-button-primary !px-3 !py-1.5 flex items-center gap-1 rounded-full whitespace-nowrap"
               >
-                <Icon name="copy" className="w-4 h-4" />
-                복사
+                <span className="text-base">📋</span>
+                <span className="text-sm inline-block">복사</span>
               </Button>
             </div>
           </div>
@@ -96,13 +89,10 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
               {(Object.keys(RESPONSE_STYLES) as ResponseStyle[]).map((style) => (
                 <Button
                   key={style}
-                  variant="ghost"
+                  variant={selectedStyle === style ? "primary" : "ghost"}
+                  size="sm"
                   onClick={() => onStyleSelect(style)}
-                  className={`flex-1 sm:flex-none px-3 py-1 rounded-lg transition-colors ${
-                    selectedStyle === style
-                      ? 'bg-mint-500/30 text-mint-300'
-                      : 'bg-white/5 text-white/60 hover:bg-white/10'
-                  }`}
+                  className={selectedStyle === style ? "apple-button-primary" : "apple-button-outline"}
                 >
                   {RESPONSE_STYLES[style].label}
                 </Button>
@@ -111,27 +101,29 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
           </div>
 
           {/* 답변 내용 섹션 */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/5 hover:border-mint-500/20 transition-all duration-300">
+          <div className="bg-[#1c1c1e] rounded-xl p-4 sm:p-6 border border-white/10">
             {isEditing ? (
               // 편집 모드
               <div className="space-y-4">
                 <textarea
                   value={editedResponse}
                   onChange={(e) => onUpdateResponse(e.target.value)}
-                  className="w-full h-32 sm:h-40 bg-white/5 rounded-lg p-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-mint-500/50 resize-none text-sm sm:text-base"
+                  className="w-full h-32 sm:h-40 bg-[#2c2c30] rounded-lg p-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#0071e3] resize-none text-sm sm:text-base"
                 />
                 <div className="flex flex-col sm:flex-row justify-end gap-2">
                   <Button
                     variant="ghost"
+                    size="sm"
                     onClick={onCancelEditing}
-                    className="w-full sm:w-auto px-4 py-2 bg-white/5 text-white/60 rounded-lg hover:bg-white/10 transition-colors"
+                    className="apple-button-outline"
                   >
                     취소
                   </Button>
                   <Button
                     variant="primary"
+                    size="sm"
                     onClick={onSaveResponse}
-                    className="w-full sm:w-auto px-4 py-2 bg-mint-500/30 text-mint-300 rounded-lg hover:bg-mint-500/40 transition-colors"
+                    className="apple-button-primary"
                   >
                     저장
                   </Button>
@@ -139,33 +131,35 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
               </div>
             ) : (
               // 보기 모드
-              <div className="relative group">
+              <div className="relative">
                 <div className="text-white/80 whitespace-pre-line text-sm sm:text-base">{editedResponse}</div>
                 <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
                   <Button
                     variant="ghost"
+                    size="sm"
                     onClick={onToggleReason}
-                    className="w-full sm:w-auto px-3 py-1 bg-white/5 text-white/60 rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
+                    className="apple-button-outline flex items-center justify-center gap-2"
                   >
-                    <Icon name={showReason ? 'chevronUp' : 'chevronDown'} className="w-4 h-4" />
+                    <span className="text-base">{showReason ? '🙈' : '🔍'}</span>
                     {showReason ? '이유 숨기기' : '이유 보기'}
                   </Button>
                   <Button
                     variant="ghost"
+                    size="sm"
                     onClick={onEdit}
-                    className="w-full sm:w-auto p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center"
+                    className="apple-button-outline px-2 flex items-center justify-center"
                   >
-                    <Icon name="edit" className="w-4 h-4 text-white/60" />
+                    <span className="text-base">✏️</span>
                   </Button>
                 </div>
                 {/* 답변 작성 이유 섹션 */}
                 {showReason && (
-                  <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/5">
-                    <h4 className="text-sm font-medium text-mint-300 mb-2">답변 작성 이유</h4>
-                    <div className="text-sm text-white/60 space-y-2">
+                  <div className="mt-4 p-4 bg-[#2c2c30] rounded-lg border border-white/10">
+                    <h4 className="text-sm font-medium text-white mb-2">답변 작성 이유</h4>
+                    <div className="text-sm text-white/70 space-y-2">
                       {RESPONSE_REASONS[selectedStyle as ResponseStyle].map((reason, index) => (
                         <div key={index} className="flex items-start gap-2">
-                          <Icon name="info" className="w-4 h-4 text-mint-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-base text-[#0071e3] mt-0.5 flex-shrink-0">💡</span>
                           <span>{reason}</span>
                         </div>
                       ))}
@@ -177,13 +171,13 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
           </div>
 
           {/* 푸터 섹션 */}
-          <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/10">
-            <div className="flex items-center justify-between text-sm">
-              <div className="flex items-center gap-3 text-white/60 group">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-mint-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Icon name="response" className="w-4 h-4 text-mint-400" />
+          <div className="mt-6 pt-4 border-t border-white/10">
+            <div className="flex items-center text-sm">
+              <div className="flex items-center gap-3 text-white/60">
+                <div className="w-8 h-8 rounded-lg bg-[#2c2c30] flex items-center justify-center">
+                  <span className="text-base">💬</span>
                 </div>
-                <span className="group-hover:text-white transition-colors duration-300">AI 답변 제안</span>
+                <span>AI 답변 제안</span>
               </div>
             </div>
           </div>
