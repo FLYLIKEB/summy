@@ -9,28 +9,9 @@
 }
 
 @layer components {
+  /* 데모 페이지에서만 사용되는 카드 스타일 확장 */
   .card {
-    @apply relative overflow-hidden rounded-xl backdrop-blur-sm border border-white/10;
-  }
-
-  .btn-primary {
-    @apply px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-mint-500 text-white rounded-full font-bold text-lg sm:text-xl 
-           hover:from-purple-600 hover:to-mint-600 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-purple-500/30
-           transform hover:-translate-y-1 rounded-full;
-  }
-
-  .btn-secondary {
-    @apply px-8 sm:px-10 py-4 sm:py-5 bg-white bg-opacity-10 text-white rounded-full font-bold text-lg sm:text-xl 
-           hover:bg-opacity-20 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-white/30
-           transform hover:-translate-y-1 border border-white border-opacity-20 rounded-full;
-  }
-
-  .btn-outline {
-    @apply px-4 py-2 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-all;
-  }
-
-  .btn-ghost {
-    @apply px-4 py-2 text-white/60 hover:text-white transition-all;
+    @apply rounded-xl;
   }
 }
 

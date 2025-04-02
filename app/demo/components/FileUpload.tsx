@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Card } from './common/Card'
 import { Icon } from './common/Icon'
-import { Button } from './common/Button'
+import { Button } from '@/components/ui/Button'
 
 interface FileUploadProps {
   onFileChange?: (file: File | null) => void

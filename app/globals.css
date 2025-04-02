@@ -19,6 +19,10 @@
   background-size: 200% 200%;
 }
 
+.bg-size-200 {
+  background-size: 200% 200%;
+}
+
 :root {
   --background-start: #7C3AED;
   --background-end: #14B8A6;
@@ -40,7 +44,7 @@ body {
   }
 
   .card {
-    @apply bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-6 border border-white border-opacity-10;
+    @apply bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden;
   }
 
   .card-title {
@@ -56,17 +60,18 @@ body {
   }
 
   .tag {
-    @apply px-3 py-1 bg-white bg-opacity-10 rounded-full text-sm;
+    @apply px-3 py-1 bg-white/10 rounded-full text-sm;
   }
 
   .progress-bar {
-    @apply bg-white bg-opacity-10 rounded-full h-2 overflow-hidden;
+    @apply bg-white/10 rounded-full h-2 overflow-hidden;
   }
 
   .progress-fill {
     @apply h-full rounded-full transition-all duration-300;
   }
 
+  /* 레거시 버튼 스타일 (컴포넌트로 점진적 마이그레이션을 위해 유지) */
   .btn-primary {
     @apply px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-purple-500 to-mint-500 text-white rounded-full font-bold text-lg sm:text-xl 
            hover:from-purple-600 hover:to-mint-600 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/50
@@ -83,6 +88,14 @@ body {
            transform hover:-translate-y-1 border border-white/30 rounded-full relative;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-outline {
+    @apply px-4 py-2 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-all;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-white/60 hover:text-white transition-all;
   }
 }
 
