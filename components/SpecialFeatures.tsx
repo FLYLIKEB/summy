@@ -24,23 +24,22 @@ export default function SpecialFeatures() {
   ]
 
   return (
-    <Section>
-      <SectionContainer size="medium">
-        <SectionTitle 
-          title="✨ summy의 특별한 점"
-          centered={true}
-        />
+    <section className="apple-section bg-[#1a1a1f]">
+      <div className="apple-section-container">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="apple-section-title">✨ summy의 특별한 점</h2>
+        </div>
         
-        <Card variant="glass" hover padding="lg">
-          <div className="space-y-6">
+        <div className="apple-card">
+          <div className="apple-card-content space-y-4">
             {features.map((feature, index) => (
-              <Card key={index} variant="default" padding="sm">
-                <h3 className="font-bold mb-2">{feature.title}</h3>
+              <div key={index} className="apple-card bg-white/[0.01] apple-card-content">
+                <h3 className="text-base sm:text-lg font-medium mb-3">{feature.title}</h3>
                 
                 {feature.type === 'progress' && (
-                  <div className="progress-bar">
+                  <div className="apple-progress-bar">
                     <div 
-                      className="progress-fill bg-purple-400" 
+                      className="apple-progress-fill" 
                       style={{ width: `${feature.progressValue}%` }}
                     ></div>
                   </div>
@@ -49,19 +48,19 @@ export default function SpecialFeatures() {
                 {feature.type === 'tags' && feature.tags && (
                   <div className="flex flex-wrap gap-2">
                     {feature.tags.map((tag, tagIndex) => (
-                      <span key={tagIndex} className="tag">{tag}</span>
+                      <span key={tagIndex} className="apple-tag">{tag}</span>
                     ))}
                   </div>
                 )}
                 
                 {feature.type === 'text' && (
-                  <p className="text-base opacity-90">{feature.description}</p>
+                  <p className="text-sm text-white/60">{feature.description}</p>
                 )}
-              </Card>
+              </div>
             ))}
           </div>
-        </Card>
-      </SectionContainer>
-    </Section>
+        </div>
+      </div>
+    </section>
   )
 } 

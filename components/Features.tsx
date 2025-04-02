@@ -54,16 +54,17 @@ export default function Features() {
   ]
 
   return (
-    <Section background="gradient-secondary">
-      <SectionContainer>
-        <SectionTitle
-          title="주요 기능"
-          description="대화 요약부터 키워드 추출까지, 효율적인 커뮤니케이션을 위한 모든 기능"
-          centered={true}
-        />
+    <section className="apple-section bg-[#1a1a1f]">
+      <div className="apple-section-container">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="apple-section-title">주요 기능</h2>
+          <p className="apple-section-description">
+            대화 요약부터 키워드 추출까지, 효율적인 커뮤니케이션을 위한 모든 기능
+          </p>
+        </div>
         
         {/* 모바일 뷰: 슬라이드 레이아웃 */}
-        <div className="md:hidden flex flex-col gap-4">
+        <div className="md:hidden flex flex-col gap-3">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -72,29 +73,25 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card
-                variant="glass"
-                padding="md"
-                hover={true}
-                animation="fade-in"
-                delay={index * 0.1}
-              >
-                <div className="flex gap-4 items-start">
-                  <div className="bg-white/20 p-3 rounded-lg backdrop-blur-sm">
-                    {feature.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">{feature.title}</h3>
-                    <p className="text-sm text-white/70">{feature.description}</p>
+              <div className="apple-card apple-card-hover">
+                <div className="apple-card-content">
+                  <div className="flex gap-3 items-start">
+                    <div className="bg-white/[0.04] p-2.5 rounded-lg">
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-base font-medium mb-1">{feature.title}</h3>
+                      <p className="text-sm text-white/60">{feature.description}</p>
+                    </div>
                   </div>
                 </div>
-              </Card>
+              </div>
             </motion.div>
           ))}
         </div>
 
         {/* 데스크탑 뷰: 그리드 레이아웃 */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -103,23 +100,19 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card
-                variant="glass"
-                padding="md"
-                hover={true}
-                animation="fade-in"
-                delay={index * 0.1}
-              >
-                <div className="bg-white/20 p-3 rounded-lg backdrop-blur-sm inline-block mb-4">
-                  {feature.icon}
+              <div className="apple-card apple-card-hover h-full">
+                <div className="apple-card-content flex flex-col h-full">
+                  <div className="bg-white/[0.04] p-2.5 rounded-lg inline-block mb-3">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-lg font-medium mb-2">{feature.title}</h3>
+                  <p className="text-sm text-white/60">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-white/70">{feature.description}</p>
-              </Card>
+              </div>
             </motion.div>
           ))}
         </div>
-      </SectionContainer>
-    </Section>
+      </div>
+    </section>
   )
 } 

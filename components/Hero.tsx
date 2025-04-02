@@ -45,16 +45,16 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative h-screen flex flex-col justify-center overflow-hidden">
+    <section className="relative h-screen flex flex-col justify-center overflow-hidden bg-[#1a1a1f]">
       {/* 주요 콘텐츠 영역 */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          <div className="space-y-6 md:space-y-8 mb-6">
+          <div className="space-y-5 md:space-y-6 mb-5 md:mb-6">
             {/* 로고 영역: 애니메이션 효과와 그라데이션 적용 */}
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-purple-400 to-mint-400 bg-clip-text text-transparent tracking-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight"
             >
               summy
             </motion.h1>
@@ -64,14 +64,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-center gap-3">
-                  <span className="text-2xl md:text-3xl lg:text-4xl font-medium">대화를 더 쉽게</span>
+              <div className="flex flex-col gap-1 sm:gap-2">
+                <div className="flex items-center justify-center gap-2 sm:gap-3">
+                  <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white/90">대화를 더 쉽게</span>
                 </div>
-                <div className="flex items-center justify-center gap-3">
-                  <span className="text-2xl md:text-3xl lg:text-4xl font-medium">요약은 더 빠르게</span>
+                <div className="flex items-center justify-center gap-2 sm:gap-3">
+                  <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white/90">요약은 더 빠르게</span>
                 </div>
               </div>
             </motion.div>
@@ -83,13 +83,13 @@ export default function Hero() {
               transition={{ delay: 0.4 }}
               className="space-y-2"
             >
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-2xl">💬</span>
-                <span className="text-base md:text-lg text-white/80">긴 대화를 AI가 빠르게 요약</span>
+              <div className="flex items-center justify-center gap-2 sm:gap-3">
+                <span className="text-xl">💬</span>
+                <span className="text-sm sm:text-base text-white/70">긴 대화를 AI가 빠르게 요약</span>
               </div>
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-2xl">✨</span>
-                <span className="text-base md:text-lg text-white/80">핵심만 쏙 뽑아서, 답변까지 제안</span>
+              <div className="flex items-center justify-center gap-2 sm:gap-3">
+                <span className="text-xl">✨</span>
+                <span className="text-sm sm:text-base text-white/70">핵심만 쏙 뽑아서, 답변까지 제안</span>
               </div>
             </motion.div>
           </div>
@@ -99,17 +99,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
           >
             <Link 
               href="/signup" 
-              className="btn-primary w-full sm:w-auto min-w-[200px] inline-flex items-center justify-center"
+              className="apple-button apple-button-primary w-full sm:w-auto min-w-[180px]"
             >
               첫 달 무료로 시작하기
             </Link>
             <Link 
               href="/demo" 
-              className="btn-secondary w-full sm:w-auto min-w-[200px] inline-flex items-center justify-center"
+              className="apple-button apple-button-secondary w-full sm:w-auto min-w-[180px]"
             >
               실제 대화 요약해보기
             </Link>
@@ -120,10 +120,9 @@ export default function Hero() {
       {/* 스크롤 다운 버튼 컴포넌트 */}
       <ScrollDownButton delay={0.8} />
 
-      {/* 배경 효과: 그라데이션 및 블러 효과로 깊이감 추가 */}
+      {/* 배경 효과: 미묘한 그라데이션으로 깊이감 추가 */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.15),transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.1),transparent_70%)] rotate-180"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_70%)]"></div>
       </div>
 
       {/* 스크롤 업 버튼: 페이지를 충분히 내렸을 때만 표시됨 */}
@@ -134,12 +133,12 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all border border-white/20 group"
+            className="fixed bottom-6 right-6 z-50 p-2.5 bg-white/[0.06] backdrop-blur-md rounded-full text-white hover:bg-white/[0.1] transition-all border border-white/[0.04]"
             aria-label="맨 위로 스크롤"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

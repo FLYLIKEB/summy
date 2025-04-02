@@ -10,7 +10,7 @@ import FinalCTA from '@/components/FinalCTA'
 // 홈페이지 메인 화면
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#1a1a1f]">
       <main className="flex-1">
         <Hero /> {/* 홈페이지 첫 화면 */}
         <Demo /> {/* 데모 영상 */}
