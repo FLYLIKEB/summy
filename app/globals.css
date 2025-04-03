@@ -280,27 +280,55 @@
 
   /* 버튼 스타일 */
   .apple-button {
-    @apply px-5 py-2.5 bg-white-opacity-10 text-white rounded-lg text-sm font-medium transition-all hover:bg-white-opacity-15 backdrop-blur-md inline-flex items-center justify-center gap-2;
+    @apply px-5 py-2.5 bg-white-opacity-10 text-white rounded-lg text-sm font-medium backdrop-blur-md inline-flex items-center justify-center gap-2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .apple-button:hover {
+    @apply bg-white-opacity-15;
+    filter: brightness(1.05);
+  }
+  
+  .apple-button:active {
+    transition-duration: 0.1s;
   }
 
   .apple-button-primary {
     @apply relative overflow-hidden;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(20, 184, 166, 0.8));
-    box-shadow: 0 1px 3px rgba(124, 58, 237, 0.2);
+    background: linear-gradient(135deg, rgba(91, 33, 182, 0.9), rgba(124, 58, 237, 0.95));
+    box-shadow: 0 1px 3px rgba(91, 33, 182, 0.2);
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   
   .apple-button-primary:hover {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(20, 184, 166, 0.9));
-    box-shadow: 0 2px 5px rgba(124, 58, 237, 0.3);
+    background: linear-gradient(135deg, rgba(91, 33, 182, 0.9), rgba(124, 58, 237, 0.95));
+    border-color: rgba(45, 212, 191, 0.7);
+    box-shadow: 0 4px 10px rgba(91, 33, 182, 0.25), 0 0 0 1px rgba(45, 212, 191, 0.3);
+    transform: translateY(-1px) scale(1.01);
   }
   
   .apple-button-primary:active {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 1), rgba(20, 184, 166, 1));
-    transform: translateY(1px);
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.95), rgba(45, 212, 191, 1));
+    transform: translateY(1px) scale(0.99);
+    transition-duration: 0.1s;
   }
 
   .apple-button-secondary {
     @apply bg-white-opacity-05 border border-white-opacity-08 hover:bg-white-opacity-08;
+    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+  
+  .apple-button-secondary:hover {
+    border-color: rgba(45, 212, 191, 0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  .apple-button-secondary:active {
+    border-color: rgba(20, 184, 166, 0.8);
+    transform: translateY(1px) scale(0.99);
+    transition-duration: 0.1s;
   }
 
   /* 아이콘 컨테이너 */
