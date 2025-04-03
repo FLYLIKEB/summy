@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
+import { MessageSquare, Settings } from 'lucide-react'
 
 // 추출된 컴포넌트들 임포트
 import SidebarHeader from '@/components/ui/sidebar/SidebarHeader'
@@ -16,6 +17,81 @@ import MobileNewSummaryButton from '@/components/ui/MobileNewSummaryButton'
 
 // 네비게이션 설정 임포트
 import { navigation } from '@/components/ui/sidebar/navigation-config'
+
+// 신규 컴포넌트 - 헤더 버튼 
+const HeaderButtons = () => (
+  <div className="flex items-center gap-4">
+    <button className="apple-button apple-button-secondary">
+      <MessageSquare className="w-4 h-4" />
+      <span>새 대화</span>
+    </button>
+    <button className="apple-button apple-button-secondary">
+      <Settings className="w-4 h-4" />
+    </button>
+  </div>
+);
+
+// 신규 컴포넌트 - 사이드바 컨텐츠
+const SidebarContent = ({ isOpen, isMobile, toggleSidebar }: {
+  isOpen: boolean;
+  isMobile: boolean;
+  toggleSidebar: () => void;
+}) => (
+  <div className="flex flex-col h-full overflow-hidden">
+    {/* 헤더 컴포넌트 */}
+    <SidebarHeader isOpen={isOpen} isMobile={isMobile} toggleSidebar={toggleSidebar} />
+    
+    {/* 네비게이션 컴포넌트 */}
+    <SidebarNavigation isOpen={isOpen} navigation={navigation} />
+    
+    {/* 새 요약 버튼 컴포넌트 */}
+    <SidebarNewSummaryButton isOpen={isOpen} />
+    
+    {/* 로그아웃 버튼 컴포넌트 */}
+    <SidebarLogoutButton isOpen={isOpen} />
+  </div>
+);
+
+// 신규 컴포넌트 - 메인 콘텐츠 영역
+const MainContent = ({
+  children,
+  isOpen,
+  isMobile,
+  sidebarWidth,
+  toggleSidebar
+}: {
+  children: React.ReactNode;
+  isOpen: boolean;
+  isMobile: boolean;
+  sidebarWidth: number;
+  toggleSidebar: () => void;
+}) => (
+  <motion.main 
+    className="flex-1 min-h-screen bg-apple-dark overflow-y-auto flex flex-col"
+    initial={{ marginLeft: isMobile ? 0 : 256 }}
+    animate={{ marginLeft: sidebarWidth }}
+    transition={{ 
+      duration: 0.3, 
+      ease: [0.25, 1, 0.5, 1]
+    }}
+  >
+    {/* 데스크톱 접힌 상태 토글 버튼 */}
+    <SidebarDesktopToggle isOpen={isOpen} isMobile={isMobile} toggleSidebar={toggleSidebar} />
+    
+    {/* 사용자 설정 헤더 */}
+    <header className="h-16 border-b border-white/10 flex items-center justify-end px-6">
+      <HeaderButtons />
+    </header>
+    
+    {/* 자식 컴포넌트 (메인 콘텐츠) */}
+    <div className="p-4 sm:p-6 md:p-8 pb-16 flex-1">
+      {children}
+    </div>
+    
+    {/* 대시보드 미니 푸터 컴포넌트 */}
+    <DashboardFooter />
+  </motion.main>
+);
 
 interface SidebarProps {
   className?: string;
@@ -66,7 +142,7 @@ export default function Sidebar({ className = '', children }: SidebarProps) {
       <div className="flex w-full h-full relative">
         {/* 사이드바 */}
         <motion.aside 
-          className={`h-screen z-40 bg-apple-dark border-r border-white-opacity-04 ${className} absolute md:relative`}
+          className={`h-screen z-40 bg-apple-dark border-r border-white-opacity-04 ${className} fixed top-0 left-0 md:relative md:top-auto md:left-auto inset-0`}
           initial={{ width: isMobile ? 0 : 256 }}
           animate={{ width: sidebarWidth }}
           transition={{ 
@@ -75,42 +151,22 @@ export default function Sidebar({ className = '', children }: SidebarProps) {
             staggerChildren: 0.05
           }}
         >
-          <div className="flex flex-col h-full overflow-hidden">
-            {/* 헤더 컴포넌트 */}
-            <SidebarHeader isOpen={isOpen} isMobile={isMobile} toggleSidebar={toggleSidebar} />
-            
-            {/* 네비게이션 컴포넌트 */}
-            <SidebarNavigation isOpen={isOpen} navigation={navigation} />
-            
-            {/* 새 요약 버튼 컴포넌트 */}
-            <SidebarNewSummaryButton isOpen={isOpen} />
-            
-            {/* 로그아웃 버튼 컴포넌트 */}
-            <SidebarLogoutButton isOpen={isOpen} />
-          </div>
+          <SidebarContent 
+            isOpen={isOpen} 
+            isMobile={isMobile} 
+            toggleSidebar={toggleSidebar} 
+          />
         </motion.aside>
         
         {/* 메인 콘텐츠 영역 */}
-        <motion.main 
-          className="flex-1 min-h-screen bg-apple-dark overflow-y-auto flex flex-col"
-          initial={{ marginLeft: isMobile ? 0 : 256 }}
-          animate={{ marginLeft: sidebarWidth }}
-          transition={{ 
-            duration: 0.3, 
-            ease: [0.25, 1, 0.5, 1]
-          }}
+        <MainContent
+          isOpen={isOpen}
+          isMobile={isMobile}
+          sidebarWidth={sidebarWidth}
+          toggleSidebar={toggleSidebar}
         >
-          {/* 데스크톱 접힌 상태 토글 버튼 */}
-          <SidebarDesktopToggle isOpen={isOpen} isMobile={isMobile} toggleSidebar={toggleSidebar} />
-          
-          {/* 자식 컴포넌트 (메인 콘텐츠) */}
-          <div className="p-4 sm:p-6 md:p-8 pb-16 flex-1">
-            {children}
-          </div>
-          
-          {/* 대시보드 미니 푸터 컴포넌트 */}
-          <DashboardFooter />
-        </motion.main>
+          {children}
+        </MainContent>
       </div>
       
       {/* 신규대화 요약 버튼 컴포넌트 */}

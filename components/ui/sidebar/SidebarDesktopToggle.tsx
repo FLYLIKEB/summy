@@ -1,6 +1,6 @@
 'use client'
 
-import { Menu } from 'lucide-react'
+import { ChevronRight, ChevronLeft } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 interface SidebarDesktopToggleProps {
@@ -10,18 +10,20 @@ interface SidebarDesktopToggleProps {
 }
 
 export default function SidebarDesktopToggle({ isOpen, isMobile, toggleSidebar }: SidebarDesktopToggleProps) {
-  if (isOpen || isMobile) return null;
+  if (isMobile) return null
+  
+  const Icon = isOpen ? ChevronLeft : ChevronRight
   
   return (
-    <motion.button
-      className="fixed left-[40px] top-5 z-20 p-2 rounded-full backdrop-blur-md bg-white-opacity-08 text-white hover:bg-white-opacity-12 active:bg-white-opacity-06 transition-all transform ml-2"
-      onClick={toggleSidebar}
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.2 }}
-    >
-      <Menu className="w-4 h-4" />
-    </motion.button>
+    <div className="fixed top-4 left-[18px] z-40 ml-0 hidden md:block group">
+      <button 
+        className={`p-2 rounded-full apple-button apple-button-secondary transition-all duration-300 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} 
+        onClick={toggleSidebar} 
+        aria-label={isOpen ? '사이드바 접기' : '사이드바 펼치기'}
+        disabled={isOpen}
+      >
+        <Icon className="w-4 h-4" />
+      </button>
+    </div>
   )
 } 

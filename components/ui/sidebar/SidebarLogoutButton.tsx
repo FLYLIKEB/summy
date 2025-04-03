@@ -1,7 +1,9 @@
 'use client'
 
-import { LogOut } from 'lucide-react'
+import React from 'react'
 import { motion } from 'framer-motion'
+import { LogOut } from 'lucide-react'
+import Link from 'next/link'
 
 interface SidebarLogoutButtonProps {
   isOpen: boolean;
@@ -9,18 +11,23 @@ interface SidebarLogoutButtonProps {
 
 export default function SidebarLogoutButton({ isOpen }: SidebarLogoutButtonProps) {
   return (
-    <div className="p-3 border-t border-white-opacity-04">
-      <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white-opacity-03 w-full transition-all">
-        <LogOut className="w-5 h-5 flex-shrink-0" />
-        <motion.span
-          initial={{ opacity: 1, width: "auto" }}
-          animate={{ opacity: isOpen ? 1 : 0, width: isOpen ? "auto" : 0 }}
-          transition={{ duration: 0.2 }}
-          className="whitespace-nowrap overflow-hidden"
-        >
-          로그아웃
-        </motion.span>
-      </button>
+    <div className="mt-auto p-4 border-t border-white-opacity-04">
+      <Link
+        href="/login"
+        className={`apple-button apple-button-secondary w-full px-4 py-2 rounded-lg flex items-center justify-center gap-2 md:gap-3`}
+      >
+        <LogOut className="w-4 h-4" />
+        {isOpen && (
+          <motion.span
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: 'auto' }}
+            exit={{ opacity: 0, width: 0 }}
+            className="whitespace-nowrap overflow-hidden"
+          >
+            로그아웃
+          </motion.span>
+        )}
+      </Link>
     </div>
   )
 } 
