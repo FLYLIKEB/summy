@@ -107,7 +107,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
               ease: [0.4, 0.0, 0.2, 1] 
             }}
           >
-            <div className="flex flex-col h-full w-full max-w-[256px]">
+            <div className="flex flex-col h-full w-64">
               {/* 헤더 영역 */}
               <div className="flex items-center justify-between p-5">
                 <Logo variant="text" size="md" />
