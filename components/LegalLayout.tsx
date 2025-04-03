@@ -22,7 +22,7 @@ export default function LegalLayout({ children, title, lastUpdated }: LegalLayou
           <div className="mt-8 text-center">
             <Link 
               href="/signup" 
-              className="btn-primary"
+              className="apple-button-primary"
               prefetch={true}
             >
               회원가입으로 돌아가기

@@ -71,14 +71,14 @@ export default function LoginPage() {
                 <KakaoLoginButton
                   onSuccess={handleKakaoLoginSuccess}
                   onError={handleKakaoLoginError}
-                  className="btn-secondary w-full !bg-yellow-400 hover:!bg-yellow-500 !text-yellow-900"
+                  className="apple-button-secondary w-full !bg-yellow-400 hover:!bg-yellow-500 !text-yellow-900"
                 />
               </div>
               <div className="w-full sm:w-80">
                 <GoogleLoginButton
                   onSuccess={handleGoogleLoginSuccess}
                   onError={handleGoogleLoginError}
-                  className="btn-secondary w-full !bg-slate-50 hover:!bg-slate-100 !text-slate-800 !border-slate-200"
+                  className="apple-button-secondary w-full !bg-slate-50 hover:!bg-slate-100 !text-slate-800 !border-slate-200"
                 />
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="btn-primary w-full"
+                    className="apple-button-secondary w-full"
                   >
                     {isLoading ? '로그인 중...' : '로그인'}
                   </button>
