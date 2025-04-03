@@ -62,7 +62,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
       {/* 모바일 토글 버튼 */}
       <div className="md:hidden fixed top-4 left-4 z-50 relative group">
         <button 
-          className="p-2 rounded-full backdrop-blur-md bg-white/[0.08] text-white hover:bg-white/[0.12] active:bg-white/[0.06] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.12)] active:shadow-[0_1px_3px_rgba(0,0,0,0.1)] transform active:scale-95"
+          className="p-2 rounded-full backdrop-blur-md bg-white-opacity-08 text-white hover:bg-white-opacity-12 active:bg-white-opacity-06 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.12)] active:shadow-[0_1px_3px_rgba(0,0,0,0.1)] transform active:scale-95"
           onClick={toggleSidebar}
           aria-label={isOpen ? '사이드바 닫기' : '사이드바 열기'}
         >
@@ -74,7 +74,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
           </motion.div>
         </button>
         <div className="absolute left-0 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
-          <div className="bg-[#1a1a1a]/90 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
+          <div className="bg-apple-dark backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
             {isOpen ? '사이드바 닫기' : '사이드바 열기'}
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            className={`sidebar fixed md:sticky top-0 left-0 h-screen z-40 md:z-10 bg-apple-bg-color border-r border-white/[0.04] ${className}`}
+            className={`sidebar fixed md:sticky top-0 left-0 h-screen z-40 md:z-10 bg-apple-dark border-r border-white-opacity-04 ${className}`}
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
@@ -113,7 +113,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
                 <Logo variant="text" size="md" />
                 <div className="relative group">
                   <button 
-                    className="p-2 rounded-full backdrop-blur-md bg-white/[0.08] text-white hover:bg-white/[0.12] active:bg-white/[0.06] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.12)] active:shadow-[0_1px_3px_rgba(0,0,0,0.1)] transform active:scale-95"
+                    className="p-2 rounded-full backdrop-blur-md bg-white-opacity-08 text-white hover:bg-white-opacity-12 active:bg-white-opacity-06 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.12)] active:shadow-[0_1px_3px_rgba(0,0,0,0.1)] transform active:scale-95"
                     onClick={() => setIsOpen(false)}
                     aria-label="사이드바 닫기"
                   >
@@ -127,7 +127,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
                     </motion.div>
                   </button>
                   <div className="absolute right-0 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
-                    <div className="bg-[#1a1a1a]/90 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
+                    <div className="bg-apple-dark backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
                       사이드바 닫기
                     </div>
                   </div>
@@ -150,8 +150,8 @@ export default function Sidebar({ className = '' }: SidebarProps) {
                           href={item.href}
                           className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                             isActive
-                              ? 'bg-white/[0.06] text-white'
-                              : 'text-white/60 hover:text-white hover:bg-white/[0.03]'
+                              ? 'bg-white-opacity-06 text-white'
+                              : 'text-white/60 hover:text-white hover:bg-white-opacity-03'
                           }`}
                         >
                           <item.icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-white/60'}`} />
@@ -175,8 +175,8 @@ export default function Sidebar({ className = '' }: SidebarProps) {
               </div>
               
               {/* 로그아웃 */}
-              <div className="p-3 border-t border-white/[0.04]">
-                <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/[0.03] w-full transition-all">
+              <div className="p-3 border-t border-white-opacity-04">
+                <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white-opacity-03 w-full transition-all">
                   <LogOut className="w-5 h-5" />
                   로그아웃
                 </button>
@@ -190,7 +190,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
       {!isOpen && !isMobile && (
         <div className="hidden md:block fixed left-4 top-4 z-20 relative group">
           <motion.button
-            className="flex p-2 rounded-full backdrop-blur-md bg-white/[0.08] text-white hover:bg-white/[0.12] active:bg-white/[0.06] transition-all shadow-[0_2px_8px_rgba(0,0,0,0.12)] active:shadow-[0_1px_3px_rgba(0,0,0,0.1)] transform active:scale-95"
+            className="flex p-2 rounded-full backdrop-blur-md bg-white-opacity-08 text-white hover:bg-white-opacity-12 active:bg-white-opacity-06 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.12)] active:shadow-[0_1px_3px_rgba(0,0,0,0.1)] transform active:scale-95"
             onClick={toggleSidebar}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -202,7 +202,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
             <Menu className="w-5 h-5" />
           </motion.button>
           <div className="absolute left-0 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
-            <div className="bg-[#1a1a1a]/90 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
+            <div className="bg-apple-dark backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
               사이드바 열기
             </div>
           </div>

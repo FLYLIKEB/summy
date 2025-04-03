@@ -55,7 +55,7 @@ const stats = [
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-[#1a1a1f]/90 text-white relative">
+    <div className="min-h-screen bg-apple-dark text-white relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-5xl">
         {/* 헤더 */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 sm:mb-8">
@@ -69,7 +69,7 @@ export default function DashboardPage() {
           </div>
           <Link 
             href="/dashboard/settings" 
-            className="px-4 py-2 bg-white/[0.06] text-white/90 rounded-lg text-sm font-medium transition-all hover:bg-white/[0.1] inline-flex items-center gap-2"
+            className="px-4 py-2 bg-white-opacity-06 text-white/90 rounded-lg text-sm font-medium transition-all hover:bg-white-opacity-10 inline-flex items-center gap-2"
           >
             <Settings className="w-4 h-4" />
             <span>설정</span>
@@ -81,10 +81,10 @@ export default function DashboardPage() {
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/[0.04] backdrop-blur-md transition-all hover:bg-white/[0.04]"
+              className="p-4 sm:p-5 rounded-xl bg-white-opacity-03 border border-white-opacity-04 backdrop-blur-md transition-all hover:bg-white-opacity-04"
             >
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white/[0.06]">
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white-opacity-06">
                   <stat.icon className="w-5 h-5 text-white/80" />
                 </div>
                 <div>
@@ -97,13 +97,13 @@ export default function DashboardPage() {
         </div>
 
         {/* 요약 내역 */}
-        <div className="rounded-xl bg-white/[0.03] border border-white/[0.04] backdrop-blur-md overflow-hidden mb-6 sm:mb-8">
-          <div className="p-4 sm:p-5 border-b border-white/[0.04]">
+        <div className="rounded-xl bg-white-opacity-03 border border-white-opacity-04 backdrop-blur-md overflow-hidden mb-6 sm:mb-8">
+          <div className="p-4 sm:p-5 border-b border-white-opacity-04">
             <h2 className="text-lg sm:text-xl font-medium">최근 요약 내역</h2>
           </div>
-          <div className="divide-y divide-white/[0.03]">
+          <div className="divide-y divide-white-opacity-03">
             {summaries.map((summary) => (
-              <div key={summary.id} className="p-4 sm:p-5 hover:bg-white/[0.02] transition-all">
+              <div key={summary.id} className="p-4 sm:p-5 hover:bg-white-opacity-02 transition-all">
                 <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
                   <h3 className="font-medium mb-1 sm:mb-0">{summary.title}</h3>
                   <span className="text-xs sm:text-sm text-white/50">{summary.date}</span>
@@ -118,7 +118,7 @@ export default function DashboardPage() {
               </div>
             ))}
           </div>
-          <div className="p-4 sm:p-5 border-t border-white/[0.04] text-center">
+          <div className="p-4 sm:p-5 border-t border-white-opacity-04 text-center">
             <Link href="/dashboard/summaries" className="text-white/70 hover:text-white/90 transition-all text-sm">
               모든 요약 보기
             </Link>
