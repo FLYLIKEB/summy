@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp, Search, X } from 'lucide-react';
 import { FilterPanelProps } from './types';
 
@@ -53,7 +52,7 @@ const FilterPanel = ({
       <div className="flex justify-between items-center">
         <button
           onClick={toggleFilterPanel}
-          className="apple-button-secondary text-sm py-1 px-3 flex items-center"
+          className="apple-button apple-button-secondary text-sm py-1 px-3 flex items-center rounded-lg"
         >
           필터
           {isFilterOpen ? (
@@ -70,7 +69,7 @@ const FilterPanel = ({
               setSearchQuery('');
               setSelectedCategory(null);
             }}
-            className="apple-button-secondary text-sm py-1 px-3"
+            className="apple-button-secondary text-sm py-1 px-3 rounded-lg"
           >
             필터 초기화
           </button>
@@ -79,13 +78,7 @@ const FilterPanel = ({
 
       {/* 확장 가능한 필터 패널 */}
       {isFilterOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="pt-2"
-        >
+        <div className="pt-2">
           <div className="flex flex-wrap gap-2">
             <h4 className="text-sm font-medium text-medium-contrast flex items-center mr-2">{categoryLabel}:</h4>
             
@@ -122,7 +115,7 @@ const FilterPanel = ({
               );
             })}
           </div>
-        </motion.div>
+        </div>
       )}
     </div>
   );
