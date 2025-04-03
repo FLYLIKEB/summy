@@ -53,7 +53,7 @@ const FilterPanel = ({
       <div className="flex justify-between items-center">
         <button
           onClick={toggleFilterPanel}
-          className="flex items-center text-sm text-medium-contrast hover:text-high-contrast transition-colors"
+          className="apple-button-secondary text-sm py-1 px-3 flex items-center"
         >
           필터
           {isFilterOpen ? (
@@ -70,7 +70,7 @@ const FilterPanel = ({
               setSearchQuery('');
               setSelectedCategory(null);
             }}
-            className="text-sm text-medium-contrast hover:text-high-contrast transition-colors"
+            className="apple-button-secondary text-sm py-1 px-3"
           >
             필터 초기화
           </button>
@@ -92,10 +92,10 @@ const FilterPanel = ({
             {/* 전체 카테고리 버튼 */}
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-3 py-1 text-sm rounded-full transition-colors ${
+              className={`py-1 px-3 text-sm rounded-full transition-all ${
                 selectedCategory === null
-                  ? 'bg-blue-500 text-high-contrast'
-                  : 'bg-white-opacity-04 text-medium-contrast hover:bg-white-opacity-08 hover:text-high-contrast'
+                  ? 'apple-button-primary'
+                  : 'apple-button-secondary'
               }`}
             >
               전체
@@ -110,10 +110,10 @@ const FilterPanel = ({
                 <button
                   key={category.name}
                   onClick={() => setSelectedCategory(isSelected ? null : category.name)}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors flex items-center gap-1 ${
+                  className={`py-1 px-3 text-sm rounded-full transition-all flex items-center gap-1 ${
                     isSelected
-                      ? 'bg-blue-500 text-high-contrast'
-                      : 'bg-white-opacity-04 text-medium-contrast hover:bg-white-opacity-08 hover:text-high-contrast'
+                      ? 'apple-button-primary'
+                      : 'apple-button-secondary'
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
