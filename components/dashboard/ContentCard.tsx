@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ContentCardProps, ListItem, ANIMATION } from './types';
+import { ContentCardProps, ListItem } from './types';
 
 /**
  * 콘텐츠 카드 컴포넌트
@@ -34,16 +33,7 @@ const ContentCard = <T extends ListItem>({
   };
 
   return (
-    <motion.div
-      initial={ANIMATION.initial}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: ANIMATION.duration,
-        delay: index * ANIMATION.stagger,
-        ease: ANIMATION.easing,
-      }}
-      whileHover={ANIMATION.hover}
-      layout
+    <div
       onClick={toggleExpand}
       className={`apple-card p-5 cursor-pointer ${isExpanded ? 'space-y-4' : ''}`}
     >
@@ -74,12 +64,7 @@ const ContentCard = <T extends ListItem>({
 
       {/* 확장된 콘텐츠 (확장 시에만 표시) */}
       {isExpanded && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          className="mt-4 pt-4 border-t border-white-opacity-08"
-        >
+        <div className="mt-4 pt-4 border-t border-white-opacity-08">
           {renderContent ? (
             renderContent(item)
           ) : (
@@ -103,9 +88,9 @@ const ContentCard = <T extends ListItem>({
               </div>
             )
           )}
-        </motion.div>
+        </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 

@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 import { PlusCircle, ChevronRight } from 'lucide-react';
-import { ListItem, CategoryOption, ANIMATION } from './types';
-import FilterPanel from './FilterPanel';
-import EmptyState from './EmptyState';
+import { ListItem, CategoryOption } from './types';
 import ContentCard from './ContentCard';
+import EmptyState from './EmptyState';
+import FilterPanel from './FilterPanel';
 
 interface UniversalListProps<T extends ListItem> {
   /** 항목 목록 */
@@ -204,12 +203,7 @@ const UniversalList = <T extends ListItem>({
   );
 
   return (
-    <motion.div
-      initial={ANIMATION.initial}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: ANIMATION.duration, ease: ANIMATION.easing }}
-      className="apple-card overflow-hidden"
-    >
+    <div className="apple-card overflow-hidden">
       {/* 헤더 섹션 */}
       <div className="p-4 sm:p-5 border-b border-white-opacity-04 flex justify-between items-center">
         <div>
@@ -259,23 +253,17 @@ const UniversalList = <T extends ListItem>({
       
       {/* 콘텐츠 목록 */}
       <div className="content-list">
-        <AnimatePresence>
-          {isLoading ? (
-            renderSkeletons()
-          ) : filteredItems.length > 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              {mode === 'card' ? renderCardMode() : renderSimpleMode()}
-            </motion.div>
-          ) : (
-            renderEmptyState()
-          )}
-        </AnimatePresence>
+        {isLoading ? (
+          renderSkeletons()
+        ) : filteredItems.length > 0 ? (
+          <div>
+            {mode === 'card' ? renderCardMode() : renderSimpleMode()}
+          </div>
+        ) : (
+          renderEmptyState()
+        )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

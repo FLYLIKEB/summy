@@ -1,8 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
-import { ANIMATION } from './types';
+import React from 'react';
 
 /**
  * 통계 카드 Props 타입
@@ -11,7 +10,7 @@ interface StatCardProps {
   /** 통계 라벨 */
   label: string;
   /** 통계 값 */
-  value: string;
+  value: string | number;
   /** 아이콘 컴포넌트 */
   icon: LucideIcon;
   /** 로딩 상태 */
@@ -25,49 +24,24 @@ interface StatCardProps {
  * 대시보드 등에서 주요 지표를 시각적으로 표시
  */
 const StatCard = ({ label, value, icon: Icon, isLoading = false, index = 0 }: StatCardProps) => {
-  if (isLoading) {
-    return (
-      <div className="skeleton rounded-xl h-24" aria-hidden="true" />
-    );
-  }
-
   return (
-    <motion.div
-      initial={ANIMATION.initial}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: ANIMATION.duration,
-        delay: index * ANIMATION.stagger,
-        ease: ANIMATION.easing,
-      }}
-      whileHover={ANIMATION.hover}
-      className="apple-card interactive-card focus-visible-card"
-      tabIndex={0}
-      role="button"
-      aria-label={`${label}: ${value}`}
-    >
-      {/* 데스크톱 레이아웃 */}
-      <div className="hidden sm:flex items-center gap-4 p-4 sm:p-5">
-        <div className="apple-icon-container">
-          <Icon className="w-5 h-5 text-high-contrast" aria-hidden="true" />
+    <div className="apple-card p-5 bg-card-bg-light dark:bg-card-bg-dark border border-white/5">
+      {isLoading ? (
+        <div className="animate-pulse">
+          <div className="w-10 h-10 rounded-full bg-white/10 mb-4"></div>
+          <div className="h-6 bg-white/10 rounded w-2/3 mb-2"></div>
+          <div className="h-4 bg-white/10 rounded w-1/3"></div>
         </div>
-        <div>
-          <h3 className="text-base sm:text-lg font-medium text-high-contrast">{value}</h3>
-          <p className="text-xs sm:text-sm text-medium-contrast">{label}</p>
-        </div>
-      </div>
-      
-      {/* 모바일 레이아웃 */}
-      <div className="flex sm:hidden compact-card">
-        <div className="compact-card-icon">
-          <Icon className="w-4 h-4 text-medium-contrast" aria-hidden="true" />
-        </div>
-        <div className="compact-card-content">
-          <p className="compact-card-title">{label}</p>
-          <p className="compact-card-value">{value}</p>
-        </div>
-      </div>
-    </motion.div>
+      ) : (
+        <>
+          <div className="apple-icon-container mb-4">
+            <Icon className="w-5 h-5 text-high-contrast" />
+          </div>
+          <h3 className="text-3xl font-bold text-high-contrast">{value}</h3>
+          <p className="text-sm text-medium-contrast mt-1">{label}</p>
+        </>
+      )}
+    </div>
   );
 };
 
