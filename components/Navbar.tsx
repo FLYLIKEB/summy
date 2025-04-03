@@ -8,7 +8,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* 로고 */}
-          <Logo variant="full" size="md" />
+          <Logo variant="text" size="md" />
 
           {/* 로그인/회원가입 버튼 */}
           <div className="flex items-center space-x-4">
