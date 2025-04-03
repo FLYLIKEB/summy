@@ -180,7 +180,7 @@ export default function Sidebar({ className = '', children }: SidebarProps) {
           {/* 새 요약 버튼 */}
           <div className="px-3 pb-4">
             <Link 
-              href="/new"
+              href="/dashboard/new"
               className="apple-button apple-button-primary w-full py-3.5 rounded-xl active:scale-[0.98] gap-3 flex items-center justify-center"
             >
               <Plus className="w-4 h-4 flex-shrink-0" />
@@ -239,6 +239,30 @@ export default function Sidebar({ className = '', children }: SidebarProps) {
         {/* 자식 컴포넌트 (메인 콘텐츠) */}
         <div className="p-4 sm:p-6 md:p-8">
           {children}
+        </div>
+        
+        {/* 모바일 - 하단 고정 신규대화 요약 버튼 */}
+        <div className="fixed bottom-6 inset-x-0 flex justify-center sm:hidden z-50">
+          <Link 
+            href="/dashboard/new" 
+            className="apple-button apple-button-primary px-6 py-3.5 rounded-full text-base active:scale-[0.98] gap-2.5 shadow-lg focus-visible-ring"
+            aria-label="신규대화 요약 시작하기"
+          >
+            <MessageSquare className="w-5 h-5" aria-hidden="true" />
+            <span>신규대화 요약</span>
+          </Link>
+        </div>
+        
+        {/* 데스크탑 - 오른쪽 하단 고정 신규대화 요약 버튼 */}
+        <div className="hidden sm:block fixed bottom-8 right-8 z-50">
+          <Link 
+            href="/dashboard/new" 
+            className="apple-button apple-button-primary px-5 py-3 rounded-full active:scale-[0.98] gap-2 shadow-lg focus-visible-ring"
+            aria-label="신규대화 요약 시작하기"
+          >
+            <MessageSquare className="w-4 h-4" aria-hidden="true" />
+            <span>신규대화 요약</span>
+          </Link>
         </div>
       </motion.div>
     </div>

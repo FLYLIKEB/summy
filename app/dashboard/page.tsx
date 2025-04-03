@@ -245,7 +245,7 @@ export default function DashboardPage() {
                     첫 대화 요약을 시작해보세요. 지금 바로 대화를 요약해보고 시간을 절약하세요.
                   </p>
                   <Link 
-                    href="/new" 
+                    href="/dashboard/new" 
                     className="apple-button apple-button-primary mt-6 focus-visible-ring"
                     aria-label="신규대화 요약 시작하기"
                   >
@@ -262,7 +262,7 @@ export default function DashboardPage() {
       {/* 모바일 - 하단 고정 신규대화 요약 버튼 */}
       <div className="fixed bottom-6 inset-x-0 flex justify-center sm:hidden z-20">
         <Link 
-          href="/new" 
+          href="/dashboard/new" 
           className="apple-button apple-button-primary px-6 py-3.5 rounded-full text-base active:scale-[0.98] gap-2.5 shadow-lg focus-visible-ring"
           aria-label="신규대화 요약 시작하기"
         >
@@ -274,7 +274,7 @@ export default function DashboardPage() {
       {/* 데스크탑 - 오른쪽 하단 고정 신규대화 요약 버튼 */}
       <div className="hidden sm:block fixed bottom-8 right-8 z-20">
         <Link 
-          href="/new" 
+          href="/dashboard/new" 
           className="apple-button apple-button-primary px-5 py-3 rounded-full active:scale-[0.98] gap-2 shadow-lg focus-visible-ring"
           aria-label="신규대화 요약 시작하기"
         >
