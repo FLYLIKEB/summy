@@ -447,6 +447,89 @@
     opacity: 0.05;
   }
 
+  /* 향상된 키보드 접근성 */
+  /* 포커스 링 공통 스타일 */
+  .focus-visible-ring {
+    @apply transition-all duration-200;
+  }
+
+  .focus-visible-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--apple-bg-color), 0 0 0 4px var(--apple-white-opacity-20);
+  }
+
+  /* 포커스 링 - 카드 요소용 */
+  .focus-visible-card {
+    @apply transition-all duration-200;
+  }
+
+  .focus-visible-card:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--apple-bg-color), 0 0 0 4px var(--color-primary-500);
+    border-radius: var(--radius-xl);
+    transform: translateY(-2px);
+  }
+
+  /* 스킵 내비게이션 */
+  .skip-nav {
+    @apply absolute px-4 py-3 text-white bg-apple-dark border border-white-opacity-10 rounded-md shadow-md;
+    top: -9999px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+  }
+
+  .skip-nav:focus {
+    top: 8px;
+  }
+
+  /* 모달 및 대화상자 관련 포커스 트랩 */
+  .focus-trap {
+    contain: layout;
+  }
+
+  /* 키보드 전용 탐색 인디케이터 */
+  .keyboard-mode-indicator {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    background-color: var(--apple-white-opacity-10);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 1000;
+  }
+
+  .keyboard-mode-indicator.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 애플 버튼 스타일에 포커스 상태 추가 */
+  .apple-button {
+    @apply focus:outline-none;
+  }
+
+  .apple-button:focus-visible {
+    box-shadow: 0 0 0 2px var(--apple-bg-color), 0 0 0 4px var(--apple-white-opacity-20);
+  }
+
+  /* 인터랙티브 카드 포커스 */
+  .interactive-card:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--apple-bg-color), 0 0 0 4px var(--color-primary-500);
+    transform: translateY(-2px);
+  }
+
+  .clickable:focus-visible::after {
+    opacity: 1;
+    transform: translate(5px, -50%);
+  }
+
   /* 클릭 가능 항목 표시 */
   .clickable {
     @apply relative cursor-pointer;
