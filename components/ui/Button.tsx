@@ -45,25 +45,21 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }, ref) => {
     // 버튼 변형에 따른 스타일
     const getVariantStyles = () => {
-      // 아웃라인 스타일 처리
-      if (outline) {
-        return {
-          primary: "border border-primary-500 text-primary-500 hover:bg-primary-500/[0.06]",
-          secondary: "border border-secondary-500 text-secondary-500 hover:bg-secondary-500/[0.06]",
-          ghost: "border border-white/[0.15] text-white hover:bg-white/[0.08]",
-          link: "text-primary-400 hover:text-primary-500 underline-offset-4 hover:underline",
-          destructive: "border border-error text-error hover:bg-error/[0.06]",
-        }[variant];
-      }
-      
-      // 기본 스타일
-      return {
-        primary: "bg-primary-500 hover:bg-primary-600 text-white",
-        secondary: "bg-secondary-500 hover:bg-secondary-600 text-white",
-        ghost: "bg-white/[0.08] hover:bg-white/[0.12] text-white border border-white/[0.12]",
+      // 애플 스타일 버튼 클래스
+      const appleStyle = {
+        primary: "apple-button apple-button-primary",
+        secondary: "apple-button apple-button-secondary",
+        ghost: "apple-button",
         link: "text-primary-400 hover:text-primary-500 underline-offset-4 hover:underline",
         destructive: "bg-error hover:bg-error/90 text-white",
       }[variant];
+      
+      // 아웃라인 클래스 적용 (ghost와 동일하게 처리)
+      if (outline && variant !== 'link' && variant !== 'ghost') {
+        return "apple-button apple-button-secondary";
+      }
+      
+      return appleStyle;
     };
 
     // 크기에 따른 스타일
@@ -84,16 +80,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       : ""
     
     // 모서리 스타일
-    const radiusStyles = rounded ? "rounded-full" : "rounded-button"
+    const radiusStyles = rounded ? "rounded-full" : ""
       
     // 호버 효과 스타일
     const getHoverEffectStyles = () => {
       switch (hoverEffect) {
         case 'scale':
-          return 'hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200';
+          return '';  // 애플 버튼에 이미 스케일 효과가 있음
         case 'subtle':
         default:
-          return 'transition-all duration-200';
+          return '';  // 애플 버튼에 이미 transition 효과가 있음
       }
     };
 
@@ -101,9 +97,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center font-medium focus-ring",
+          "inline-flex items-center justify-center font-medium focus-visible-ring",
           getVariantStyles(),
-          sizeStyles[size],
+          size !== 'md' ? sizeStyles[size] : "",  // 기본 크기는 애플 버튼 클래스에 있음
           widthStyles,
           radiusStyles,
           stateStyles,

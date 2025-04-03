@@ -92,7 +92,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                   variant={selectedStyle === style ? "primary" : "ghost"}
                   size="sm"
                   onClick={() => onStyleSelect(style)}
-                  className={selectedStyle === style ? "apple-button-primary" : "apple-button-outline"}
+                  className={selectedStyle === style ? "apple-button apple-button-primary" : "apple-button apple-button-secondary"}
                 >
                   {RESPONSE_STYLES[style].label}
                 </Button>
@@ -115,7 +115,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                     variant="ghost"
                     size="sm"
                     onClick={onCancelEditing}
-                    className="apple-button-outline"
+                    className="apple-button apple-button-secondary"
                   >
                     취소
                   </Button>
@@ -123,7 +123,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                     variant="primary"
                     size="sm"
                     onClick={onSaveResponse}
-                    className="apple-button-primary"
+                    className="apple-button apple-button-primary"
                   >
                     저장
                   </Button>
@@ -138,7 +138,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                     variant="ghost"
                     size="sm"
                     onClick={onToggleReason}
-                    className="apple-button-outline flex items-center justify-center gap-2"
+                    className="apple-button apple-button-secondary flex items-center justify-center gap-2"
                   >
                     <span className="text-base">{showReason ? '🙈' : '🔍'}</span>
                     {showReason ? '이유 숨기기' : '이유 보기'}
@@ -147,7 +147,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                     variant="ghost"
                     size="sm"
                     onClick={onEdit}
-                    className="apple-button-outline px-2 flex items-center justify-center"
+                    className="apple-button apple-button-secondary px-2 flex items-center justify-center"
                   >
                     <span className="text-base">✏️</span>
                   </Button>

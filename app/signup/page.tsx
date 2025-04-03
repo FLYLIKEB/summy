@@ -72,14 +72,14 @@ export default function SignupPage() {
                 <KakaoLoginButton
                   onSuccess={handleKakaoLoginSuccess}
                   onError={handleKakaoLoginError}
-                  className="apple-button-secondary w-full !bg-yellow-200 hover:!bg-yellow-300 !text-yellow-900"
+                  className="apple-button apple-button-secondary w-full !bg-yellow-200 hover:!bg-yellow-300 !text-yellow-900"
                 />
               </div>
               <div className="w-full sm:w-80">
                 <GoogleLoginButton
                   onSuccess={handleGoogleLoginSuccess}
                   onError={handleGoogleLoginError}
-                  className="apple-button-secondary w-full !bg-slate-50 hover:!bg-slate-100 !text-slate-800 !border-slate-200"
+                  className="apple-button apple-button-secondary w-full !bg-slate-50 hover:!bg-slate-100 !text-slate-800 !border-slate-200"
                 />
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function SignupPage() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="apple-button-secondary w-full"
+                    className="apple-button apple-button-secondary w-full"
                   >
                     {isLoading ? '회원가입 중...' : '회원가입'}
                   </button>

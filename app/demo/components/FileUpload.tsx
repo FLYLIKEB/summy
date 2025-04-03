@@ -89,7 +89,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileChange, className 
                 e.stopPropagation()
                 handleRemoveFile()
               }}
-              className="text-white/60 hover:text-white"
+              className="apple-button apple-button-secondary !p-1.5 rounded-full"
             >
               <Icon name="remove" className="w-4 h-4" />
             </Button>
