@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Hero from '@/components/Hero'
-import Demo from '@/components/Demo'
-import PersonaProblems from '@/components/PersonaProblems'
-import Features from '@/components/Features'
-import SpecialFeatures from '@/components/SpecialFeatures'
-import FinalCTA from '@/components/FinalCTA'
-import Reviews from '@/components/Reviews'
-import PageNavigation from '@/components/PageNavigation'
+import Hero from '@/components/landing/Hero'
+import Demo from '@/components/landing/Demo'
+import PersonaProblems from '@/components/landing/PersonaProblems'
+import Features from '@/components/landing/Features'
+import SpecialFeatures from '@/components/landing/SpecialFeatures'
+import FinalCTA from '@/components/landing/FinalCTA'
+import Reviews from '@/components/landing/Reviews'
+import PageNavigation from '@/components/layout/PageNavigation'
 
 // 홈페이지 메인 화면
 export default function Home() {

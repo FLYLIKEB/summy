@@ -4,7 +4,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { THEME_VARIANTS, ButtonVariant, SizeVariant } from "@/components/ui/theme"
+import { THEME_VARIANTS, ButtonVariant, SizeVariant } from "@/components/theme"
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
@@ -45,25 +45,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }, ref) => {
     // 버튼 변형에 따른 스타일
     const getVariantStyles = () => {
-      // 애플 스타일 버튼 클래스
-      const appleStyle = {
+      // 애플 스타일 버튼
+      const appleStyle: Record<string, string> = {
         primary: "apple-button apple-button-primary",
         secondary: "apple-button apple-button-secondary",
         ghost: "apple-button",
         link: "text-primary-400 hover:text-primary-500 underline-offset-4 hover:underline",
         destructive: "bg-error hover:bg-error/90 text-white",
-      }[variant];
+      };
       
       // 아웃라인 클래스 적용 (ghost와 동일하게 처리)
       if (outline && variant !== 'link' && variant !== 'ghost') {
         return "apple-button apple-button-secondary";
       }
       
-      return appleStyle;
+      return appleStyle[variant] || appleStyle.primary;
     };
 
     // 크기에 따른 스타일
-    const sizeStyles = {
+    const sizeStyles: Record<string, string> = {
       xs: "px-2 py-1 text-xs",
       sm: "px-3 py-1.5 text-xs",
       md: "px-4 py-2 text-sm",
@@ -99,7 +99,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "inline-flex items-center justify-center font-medium focus-visible-ring",
           getVariantStyles(),
-          size !== 'md' ? sizeStyles[size] : "",  // 기본 크기는 애플 버튼 클래스에 있음
+          size !== 'md' ? sizeStyles[size] || "" : "",  // 기본 크기는 애플 버튼 클래스에 있음
           widthStyles,
           radiusStyles,
           stateStyles,

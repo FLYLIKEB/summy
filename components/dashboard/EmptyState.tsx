@@ -21,15 +21,15 @@ const EmptyState = ({
       initial={ANIMATION.initial}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: ANIMATION.duration, ease: ANIMATION.easing }}
-      className="flex flex-col items-center justify-center h-60 p-8 my-8 gap-4 bg-gray-50 dark:bg-gray-900 rounded-2xl"
+      className="flex flex-col items-center justify-center h-60 p-8 my-8 gap-4 bg-white-opacity-02 rounded-2xl"
     >
-      <FolderSearch className="w-12 h-12 text-gray-400" />
+      <FolderSearch className="w-12 h-12 text-medium-contrast" />
       
       <div className="text-center">
-        <h3 className="text-lg font-medium mb-1">
+        <h3 className="text-lg font-medium mb-1 text-high-contrast">
           {hasFilters ? noResultsMessage : emptyMessage}
         </h3>
-        <p className="text-gray-500 dark:text-gray-400 mb-4">
+        <p className="text-medium-contrast mb-4">
           {hasFilters 
             ? '검색 조건을 변경하여 다시 시도해보세요' 
             : '첫 번째 항목을 만들어보세요'}
@@ -39,7 +39,7 @@ const EmptyState = ({
           {hasFilters ? (
             <button
               onClick={resetFilters}
-              className="apple-button flex items-center gap-1 text-sm font-medium"
+              className="apple-button-secondary flex items-center gap-1 text-sm font-medium"
             >
               <RefreshCw className="w-4 h-4" />
               필터 초기화
@@ -47,7 +47,7 @@ const EmptyState = ({
           ) : (
             <button
               onClick={createNewItem}
-              className="apple-button flex items-center gap-1 text-sm font-medium"
+              className="apple-button-primary flex items-center gap-1 text-sm font-medium"
             >
               <PlusCircle className="w-4 h-4" />
               {createButtonText}

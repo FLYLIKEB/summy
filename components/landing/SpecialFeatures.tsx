@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Section, SectionContainer, SectionTitle } from '@/components/ui/Section'
-import { Card } from '@/components/ui/card'
+import { Section, SectionContainer, SectionTitle } from '@/components/common/Section'
+import { Card } from '@/components/common/card'
 
 export default function SpecialFeatures() {
   const features = [

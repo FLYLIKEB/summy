@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import Logo from './ui/Logo'
-import ScrollDownButton from './ui/ScrollDownButton'
+import Logo from '../common/Logo'
+import ScrollDownButton from '../common/ScrollDownButton'
 
 /**
  * 히어로 섹션 컴포넌트

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { PricingPlan } from '../../types/pricing';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/common/card';
 import { cn } from '@/lib/utils';
 
 // 분리된 컴포넌트들

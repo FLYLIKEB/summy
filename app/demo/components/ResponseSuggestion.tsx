@@ -1,8 +1,8 @@
 // 필요한 의존성 모듈 import
 import React from 'react'
-import { Card } from '@/components/ui/card'
+import { Card } from '@/components/common/card'
 import { Icon } from './common/Icon'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/common/Button'
 import { RESPONSE_STYLES, RESPONSE_REASONS } from '../constants'
 import { ResponseStyle } from '../types'
 

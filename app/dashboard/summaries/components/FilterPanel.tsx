@@ -1,6 +1,6 @@
 'use client';
 
-import { FilterPanel as CommonFilterPanel } from '@/components/common';
+import { FilterPanel as CommonFilterPanel } from '@/components/dashboard';
 import { FilterPanelProps } from './types';
 import { PLATFORMS } from './constants';
 

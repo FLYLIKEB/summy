@@ -53,8 +53,8 @@ const ContentCard = <T extends ListItem>({
           renderHeader(item)
         ) : (
           <div>
-            <h3 className="font-medium text-lg mb-1 line-clamp-1">{item.title}</h3>
-            <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mb-2">
+            <h3 className="font-medium text-lg mb-1 line-clamp-1 text-high-contrast">{item.title}</h3>
+            <span className={`apple-tag-secondary mb-2 inline-block`}>
               {item.category}
             </span>
           </div>
@@ -62,7 +62,7 @@ const ContentCard = <T extends ListItem>({
       </div>
 
       {/* 카드 메타 정보 */}
-      <div className="flex flex-wrap gap-3 text-sm text-gray-500 dark:text-gray-400">
+      <div className="flex flex-wrap gap-3 text-sm text-medium-contrast">
         {renderMeta ? (
           renderMeta(item)
         ) : (
@@ -78,14 +78,14 @@ const ContentCard = <T extends ListItem>({
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="mt-4 pt-4 border-t dark:border-gray-700"
+          className="mt-4 pt-4 border-t border-white-opacity-08"
         >
           {renderContent ? (
             renderContent(item)
           ) : (
             <>
-              <h4 className="font-medium mb-2 text-sm text-gray-600 dark:text-gray-300">내용</h4>
-              <p className="text-sm whitespace-pre-line">{item.content}</p>
+              <h4 className="font-medium mb-2 text-sm text-medium-contrast">내용</h4>
+              <p className="text-sm whitespace-pre-line text-high-contrast">{item.content}</p>
             </>
           )}
           
@@ -95,7 +95,7 @@ const ContentCard = <T extends ListItem>({
             onViewDetail && (
               <div className="flex justify-end mt-4">
                 <button 
-                  className="apple-button text-sm"
+                  className="apple-button-primary text-sm"
                   onClick={handleViewDetail}
                 >
                   전체 보기

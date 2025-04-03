@@ -1,9 +1,9 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Lato } from 'next/font/google'
-import { ToastProvider } from '@/components/ui/Toast'
-import Footer from '@/components/Footer'
-import NavbarWrapper from '@/components/NavbarWrapper'
+import { ToastProvider } from '@/components/common/Toast'
+import Footer from '@/components/landing/Footer'
+import NavbarWrapper from '@/components/layout/NavbarWrapper'
 
 // 폰트 설정
 const inter = Inter({ 

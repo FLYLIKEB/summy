@@ -3,9 +3,9 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import KakaoLoginButton from '@/components/KakaoLoginButton'
-import GoogleLoginButton from '@/components/GoogleLoginButton'
-import Logo from '@/components/ui/Logo'
+import KakaoLoginButton from '@/components/auth/KakaoLoginButton'
+import GoogleLoginButton from '@/components/auth/GoogleLoginButton'
+import Logo from '@/components/common/Logo'
 
 export default function LoginPage() {
   const router = useRouter()

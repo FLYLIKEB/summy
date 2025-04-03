@@ -1,6 +1,6 @@
 'use client';
 
-import { EmptyState as CommonEmptyState } from '@/components/common';
+import { EmptyState as CommonEmptyState } from '@/components/dashboard';
 import { EmptyStateProps } from './types';
 
 /**

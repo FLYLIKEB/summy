@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Button } from './ui/Button'
 import { PlayCircle, DownloadCloud, ArrowRight, Rewind, Pause } from 'lucide-react'
-import { useToast } from './ui/Toast'
+import { useToast } from '../common/Toast'
 
 export default function Demo() {
   const [isPlaying, setIsPlaying] = useState(false)

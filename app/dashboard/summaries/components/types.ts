@@ -1,5 +1,5 @@
 import { LucideIcon } from 'lucide-react';
-import { ListItem } from '@/components/common/types';
+import { ListItem } from '@/components/dashboard/types';
 
 /**
  * 요약 항목 타입 정의

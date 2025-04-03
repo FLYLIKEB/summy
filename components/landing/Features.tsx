@@ -2,9 +2,6 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Section, SectionContainer, SectionTitle } from './ui/Section'
-import { Card } from './ui/card'
-import { ArrowRight } from 'lucide-react'
 
 interface FeatureProps {
   icon: React.ReactNode

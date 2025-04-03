@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Settings } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import StatCard from './StatCard';
-import SummaryList from './SummaryList';
+import UniversalList from './UniversalList';
+import { ListItem } from './types';
 
 /**
  * 통계 항목 타입
@@ -20,11 +21,8 @@ interface StatItem {
 /**
  * 요약 항목 타입
  */
-interface SummaryItem {
-  id: number;
-  title: string;
+interface SummaryItem extends ListItem {
   platform: string;
-  date: string;
   messageCount: number;
   summaryLength: string;
 }
@@ -156,12 +154,23 @@ const Dashboard = ({
           {/* 요약 내역 */}
           <section aria-labelledby="summaries-heading" className="mb-6 sm:mb-8">
             <h2 id="summaries-heading" className="sr-only">최근 요약 내역</h2>
-            <SummaryList
-              summaries={summaries}
-              isLoading={isLoading}
-              viewAllUrl={allSummariesPath}
-              newSummaryUrl={newSummaryPath}
+            <UniversalList
+              items={summaries}
               title="최근 요약 내역"
+              viewAllUrl={allSummariesPath}
+              isLoading={isLoading}
+              detailUrlPattern={`${summaryDetailPath}/{id}`}
+              mode="simple"
+              enableFiltering={false}
+              renderMeta={(item: SummaryItem) => (
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-medium-contrast">
+                  <span>{item.platform}</span>
+                  <span className="hidden sm:inline text-low-contrast" aria-hidden="true">•</span>
+                  <span>{item.messageCount}개의 메시지</span>
+                  <span className="hidden sm:inline text-low-contrast" aria-hidden="true">•</span>
+                  <span>{item.summaryLength} 분량</span>
+                </div>
+              )}
             />
           </section>
         </main>

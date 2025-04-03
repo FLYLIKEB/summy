@@ -4,18 +4,18 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
 // 추출된 컴포넌트들 임포트
-import SidebarHeader from '@/components/ui/sidebar/SidebarHeader'
-import SidebarNavigation from '@/components/ui/sidebar/SidebarNavigation'
-import SidebarNewSummaryButton from '@/components/ui/sidebar/SidebarNewSummaryButton'
-import SidebarLogoutButton from '@/components/ui/sidebar/SidebarLogoutButton'
-import SidebarMobileToggle from '@/components/ui/sidebar/SidebarMobileToggle'
-import SidebarDesktopToggle from '@/components/ui/sidebar/SidebarDesktopToggle'
-import SidebarMobileOverlay from '@/components/ui/sidebar/SidebarMobileOverlay'
-import DashboardFooter from '@/components/ui/DashboardFooter'
-import MobileNewSummaryButton from '@/components/ui/MobileNewSummaryButton'
+import SidebarHeader from '@/components/layout/sidebar/SidebarHeader'
+import SidebarNavigation from '@/components/layout/sidebar/SidebarNavigation'
+import SidebarNewSummaryButton from '@/components/layout/sidebar/SidebarNewSummaryButton'
+import SidebarLogoutButton from '@/components/layout/sidebar/SidebarLogoutButton'
+import SidebarMobileToggle from '@/components/layout/sidebar/SidebarMobileToggle'
+import SidebarDesktopToggle from '@/components/layout/sidebar/SidebarDesktopToggle'
+import SidebarMobileOverlay from '@/components/layout/sidebar/SidebarMobileOverlay'
+import DashboardFooter from '@/components/dashboard/DashboardFooter'
+import MobileNewSummaryButton from '@/components/utils/MobileNewSummaryButton'
 
 // 네비게이션 설정 임포트
-import { navigation } from '@/components/ui/sidebar/navigation-config'
+import { navigation } from '@/components/layout/sidebar/navigation-config'
 
 // 사이드바 컨텐츠 컴포넌트
 const SidebarContent = ({

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useFileUpload } from '@/hooks/useFileUpload'
-import { Icon } from '@/components/ui/Icon'
+import { Icon } from '@/components/common/Icon'
 
 interface FileUploadProps {
   onFileChange: (file: File | null) => void

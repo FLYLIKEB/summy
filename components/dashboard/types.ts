@@ -13,7 +13,7 @@ export interface ListItem {
   /** 항목 카테고리 또는 타입 */
   category: string;
   /** 항목 생성 날짜 */
-  date: string;
+  date?: string;
   /** 항목 내용 */
   content: string;
   /** 추가 메타데이터 (선택적) */

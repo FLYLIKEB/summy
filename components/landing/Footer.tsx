@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Logo from './ui/Logo'
+import Logo from '../common/Logo'
 
 export default function Footer() {
   return (
