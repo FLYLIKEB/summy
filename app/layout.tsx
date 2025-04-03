@@ -2,8 +2,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Lato } from 'next/font/google'
 import { ToastProvider } from '@/components/ui/Toast'
-import { Navbar } from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import NavbarWrapper from '@/components/NavbarWrapper'
 
 // 폰트 설정
 const inter = Inter({ 
@@ -47,7 +47,7 @@ export default function RootLayout({
       <body className={`${inter.className} ${inter.variable} ${lato.variable}`}>
         <ToastProvider>
           <div className="flex flex-col min-h-screen">
-            <Navbar />
+            <NavbarWrapper />
             <main className="flex-grow pt-16">
               {children}
             </main>
