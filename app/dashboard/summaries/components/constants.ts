@@ -1,5 +1,5 @@
 import { Slack, MessageSquare } from 'lucide-react';
-import { PlatformOption, SummaryItem } from './types';
+import { SummaryItem, PlatformOption } from './types';
 
 /**
  * 애니메이션 관련 상수
@@ -35,6 +35,7 @@ export const MOCK_SUMMARIES: SummaryItem[] = [
   {
     id: 1,
     title: '마케팅팀 주간 회의',
+    category: 'Slack',
     platform: 'Slack',
     date: '2024-03-20',
     messageCount: 125,
@@ -44,6 +45,7 @@ export const MOCK_SUMMARIES: SummaryItem[] = [
   {
     id: 2,
     title: '제품 기획 논의',
+    category: 'KakaoTalk',
     platform: 'KakaoTalk',
     date: '2024-03-19',
     messageCount: 89,
@@ -53,6 +55,7 @@ export const MOCK_SUMMARIES: SummaryItem[] = [
   {
     id: 3,
     title: '디자인 피드백',
+    category: 'KakaoTalk',
     platform: 'KakaoTalk',
     date: '2024-03-18',
     messageCount: 67,
@@ -62,6 +65,7 @@ export const MOCK_SUMMARIES: SummaryItem[] = [
   {
     id: 4,
     title: '개발팀 스프린트 회의',
+    category: 'Slack',
     platform: 'Slack',
     date: '2024-03-17',
     messageCount: 156,
@@ -71,6 +75,7 @@ export const MOCK_SUMMARIES: SummaryItem[] = [
   {
     id: 5,
     title: '고객 피드백 논의',
+    category: 'KakaoTalk',
     platform: 'KakaoTalk',
     date: '2024-03-16',
     messageCount: 92,

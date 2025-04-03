@@ -1,24 +1,17 @@
 import { LucideIcon } from 'lucide-react';
+import { ListItem } from '@/components/common/types';
 
 /**
  * 요약 항목 타입 정의
  * 대화 요약 정보를 나타내는 인터페이스
  */
-export interface SummaryItem {
-  /** 요약 고유 식별자 */
-  id: number;
-  /** 요약 제목 */
-  title: string;
+export interface SummaryItem extends ListItem {
   /** 요약이 생성된 플랫폼 */
   platform: 'Slack' | 'KakaoTalk';
-  /** 요약 생성 날짜 */
-  date: string;
   /** 요약된 메시지 수 */
   messageCount: number;
   /** 요약 읽기 소요 시간 */
   summaryLength: string;
-  /** 요약 내용 */
-  content: string;
 }
 
 /**
@@ -69,4 +62,6 @@ export interface SummaryCardProps {
   summary: SummaryItem;
   /** 애니메이션 지연을 위한 카드 인덱스 */
   index: number;
+  /** 상세 보기 이동 함수 (선택적) */
+  onViewDetail?: (item: SummaryItem) => void;
 } 
