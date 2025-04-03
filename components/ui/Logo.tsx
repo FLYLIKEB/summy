@@ -40,23 +40,23 @@ const Logo: React.FC<LogoProps> = ({
       case 'icon':
         return (
           <div className={`logo-icon shadow-sm ${iconSize[size]}`}>
-            <span className="text-white font-semibold text-center">s</span>
+            <span className="text-white font-semibold text-center">✉️</span>
           </div>
         )
       case 'text':
         return (
           <span className={`logo-text ${sizeClasses[size]} transition-all duration-200`}>
-            summy
+            Summy
           </span>
         )
       case 'full':
         return (
           <div className="flex items-center gap-2">
             <div className={`logo-icon shadow-sm ${iconSize[size]}`}>
-              <span className="text-white font-semibold text-center">s</span>
+              <span className="text-white font-semibold text-center">✉️</span>
             </div>
             <span className={`logo-text ${sizeClasses[size]} transition-all duration-200`}>
-              summy
+              Summy
             </span>
           </div>
         )
