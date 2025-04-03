@@ -18,21 +18,12 @@ import MobileNewSummaryButton from '@/components/ui/MobileNewSummaryButton'
 // 네비게이션 설정 임포트
 import { navigation } from '@/components/ui/sidebar/navigation-config'
 
-// 신규 컴포넌트 - 헤더 버튼 
-const HeaderButtons = () => (
-  <div className="flex items-center gap-4">
-    <button className="apple-button apple-button-secondary">
-      <MessageSquare className="w-4 h-4" />
-      <span>새 대화</span>
-    </button>
-    <button className="apple-button apple-button-secondary">
-      <Settings className="w-4 h-4" />
-    </button>
-  </div>
-);
-
-// 신규 컴포넌트 - 사이드바 컨텐츠
-const SidebarContent = ({ isOpen, isMobile, toggleSidebar }: {
+// 사이드바 컨텐츠 컴포넌트
+const SidebarContent = ({
+  isOpen,
+  isMobile,
+  toggleSidebar,
+}: {
   isOpen: boolean;
   isMobile: boolean;
   toggleSidebar: () => void;
@@ -77,11 +68,6 @@ const MainContent = ({
   >
     {/* 데스크톱 접힌 상태 토글 버튼 */}
     <SidebarDesktopToggle isOpen={isOpen} isMobile={isMobile} toggleSidebar={toggleSidebar} />
-    
-    {/* 사용자 설정 헤더 */}
-    <header className="h-16 border-b border-white/10 flex items-center justify-end px-6">
-      <HeaderButtons />
-    </header>
     
     {/* 자식 컴포넌트 (메인 콘텐츠) */}
     <div className="p-4 sm:p-6 md:p-8 pb-16 flex-1">
