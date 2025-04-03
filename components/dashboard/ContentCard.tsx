@@ -80,7 +80,7 @@ const ContentCard = <T extends ListItem>({
             onViewDetail && (
               <div className="flex justify-end mt-4">
                 <button 
-                  className="apple-button-primary text-sm"
+                  className="apple-button apple-button-secondary text-sm rounded-lg"
                   onClick={handleViewDetail}
                 >
                   전체 보기

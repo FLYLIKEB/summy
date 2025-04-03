@@ -40,7 +40,7 @@ const EmptyState = ({
         {hasFilters && (
           <button
             onClick={resetFilters}
-            className="apple-button apple-button-secondary text-sm"
+            className="apple-button apple-button-secondary text-sm rounded-lg"
           >
             필터 초기화
           </button>
@@ -48,7 +48,7 @@ const EmptyState = ({
         
         <button
           onClick={createNewItem}
-          className="apple-button apple-button-primary text-sm"
+          className="apple-button apple-button-primary text-sm rounded-lg"
         >
           {createButtonText}
         </button>
