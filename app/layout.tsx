@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Lato } from 'next/font/google'
 import { ToastProvider } from '@/components/ui/Toast'
 import { Navbar } from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -9,6 +9,15 @@ import Footer from '@/components/Footer'
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap'
+})
+
+// Lato 폰트 설정 (로고용)
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-lato',
   display: 'swap'
 })
 
@@ -35,7 +44,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         />
       </head>
-      <body className={`${inter.className} ${inter.variable}`}>
+      <body className={`${inter.className} ${inter.variable} ${lato.variable}`}>
         <ToastProvider>
           <div className="flex flex-col min-h-screen">
             <Navbar />

@@ -45,8 +45,8 @@ const Logo: React.FC<LogoProps> = ({
         )
       case 'text':
         return (
-          <span className={`logo-text ${sizeClasses[size]} transition-all duration-200`}>
-            Summy
+          <span className={`logo-text ${sizeClasses[size]} transition-all duration-200 px-0.5`}>
+            Summy.
           </span>
         )
       case 'full':
@@ -55,7 +55,7 @@ const Logo: React.FC<LogoProps> = ({
             <div className={`logo-icon shadow-sm ${iconSize[size]}`}>
               <span className="text-white font-semibold text-center">✉️</span>
             </div>
-            <span className={`logo-text ${sizeClasses[size]} transition-all duration-200`}>
+            <span className={`logo-text ${sizeClasses[size]} transition-all duration-200 px-0.5`}>
               Summy
             </span>
           </div>
