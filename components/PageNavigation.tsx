@@ -218,20 +218,13 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
               {isMobile && (
                 <motion.button 
                   onClick={() => setIsNavExpanded(false)}
-                  className="fixed bottom-6 left-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 text-white/80"
-                  whileTap={{ scale: 0.92 }}
-                  transition={{ duration: 0.1 }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  style={{
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18), 0 0 4px rgba(255, 255, 255, 0.04)',
-                    WebkitTapHighlightColor: 'transparent'
-                  }}
+                  className="fixed top-20 left-4 z-40 w-10 h-10 flex items-center justify-center rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 text-white/80"
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 6L6 18"></path>
-                    <path d="M6 6l12 12"></path>
+                  <svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
                   </svg>
                 </motion.button>
               )}
