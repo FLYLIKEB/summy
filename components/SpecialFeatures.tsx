@@ -26,8 +26,22 @@ export default function SpecialFeatures() {
   return (
     <section className="apple-section">
       <div className="apple-section-container">
-        <div className="text-center mb-8 sm:mb-10">
-          <h2 className="apple-section-title">✨ summy만의 차별점</h2>
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 
+            className="apple-section-title cursor-pointer" 
+            onClick={() => {
+              const specialFeaturesSection = document.getElementById('special-features')
+              if (specialFeaturesSection) {
+                specialFeaturesSection.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            title="특별한 점 섹션으로 이동"
+          >
+            특별한 점
+          </h2>
+          <p className="text-white/60 max-w-2xl mx-auto mt-2 text-sm sm:text-base">
+            Summy만의 차별화된 가치
+          </p>
         </div>
         
         <div className="apple-card">

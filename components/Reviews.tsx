@@ -57,9 +57,16 @@ export default function Reviews() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             id="reviews-section-heading"
-            className="text-2xl sm:text-3xl md:text-4xl font-medium text-white"
+            className="text-2xl sm:text-3xl md:text-4xl font-medium text-white cursor-pointer"
+            onClick={() => {
+              const reviewsSection = document.getElementById('reviews')
+              if (reviewsSection) {
+                reviewsSection.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            title="사용자 후기 섹션으로 이동"
           >
-            사용자들의 리얼 후기
+            사용자 후기
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -67,7 +74,7 @@ export default function Reviews() {
             transition={{ delay: 0.1 }}
             className="mt-3 text-sm sm:text-base text-white/70 max-w-2xl mx-auto"
           >
-            실제 Summy를 사용하는 사람들의 이야기를 들어보세요
+            summy가 가져온 소통의 변화, 직접 경험해보세요
           </motion.p>
         </div>
 

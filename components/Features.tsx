@@ -61,10 +61,21 @@ export default function Features() {
   return (
     <section className="apple-section">
       <div className="apple-section-container">
-        <div className="text-center mb-8 sm:mb-10">
-          <h2 className="apple-section-title">summy의 강력한 기능</h2>
-          <p className="apple-section-description">
-            요약과 답장 제안으로 커뮤니케이션 효율을 극대화하는 솔루션
+        <div className="text-center mb-10">
+          <h2 
+            className="apple-section-title cursor-pointer" 
+            onClick={() => {
+              const featuresSection = document.getElementById('features')
+              if (featuresSection) {
+                featuresSection.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            title="주요 기능 섹션으로 이동"
+          >
+            주요 기능
+          </h2>
+          <p className="text-white/60 max-w-2xl mx-auto mt-2 text-sm sm:text-base">
+            대화를 더 스마트하게 관리하는 Summy의 핵심 기능
           </p>
         </div>
         

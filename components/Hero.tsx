@@ -54,7 +54,14 @@ export default function Hero() {
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-medium text-white tracking-tight cursor-pointer"
+              onClick={() => {
+                const heroSection = document.getElementById('hero')
+                if (heroSection) {
+                  heroSection.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+              title="맨 위로 이동"
             >
               <Logo variant="text" size="xl" />
             </motion.h1>

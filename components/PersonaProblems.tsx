@@ -63,21 +63,23 @@ export default function PersonaProblems() {
   return (
     <section className="relative py-16 sm:py-24 bg-[#1a1a1f]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-10 sm:mb-16"
-        >
-          <h2 className="text-2xl sm:text-3xl font-medium text-white mb-3 sm:mb-4">
-            <span className="inline-block mr-2 sm:mr-3">🎯</span>
-            <span className="text-3xl sm:text-4xl text-white">이런 분들을 위한 솔루션</span>
+        <div className="text-center mb-10">
+          <h2 
+            className="apple-section-title cursor-pointer" 
+            onClick={() => {
+              const problemsSection = document.getElementById('problems')
+              if (problemsSection) {
+                problemsSection.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            title="왜 필요한가요? 섹션으로 이동"
+          >
+            왜 필요한가요?
           </h2>
-          <p className="text-white/60 text-sm sm:text-base max-w-2xl mx-auto">
-            메시지 요약과 답장 제안으로 완벽한 대화 관리를 경험하세요
+          <p className="text-white/60 max-w-2xl mx-auto mt-2 text-sm sm:text-base">
+            메시지와 미팅이 많을수록 소통 효율은 떨어집니다
           </p>
-        </motion.div>
+        </div>
 
         {/* 모바일 스냅 스크롤 컨테이너 */}
         <div className="sm:hidden overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-4 px-4 pb-8">
