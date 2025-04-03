@@ -6,6 +6,7 @@ import PersonaProblems from '@/components/PersonaProblems'
 import Features from '@/components/Features'
 import SpecialFeatures from '@/components/SpecialFeatures'
 import FinalCTA from '@/components/FinalCTA'
+import Reviews from '@/components/Reviews'
 
 // 홈페이지 메인 화면
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-apple-dark">
       <main className="flex-1">
         <Hero /> {/* 홈페이지 첫 화면 */}
+        <Reviews /> {/* 사용자 리뷰 */}
         <Demo /> {/* 데모 영상 */}
         <PersonaProblems /> {/* 사용자 문제 소개 */}
         <Features /> {/* 주요 기능 소개 */}

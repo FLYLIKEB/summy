@@ -45,7 +45,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative h-screen flex flex-col justify-center overflow-hidden bg-apple-dark">
+    <section className="relative h-screen flex flex-col justify-start pt-[12vh] sm:pt-[15vh] overflow-hidden bg-apple-dark">
       {/* 주요 콘텐츠 영역 */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
