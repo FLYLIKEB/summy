@@ -67,13 +67,22 @@ export default function DashboardPage() {
               오늘도 Summy와 함께 효율적인 하루 보내세요
             </p>
           </div>
-          <Link 
-            href="/settings" 
-            className="px-4 py-2 bg-white/[0.06] text-white/90 rounded-lg text-sm font-medium transition-all hover:bg-white/[0.1] inline-flex items-center gap-2"
-          >
-            <Settings className="w-4 h-4" />
-            <span>설정</span>
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link 
+              href="/new" 
+              className="px-4 py-2 bg-gradient-to-b from-purple-500/90 to-purple-600/90 text-white rounded-lg text-sm font-medium transition-all hover:from-purple-500 hover:to-purple-600 shadow-sm shadow-purple-900/20 inline-flex items-center gap-2"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>신규대화 요약</span>
+            </Link>
+            <Link 
+              href="/dashboard/settings" 
+              className="px-4 py-2 bg-white/[0.06] text-white/90 rounded-lg text-sm font-medium transition-all hover:bg-white/[0.1] inline-flex items-center gap-2"
+            >
+              <Settings className="w-4 h-4" />
+              <span>설정</span>
+            </Link>
+          </div>
         </div>
 
         {/* 통계 카드 */}
@@ -119,7 +128,7 @@ export default function DashboardPage() {
             ))}
           </div>
           <div className="p-4 sm:p-5 border-t border-white/[0.04] text-center">
-            <Link href="/summaries" className="text-white/70 hover:text-white/90 transition-all text-sm">
+            <Link href="/dashboard/summaries" className="text-white/70 hover:text-white/90 transition-all text-sm">
               모든 요약 보기
             </Link>
           </div>

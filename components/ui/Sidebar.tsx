@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, MessageSquare, Settings, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, MessageSquare, Settings, LogOut, Menu, X, Plus } from 'lucide-react'
 import Logo from '@/components/ui/Logo'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -15,12 +15,12 @@ const navigation = [
   },
   {
     name: '요약 내역',
-    href: '/summaries',
+    href: '/dashboard/summaries',
     icon: MessageSquare,
   },
   {
     name: '설정',
-    href: '/settings',
+    href: '/dashboard/settings',
     icon: Settings,
   },
 ]
@@ -138,7 +138,12 @@ export default function Sidebar({ className = '' }: SidebarProps) {
               <nav className="flex-1 px-3 pb-4 overflow-y-auto scrollbar-thin">
                 <ul className="space-y-1">
                   {navigation.map((item) => {
-                    const isActive = pathname === item.href
+                    // 대시보드는 정확히 일치할 때만 활성화, 다른 항목은 해당 경로로 시작할 때 활성화
+                    const isActive = 
+                      item.href === '/dashboard' 
+                        ? pathname === '/dashboard' 
+                        : pathname.startsWith(item.href);
+                    
                     return (
                       <li key={item.name}>
                         <Link
@@ -157,6 +162,17 @@ export default function Sidebar({ className = '' }: SidebarProps) {
                   })}
                 </ul>
               </nav>
+              
+              {/* 새 요약 버튼 */}
+              <div className="px-3 pb-4">
+                <Link 
+                  href="/new"
+                  className="flex items-center justify-center gap-3 px-3 py-3.5 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white font-medium text-sm shadow-lg shadow-purple-900/20 transition-all hover:shadow-xl hover:shadow-purple-900/30 hover:from-purple-500 hover:to-purple-700 active:scale-[0.98] w-full"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>신규대화 요약</span>
+                </Link>
+              </div>
               
               {/* 로그아웃 */}
               <div className="p-3 border-t border-white/[0.04]">
