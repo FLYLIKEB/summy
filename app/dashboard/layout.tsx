@@ -9,12 +9,8 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-screen bg-apple-bg-color">
-      {/* 사이드바 컴포넌트 */}
-      <Sidebar />
-      
-      {/* 메인 콘텐츠 */}
-      <div className="flex-1">{children}</div>
-    </div>
+    <Sidebar>
+      {children}
+    </Sidebar>
   )
 } 
