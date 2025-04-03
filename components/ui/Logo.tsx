@@ -39,23 +39,23 @@ const Logo: React.FC<LogoProps> = ({
     switch (variant) {
       case 'icon':
         return (
-          <div className={`logo-icon shadow-sm ${iconSize[size]}`}>
+          <div className={`logo-icon logo-icon-hover shadow-sm ${iconSize[size]}`}>
             <span className="text-white font-semibold text-center">✉️</span>
           </div>
         )
       case 'text':
         return (
-          <span className={`logo-text ${sizeClasses[size]} transition-all duration-200 px-0.5`}>
+          <span className={`logo-text logo-hover-underline ${sizeClasses[size]}`}>
             Summy.
           </span>
         )
       case 'full':
         return (
           <div className="flex items-center gap-2">
-            <div className={`logo-icon shadow-sm ${iconSize[size]}`}>
+            <div className={`logo-icon logo-icon-hover shadow-sm ${iconSize[size]}`}>
               <span className="text-white font-semibold text-center">✉️</span>
             </div>
-            <span className={`logo-text ${sizeClasses[size]} transition-all duration-200 px-0.5`}>
+            <span className={`logo-text logo-hover-underline ${sizeClasses[size]}`}>
               Summy
             </span>
           </div>
@@ -68,7 +68,7 @@ const Logo: React.FC<LogoProps> = ({
   const logoContent = renderLogoContent()
 
   if (!href) {
-    return <div className={`inline-block ${className}`}>{logoContent}</div>
+    return <div className={`inline-block group ${className}`}>{logoContent}</div>
   }
 
   return (

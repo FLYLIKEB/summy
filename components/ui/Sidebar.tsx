@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { MessageSquare, Settings } from 'lucide-react'
 
 // 추출된 컴포넌트들 임포트
 import SidebarHeader from '@/components/ui/sidebar/SidebarHeader'

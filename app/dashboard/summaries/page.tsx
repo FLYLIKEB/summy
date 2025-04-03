@@ -1,16 +1,70 @@
 'use client'
 
-import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { PlusCircle } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Slack, MessageSquare } from 'lucide-react'
+import { ContentList } from '@/components/common'
+import { ListItem, CategoryOption } from '@/components/common/types'
 
-// 분리된 컴포넌트 및 유틸리티 임포트
-import SummaryCard from './components/SummaryCard'
-import FilterPanel from './components/FilterPanel'
-import EmptyState from './components/EmptyState'
-import { MOCK_SUMMARIES, ANIMATION } from './components/constants'
-import { SummaryItem } from './components/types'
+// 요약 데이터 타입 확장
+interface SummaryItem extends ListItem {
+  messageCount: number
+  summaryLength: string
+}
+
+// 지원되는 플랫폼 목록
+const PLATFORMS: CategoryOption[] = [
+  { name: 'Slack', icon: Slack },
+  { name: 'KakaoTalk', icon: MessageSquare },
+]
+
+// 임시 요약 데이터
+const MOCK_SUMMARIES: SummaryItem[] = [
+  {
+    id: 1,
+    title: '마케팅팀 주간 회의',
+    category: 'Slack',
+    date: '2024-03-20',
+    messageCount: 125,
+    summaryLength: '3분',
+    content: '1. 신규 캠페인 진행 상황 점검\n2. SNS 광고 성과 분석\n3. 다음 분기 마케팅 전략 논의',
+  },
+  {
+    id: 2,
+    title: '제품 기획 논의',
+    category: 'KakaoTalk',
+    date: '2024-03-19',
+    messageCount: 89,
+    summaryLength: '2분',
+    content: '1. 신규 기능 우선순위 설정\n2. UI/UX 개선 사항\n3. 출시 일정 조정',
+  },
+  {
+    id: 3,
+    title: '디자인 피드백',
+    category: 'KakaoTalk',
+    date: '2024-03-18',
+    messageCount: 67,
+    summaryLength: '1분',
+    content: '1. 메인 페이지 디자인 리뷰\n2. 색상 체계 조정\n3. 모바일 대응 논의',
+  },
+  {
+    id: 4,
+    title: '개발팀 스프린트 회의',
+    category: 'Slack',
+    date: '2024-03-17',
+    messageCount: 156,
+    summaryLength: '4분',
+    content: '1. 이번 스프린트 목표 설정\n2. 기술 부채 해결 방안\n3. 코드 리뷰 프로세스 개선',
+  },
+  {
+    id: 5,
+    title: '고객 피드백 논의',
+    category: 'KakaoTalk',
+    date: '2024-03-16',
+    messageCount: 92,
+    summaryLength: '2분',
+    content: '1. 사용자 피드백 분석\n2. 개선 우선순위 설정\n3. 대응 방안 수립',
+  },
+]
 
 /**
  * 요약 내역 페이지 컴포넌트
@@ -19,106 +73,45 @@ import { SummaryItem } from './components/types'
 export default function SummariesPage() {
   const router = useRouter()
   
-  // 상태 관리
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null)
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
+  // 메타데이터 렌더링 함수
+  const renderSummaryMeta = (summary: SummaryItem) => (
+    <>
+      <div className="flex items-center gap-1">
+        <span>{summary.date}</span>
+      </div>
+      <div className="flex items-center gap-1">
+        <MessageSquare className="w-3.5 h-3.5" />
+        <span>{summary.messageCount}개 메시지</span>
+      </div>
+      <div className="flex items-center gap-1">
+        <span>{summary.summaryLength} 소요</span>
+      </div>
+    </>
+  )
   
-  // 필터 초기화 핸들러
-  const resetFilters = useCallback(() => {
-    setSearchQuery('')
-    setSelectedPlatform(null)
-  }, [])
+  // 상세 페이지 이동 핸들러
+  const handleViewDetail = (summary: SummaryItem) => {
+    router.push(`/dashboard/summaries/${summary.id}`)
+  }
   
-  // 새 요약 시작 핸들러
-  const startNewSummary = useCallback(() => {
+  // 새 요약 생성 핸들러
+  const handleCreateSummary = () => {
     router.push('/dashboard/new')
-  }, [router])
-  
-  // 필터링된 요약 목록 계산
-  const filteredSummaries = MOCK_SUMMARIES.filter((summary) => {
-    // 플랫폼 필터 확인
-    if (selectedPlatform && summary.platform !== selectedPlatform) {
-      return false
-    }
-    
-    // 검색어 필터 확인 (제목과 내용에서 검색)
-    if (
-      searchQuery &&
-      !summary.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !summary.content.toLowerCase().includes(searchQuery.toLowerCase())
-    ) {
-      return false
-    }
-    
-    return true
-  })
-  
-  // 필터 적용 여부 확인
-  const hasFilters = Boolean(searchQuery || selectedPlatform)
+  }
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-4xl">
-      {/* 접근성 스킵 네비게이션 링크 */}
-      <div className="sr-only focus:not-sr-only focus:mb-4">
-        <a href="#summaries" className="apple-button">요약 목록으로 건너뛰기</a>
-      </div>
-      
-      {/* 페이지 헤더 */}
-      <div className="mb-8">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">요약 내역</h1>
-          <button
-            onClick={startNewSummary}
-            className="apple-button flex items-center gap-1"
-          >
-            <PlusCircle className="w-4 h-4" />
-            새 요약
-          </button>
-        </div>
-        <p className="text-gray-600 dark:text-gray-400 mt-1">
-          이전에 생성한 대화 요약을 확인하세요.
-        </p>
-      </div>
-      
-      {/* 검색 및 필터 패널 */}
-      <FilterPanel
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        selectedPlatform={selectedPlatform}
-        setSelectedPlatform={setSelectedPlatform}
-        isFilterOpen={isFilterOpen}
-        setIsFilterOpen={setIsFilterOpen}
-      />
-      
-      {/* 요약 목록 */}
-      <div id="summaries" className="space-y-4">
-        <AnimatePresence>
-          {filteredSummaries.length > 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="grid gap-4">
-                {filteredSummaries.map((summary, index) => (
-                  <SummaryCard
-                    key={summary.id}
-                    summary={summary}
-                    index={index}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          ) : (
-            <EmptyState
-              hasFilters={hasFilters}
-              resetFilters={resetFilters}
-              startNewSummary={startNewSummary}
-            />
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
+    <ContentList
+      items={MOCK_SUMMARIES}
+      categories={PLATFORMS}
+      title="요약 내역"
+      description="이전에 생성한 대화 요약을 확인하세요."
+      createButtonText="새 요약"
+      onCreateItem={handleCreateSummary}
+      onViewDetail={handleViewDetail}
+      renderMeta={renderSummaryMeta}
+      categoryLabel="플랫폼"
+      emptyMessage="아직 요약이 없습니다"
+      noResultsMessage="검색 결과가 없습니다"
+    />
   )
 }
