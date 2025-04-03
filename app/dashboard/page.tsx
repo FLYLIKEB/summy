@@ -124,7 +124,7 @@ export default function DashboardPage() {
         </div>
         <button
           onClick={createNewSummary}
-          className="apple-button-primary flex items-center gap-2 whitespace-nowrap"
+          className="apple-button apple-button-primary flex items-center gap-2 whitespace-nowrap rounded-lg"
         >
           <PlusCircle className="w-5 h-5" />
           새 요약 생성
