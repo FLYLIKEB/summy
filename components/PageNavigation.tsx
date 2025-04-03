@@ -1,13 +1,26 @@
 'use client'
 
+/**
+ * PageNavigation 컴포넌트
+ * 
+ * 애플 스타일의 페이지 내 네비게이션 컴포넌트입니다.
+ * 사용자가 페이지의 특정 섹션으로 빠르게 이동할 수 있도록 도와주며,
+ * 현재 보고 있는 섹션을 인디케이터로 표시합니다.
+ * 
+ * 주요 특징:
+ * - 모바일/데스크톱 반응형 디자인
+ * - 현재 활성화된 섹션 자동 감지
+ * - 부드러운 스크롤 애니메이션
+ * - 애플 스타일의 블러 이펙트 및 UI 
+ */
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // 네비게이션 아이템 타입 정의
 interface NavItem {
-  id: string
-  label: string
-  emoji: string
+  id: string        // 섹션의 HTML ID (스크롤 타겟)
+  label: string     // 표시될 텍스트
+  emoji: string     // 각 항목을 대표하는 이모지
 }
 
 // 네비게이션 구성 항목
@@ -22,16 +35,21 @@ const navItems: NavItem[] = [
 ]
 
 interface PageNavigationProps {
-  className?: string
+  className?: string  // 외부에서 추가할 수 있는 클래스명
 }
 
 export default function PageNavigation({ className = '' }: PageNavigationProps) {
-  const [activeSection, setActiveSection] = useState('hero')
-  const [isScrolling, setIsScrolling] = useState(false)
-  const [isNavExpanded, setIsNavExpanded] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  // 상태 관리
+  const [activeSection, setActiveSection] = useState('hero')  // 현재 활성화된 섹션 ID
+  const [isScrolling, setIsScrolling] = useState(false)      // 스크롤 진행 중 여부
+  const [isNavExpanded, setIsNavExpanded] = useState(false)  // 모바일에서 네비게이션 확장 여부
+  const [isMobile, setIsMobile] = useState(false)            // 모바일 기기 여부
 
-  // 모바일 감지
+  /**
+   * 모바일 기기 감지 효과
+   * 화면 크기에 따라 모바일 여부를 판단하고, 
+   * 모바일인 경우 네비게이션을 축소된 상태로 시작합니다.
+   */
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640)
@@ -42,7 +60,11 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // 현재 활성화된 섹션 감지
+  /**
+   * 활성 섹션 감지 효과
+   * 스크롤 위치에 따라 현재 보이는 섹션을 자동으로 감지하여
+   * 해당 섹션의 네비게이션 항목을 활성화합니다.
+   */
   useEffect(() => {
     const handleScroll = () => {
       if (isScrolling) return
@@ -77,7 +99,11 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isScrolling, isMobile, isNavExpanded])
 
-  // 섹션으로 스크롤 처리
+  /**
+   * 섹션으로 스크롤 처리 함수
+   * 선택한 섹션으로 부드럽게 스크롤하고,
+   * 모바일에서는 네비게이션을 축소합니다.
+   */
   const scrollToSection = (id: string) => {
     setIsScrolling(true)
     setIsNavExpanded(false)
@@ -98,12 +124,19 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
     }
   }
   
-  // 현재 활성 섹션의 이모지 찾기
+  /**
+   * 현재 활성 섹션의 이모지 가져오기
+   * 모바일 축소 버전에서 표시될 이모지를 결정합니다.
+   */
   const getActiveEmoji = () => {
     const activeItem = navItems.find(item => item.id === activeSection)
     return activeItem ? activeItem.emoji : navItems[0].emoji
   }
 
+  /**
+   * 애니메이션 변형 정의
+   * Framer Motion을 활용한 부드러운 애니메이션을 위한 설정입니다.
+   */
   // 활성화 인디케이터 애니메이션 변형
   const indicatorVariants = {
     initial: { opacity: 0, scale: 0.8 },
@@ -120,7 +153,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
       transition: { 
         duration: 0.3, 
         ease: [0.22, 1, 0.36, 1],
-        staggerChildren: 0.05
+        staggerChildren: 0.05  // 각 항목이 순차적으로 나타나도록 함
       } 
     },
     exit: { 
@@ -141,7 +174,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
 
   return (
     <>
-      {/* 모바일용 간소화된 네비게이션 */}
+      {/* 모바일용 간소화된 네비게이션 버튼 */}
       <AnimatePresence>
         {isMobile && !isNavExpanded && (
           <motion.button
@@ -172,6 +205,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
             variants={containerVariants}
             className={`fixed ${isMobile ? 'left-0 bottom-20' : 'left-6 bottom-6'} z-40 ${className} ${isMobile ? 'mx-4' : ''}`}
           >
+            {/* 애플 스타일의 블러 배경을 가진 메뉴 컨테이너 */}
             <motion.div
               className="backdrop-blur-2xl bg-white/8 rounded-2xl border border-white/10 shadow-lg"
               style={{
@@ -180,22 +214,29 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
               }}
               layout
             >
+              {/* 모바일 모드에서 닫기 버튼 */}
               {isMobile && (
-                <div className="absolute -top-12 right-0">
-                  <motion.button 
-                    onClick={() => setIsNavExpanded(false)}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 text-white/80"
-                    whileTap={{ scale: 0.92 }}
-                    transition={{ duration: 0.1 }}
-                    style={{
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-                    }}
-                  >
-                    <span className="text-xs">✕</span>
-                  </motion.button>
-                </div>
+                <motion.button 
+                  onClick={() => setIsNavExpanded(false)}
+                  className="fixed bottom-6 left-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 text-white/80"
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ duration: 0.1 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  style={{
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18), 0 0 4px rgba(255, 255, 255, 0.04)',
+                    WebkitTapHighlightColor: 'transparent'
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 6L6 18"></path>
+                    <path d="M6 6l12 12"></path>
+                  </svg>
+                </motion.button>
               )}
               
+              {/* 네비게이션 항목 목록 */}
               <div className="relative px-2 py-2">
                 <ul className="flex items-center gap-1.5 sm:gap-2">
                   {navItems.map((item) => (
@@ -205,8 +246,8 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
                         className={`
                           px-3 sm:px-3.5 py-2.5 rounded-xl text-sm transition-all
                           ${activeSection === item.id
-                            ? 'bg-white/12 text-white shadow-inner'
-                            : 'text-white/70 hover:text-white hover:bg-white/8'
+                            ? 'bg-white/12 text-white shadow-inner'  // 활성화된 항목 스타일
+                            : 'text-white/70 hover:text-white hover:bg-white/8'  // 비활성화된 항목 스타일
                           }
                           focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-black/20
                         `}
@@ -216,6 +257,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
                       >
                         <span className="flex items-center justify-center sm:justify-start gap-2">
                           <span className="text-lg sm:text-base">{item.emoji}</span>
+                          {/* 모바일에서는 이모지만 표시, 데스크톱에서는 텍스트도 표시 */}
                           <span className={`${isMobile ? 'hidden' : 'hidden sm:inline-block'} text-sm font-medium whitespace-nowrap`}>
                             {item.label}
                           </span>
