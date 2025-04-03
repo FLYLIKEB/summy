@@ -55,7 +55,7 @@ const stats = [
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-[#1a1a1f]/90 text-white">
+    <div className="min-h-screen bg-[#1a1a1f]/90 text-white relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-5xl">
         {/* 헤더 */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 sm:mb-8">
@@ -67,22 +67,13 @@ export default function DashboardPage() {
               오늘도 Summy와 함께 효율적인 하루 보내세요
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Link 
-              href="/new" 
-              className="px-4 py-2 bg-gradient-to-b from-purple-500/90 to-purple-600/90 text-white rounded-lg text-sm font-medium transition-all hover:from-purple-500 hover:to-purple-600 shadow-sm shadow-purple-900/20 inline-flex items-center gap-2"
-            >
-              <MessageSquare className="w-4 h-4" />
-              <span>신규대화 요약</span>
-            </Link>
-            <Link 
-              href="/dashboard/settings" 
-              className="px-4 py-2 bg-white/[0.06] text-white/90 rounded-lg text-sm font-medium transition-all hover:bg-white/[0.1] inline-flex items-center gap-2"
-            >
-              <Settings className="w-4 h-4" />
-              <span>설정</span>
-            </Link>
-          </div>
+          <Link 
+            href="/dashboard/settings" 
+            className="px-4 py-2 bg-white/[0.06] text-white/90 rounded-lg text-sm font-medium transition-all hover:bg-white/[0.1] inline-flex items-center gap-2"
+          >
+            <Settings className="w-4 h-4" />
+            <span>설정</span>
+          </Link>
         </div>
 
         {/* 통계 카드 */}
@@ -133,17 +124,28 @@ export default function DashboardPage() {
             </Link>
           </div>
         </div>
-
-        {/* 새 요약 시작 버튼 */}
-        <div className="mt-6 sm:mt-8 text-center">
-          <Link
-            href="/new"
-            className="px-5 py-2.5 bg-white/10 text-white rounded-lg transition-all hover:bg-white/15 backdrop-blur-sm inline-flex items-center justify-center gap-2 text-sm font-medium"
-          >
-            <MessageSquare className="w-4 h-4" />
-            새로운 대화 요약하기
-          </Link>
-        </div>
+      </div>
+      
+      {/* 모바일 - 하단 고정 신규대화 요약 버튼 */}
+      <div className="fixed bottom-6 inset-x-0 flex justify-center sm:hidden z-20">
+        <Link 
+          href="/new" 
+          className="apple-button apple-button-primary px-6 py-3.5 rounded-full text-base active:scale-[0.98] gap-2.5"
+        >
+          <MessageSquare className="w-5 h-5" />
+          <span>신규대화 요약</span>
+        </Link>
+      </div>
+      
+      {/* 데스크탑 - 오른쪽 하단 고정 신규대화 요약 버튼 */}
+      <div className="hidden sm:block fixed bottom-8 right-8 z-20">
+        <Link 
+          href="/new" 
+          className="apple-button apple-button-primary px-5 py-3 rounded-full active:scale-[0.98] gap-2"
+        >
+          <MessageSquare className="w-4 h-4" />
+          <span>신규대화 요약</span>
+        </Link>
       </div>
     </div>
   )

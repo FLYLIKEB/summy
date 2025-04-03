@@ -167,7 +167,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
               <div className="px-3 pb-4">
                 <Link 
                   href="/new"
-                  className="flex items-center justify-center gap-3 px-3 py-3.5 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white font-medium text-sm shadow-lg shadow-purple-900/20 transition-all hover:shadow-xl hover:shadow-purple-900/30 hover:from-purple-500 hover:to-purple-700 active:scale-[0.98] w-full"
+                  className="apple-button apple-button-primary w-full py-3.5 rounded-xl active:scale-[0.98] gap-3"
                 >
                   <Plus className="w-4 h-4" />
                   <span>신규대화 요약</span>
