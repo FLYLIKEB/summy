@@ -104,20 +104,57 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
     return activeItem ? activeItem.emoji : navItems[0].emoji
   }
 
+  // 활성화 인디케이터 애니메이션 변형
+  const indicatorVariants = {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1, transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] } },
+    tap: { scale: 0.9, transition: { duration: 0.1 } }
+  }
+
+  // 메뉴 컨테이너 애니메이션 변형
+  const containerVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.3, 
+        ease: [0.22, 1, 0.36, 1],
+        staggerChildren: 0.05
+      } 
+    },
+    exit: { 
+      opacity: 0, 
+      y: 10, 
+      transition: { 
+        duration: 0.2,
+        ease: [0.22, 1, 0.36, 1]
+      } 
+    }
+  }
+
+  // 메뉴 아이템 애니메이션 변형
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.2 } }
+  }
+
   return (
     <>
       {/* 모바일용 간소화된 네비게이션 */}
       <AnimatePresence>
         {isMobile && !isNavExpanded && (
           <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            whileTap={{ scale: 0.95 }}
+            initial="initial"
+            animate="animate"
+            exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.15 } }}
+            whileTap="tap"
+            variants={indicatorVariants}
             onClick={() => setIsNavExpanded(true)}
-            className="fixed bottom-6 left-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/10 shadow-lg"
+            className="fixed bottom-6 left-6 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 shadow-lg"
             style={{
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), 0 0 4px rgba(255, 255, 255, 0.05)'
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18), 0 0 4px rgba(255, 255, 255, 0.04)',
+              WebkitTapHighlightColor: 'transparent'
             }}
           >
             <span className="text-xl">{getActiveEmoji()}</span>
@@ -129,53 +166,61 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
       <AnimatePresence>
         {(isNavExpanded || !isMobile) && (
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20, transition: { duration: 0.2 } }}
-            transition={{ duration: 0.3, ease: [0.19, 1, 0.22, 1] }}
-            className={`fixed ${isMobile ? 'left-0 bottom-20' : 'left-1/2 transform -translate-x-1/2 bottom-6'} z-40 ${className} ${isMobile ? 'mx-4' : ''}`}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={containerVariants}
+            className={`fixed ${isMobile ? 'left-0 bottom-20' : 'left-6 bottom-6'} z-40 ${className} ${isMobile ? 'mx-4' : ''}`}
           >
             <motion.div
-              className="backdrop-blur-xl bg-white/10 rounded-full border border-white/20 shadow-lg"
+              className="backdrop-blur-2xl bg-white/8 rounded-2xl border border-white/10 shadow-lg"
               style={{
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(255, 255, 255, 0.1)'
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(255, 255, 255, 0.05)',
+                WebkitBackdropFilter: 'blur(20px)'
               }}
               layout
             >
               {isMobile && (
-                <div className="absolute -top-10 right-0">
-                  <button 
+                <div className="absolute -top-12 right-0">
+                  <motion.button 
                     onClick={() => setIsNavExpanded(false)}
-                    className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/70"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 text-white/80"
+                    whileTap={{ scale: 0.92 }}
+                    transition={{ duration: 0.1 }}
+                    style={{
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+                    }}
                   >
                     <span className="text-xs">✕</span>
-                  </button>
+                  </motion.button>
                 </div>
               )}
               
-              <div className="relative px-2 py-1.5">
-                <ul className="flex items-center gap-1 sm:gap-2">
+              <div className="relative px-2 py-2">
+                <ul className="flex items-center gap-1.5 sm:gap-2">
                   {navItems.map((item) => (
-                    <motion.li key={item.id} layout>
-                      <button
+                    <motion.li key={item.id} layout variants={itemVariants}>
+                      <motion.button
                         onClick={() => scrollToSection(item.id)}
                         className={`
-                          px-2.5 sm:px-3 py-2 rounded-full text-sm transition-all
+                          px-3 sm:px-3.5 py-2.5 rounded-xl text-sm transition-all
                           ${activeSection === item.id
-                            ? 'bg-white/20 text-white shadow-inner'
-                            : 'text-white/70 hover:text-white hover:bg-white/10'
+                            ? 'bg-white/12 text-white shadow-inner'
+                            : 'text-white/70 hover:text-white hover:bg-white/8'
                           }
-                          focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black/20
+                          focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-black/20
                         `}
                         title={item.label}
+                        whileTap={{ scale: 0.96 }}
+                        transition={{ duration: 0.1 }}
                       >
-                        <span className="flex items-center justify-center sm:justify-start gap-1.5">
+                        <span className="flex items-center justify-center sm:justify-start gap-2">
                           <span className="text-lg sm:text-base">{item.emoji}</span>
-                          <span className={`${isMobile ? 'hidden' : 'hidden sm:inline-block'} text-sm whitespace-nowrap`}>
+                          <span className={`${isMobile ? 'hidden' : 'hidden sm:inline-block'} text-sm font-medium whitespace-nowrap`}>
                             {item.label}
                           </span>
                         </span>
-                      </button>
+                      </motion.button>
                     </motion.li>
                   ))}
                 </ul>
