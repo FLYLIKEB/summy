@@ -242,16 +242,13 @@ export default function Sidebar({ className = '', children }: SidebarProps) {
         </div>
         
         {/* 대시보드 전용 미니 푸터 */}
-        <div className="border-t border-white-opacity-04 bg-apple-darker backdrop-blur-sm px-4 sm:px-6 md:px-8 py-3 sm:py-3 pb-24 sm:pb-3">
-          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-3 sm:gap-0 text-xs">
-            <div className="text-white/40 text-center sm:text-left">
-              © 2024 Summy. All rights reserved.
-            </div>
-            <div className="flex items-center gap-4 sm:space-x-4">
-              <Link href="/terms" className="text-white/40 hover:text-white/60 transition-colors">이용약관</Link>
-              <Link href="/privacy" className="text-white/40 hover:text-white/60 transition-colors">개인정보처리방침</Link>
-              <Link href="/contact" className="text-white/40 hover:text-white/60 transition-colors">문의하기</Link>
-            </div>
+        <div className="border-t border-white-opacity-03 bg-transparent px-4 sm:px-6 md:px-8 py-2 pb-20 sm:pb-2">
+          <div className="flex items-center justify-center text-[10px] text-white/30">
+            <span>© 2024 Summy</span>
+            <span className="mx-2">•</span>
+            <Link href="/terms" className="hover:text-white/50 transition-colors">이용약관</Link>
+            <span className="mx-2">•</span>
+            <Link href="/privacy" className="hover:text-white/50 transition-colors">개인정보</Link>
           </div>
         </div>
         
