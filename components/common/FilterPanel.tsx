@@ -36,12 +36,12 @@ const FilterPanel = ({
           placeholder="검색..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full py-2 pl-10 pr-10 border dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full py-2 pl-10 pr-10 border-white-opacity-04 rounded-lg bg-white-opacity-03 dark:bg-white-opacity-02 focus:ring-2 focus:ring-white-opacity-15 focus:border-transparent"
         />
         {searchQuery && (
           <button
             onClick={clearSearch}
-            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-medium-contrast hover:text-high-contrast"
             aria-label="검색어 지우기"
           >
             <X className="h-4 w-4" />
@@ -53,7 +53,7 @@ const FilterPanel = ({
       <div className="flex justify-between items-center">
         <button
           onClick={toggleFilterPanel}
-          className="flex items-center text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+          className="flex items-center text-sm text-medium-contrast hover:text-high-contrast transition-colors"
         >
           필터
           {isFilterOpen ? (
@@ -70,7 +70,7 @@ const FilterPanel = ({
               setSearchQuery('');
               setSelectedCategory(null);
             }}
-            className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+            className="text-sm text-medium-contrast hover:text-high-contrast transition-colors"
           >
             필터 초기화
           </button>
@@ -87,15 +87,15 @@ const FilterPanel = ({
           className="pt-2"
         >
           <div className="flex flex-wrap gap-2">
-            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center mr-2">{categoryLabel}:</h4>
+            <h4 className="text-sm font-medium text-medium-contrast flex items-center mr-2">{categoryLabel}:</h4>
             
             {/* 전체 카테고리 버튼 */}
             <button
               onClick={() => setSelectedCategory(null)}
               className={`px-3 py-1 text-sm rounded-full transition-colors ${
                 selectedCategory === null
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  ? 'bg-blue-500 text-high-contrast'
+                  : 'bg-white-opacity-04 text-medium-contrast hover:bg-white-opacity-08 hover:text-high-contrast'
               }`}
             >
               전체
@@ -112,8 +112,8 @@ const FilterPanel = ({
                   onClick={() => setSelectedCategory(isSelected ? null : category.name)}
                   className={`px-3 py-1 text-sm rounded-full transition-colors flex items-center gap-1 ${
                     isSelected
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                      ? 'bg-blue-500 text-high-contrast'
+                      : 'bg-white-opacity-04 text-medium-contrast hover:bg-white-opacity-08 hover:text-high-contrast'
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
