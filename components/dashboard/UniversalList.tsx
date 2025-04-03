@@ -228,7 +228,7 @@ const UniversalList = <T extends ListItem>({
           {onCreateItem && (
             <button
               onClick={createNewItem}
-              className="apple-button-primary flex items-center gap-1 rounded-lg"
+              className="apple-button apple-button-primary flex items-center gap-1 rounded-lg"
             >
               <PlusCircle className="w-4 h-4" />
               {createButtonText || '새 항목'}
