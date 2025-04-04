@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+p 나 push 나 git push 입력 시, 깃허브 커밋/푸시 메세지를 한번에 해줘.
