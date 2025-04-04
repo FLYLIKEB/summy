@@ -53,6 +53,28 @@ const DUMMY_SUMMARIES: SummaryItem[] = [
   }
 ]
 
+// 페이지 타이틀 컴포넌트
+const PageHeader = () => (
+  <div className="mb-6 text-center">
+    <h1 className="text-2xl font-bold mb-2">대화 요약 모음</h1>
+    <p className="text-white/60">
+      지금까지 생성한 모든 대화 요약을 확인하고 관리할 수 있습니다.
+    </p>
+  </div>
+)
+
+// 요약 메타데이터 컴포넌트
+const SummaryMetadata = ({ item }: { item: SummaryItem }) => (
+  <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-medium-contrast">
+    <span className="bg-white/10 px-2.5 py-1 rounded-full font-medium">{item.platform}</span>
+    <div className="flex items-center gap-2">
+      <span>{item.messageCount}개의 메시지</span>
+      <span className="inline text-low-contrast" aria-hidden="true">•</span>
+      <span>{item.summaryLength} 분량</span>
+    </div>
+  </div>
+)
+
 /**
  * 요약 목록 페이지
  * 사용자의 모든 대화 요약 목록을 표시
@@ -72,28 +94,27 @@ export default function SummariesPage() {
   }
   
   return (
-    <UniversalList
-      items={summaries}
-      categories={PLATFORMS}
-      title="대화 요약 모음"
-      description="지금까지 생성한 모든 대화 요약을 확인해보세요."
-      categoryLabel="플랫폼"
-      createButtonText="새 요약 만들기"
-      onCreateItem={handleCreateSummary}
-      onViewDetail={handleViewDetail}
-      emptyMessage="아직 요약이 없습니다"
-      noResultsMessage="검색 결과가 없습니다"
-      mode="card"
-      enableFiltering={true}
-      renderMeta={(item: SummaryItem) => (
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-medium-contrast">
-          <span>{item.platform}</span>
-          <span className="hidden sm:inline text-low-contrast" aria-hidden="true">•</span>
-          <span>{item.messageCount}개의 메시지</span>
-          <span className="hidden sm:inline text-low-contrast" aria-hidden="true">•</span>
-          <span>{item.summaryLength} 분량</span>
+    <div className="py-6 flex flex-col items-center">
+      <div className="w-full max-w-3xl">
+        <PageHeader />
+
+        <div className="backdrop-blur-sm bg-white/5 rounded-2xl border border-white/10 shadow-lg overflow-hidden">
+          <UniversalList
+            items={summaries}
+            categories={PLATFORMS}
+            title=""
+            categoryLabel="플랫폼"
+            createButtonText="새 요약 만들기"
+            onCreateItem={handleCreateSummary}
+            onViewDetail={handleViewDetail}
+            emptyMessage="아직 요약이 없습니다"
+            noResultsMessage="검색 결과가 없습니다"
+            mode="card"
+            enableFiltering={true}
+            renderMeta={(item: SummaryItem) => <SummaryMetadata item={item} />}
+          />
         </div>
-      )}
-    />
+      </div>
+    </div>
   )
 }
