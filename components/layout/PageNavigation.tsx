@@ -262,7 +262,14 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
               <motion.li layout variants={itemVariants}>
                 <motion.button
                   onClick={toggleDarkMode}
-                  className="px-3 sm:px-3.5 py-2.5 rounded-xl text-sm transition-all text-white/70 hover:text-white hover:bg-white/8"
+                  className={`
+                    px-3 sm:px-3.5 py-2.5 rounded-xl text-sm transition-all
+                    ${isDarkMode 
+                      ? 'bg-white/12 text-white shadow-inner' 
+                      : 'text-white/70 hover:text-white hover:bg-white/8'
+                    }
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-black/20
+                  `}
                   whileTap={{ scale: 0.96 }}
                   transition={{ duration: 0.1 }}
                   title={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
