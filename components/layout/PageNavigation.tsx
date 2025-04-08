@@ -44,19 +44,6 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
   const [isScrolling, setIsScrolling] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isNavExpanded, setIsNavExpanded] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
-
-  // 다크모드 토글
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    document.documentElement.classList.toggle('dark')
-  }
-
-  // 초기 다크모드 설정
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark')
-    setIsDarkMode(isDark)
-  }, [])
 
   // 모바일 체크
   useEffect(() => {
@@ -258,32 +245,6 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
                   </motion.button>
                 </motion.li>
               ))}
-              {/* 다크모드 토글 버튼 */}
-              <motion.li layout variants={itemVariants}>
-                <motion.button
-                  onClick={toggleDarkMode}
-                  className={`
-                    px-3 sm:px-3.5 py-2.5 rounded-xl text-sm transition-all
-                    ${isDarkMode 
-                      ? 'bg-white/12 text-white shadow-inner' 
-                      : 'text-white/70 hover:text-white hover:bg-white/8'
-                    }
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-black/20
-                  `}
-                  whileTap={{ scale: 0.96 }}
-                  transition={{ duration: 0.1 }}
-                  title={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
-                >
-                  <span className="flex items-center justify-center sm:justify-start gap-2">
-                    <span className="text-lg sm:text-base">
-                      {isDarkMode ? '🌞' : '🌙'}
-                    </span>
-                    <span className={`${isMobile ? 'hidden' : 'hidden sm:inline-block'} text-sm font-medium whitespace-nowrap`}>
-                      {isDarkMode ? '라이트 모드' : '다크 모드'}
-                    </span>
-                  </span>
-                </motion.button>
-              </motion.li>
             </ul>
           </div>
         </motion.div>
