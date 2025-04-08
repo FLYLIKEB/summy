@@ -44,13 +44,8 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
   const [isScrolling, setIsScrolling] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isNavExpanded, setIsNavExpanded] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
 
-  /**
-   * 모바일 기기 감지 효과
-   * 화면 크기에 따라 모바일 여부를 판단하고, 
-   * 모바일인 경우 네비게이션을 축소된 상태로 시작합니다.
-   */
+  // 모바일 체크
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
@@ -61,11 +56,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  /**
-   * 활성 섹션 감지 효과
-   * 스크롤 위치에 따라 현재 보이는 섹션을 자동으로 감지하여
-   * 해당 섹션의 네비게이션 항목을 활성화합니다.
-   */
+  // 활성 섹션 감지
   useEffect(() => {
     const handleScroll = () => {
       if (isScrolling) return
@@ -89,31 +80,11 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
           break
         }
       }
-      
-      // 스크롤 중에는 네비게이션 축소
-      if (isMobile && isNavExpanded) {
-        setIsNavExpanded(false)
-      }
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [isScrolling, isMobile, isNavExpanded])
-
-  // 네비게이션 확장/축소 로직
-  useEffect(() => {
-    if (isMobile) {
-      // 모바일에서는 호버 효과 없이 클릭으로만 제어
-      return
-    }
-    
-    // 데스크탑에서는 호버 시 확장, 호버 해제 시 축소
-    if (isHovered) {
-      setIsNavExpanded(true)
-    } else {
-      setIsNavExpanded(false)
-    }
-  }, [isHovered, isMobile])
+  }, [isScrolling])
 
   /**
    * 섹션으로 스크롤 처리 함수
@@ -218,8 +189,8 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
         initial="hidden"
         animate={isNavExpanded ? "visible" : "hidden"}
         exit="exit"
-        onMouseEnter={() => !isMobile && setIsHovered(true)}
-        onMouseLeave={() => !isMobile && setIsHovered(false)}
+        onMouseEnter={() => !isMobile && setIsNavExpanded(true)}
+        onMouseLeave={() => !isMobile && setIsNavExpanded(false)}
       >
         {/* 애플 스타일의 블러 배경을 가진 메뉴 컨테이너 */}
         <motion.div
