@@ -146,15 +146,32 @@
   --gradient-secondary: linear-gradient(135deg, var(--color-secondary-600) 0%, var(--color-secondary-400) 100%);
   --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0.1) 100%);
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
-/* 기본 배경색 설정 */
-@layer base {
-  body {
-    background: var(--apple-bg-color);
-    color: #fff;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* 다크모드 전환 애니메이션 */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer components {
