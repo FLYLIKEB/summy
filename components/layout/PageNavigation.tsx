@@ -42,9 +42,9 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
   // 상태 관리
   const [activeSection, setActiveSection] = useState(navItems[0].id)
   const [isScrolling, setIsScrolling] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [isNavExpanded, setIsNavExpanded] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
 
   /**
    * 모바일 기기 감지 효과
@@ -53,19 +53,12 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
    */
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768
-      setIsMobile(mobile)
-      if (mobile) {
-        setIsNavExpanded(false)
-      }
+      setIsMobile(window.innerWidth < 768)
     }
     
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile)
-    }
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   /**
@@ -107,13 +100,17 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isScrolling, isMobile, isNavExpanded])
 
-  /**
-   * 호버 상태에 따라 네비게이션 확장/축소
-   */
+  // 네비게이션 확장/축소 로직
   useEffect(() => {
-    if (!isMobile && isHovered) {
+    if (isMobile) {
+      // 모바일에서는 호버 효과 없이 클릭으로만 제어
+      return
+    }
+    
+    // 데스크탑에서는 호버 시 확장, 호버 해제 시 축소
+    if (isHovered) {
       setIsNavExpanded(true)
-    } else if (!isMobile && !isHovered) {
+    } else {
       setIsNavExpanded(false)
     }
   }, [isHovered, isMobile])
