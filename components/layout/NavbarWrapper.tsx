@@ -1,10 +1,10 @@
 'use client'
 
-import { Navbar } from '@/components/layout/Navbar'
+import Navbar from '@/components/layout/Navbar'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
-export const NavbarWrapper = () => {
+const NavbarWrapper = () => {
   const [showNavbar, setShowNavbar] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const pathname = usePathname()
@@ -47,4 +47,6 @@ export const NavbarWrapper = () => {
       <Navbar />
     </div>
   )
-} 
+}
+
+export default NavbarWrapper 

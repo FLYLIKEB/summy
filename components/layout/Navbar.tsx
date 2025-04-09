@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import Logo from '../common/Logo'
 import { useTheme } from '../providers/ThemeProvider'
 
-export const Navbar = () => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const isDarkMode = theme === 'dark'
@@ -79,4 +79,6 @@ export const Navbar = () => {
       </div>
     </motion.nav>
   )
-} 
+}
+
+export default Navbar; 

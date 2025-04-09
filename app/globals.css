@@ -330,6 +330,29 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* 다양한 컴포넌트에 텍스트 색상 적용 - 라이트모드/다크모드 모두 작동하도록 */
+h1, h2, h3, h4, h5, h6 {
+  color: rgb(var(--foreground-rgb));
+}
+
+p, span, div {
+  color: rgb(var(--foreground-rgb));
+}
+
+/* Hero, Feature 등 랜딩 페이지 컴포넌트 텍스트를 다크모드 기본 스타일로 유지 */
+.hero-section h1,
+.hero-section p,
+.feature-section h2,
+.feature-section p,
+.demo-section h2,
+.demo-section p,
+.problems-section h2,
+.problems-section p,
+.cta-section h2,
+.cta-section p {
+  @apply dark:text-white text-gray-900;
+}
+
 /* 애플 스타일 버튼 */
 .apple-button {
   @apply px-4 py-2 rounded-lg text-sm font-medium transition-all;
