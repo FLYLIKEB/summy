@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import ThemeProvider from '@/components/providers/ThemeProvider'
 import { NavbarWrapper } from '@/components/layout/NavbarWrapper'
 import { Sidebar } from '@/components/layout/sidebar/Sidebar'
+import { Footer } from '@/components/layout/Footer'
 import { ToastProvider } from '@/components/common/Toast'
 import { usePathname } from 'next/navigation'
 
@@ -46,6 +47,7 @@ export default function RootLayout({
             <main className={`min-h-screen ${isDashboard ? 'pl-0 md:pl-64' : ''}`}>
               {children}
             </main>
+            {!isDashboard && <Footer />}
           </ToastProvider>
         </ThemeProvider>
       </body>
