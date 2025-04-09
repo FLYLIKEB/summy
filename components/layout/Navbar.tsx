@@ -43,16 +43,24 @@ export const Navbar = () => {
           <div className="flex items-center gap-4">
             {/* 다크모드 토글 버튼 */}
             <motion.button
-              onClick={toggleTheme}
-              className={`p-2 rounded-lg transition-all ${
+              onClick={() => {
+                toggleTheme();
+                // 더 명확한 시각적 피드백을 위해 버튼에 짧은 효과 적용
+                const btn = document.activeElement as HTMLElement;
+                if (btn) btn.blur();
+              }}
+              className={`p-2 rounded-lg transition-all flex items-center justify-center ${
                 isDarkMode 
-                  ? 'text-white/70 hover:text-white hover:bg-white/8' 
-                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'
+                  ? 'text-white/70 hover:text-white hover:bg-white/8 active:bg-white/15' 
+                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50 active:bg-gray-200/80'
               }`}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.9 }}
               title={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
+              aria-label={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
             >
-              {isDarkMode ? '🌞' : '🌙'}
+              <span className="text-lg">
+                {isDarkMode ? '🌞' : '🌙'}
+              </span>
             </motion.button>
 
             {/* 로그인/회원가입 버튼 */}

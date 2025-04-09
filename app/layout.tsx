@@ -25,7 +25,7 @@ export default function RootLayout({
   const isDashboard = pathname.startsWith('/dashboard');
 
   return (
-    <html lang="ko" className="dark" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <title>Summy - 요약만 모아보자</title>
         <meta name="description" content="읽고 싶은 글들의 요약만 모아보자" />
