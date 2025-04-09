@@ -171,7 +171,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
             whileTap="tap"
             variants={indicatorVariants}
             onClick={() => setIsNavExpanded(true)}
-            className={`fixed ${isMobile ? 'bottom-6 left-6' : 'top-20 left-4'} z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 shadow-lg`}
+            className={`fixed ${isMobile ? 'bottom-6 left-6' : 'top-20 left-4'} z-50 w-12 h-12 flex items-center justify-center rounded-full dark:bg-white/8 bg-black/8 backdrop-blur-2xl dark:border-white/10 border-black/10 dark:shadow-lg shadow-md`}
             style={{
               boxShadow: '0 4px 20px rgba(0, 0, 0, 0.18), 0 0 4px rgba(255, 255, 255, 0.04)',
               WebkitTapHighlightColor: 'transparent'
@@ -194,7 +194,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
       >
         {/* 애플 스타일의 블러 배경을 가진 메뉴 컨테이너 */}
         <motion.div
-          className="backdrop-blur-2xl bg-white/8 rounded-2xl border border-white/10 shadow-lg"
+          className="backdrop-blur-2xl dark:bg-white/8 bg-black/8 rounded-2xl dark:border-white/10 border-black/10 shadow-lg"
           style={{
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(255, 255, 255, 0.05)',
             WebkitBackdropFilter: 'blur(20px)'
@@ -205,7 +205,7 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
           {isMobile && (
             <motion.button 
               onClick={() => setIsNavExpanded(false)}
-              className="fixed top-20 left-4 z-40 w-10 h-10 flex items-center justify-center rounded-full bg-white/8 backdrop-blur-2xl border border-white/10 text-white/80"
+              className="fixed top-20 left-4 z-40 w-10 h-10 flex items-center justify-center rounded-full dark:bg-white/8 bg-black/8 backdrop-blur-2xl dark:border-white/10 border-black/10 dark:text-white/80 text-black/80"
               whileTap={{ scale: 0.9 }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -226,10 +226,10 @@ export default function PageNavigation({ className = '' }: PageNavigationProps) 
                     className={`
                       px-3 sm:px-3.5 py-2.5 rounded-xl text-sm transition-all
                       ${activeSection === item.id
-                        ? 'bg-white/12 text-white shadow-inner'  // 활성화된 항목 스타일
-                        : 'text-white/70 hover:text-white hover:bg-white/8'  // 비활성화된 항목 스타일
+                        ? 'dark:bg-white/12 bg-black/12 dark:text-white text-black dark:shadow-inner shadow-inner'  // 활성화된 항목 스타일
+                        : 'dark:text-white/70 text-black/70 dark:hover:text-white hover:text-black dark:hover:bg-white/8 hover:bg-black/8'  // 비활성화된 항목 스타일
                       }
-                      focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-black/20
+                      focus:outline-none focus-visible:ring-2 dark:focus-visible:ring-white/30 focus-visible:ring-black/30 dark:focus-visible:ring-offset-1 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-black/20 focus-visible:ring-offset-white/20
                     `}
                     title={item.label}
                     whileTap={{ scale: 0.96 }}

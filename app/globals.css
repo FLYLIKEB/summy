@@ -19,12 +19,32 @@
 }
 
 :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 245, 245, 245;
+  --apple-bg-color: linear-gradient(to bottom, #161618, #1a1a1c);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+  --glass-surface: rgba(255, 255, 255, 0.08);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0.1) 100%);
+
+  --navbar-bg: rgba(255, 255, 255, 0.8);
+  --navbar-text: #1a1a1c;
+  --navbar-border: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-text: #1a1a1c;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --button-primary-bg: #007aff;
+  --button-primary-text: white;
+  --button-secondary-bg: rgba(0, 0, 0, 0.05);
+  --button-secondary-text: #1a1a1c;
+
   /* 배경 - 애플 스타일로 변경 */
   --background-start: #1a1a1f;
   --background-end: #2d2d3a;
   
   /* 애플 스타일 배경색 및 투명도 */
-  --apple-bg-color: #1a1a1f;
   --apple-bg-color-lighter: #222228;
   --apple-bg-color-darker: #16161a;
   --apple-white-opacity-01: rgba(255, 255, 255, 0.01);
@@ -144,8 +164,190 @@
   /* 그라데이션 */
   --gradient-primary: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-500) 100%);
   --gradient-secondary: linear-gradient(135deg, var(--color-secondary-600) 0%, var(--color-secondary-400) 100%);
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 10, 10, 10;
+  --apple-bg-color: linear-gradient(to bottom, #161618, #1a1a1c);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+  --glass-surface: rgba(255, 255, 255, 0.08);
   --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   --gradient-glow: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0.1) 100%);
+
+  --navbar-bg: rgba(0, 0, 0, 0.8);
+  --navbar-text: rgba(255, 255, 255, 0.9);
+  --navbar-border: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(30, 30, 30, 0.8);
+  --card-text: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --button-primary-bg: #007aff;
+  --button-primary-text: white;
+  --button-secondary-bg: rgba(255, 255, 255, 0.1);
+  --button-secondary-text: rgba(255, 255, 255, 0.9);
+
+  /* 배경 - 애플 스타일로 변경 */
+  --background-start: #1a1a1f;
+  --background-end: #2d2d3a;
+  
+  /* 애플 스타일 배경색 및 투명도 */
+  --apple-bg-color-lighter: #222228;
+  --apple-bg-color-darker: #16161a;
+  --apple-white-opacity-01: rgba(255, 255, 255, 0.01);
+  --apple-white-opacity-02: rgba(255, 255, 255, 0.02);
+  --apple-white-opacity-03: rgba(255, 255, 255, 0.03);
+  --apple-white-opacity-04: rgba(255, 255, 255, 0.04);
+  --apple-white-opacity-05: rgba(255, 255, 255, 0.05);
+  --apple-white-opacity-06: rgba(255, 255, 255, 0.06);
+  --apple-white-opacity-08: rgba(255, 255, 255, 0.08);
+  --apple-white-opacity-10: rgba(255, 255, 255, 0.1);
+  --apple-white-opacity-12: rgba(255, 255, 255, 0.12);
+  --apple-white-opacity-15: rgba(255, 255, 255, 0.15);
+  --apple-white-opacity-20: rgba(255, 255, 255, 0.2);
+  
+  /* 색상 시스템 */
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+  
+  --color-secondary-50: #f0fdfa;
+  --color-secondary-100: #ccfbf1;
+  --color-secondary-200: #99f6e4;
+  --color-secondary-300: #5eead4;
+  --color-secondary-400: #2dd4bf;
+  --color-secondary-500: #14b8a6;
+  --color-secondary-600: #0d9488;
+  --color-secondary-700: #0f766e;
+  --color-secondary-800: #115e59;
+  --color-secondary-900: #134e4a;
+  
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  /* 간격 시스템 */
+  --spacing-none: 0;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* 테두리 반경 - 애플 스타일 일관된 값 */
+  --radius-none: 0;
+  --radius-sm: 0.375rem;   /* 6px - 작은 요소용 */
+  --radius-md: 0.5rem;     /* 8px - 기본 요소용 */
+  --radius-lg: 0.75rem;    /* 12px - 큰 요소용 */
+  --radius-xl: 1rem;       /* 16px - 카드, 패널용 */
+  --radius-2xl: 1.25rem;   /* 20px - 모달용 */
+  --radius-full: 9999px;   /* 완전 원형 요소용 */
+  
+  /* 기본 라운드 코너 값 (공통 적용될 값) */
+  --radius-default: var(--radius-md);
+  --radius-card: var(--radius-xl);
+  --radius-button: var(--radius-md);
+  --radius-input: var(--radius-md);
+  --radius-badge: var(--radius-full);
+  
+  /* 그림자 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* 폰트 크기 */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* 폰트 두께 */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  
+  /* 애니메이션 타이밍 */
+  --transition-fast: 0.15s;
+  --transition-normal: 0.3s;
+  --transition-slow: 0.5s;
+  
+  /* 레이아웃 */
+  --container-max-width: 1280px;
+  --header-height: 64px;
+  --sidebar-width: 256px;
+  
+  /* 그라데이션 */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-500) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-secondary-600) 0%, var(--color-secondary-400) 100%);
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* 다크모드 전환 애니메이션 */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 애플 스타일 버튼 */
+.apple-button {
+  @apply px-4 py-2 rounded-lg text-sm font-medium transition-all;
+  color: var(--button-secondary-text);
+  background-color: var(--button-secondary-bg);
+}
+
+.apple-button-primary {
+  color: var(--button-primary-text);
+  background-color: var(--button-primary-bg);
+}
+
+.apple-button:hover {
+  @apply transform scale-105;
+}
+
+.apple-button:active {
+  @apply transform scale-95;
 }
 
 /* 기본 배경색 설정 */
