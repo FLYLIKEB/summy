@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import ThemeProvider from '@/components/providers/ThemeProvider'
 import { NavbarWrapper } from '@/components/layout/NavbarWrapper'
 import { Sidebar } from '@/components/layout/sidebar/Sidebar'
-import { Footer } from '@/components/layout/Footer'
+import Footer from '@/components/landing/Footer'
 import { ToastProvider } from '@/components/common/Toast'
 import { usePathname } from 'next/navigation'
 
