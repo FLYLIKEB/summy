@@ -33,3 +33,9 @@ yarn-error.log*
 next-env.d.ts
 
 *storybook.log
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/summy.iml
+/.idea/vcs.xml
