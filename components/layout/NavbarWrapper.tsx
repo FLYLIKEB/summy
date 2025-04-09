@@ -1,27 +1,39 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import { Navbar } from '@/components/layout/Navbar'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function NavbarWrapper() {
-  const pathname = usePathname()
-  // dashboard 경로가 포함된 경우를 제외한 모든 페이지에서 네비게이션 바 표시
-  const isDashboardPage = pathname.includes('/dashboard')
-  const isNavPage = !isDashboardPage
-  
-  // 홈페이지일 때만 main에 패딩 추가
+export const NavbarWrapper = () => {
+  const [showNavbar, setShowNavbar] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
   useEffect(() => {
-    const mainElement = document.querySelector('main')
-    if (mainElement) {
-      if (isNavPage) {
-        mainElement.classList.add('pt-16')
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setShowNavbar(false) // 아래로 스크롤 시 숨기기
       } else {
-        mainElement.classList.remove('pt-16')
+        setShowNavbar(true) // 위로 스크롤 시 보이기
       }
+      
+      setLastScrollY(currentScrollY)
     }
-  }, [isNavPage])
-  
-  // 첫 페이지(루트 경로)에서만 Navbar 표시
-  return isNavPage ? <Navbar /> : null
+
+    window.addEventListener('scroll', controlNavbar)
+
+    return () => {
+      window.removeEventListener('scroll', controlNavbar)
+    }
+  }, [lastScrollY])
+
+  return (
+    <div 
+      className={`transition-transform duration-300 ease-in-out ${
+        showNavbar ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
+      <Navbar />
+    </div>
+  )
 } 

@@ -1,9 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter, Lato } from 'next/font/google'
-import { ToastProvider } from '@/components/common/Toast'
-import Footer from '@/components/landing/Footer'
-import NavbarWrapper from '@/components/layout/NavbarWrapper'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import ThemeProvider from '@/components/providers/ThemeProvider'
+import { NavbarWrapper } from '@/components/layout/NavbarWrapper'
+import { Sidebar } from '@/components/layout/sidebar/Sidebar'
 
 // 폰트 설정
 const inter = Inter({ 
@@ -12,18 +13,9 @@ const inter = Inter({
   display: 'swap'
 })
 
-// Lato 폰트 설정 (로고용)
-const lato = Lato({
-  subsets: ['latin'],
-  weight: ['400', '700', '900'],
-  style: ['normal', 'italic'],
-  variable: '--font-lato',
-  display: 'swap'
-})
-
 export const metadata: Metadata = {
-  title: 'Summy - AI 대화 요약',
-  description: 'AI로 대화를 더 스마트하게 요약하세요',
+  title: 'Summy - 요약만 모아보자',
+  description: '읽고 싶은 글들의 요약만 모아보자',
 }
 
 export default function RootLayout({
@@ -32,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className="dark" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -44,16 +36,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         />
       </head>
-      <body className={`${inter.className} ${inter.variable} ${lato.variable}`}>
-        <ToastProvider>
-          <div className="flex flex-col min-h-screen">
-            <NavbarWrapper />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </ToastProvider>
+      <body className={`${inter.className} ${inter.variable}`}>
+        <ThemeProvider>
+          <NavbarWrapper />
+          <Sidebar />
+          <main className="min-h-screen">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -4,38 +4,12 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Logo from '../common/Logo'
+import { useTheme } from '../providers/ThemeProvider'
 
-export default function Navbar() {
+export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
-
-  // 다크모드 토글
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    document.documentElement.classList.toggle('dark')
-    // localStorage에 다크모드 설정 저장
-    if (document.documentElement.classList.contains('dark')) {
-      localStorage.setItem('theme', 'dark')
-    } else {
-      localStorage.setItem('theme', 'light')
-    }
-  }
-
-  // 초기 다크모드 설정
-  useEffect(() => {
-    // localStorage에서 테마 설정 불러오기
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    // 저장된 테마가 있으면 그 설정을 사용, 없으면 시스템 설정 사용
-    if (savedTheme === 'dark' || (savedTheme === null && prefersDark)) {
-      document.documentElement.classList.add('dark')
-      setIsDarkMode(true)
-    } else {
-      document.documentElement.classList.remove('dark')
-      setIsDarkMode(false)
-    }
-  }, [])
+  const { theme, toggleTheme } = useTheme()
+  const isDarkMode = theme === 'dark'
 
   // 스크롤 이벤트 처리
   useEffect(() => {
@@ -69,7 +43,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             {/* 다크모드 토글 버튼 */}
             <motion.button
-              onClick={toggleDarkMode}
+              onClick={toggleTheme}
               className={`p-2 rounded-lg transition-all ${
                 isDarkMode 
                   ? 'text-white/70 hover:text-white hover:bg-white/8' 
@@ -84,15 +58,13 @@ export default function Navbar() {
             {/* 로그인/회원가입 버튼 */}
             <Link
               href="/login"
-              className="apple-button apple-button-secondary"
+              className={`px-4 py-2 rounded-lg transition-all ${
+                isDarkMode
+                  ? 'bg-white/10 text-white hover:bg-white/20'
+                  : 'bg-black/10 text-black hover:bg-black/20'
+              }`}
             >
               로그인
-            </Link>
-            <Link
-              href="/signup"
-              className="apple-button apple-button-primary"
-            >
-              회원가입
             </Link>
           </div>
         </div>
