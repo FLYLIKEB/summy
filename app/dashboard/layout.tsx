@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Sidebar from '@/components/layout/sidebar/Sidebar'
 
 export default function DashboardLayout({
   children,
@@ -9,21 +8,10 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="h-full pt-0 mt-0" id="dashboard-layout">
-      <style jsx global>{`
-        body {
-          padding-bottom: 0;
-        }
-        body > div > main {
-          padding-top: 0;
-        }
-        footer {
-          display: none;
-        }
-      `}</style>
-      <Sidebar>
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
+      <div className="flex-grow px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pt-24 pb-12">
         {children}
-      </Sidebar>
+      </div>
     </div>
   )
 } 

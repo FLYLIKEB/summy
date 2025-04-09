@@ -1,11 +1,12 @@
+'use client'
+
 import './globals.css'
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
 import ThemeProvider from '@/components/providers/ThemeProvider'
 import { NavbarWrapper } from '@/components/layout/NavbarWrapper'
 import { Sidebar } from '@/components/layout/sidebar/Sidebar'
 import { ToastProvider } from '@/components/common/Toast'
+import { usePathname } from 'next/navigation'
 
 // 폰트 설정
 const inter = Inter({ 
@@ -14,19 +15,19 @@ const inter = Inter({
   display: 'swap'
 })
 
-export const metadata: Metadata = {
-  title: 'Summy - 요약만 모아보자',
-  description: '읽고 싶은 글들의 요약만 모아보자',
-}
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();
+  const isDashboard = pathname.startsWith('/dashboard');
+
   return (
     <html lang="ko" className="dark" suppressHydrationWarning>
       <head>
+        <title>Summy - 요약만 모아보자</title>
+        <meta name="description" content="읽고 싶은 글들의 요약만 모아보자" />
         <link
           rel="stylesheet"
           as="style"
@@ -41,8 +42,10 @@ export default function RootLayout({
         <ThemeProvider>
           <ToastProvider>
             <NavbarWrapper />
-            <Sidebar />
-            <main className="min-h-screen">{children}</main>
+            {isDashboard && <Sidebar />}
+            <main className={`min-h-screen ${isDashboard ? 'pl-0 md:pl-64' : ''}`}>
+              {children}
+            </main>
           </ToastProvider>
         </ThemeProvider>
       </body>

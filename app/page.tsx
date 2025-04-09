@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import Hero from '@/components/landing/Hero'
 import Demo from '@/components/landing/Demo'
@@ -12,7 +11,7 @@ import PageNavigation from '@/components/layout/PageNavigation'
 // 홈페이지 메인 화면
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-apple-dark">
+    <div className="min-h-screen flex flex-col">
       <main className="flex-1">
         <div id="hero">
           <Hero /> {/* 홈페이지 첫 화면 */}
