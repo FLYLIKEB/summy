@@ -3,7 +3,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import ThemeProvider from '@/components/providers/ThemeProvider'
-import NavbarWrapper from '@/components/layout/NavbarWrapper'
+import { Header } from '@/app/demo/components/Header'
 import { Sidebar } from '@/components/layout/sidebar/Sidebar'
 import Footer from '@/components/landing/Footer'
 import { ToastProvider } from '@/components/common/Toast'
@@ -42,7 +42,9 @@ export default function RootLayout({
       <body className={`${inter.className} ${inter.variable}`}>
         <ThemeProvider>
           <ToastProvider>
-            <NavbarWrapper />
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+              <Header />
+            </div>
             {isDashboard && <Sidebar />}
             <main className={`min-h-screen ${isDashboard ? 'pl-0 md:pl-64' : ''}`}>
               {children}
