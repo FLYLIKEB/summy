@@ -5,6 +5,7 @@ import './globals.css'
 import ThemeProvider from '@/components/providers/ThemeProvider'
 import { NavbarWrapper } from '@/components/layout/NavbarWrapper'
 import { Sidebar } from '@/components/layout/sidebar/Sidebar'
+import { ToastProvider } from '@/components/common/Toast'
 
 // 폰트 설정
 const inter = Inter({ 
@@ -38,9 +39,11 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} ${inter.variable}`}>
         <ThemeProvider>
-          <NavbarWrapper />
-          <Sidebar />
-          <main className="min-h-screen">{children}</main>
+          <ToastProvider>
+            <NavbarWrapper />
+            <Sidebar />
+            <main className="min-h-screen">{children}</main>
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>
