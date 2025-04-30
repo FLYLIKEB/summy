@@ -20,8 +20,8 @@ export default function FinalCTA() {
               <Link href="/signup" className="apple-button apple-button-primary">
                 <span className="font-medium">14일 무료 체험</span>하기
               </Link>
-              <Link href="/demo" className="apple-button apple-button-secondary">
-                <span className="font-medium">데모 체험</span>하기
+              <Link href="/home" className="apple-button apple-button-secondary">
+                <span className="font-medium">로그인 없이 체험</span>하기
               </Link>
             </div>
             
@@ -33,4 +33,4 @@ export default function FinalCTA() {
       </div>
     </section>
   )
-} 
+}

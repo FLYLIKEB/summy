@@ -115,7 +115,7 @@ export default function Hero() {
               14일 무료로 시작하기
             </Link>
             <Link 
-              href="/demo" 
+              href="/home" 
               className="apple-button apple-button-secondary w-full sm:w-auto min-w-[180px]"
             >
               실제 대화 요약해보기
