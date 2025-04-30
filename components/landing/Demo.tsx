@@ -50,40 +50,15 @@ export default function Demo() {
 
           <div className="apple-card overflow-hidden mx-auto">
             <div className="relative aspect-video rounded-t-xl overflow-hidden animate-fade-in">
-              <video 
-                src="/videos/demo.mp4" 
+    					<iframe 
                 className="w-full h-full object-cover"
-                poster="/images/demo-thumbnail.jpg"
-                controls={false}
-              />
-              {/* 비디오 오버레이 컨트롤 */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity hover:bg-black/30">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <button
-                    onClick={handlePlay}
-                    className="apple-button apple-button-primary rounded-full px-5 py-2"
-                  >
-                    <span className="flex items-center gap-2">
-                      {isPlaying 
-                        ? <Pause className="w-4 h-4" />
-                        : <PlayCircle className="w-4 h-4" />
-                      }
-                      {isPlaying ? '일시정지' : '재생'}
-                    </span>
-                  </button>
-                  <button
-                    onClick={handleDownload}
-                    className="apple-button apple-button-secondary rounded-full px-5 py-2"
-                  >
-                    <span className="flex items-center gap-2">
-                      <DownloadCloud className="w-4 h-4" />
-                      다운로드
-                    </span>
-                  </button>
-                </div>
-              </div>
+                src="https://www.youtube.com/embed/QHgyX24kOSE?autoplay=1" 
+                title="대한민국 대학생들이 만든 레전드 광고 ㅋㅋㅋ" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen
+              ></iframe>
             </div>
-
             <div className="apple-card-content flex flex-col md:flex-row items-center justify-between">
               <div className="animate-slide-in-up mb-4 md:mb-0" style={{ animationDelay: '0.2s' }}>
                 <h3 className="text-lg sm:text-xl font-medium mb-1">대화의 바다에서 인사이트를 발굴</h3>

@@ -3,7 +3,7 @@
 import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import axios, { AxiosError } from 'axios'
-import { VisitorIdUtils, VisitorData, VisitorCount, SCRIPT_URL } from '@/utils/VisitorUtils'
+import { VisitorIdUtils, VisitorData, VisitorCount, SCRIPT_URL } from '@/components/utils/VisitorUtils'
 
 // 고유 방문자 ID 생성/가져오기
 export const getUVfromCookie = () => {
@@ -34,7 +34,9 @@ const setCookieValue = (name: string, value: string, days: number) => {
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
     expires = '; expires=' + date.toUTCString()
   }
-  document.cookie = name + '=' + (value || '') + expires + '; path=/'
+  
+  // SameSite=None과 Secure 속성 추가
+  document.cookie = `${name}=${value || ''}${expires}; path=/; SameSite=None; Secure`
   console.log('쿠키 설정 완료:', name, value, days)
 }
 
@@ -88,26 +90,30 @@ export default function VisitorTracking() {
 
         // 방문자 데이터 생성
         const visitorData: VisitorData = {
+          id: visitorId.current,
           landingUrl: window.location.href,
           ip: ipAddress,
           referer: document.referrer || 'direct',
           time_stamp: new Date().toISOString(),
           utm: utm,
-          device: device,
-          id: visitorId.current
+          device: device
         }
         console.log('방문자 데이터:', visitorData)
 
         // 방문자 데이터 전송
         console.log('방문자 데이터 전송 중...')
         const encodedData = encodeURIComponent(JSON.stringify(visitorData))
-        const response = await axios.get(`${SCRIPT_URL}?action=insert&table=visitors&data=${encodedData}`, {
-          withCredentials: false,
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+        const response = await axios.get(
+          `${SCRIPT_URL}?action=insert&table=visitors&data=${encodedData}`,
+          {
+            withCredentials: false,
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            maxRedirects: 0
           }
-        })
+        )
         console.log('방문자 데이터 전송 완료:', response.data)
 
       } catch (error) {

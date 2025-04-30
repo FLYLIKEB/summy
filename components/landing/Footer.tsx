@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Logo from '../common/Logo'
 import VisitorTracking from '../VisitorTracking'
-import { FormUtils } from '@/utils/FormUtils'
+import { FormUtils } from '@/components/utils/FormUtils'
 import { useToast } from '../common/Toast'
 
 // 푸터 링크 컴포넌트
