@@ -22,8 +22,13 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: 'Summy - AI 대화 요약',
-  description: 'AI로 대화를 더 스마트하게 요약하세요',
+  title: 'Summy - AI-Powered Meeting Summaries',
+  description: 'Transform your meetings into actionable insights with Summy. Our AI-powered platform automatically generates comprehensive summaries, action items, and key decisions from your meetings.',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
