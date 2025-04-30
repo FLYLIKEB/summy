@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from 'react'
 import { Slack, MessageCircle, Upload, FileText, RefreshCw } from 'lucide-react'
-import { useFileUpload } from '@/app/demo/hooks/useFileUpload'
-import { useSummarize } from '@/app/demo/hooks/useSummarize'
-import { useResponse } from '@/app/demo/hooks/useResponse'
-import { SummaryResult } from '@/app/demo/components/SummaryResult'
-import { ResponseSuggestion } from '@/app/demo/components/ResponseSuggestion'
-import { ActionButtons } from '@/app/demo/components/ActionButtons'
-import { FileUpload } from '@/app/demo/components/FileUpload'
+import { useFileUpload } from '@/app/home/hooks/useFileUpload'
+import { useSummarize } from '@/app/home/hooks/useSummarize'
+import { useResponse } from '@/app/home/hooks/useResponse'
+import { SummaryResult } from '@/app/home/components/SummaryResult'
+import { ResponseSuggestion } from '@/app/home/components/ResponseSuggestion'
+import { ActionButtons } from '@/app/home/components/ActionButtons'
+import { FileUpload } from '@/app/home/components/FileUpload'
 import { motion } from 'framer-motion'
-import { ResponseStyle } from '@/app/demo/types'
+import { ResponseStyle } from '@/app/home/types'
 
 // 플랫폼 정보 상수화
 const PLATFORMS = [
