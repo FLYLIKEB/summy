@@ -1,10 +1,10 @@
 'use client'
 
-import * as React from "react"
+import React, { useEffect, useState } from 'react'
 import { cn } from "@/lib/utils"
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from "lucide-react"
 
-export type ToastProps = {
+interface ToastProps {
   title?: string
   message: string
   type?: 'success' | 'error' | 'info' | 'warning'
@@ -14,17 +14,9 @@ export type ToastProps = {
   showProgress?: boolean
 }
 
-const Toast: React.FC<ToastProps> = ({
-  title,
-  message,
-  type = 'info',
-  duration = 3000,
-  onClose,
-  position = 'bottom-center',
-  showProgress = true
-}) => {
-  const [isVisible, setIsVisible] = React.useState(true)
-  const [progress, setProgress] = React.useState(100)
+export const Toast = ({ title, message, type = 'success', duration = 3000, onClose, position = 'bottom-center', showProgress = true }: ToastProps) => {
+  const [isVisible, setIsVisible] = useState(true)
+  const [progress, setProgress] = useState(100)
   const timerRef = React.useRef<NodeJS.Timeout | null>(null)
   const progressTimerRef = React.useRef<NodeJS.Timeout | null>(null)
 
@@ -58,7 +50,7 @@ const Toast: React.FC<ToastProps> = ({
     }, 300) // 페이드 아웃 시간
   }, [onClose]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (duration !== Infinity) {
       timerRef.current = setTimeout(() => {
         handleClose()
@@ -137,8 +129,6 @@ const Toast: React.FC<ToastProps> = ({
     </div>
   )
 }
-
-export { Toast }
 
 // Toast 컨텍스트 및 공급자 (글로벌 토스트 관리용)
 interface ToastContextValue {

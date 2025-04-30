@@ -8,6 +8,7 @@ import SpecialFeatures from '@/components/landing/SpecialFeatures'
 import FinalCTA from '@/components/landing/FinalCTA'
 import Reviews from '@/components/landing/Reviews'
 import PageNavigation from '@/components/layout/PageNavigation'
+import VisitorTracking from '@/components/VisitorTracking'
 
 export default function Intro() {
   return (

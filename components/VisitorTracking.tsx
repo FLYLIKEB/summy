@@ -1,28 +1,45 @@
 'use client'
 
+import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import axios, { AxiosError } from 'axios'
+import { VisitorIdUtils, VisitorData, VisitorCount, SCRIPT_URL } from '@/utils/VisitorUtils'
 
-interface VisitorData {
-  id: string
-  landingUrl: string
-  ip: string
-  referer: string
-  time_stamp: string
-  utm: string
-  device: string
+// 고유 방문자 ID 생성/가져오기
+export const getUVfromCookie = () => {
+  const hash = Math.random().toString(36).substring(2, 8).toUpperCase()
+  const existingHash = getCookieValue('user')
+  
+  if (!existingHash) {
+    console.log('새로운 방문자 ID 생성:', hash)
+    setCookieValue('user', hash, 180)
+    return hash
+  }
+  console.log('기존 방문자 ID 사용:', existingHash)
+  return existingHash
 }
 
-interface VisitorCount {
-  total: number
-  today: number
+// 쿠키 값 가져오기
+const getCookieValue = (name: string) => {
+  const value = '; ' + document.cookie
+  const parts = value.split('; ' + name + '=')
+  if (parts.length === 2) return parts.pop()?.split(';').shift()
 }
 
-// Google Apps Script 웹 앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJUXMY2za1l0ENM-3jOk5m5ewQMt_8vHbsi5OlwtYzfE8uudXQ8P5teFRvTg8C6aXyxQ/exec'
+// 쿠키 값 설정
+const setCookieValue = (name: string, value: string, days: number) => {
+  let expires = ''
+  if (days) {
+    const date = new Date()
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
+    expires = '; expires=' + date.toUTCString()
+  }
+  document.cookie = name + '=' + (value || '') + expires + '; path=/'
+  console.log('쿠키 설정 완료:', name, value, days)
+}
 
 export default function VisitorTracking() {
-  const [visitorCount, setVisitorCount] = useState({ total: 0, today: 0 })
+  const [visitorCount, setVisitorCount] = useState<VisitorCount>({ total: 0, today: 0 })
   const isTracking = useRef(false)
   const visitorId = useRef<string | null>(null)
 
@@ -36,7 +53,7 @@ export default function VisitorTracking() {
       try {
         // 방문자 ID 생성/가져오기
         if (!visitorId.current) {
-          visitorId.current = getUVfromCookie()
+          visitorId.current = VisitorIdUtils.getUVfromCookie()
         }
 
         // IP 주소와 방문자 데이터를 병렬로 처리
@@ -70,15 +87,14 @@ export default function VisitorTracking() {
         console.log('디바이스 타입:', device)
 
         // 방문자 데이터 생성
-        const visitorData = {
+        const visitorData: VisitorData = {
           landingUrl: window.location.href,
           ip: ipAddress,
           referer: document.referrer || 'direct',
           time_stamp: new Date().toISOString(),
           utm: utm,
           device: device,
-          device_id: `${visitorId.current}_${new Date().getTime()}`,
-          user_id: visitorId.current
+          id: visitorId.current
         }
         console.log('방문자 데이터:', visitorData)
 
@@ -117,20 +133,6 @@ export default function VisitorTracking() {
     trackVisitor()
   }, [])
 
-  // 고유 방문자 ID 생성/가져오기
-  const getUVfromCookie = () => {
-    const hash = Math.random().toString(36).substring(2, 8).toUpperCase()
-    const existingHash = getCookieValue('user')
-    
-    if (!existingHash) {
-      console.log('새로운 방문자 ID 생성:', hash)
-      setCookieValue('user', hash, 180)
-      return hash
-    }
-    console.log('기존 방문자 ID 사용:', existingHash)
-    return existingHash
-  }
-
   const updateVisitorCount = (visitorResponse: any) => {
     if (visitorResponse.data?.success && visitorResponse.data?.data?.length > 0) {
       const visitorDatas = visitorResponse.data.data
@@ -140,7 +142,7 @@ export default function VisitorTracking() {
         (visitor: VisitorData) => visitor.time_stamp.split('T')[0] === today
       )
       const totalVisitors = visitorDatas.length
-      const newCount = {
+      const newCount: VisitorCount = {
         total: totalVisitors || 0,
         today: todayVisitors.length || 0
       }
@@ -149,31 +151,14 @@ export default function VisitorTracking() {
     }
   }
 
-  // 쿠키 값 가져오기
-  const getCookieValue = (name: string) => {
-    const value = '; ' + document.cookie
-    const parts = value.split('; ' + name + '=')
-    if (parts.length === 2) return parts.pop()?.split(';').shift()
-  }
-
-  // 쿠키 값 설정
-  const setCookieValue = (name: string, value: string, days: number) => {
-    let expires = ''
-    if (days) {
-      const date = new Date()
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
-      expires = '; expires=' + date.toUTCString()
-    }
-    document.cookie = name + '=' + (value || '') + expires + '; path=/'
-    console.log('쿠키 설정 완료:', name, value, days)
-  }
-
   return (
-    <div className="visitor-counter">
-      <span className="visitor-label">오늘 방문자 수:</span>
-      <span className="visitor-number">{visitorCount.today}</span>
-      <span className="visitor-label"> 전체 방문자:</span>
-      <span className="visitor-number">{visitorCount.total}</span>
+    <div className="text-center md:text-left">
+      <div className="text-sm text-white/60 mb-4">
+        <span className="text-sm text-white/60 mb-4">오늘 방문자 : </span>
+        <span className="text-sm text-white/60 mb-4">{visitorCount.today}</span>
+        <span className="text-sm text-white/60 mb-4"> / 총 방문자 : </span>
+        <span className="text-sm text-white/60 mb-4">{visitorCount.total}</span>
+      </div>
     </div>
   )
 } 
