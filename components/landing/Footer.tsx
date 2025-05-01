@@ -109,9 +109,9 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <h4 className="text-white font-medium mb-4">빠른 링크</h4>
             <ul className="space-y-3">
+              <li><FooterLink href="/intro" icon="💭">Summy가 무엇인가요?</FooterLink></li>
               <li><FooterLink href="/features" icon="✨">상세 기능 소개</FooterLink></li>
               <li><FooterLink href="/pricing" icon="💰">요금제</FooterLink></li>
-              <li><FooterLink href="/blog" icon="📝">블로그</FooterLink></li>
               <li><FooterLink href="/faq" icon="❓">자주 묻는 질문</FooterLink></li>
             </ul>
           </div>
@@ -121,21 +121,21 @@ export default function Footer() {
             <h4 className="text-white font-medium mb-4">연락처</h4>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:support@summy.ai" className="flex items-center justify-center md:justify-start text-sm text-white/60 hover:text-white transition-all group">
+                <a href="mailto:rerub0831@gmail.com" className="flex items-center justify-center md:justify-start text-sm text-white/60 hover:text-white transition-all group">
                   <span className="w-6 h-6 flex items-center justify-center mr-1.5 bg-white-opacity-04 rounded-md group-hover:bg-white-opacity-06 transition-all">📧</span>
-                  support@summy.ai
+                  rerub0831@gmail.com
                 </a>
               </li>
               <li>
-                <a href="https://pf.kakao.com/_xxxxx" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start text-sm text-white/60 hover:text-white transition-all group">
+                <a href="https://pf.kakao.com/bumkyu11" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start text-sm text-white/60 hover:text-white transition-all group">
                   <span className="w-6 h-6 flex items-center justify-center mr-1.5 bg-white-opacity-04 rounded-md group-hover:bg-white-opacity-06 transition-all">💬</span>
                   카카오톡 채널
                 </a>
               </li>
               <li>
-                <a href="https://maps.google.com/?q=서울특별시" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start text-sm text-white/60 hover:text-white transition-all group">
+                <a href="https://maps.google.com/?q=서울특별시_광진구_아차산로_405" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-start text-sm text-white/60 hover:text-white transition-all group">
                   <span className="w-6 h-6 flex items-center justify-center mr-1.5 bg-white-opacity-04 rounded-md group-hover:bg-white-opacity-06 transition-all">📍</span>
-                  서울특별시
+                  서울특별시 광진구 아차산로 405
                 </a>
               </li>
             </ul>
