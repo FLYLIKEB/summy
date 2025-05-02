@@ -6,4 +6,4 @@ export { default as SpecialFeatures } from './SpecialFeatures';
 export { default as FinalCTA } from './FinalCTA';
 export { default as Footer } from './Footer';
 export { default as Demo } from './Demo';
-export { default as PersonaProblems } from './PersonaProblems'; 
+export { default as PersonaProblems } from './PersonaProblems';
