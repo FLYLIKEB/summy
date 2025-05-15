@@ -1,5 +1,37 @@
 import { useState } from 'react';
 import { ResponseStyle } from '../types';
+import axios from 'axios';
+
+// 에러 발생시 기본 응답
+const DEFAULT_RESPONSES = {
+  formal: {
+    response: '안녕하세요. 회의 내용을 잘 확인했습니다. 제안하신 사항들에 대해 검토 후 다음 주 월요일까지 피드백 드리도록 하겠습니다.',
+    reasons: [
+      "회의에서 제안된 내용에 대한 확인이 필요했습니다.",
+      "향후 피드백 일정을 명확히 제시하여 기대치를 설정했습니다.",
+      "정중한 어조로 전문적인 관계를 유지했습니다."
+    ],
+    userName: "지우"
+  },
+  friendly: {
+    response: '안녕하세요! 회의 내용 잘 확인했어요. 제안해주신 내용들 정말 좋네요. 다음 주 월요일까지 검토하고 피드백 드릴게요!',
+    reasons: [
+      "친근한 어조로 소통하여 관계를 돈독히 하고자 했습니다.",
+      "긍정적인 평가를 통해 제안에 대한 감사를 표현했습니다.",
+      "명확한 일정을 제시하여 기대치를 관리했습니다."
+    ],
+    userName: "지우"
+  },
+  concise: {
+    response: '회의 내용 확인했습니다. 다음 주 월요일까지 피드백 드리겠습니다.',
+    reasons: [
+      "핵심 정보만 간결하게 전달했습니다.",
+      "시간 효율성을 위해 불필요한 내용을 생략했습니다.",
+      "명확한 후속 조치를 약속했습니다."
+    ],
+    userName: "지우"
+  }
+};
 
 /**
  * 답변 제안 기능을 관리하는 커스텀 훅
@@ -12,6 +44,8 @@ export const useResponse = () => {
   const [isSuggesting, setIsSuggesting] = useState(false);
   // 제안된 답변 내용
   const [suggestedResponse, setSuggestedResponse] = useState<string>('');
+  // 답변 작성 이유 목록
+  const [responseReasons, setResponseReasons] = useState<string[]>([]);
   // 선택된 답변 스타일 (정중한, 친근한, 간결한)
   const [selectedStyle, setSelectedStyle] = useState<ResponseStyle>('formal');
   // 답변 편집 모드 상태
@@ -20,6 +54,10 @@ export const useResponse = () => {
   const [editedResponse, setEditedResponse] = useState<string>('');
   // 답변 작성 이유 표시 여부
   const [showReason, setShowReason] = useState(false);
+  // 오류 상태
+  const [error, setError] = useState<string | null>(null);
+  // 사용자 이름
+  const [userName, setUserName] = useState<string>("지우");
 
   /**
    * 답변을 제안하는 함수
@@ -28,15 +66,58 @@ export const useResponse = () => {
    * @param input - 답변을 생성할 입력 텍스트
    */
   const handleSuggestResponse = async (input: string) => {
+    if (!input || input.trim() === '') {
+      setError('입력된 내용이 없습니다.');
+      return;
+    }
+    
     setIsSuggesting(true);
+    setError(null);
+    
     try {
-      // TODO: API 호출 구현
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      const response = '안녕하세요. 회의 내용을 잘 확인했습니다. 제안하신 사항들에 대해 검토 후 다음 주 월요일까지 피드백 드리도록 하겠습니다.';
-      setSuggestedResponse(response);
-      setEditedResponse(response);
-    } catch (error) {
+      console.log(`[useResponse] 요청 시작: ${selectedStyle} 스타일로 답변 생성`);
+      
+      // 내부 API 엔드포인트 호출
+      const response = await axios.post('/api/response', {
+        message: input,
+        style: selectedStyle
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        timeout: 60000 // 60초로 증가
+      });
+      
+      if (response.data && response.data.response) {
+        // API 응답에서 답변과 이유를 추출
+        const { response: answer, reasons, userName: responseUserName } = response.data;
+        setSuggestedResponse(answer);
+        setEditedResponse(answer);
+        setResponseReasons(reasons || []);
+        if (responseUserName) {
+          setUserName(responseUserName);
+        }
+        console.log(`[useResponse] 응답 수신 완료: ${answer.substring(0, 30)}...`);
+      } else if (response.data && response.data.error) {
+        throw new Error(response.data.error);
+      } else {
+        throw new Error('응답 형식이 올바르지 않습니다.');
+      }
+    } catch (error: any) {
       console.error('답변 제안 중 오류가 발생했습니다:', error);
+      setError('답변을 생성하는 중 오류가 발생했습니다. 다시 시도해주세요.');
+      
+      // 개발 환경에서는 기본 응답 사용
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[useResponse] 개발 환경에서 기본 응답 사용');
+        const { response, reasons, userName: defaultUserName } = DEFAULT_RESPONSES[selectedStyle];
+        setSuggestedResponse(response);
+        setEditedResponse(response);
+        setResponseReasons(reasons);
+        if (defaultUserName) {
+          setUserName(defaultUserName);
+        }
+      }
     } finally {
       setIsSuggesting(false);
     }
@@ -48,6 +129,7 @@ export const useResponse = () => {
   const handleCopyResponse = async () => {
     try {
       await navigator.clipboard.writeText(editedResponse);
+      console.log('[useResponse] 답변이 클립보드에 복사되었습니다.');
     } catch (error) {
       console.error('답변 복사 중 오류가 발생했습니다:', error);
     }
@@ -59,23 +141,64 @@ export const useResponse = () => {
    * 
    * @param style - 변경할 답변 스타일
    */
-  const handleStyleChange = (style: ResponseStyle) => {
+  const handleStyleChange = async (style: ResponseStyle) => {
     setSelectedStyle(style);
-    // 스타일에 따라 답변 내용 변경
-    let newResponse = '';
-    switch (style) {
-      case 'formal':
-        newResponse = '안녕하세요. 회의 내용을 잘 확인했습니다. 제안하신 사항들에 대해 검토 후 다음 주 월요일까지 피드백 드리도록 하겠습니다.';
-        break;
-      case 'friendly':
-        newResponse = '안녕하세요! 회의 내용 잘 확인했습니다. 제안하신 내용들 정말 좋네요. 다음 주 월요일까지 검토하고 피드백 드릴게요.';
-        break;
-      case 'concise':
-        newResponse = '회의 내용 확인했습니다. 다음 주 월요일까지 피드백 드리겠습니다.';
-        break;
+    
+    // 입력된 텍스트가 없는 경우 기본 응답 사용
+    if (!suggestedResponse) {
+      const { response, reasons, userName: defaultUserName } = DEFAULT_RESPONSES[style];
+      setSuggestedResponse(response);
+      setEditedResponse(response);
+      setResponseReasons(reasons);
+      if (defaultUserName) {
+        setUserName(defaultUserName);
+      }
+      return;
     }
-    setEditedResponse(newResponse);
-    setSuggestedResponse(newResponse);
+    
+    setIsSuggesting(true);
+    
+    try {
+      // 스타일 변경 시에도 API 호출
+      const response = await axios.post('/api/response', {
+        message: suggestedResponse, // 현재 답변을 기반으로 새 스타일 적용
+        style: style
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        timeout: 60000 // 60초로 증가
+      });
+      
+      if (response.data && response.data.response) {
+        const { response: answer, reasons, userName: responseUserName } = response.data;
+        setSuggestedResponse(answer);
+        setEditedResponse(answer);
+        setResponseReasons(reasons || []);
+        if (responseUserName) {
+          setUserName(responseUserName);
+        }
+      } else if (response.data && response.data.error) {
+        throw new Error(response.data.error);
+      } else {
+        throw new Error('응답 형식이 올바르지 않습니다.');
+      }
+    } catch (error) {
+      console.error('스타일 변경 중 오류가 발생했습니다:', error);
+      
+      // 개발 환경에서는 기본 응답 사용
+      if (process.env.NODE_ENV === 'development') {
+        const { response, reasons, userName: defaultUserName } = DEFAULT_RESPONSES[style];
+        setSuggestedResponse(response);
+        setEditedResponse(response);
+        setResponseReasons(reasons);
+        if (defaultUserName) {
+          setUserName(defaultUserName);
+        }
+      }
+    } finally {
+      setIsSuggesting(false);
+    }
   };
 
   /**
@@ -120,10 +243,13 @@ export const useResponse = () => {
   return {
     isSuggesting,
     suggestedResponse,
+    responseReasons,
     selectedStyle,
     isEditing,
     editedResponse,
     showReason,
+    error,
+    userName,
     handleSuggestResponse,
     handleCopyResponse,
     handleStyleChange,

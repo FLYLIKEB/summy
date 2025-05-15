@@ -31,6 +31,7 @@ export default function DemoPage() {
   const {
     isSummarizing,
     result,
+    error,
     handleSummarize
   } = useSummarize();
 
@@ -38,10 +39,12 @@ export default function DemoPage() {
   const {
     isSuggesting,
     suggestedResponse,
+    responseReasons,
     selectedStyle,
     isEditing,
     editedResponse,
     showReason,
+    userName,
     handleSuggestResponse,
     handleCopyResponse,
     handleStyleChange,
@@ -137,13 +140,15 @@ export default function DemoPage() {
                   onSaveResponse={handleSaveResponse}
                   showReason={showReason}
                   onToggleReason={toggleReason}
+                  responseReasons={responseReasons}
+                  userName={userName}
                 />
               </div>
             )}
 
             {/* 요약 결과 섹션 */}
-            {result && (
-              <SummaryResult result={result} />
+            {(result || error) && (
+              <SummaryResult result={result} error={error} />
             )}
           </div>
         </div>

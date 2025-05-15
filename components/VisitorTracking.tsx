@@ -106,10 +106,10 @@ export default function VisitorTracking() {
         const response = await axios.get(
           `${SCRIPT_URL}?action=insert&table=visitors&data=${encodedData}`,
           {
-            withCredentials: false,
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
+          withCredentials: false,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
             },
             maxRedirects: 0
           }

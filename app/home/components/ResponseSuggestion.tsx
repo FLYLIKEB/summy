@@ -33,6 +33,8 @@ interface ResponseSuggestionProps {
   onSaveResponse: () => void                         // 답변 저장 핸들러
   showReason: boolean                                // 답변 작성 이유 표시 여부
   onToggleReason: () => void                        // 답변 작성 이유 토글 핸들러
+  responseReasons?: string[]                         // 답변 작성 이유 목록
+  userName?: string                                 // 사용자 이름
 }
 
 // 답변 제안 컴포넌트
@@ -46,7 +48,9 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
   onCancelEditing,
   onSaveResponse,
   showReason,
-  onToggleReason
+  onToggleReason,
+  responseReasons,
+  userName = "지우"
 }) => {
   return (
     <div className="animate-fade-in-up py-8">
@@ -65,7 +69,7 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                   <h2 className="text-lg sm:text-xl font-medium">답변 제안</h2>
                   <span className="px-2 py-1 text-xs font-medium bg-[#2c2c30] rounded-full text-white/70">AI 제안</span>
                 </div>
-                <p className="text-sm text-white/60 mt-1">회의 내용을 바탕으로 적절한 답변을 제안합니다</p>
+                <p className="text-sm text-white/60 mt-1">{userName}님을 위한 맞춤 답변을 제안합니다</p>
               </div>
             </div>
             {/* 복사 버튼 */}
@@ -100,74 +104,68 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
             </div>
           </div>
 
-          {/* 답변 내용 섹션 */}
-          <div className="bg-[#1c1c1e] rounded-xl p-4 sm:p-6 border border-white/10">
-            {isEditing ? (
-              // 편집 모드
-              <div className="space-y-4">
-                <textarea
-                  value={editedResponse}
-                  onChange={(e) => onUpdateResponse(e.target.value)}
-                  className="w-full h-32 sm:h-40 bg-[#2c2c30] rounded-lg p-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#0071e3] resize-none text-sm sm:text-base"
-                />
-                <div className="flex flex-col sm:flex-row justify-end gap-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={onCancelEditing}
-                    className="apple-button apple-button-secondary"
-                  >
-                    취소
-                  </Button>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={onSaveResponse}
-                    className="apple-button apple-button-primary"
-                  >
-                    저장
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              // 보기 모드
-              <div className="relative">
-                <div className="text-white/80 whitespace-pre-line text-sm sm:text-base">{editedResponse}</div>
-                <div className="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={onToggleReason}
-                    className="apple-button apple-button-secondary flex items-center justify-center gap-2"
-                  >
-                    <span className="text-base">{showReason ? '🙈' : '🔍'}</span>
-                    {showReason ? '이유 숨기기' : '이유 보기'}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={onEdit}
-                    className="apple-button apple-button-secondary px-2 flex items-center justify-center"
-                  >
-                    <span className="text-base">✏️</span>
-                  </Button>
-                </div>
-                {/* 답변 작성 이유 섹션 */}
-                {showReason && (
-                  <div className="mt-4 p-4 bg-[#2c2c30] rounded-lg border border-white/10">
-                    <h4 className="text-sm font-medium text-white mb-2">답변 작성 이유</h4>
-                    <div className="text-sm text-white/70 space-y-2">
-                      {RESPONSE_REASONS[selectedStyle as ResponseStyle].map((reason, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <span className="text-base text-[#0071e3] mt-0.5 flex-shrink-0">💡</span>
-                          <span>{reason}</span>
-                        </div>
-                      ))}
-                    </div>
+          {/* 답변 내용 및 이유 섹션 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* 답변 내용 섹션 */}
+            <div className="md:col-span-2 bg-[#1c1c1e] rounded-xl p-4 sm:p-6 border border-white/10">
+              <h4 className="text-sm font-medium text-white mb-3">{userName}님의 답변</h4>
+              {isEditing ? (
+                // 편집 모드
+                <div className="space-y-4">
+                  <textarea
+                    value={editedResponse}
+                    onChange={(e) => onUpdateResponse(e.target.value)}
+                    className="w-full h-32 sm:h-40 bg-[#2c2c30] rounded-lg p-4 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#0071e3] resize-none text-sm sm:text-base"
+                  />
+                  <div className="flex flex-col sm:flex-row justify-end gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={onCancelEditing}
+                      className="apple-button apple-button-secondary"
+                    >
+                      취소
+                    </Button>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={onSaveResponse}
+                      className="apple-button apple-button-primary"
+                    >
+                      저장
+                    </Button>
                   </div>
-                )}
+                </div>
+              ) : (
+                // 보기 모드
+                <div className="relative">
+                  <div className="text-white/80 whitespace-pre-line text-sm sm:text-base mb-4">{editedResponse}</div>
+                  <div className="flex justify-end">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={onEdit}
+                      className="apple-button apple-button-secondary px-2 flex items-center justify-center"
+                    >
+                      <span className="text-base">✏️</span>
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* 답변 작성 이유 섹션 */}
+            <div className="md:col-span-1 bg-[#1c1c1e] rounded-xl p-4 sm:p-6 border border-white/10">
+              <h4 className="text-sm font-medium text-white mb-3">답변 작성 이유</h4>
+              <div className="text-sm text-white/70 space-y-2">
+                {(responseReasons || RESPONSE_REASONS[selectedStyle]).map((reason, index) => (
+                  <div key={index} className="flex items-start gap-2">
+                    <span className="text-base text-[#0071e3] mt-0.5 flex-shrink-0">💡</span>
+                    <span>{reason}</span>
+                  </div>
+                ))}
               </div>
-            )}
+            </div>
           </div>
 
           {/* 푸터 섹션 */}

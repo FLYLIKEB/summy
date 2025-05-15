@@ -1,6 +1,15 @@
 # Summy
 
-Summy는 Next.js로 개발된 웹 애플리케이션으로, React와 TypeScript를 활용한 현대적인 프론트엔드 프로젝트입니다.
+Next.js 기반의 대화 요약 웹 애플리케이션
+
+## 환경 변수 설정
+
+프로젝트 루트에 `.env.local` 파일을 생성하고 다음 환경 변수를 설정하세요:
+
+```
+# XAI API 설정
+NEXT_PUBLIC_XAI_API_URL=http://52.78.150.124:8080/api/xai/complete
+```
 
 ## 프로젝트 구조
 
@@ -122,10 +131,9 @@ git push origin feature/your-feature-name
 
 ## 주요 기능
 
-1. 방문자 추적
-2. 인증 시스템 (로그인/회원가입)
-3. 대시보드
-4. 반응형 UI
+- 텍스트 입력 및 파일 업로드를 통한 대화 내용 요약
+- API를 통한 AI 요약 생성
+- 에러 처리 및 사용자 피드백
 
 ## 기여 방법
 
