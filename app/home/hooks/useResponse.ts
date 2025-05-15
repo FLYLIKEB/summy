@@ -2,6 +2,20 @@ import { useState } from 'react';
 import { ResponseStyle } from '../types';
 import axios from 'axios';
 
+// API 응답 형식 정의
+interface ApiResponse {
+  /** 생성된 답변 텍스트 */
+  response: string;
+  /** 답변 작성 이유 목록 */
+  reasons: string[];
+  /** 사용된 답변 스타일 */
+  style: ResponseStyle;
+  /** 사용자 이름 */
+  userName: string;
+  /** 오류 메시지 (있을 경우) */
+  error?: string;
+}
+
 // 에러 발생시 기본 응답
 const DEFAULT_RESPONSES = {
   formal: {
@@ -77,8 +91,17 @@ export const useResponse = () => {
     try {
       console.log(`[useResponse] 요청 시작: ${selectedStyle} 스타일로 답변 생성`);
       
+      /**
+       * API 응답 형식:
+       * {
+       *   response: string;    // 생성된 답변 텍스트
+       *   reasons: string[];   // 답변 작성 이유 목록 (최대 3개)
+       *   style: ResponseStyle; // 사용된 답변 스타일 (formal, friendly, concise)
+       *   userName: string;    // 사용자 이름
+       * }
+       */
       // 내부 API 엔드포인트 호출
-      const response = await axios.post('/api/response', {
+      const response = await axios.post<ApiResponse>('/api/response', {
         message: input,
         style: selectedStyle
       }, {
@@ -106,18 +129,6 @@ export const useResponse = () => {
     } catch (error: any) {
       console.error('답변 제안 중 오류가 발생했습니다:', error);
       setError('답변을 생성하는 중 오류가 발생했습니다. 다시 시도해주세요.');
-      
-      // 개발 환경에서는 기본 응답 사용
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[useResponse] 개발 환경에서 기본 응답 사용');
-        const { response, reasons, userName: defaultUserName } = DEFAULT_RESPONSES[selectedStyle];
-        setSuggestedResponse(response);
-        setEditedResponse(response);
-        setResponseReasons(reasons);
-        if (defaultUserName) {
-          setUserName(defaultUserName);
-        }
-      }
     } finally {
       setIsSuggesting(false);
     }
@@ -160,7 +171,7 @@ export const useResponse = () => {
     
     try {
       // 스타일 변경 시에도 API 호출
-      const response = await axios.post('/api/response', {
+      const response = await axios.post<ApiResponse>('/api/response', {
         message: suggestedResponse, // 현재 답변을 기반으로 새 스타일 적용
         style: style
       }, {
