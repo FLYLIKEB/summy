@@ -1,5 +1,5 @@
 // 필요한 의존성 모듈 import
-import React from 'react'
+import React, { useState } from 'react'
 import { Card } from '@/components/common/card'
 import { Icon } from './common/Icon'
 import { Button } from '@/components/common/Button'
@@ -35,6 +35,7 @@ interface ResponseSuggestionProps {
   onToggleReason: () => void                        // 답변 작성 이유 토글 핸들러
   responseReasons?: string[]                         // 답변 작성 이유 목록
   userName?: string                                 // 사용자 이름
+  onUserNameChange?: (name: string) => void         // 사용자 이름 변경 핸들러
 }
 
 // 답변 제안 컴포넌트
@@ -50,8 +51,43 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
   showReason,
   onToggleReason,
   responseReasons,
-  userName = "지우"
+  userName = "지우",
+  onUserNameChange
 }) => {
+  // 이름 편집 모드 상태
+  const [isEditingName, setIsEditingName] = useState(false);
+  // 편집 중인 이름
+  const [editedName, setEditedName] = useState(userName);
+
+  // 이름 편집 시작
+  const handleEditName = () => {
+    setEditedName(userName);
+    setIsEditingName(true);
+  };
+
+  // 이름 저장
+  const handleSaveName = () => {
+    if (editedName.trim() && onUserNameChange) {
+      onUserNameChange(editedName);
+    }
+    setIsEditingName(false);
+  };
+
+  // 이름 편집 취소
+  const handleCancelEditName = () => {
+    setEditedName(userName);
+    setIsEditingName(false);
+  };
+
+  // 엔터 키로 이름 저장
+  const handleNameKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSaveName();
+    } else if (e.key === 'Escape') {
+      handleCancelEditName();
+    }
+  };
+
   return (
     <div className="animate-fade-in-up py-8">
       {/* 메인 카드 컨테이너 */}
@@ -69,7 +105,49 @@ export const ResponseSuggestion: React.FC<ResponseSuggestionProps> = ({
                   <h2 className="text-lg sm:text-xl font-medium">답변 제안</h2>
                   <span className="px-2 py-1 text-xs font-medium bg-[#2c2c30] rounded-full text-white/70">AI 제안</span>
                 </div>
-                <p className="text-sm text-white/60 mt-1">{userName}님을 위한 맞춤 답변을 제안합니다</p>
+                <div className="text-sm text-white/60 mt-1 flex items-center gap-2">
+                  {isEditingName ? (
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={editedName}
+                        onChange={(e) => setEditedName(e.target.value)}
+                        onKeyDown={handleNameKeyDown}
+                        className="bg-[#2c2c30] border border-white/20 rounded px-2 py-1 text-white focus:outline-none focus:ring-1 focus:ring-[#0071e3] w-24"
+                        placeholder="이름 입력"
+                        autoFocus
+                      />
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={handleSaveName}
+                        className="apple-button apple-button-primary !px-2 !py-1 text-xs rounded-full"
+                      >
+                        저장
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleCancelEditName}
+                        className="apple-button apple-button-secondary !px-2 !py-1 text-xs rounded-full"
+                      >
+                        취소
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <span>{userName}님을 위한 맞춤 답변을 제안합니다</span>
+                      {onUserNameChange && (
+                        <button
+                          onClick={handleEditName}
+                          className="text-[#0071e3] hover:underline text-xs"
+                        >
+                          이름 변경
+                        </button>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
             {/* 복사 버튼 */}

@@ -1,6 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ResponseStyle } from '../types';
 import axios from 'axios';
+import { 
+  API_URL, 
+  API_TIMEOUT, 
+  sanitizeInput, 
+  getResponsePrompt,
+  parseJsonResponse
+} from '../../lib/client-api';
+import { DEFAULT_VALUES } from '../../constants/templates';
 
 // API 응답 형식 정의
 interface ApiResponse {
@@ -27,7 +35,7 @@ interface ApiResponse {
 // 추가 통계 데이터 타입 정의
 interface ResponseData {
   participants: number;
-  keywords: number;
+  keywords: number | string[];
   time: string;
   progress: number;
 }
@@ -41,7 +49,7 @@ const DEFAULT_RESPONSES = {
       "향후 피드백 일정을 명확히 제시하여 기대치를 설정했습니다.",
       "정중한 어조로 전문적인 관계를 유지했습니다."
     ],
-    userName: "지우"
+    userName: DEFAULT_VALUES.userName
   },
   friendly: {
     response: '안녕하세요! 회의 내용 잘 확인했어요. 제안해주신 내용들 정말 좋네요. 다음 주 월요일까지 검토하고 피드백 드릴게요!',
@@ -50,7 +58,7 @@ const DEFAULT_RESPONSES = {
       "긍정적인 평가를 통해 제안에 대한 감사를 표현했습니다.",
       "명확한 일정을 제시하여 기대치를 관리했습니다."
     ],
-    userName: "지우"
+    userName: DEFAULT_VALUES.userName
   },
   concise: {
     response: '회의 내용 확인했습니다. 다음 주 월요일까지 피드백 드리겠습니다.',
@@ -59,8 +67,50 @@ const DEFAULT_RESPONSES = {
       "시간 효율성을 위해 불필요한 내용을 생략했습니다.",
       "명확한 후속 조치를 약속했습니다."
     ],
-    userName: "지우"
+    userName: DEFAULT_VALUES.userName
   }
+};
+
+// 요약 정보를 기반으로 응답 생성
+const generateResponseFromSummary = (summary: any, style: ResponseStyle): { response: string, reasons: string[] } => {
+  const mainPoints = summary?.mainPoints || [];
+  const nextSteps = summary?.nextSteps || [];
+  
+  // 스타일에 따른 응답 생성
+  let response = '';
+  let reasons = [];
+  
+  switch(style) {
+    case 'formal':
+      response = `안녕하세요. 회의 내용을 확인했습니다.\n\n${mainPoints.length > 0 ? `논의된 주요 내용은 다음과 같습니다:\n- ${mainPoints.join('\n- ')}\n\n` : ''}${nextSteps.length > 0 ? `다음 단계는 다음과 같습니다:\n- ${nextSteps.join('\n- ')}` : ''}`;
+      reasons = [
+        "정중한 인사로 전문성을 유지했습니다.",
+        "논의된 주요 내용을 명확하게 요약했습니다.",
+        "다음 단계를 체계적으로 정리했습니다."
+      ];
+      break;
+    case 'friendly':
+      response = `안녕하세요! 회의 내용 살펴봤어요.\n\n${mainPoints.length > 0 ? `주요 내용은 이렇게 정리할 수 있어요:\n- ${mainPoints.join('\n- ')}\n\n` : ''}${nextSteps.length > 0 ? `앞으로 할 일은 다음과 같아요:\n- ${nextSteps.join('\n- ')}` : ''}`;
+      reasons = [
+        "친근한 인사로 편안한 분위기를 조성했습니다.",
+        "주요 내용을 이해하기 쉽게 정리했습니다.",
+        "앞으로의 계획을 명확하게 공유했습니다."
+      ];
+      break;
+    case 'concise':
+      response = `회의 요약:\n${mainPoints.length > 0 ? `- ${mainPoints.join('\n- ')}\n` : ''}${nextSteps.length > 0 ? `\n다음 단계:\n- ${nextSteps.join('\n- ')}` : ''}`;
+      reasons = [
+        "불필요한 인사말을 생략하고 핵심만 전달했습니다.",
+        "요점만 간결하게 정리했습니다.",
+        "다음 단계를 명확하게 제시했습니다."
+      ];
+      break;
+    default:
+      response = DEFAULT_RESPONSES.formal.response;
+      reasons = DEFAULT_RESPONSES.formal.reasons;
+  }
+  
+  return { response, reasons };
 };
 
 /**
@@ -87,9 +137,80 @@ export const useResponse = () => {
   // 오류 상태
   const [error, setError] = useState<string | null>(null);
   // 사용자 이름
-  const [userName, setUserName] = useState<string>("지우");
+  const [userName, setUserName] = useState<string>(DEFAULT_VALUES.userName);
   // 추가 통계 데이터
   const [responseData, setResponseData] = useState<ResponseData | null>(null);
+
+  /**
+   * 사용자 이름을 설정하는 함수
+   * @param name - 설정할 사용자 이름
+   */
+  const handleSetUserName = (name: string) => {
+    if (name && name.trim() !== '') {
+      setUserName(name);
+      // 로컬 스토리지에 저장하여 다음 방문 시에도 사용
+      localStorage.setItem('summy_userName', name);
+      
+      // 이름 변경 후 이미 생성된 응답이 있다면 API 다시 호출
+      if (suggestedResponse) {
+        console.log(`[useResponse] 이름 변경 감지: ${name}. 응답 재생성 시작`);
+        // 기존 응답을 입력으로 사용하여 새 이름으로 응답 재생성
+        setIsSuggesting(true);
+        
+        // 입력 텍스트 정리
+        const sanitizedMessage = sanitizeInput(suggestedResponse, 2000);
+        
+        // 응답 프롬프트 생성 (새 이름으로)
+        const prompt = getResponsePrompt(sanitizedMessage, { 
+          style: selectedStyle, 
+          userName: name
+        });
+        
+        // API 호출
+        axios.post(API_URL, {
+          message: prompt
+        }, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          timeout: API_TIMEOUT
+        }).then(response => {
+          if (response.data && response.data.choices && response.data.choices.length > 0) {
+            const content = response.data.choices[0].message.content;
+            
+            try {
+              // JSON 응답 파싱
+              const parsedJson = parseJsonResponse(content);
+              
+              // 응답 데이터 추출
+              const answer = parsedJson.response || '응답을 생성할 수 없습니다.';
+              const reasons = parsedJson.reasons || [];
+              
+              console.log('[useResponse] 이름 변경 후 새 응답 생성 완료:', { answer, reasons: reasons.length });
+              
+              setSuggestedResponse(answer);
+              setEditedResponse(answer);
+              setResponseReasons(reasons);
+            } catch (parseError) {
+              console.error('[useResponse] 이름 변경 후 JSON 파싱 오류:', parseError);
+            }
+          }
+        }).catch(error => {
+          console.error('[useResponse] 이름 변경 후 API 호출 오류:', error);
+        }).finally(() => {
+          setIsSuggesting(false);
+        });
+      }
+    }
+  };
+
+  // 컴포넌트 마운트 시 로컬 스토리지에서 사용자 이름 로드
+  useEffect(() => {
+    const savedName = localStorage.getItem('summy_userName');
+    if (savedName) {
+      setUserName(savedName);
+    }
+  }, []);
 
   /**
    * 답변을 제안하는 함수
@@ -109,65 +230,71 @@ export const useResponse = () => {
     try {
       console.log(`[useResponse] 요청 시작: ${selectedStyle} 스타일로 답변 생성`);
       
-      /**
-       * API 응답 형식:
-       * {
-       *   response: string;    // 생성된 답변 텍스트
-       *   reasons: string[];   // 답변 작성 이유 목록 (최대 3개)
-       *   style: ResponseStyle; // 사용된 답변 스타일 (formal, friendly, concise)
-       *   userName: string;    // 사용자 이름
-       *   participants?: number;
-       *   keywords?: number;
-       *   time?: string;
-       *   progress?: number;
-       * }
-       */
-      // 내부 API 엔드포인트 호출
-      const response = await axios.post<ApiResponse>('/api/response', {
-        message: input,
-        style: selectedStyle
+      // 입력 텍스트 정리 (최대 2000자)
+      const sanitizedMessage = sanitizeInput(input, 2000);
+      
+      // 응답 프롬프트 생성
+      const prompt = getResponsePrompt(sanitizedMessage, { 
+        style: selectedStyle, 
+        userName: userName  // 현재 사용자 이름 전달
+      });
+      
+      // 외부 API 직접 호출
+      const response = await axios.post(API_URL, {
+        message: prompt
       }, {
         headers: {
           'Content-Type': 'application/json'
         },
-        timeout: 60000 // 60초로 증가
+        timeout: API_TIMEOUT
       });
       
       // 전체 응답 로깅
       console.log('[useResponse] 전체 응답 데이터:', JSON.stringify(response.data, null, 2));
       
-      if (response.data && response.data.response) {
-        // API 응답에서 답변과 이유를 추출
-        const { 
-          response: answer, 
-          reasons, 
-          userName: responseUserName, 
-          participants, 
-          keywords, 
-          time, 
-          progress 
-        } = response.data;
+      if (response.data && response.data.choices && response.data.choices.length > 0) {
+        const content = response.data.choices[0].message.content;
         
-        setSuggestedResponse(answer);
-        setEditedResponse(answer);
-        setResponseReasons(reasons || []);
-        
-        if (responseUserName) {
-          setUserName(responseUserName);
+        try {
+          // JSON 응답 파싱
+          const parsedJson = parseJsonResponse(content);
+          
+          // 응답 데이터 추출 - 직접 response와 reasons 필드 사용
+          const answer = parsedJson.response || '응답을 생성할 수 없습니다.';
+          const reasons = parsedJson.reasons || [];
+          const responseUserName = parsedJson.userName || userName;
+          const metadata = parsedJson.metadata || {};
+          
+          console.log('[useResponse] 파싱된 응답:', { answer, reasons: reasons.length, userName: responseUserName });
+          
+          setSuggestedResponse(answer);
+          setEditedResponse(answer);
+          setResponseReasons(reasons);
+          
+          if (responseUserName) {
+            setUserName(responseUserName);
+          }
+          
+          // 추가 통계 데이터 저장 (있는 경우)
+          if (metadata && (metadata.participants !== undefined || metadata.keywords !== undefined || 
+              metadata.time !== undefined || metadata.progress !== undefined)) {
+            setResponseData({
+              participants: metadata.participants || 2,
+              keywords: metadata.keywords || 4,
+              time: metadata.time || '30분',
+              progress: metadata.progress || 75
+            });
+          }
+          
+          console.log(`[useResponse] 응답 수신 완료: ${answer.substring(0, 30)}...`);
+        } catch (parseError) {
+          console.error('[useResponse] JSON 파싱 오류:', parseError);
+          // 개발 환경에서는 기본 응답 사용
+          const { response, reasons } = DEFAULT_RESPONSES[selectedStyle];
+          setSuggestedResponse(response);
+          setEditedResponse(response);
+          setResponseReasons(reasons);
         }
-        
-        // 추가 통계 데이터 저장
-        if (participants !== undefined || keywords !== undefined || 
-            time !== undefined || progress !== undefined) {
-          setResponseData({
-            participants: participants || 2,
-            keywords: keywords || 4,
-            time: time || '30분',
-            progress: progress || 75
-          });
-        }
-        
-        console.log(`[useResponse] 응답 수신 완료: ${answer.substring(0, 30)}...`);
       } else if (response.data && response.data.error) {
         throw new Error(response.data.error);
       } else {
@@ -176,6 +303,14 @@ export const useResponse = () => {
     } catch (error: any) {
       console.error('답변 제안 중 오류가 발생했습니다:', error);
       setError('답변을 생성하는 중 오류가 발생했습니다. 다시 시도해주세요.');
+      
+      // 개발 환경에서는 기본 응답 사용
+      if (process.env.NODE_ENV === 'development') {
+        const { response, reasons } = DEFAULT_RESPONSES[selectedStyle];
+        setSuggestedResponse(response);
+        setEditedResponse(response);
+        setResponseReasons(reasons);
+      }
     } finally {
       setIsSuggesting(false);
     }
@@ -217,67 +352,84 @@ export const useResponse = () => {
     setIsSuggesting(true);
     
     try {
-      // 스타일 변경 시에도 API 호출
-      const response = await axios.post<ApiResponse>('/api/response', {
-        message: suggestedResponse, // 현재 답변을 기반으로 새 스타일 적용
-        style: style
+      // 입력 텍스트 정리 (최대 2000자)
+      const sanitizedMessage = sanitizeInput(suggestedResponse, 2000);
+      
+      // 응답 프롬프트 생성
+      const prompt = getResponsePrompt(sanitizedMessage, { 
+        style: style, 
+        userName: userName // 현재 사용자 이름 전달
+      });
+      
+      // 외부 API 직접 호출
+      const response = await axios.post(API_URL, {
+        message: prompt
       }, {
         headers: {
           'Content-Type': 'application/json'
         },
-        timeout: 60000 // 60초로 증가
+        timeout: API_TIMEOUT
       });
       
       // 전체 응답 로깅
       console.log('[useResponse] 스타일 변경 응답 데이터:', JSON.stringify(response.data, null, 2));
       
-      if (response.data && response.data.response) {
-        const { 
-          response: answer, 
-          reasons, 
-          userName: responseUserName,
-          participants, 
-          keywords, 
-          time, 
-          progress
-        } = response.data;
+      if (response.data && response.data.choices && response.data.choices.length > 0) {
+        const content = response.data.choices[0].message.content;
         
-        setSuggestedResponse(answer);
-        setEditedResponse(answer);
-        setResponseReasons(reasons || []);
-        
-        if (responseUserName) {
-          setUserName(responseUserName);
+        try {
+          // JSON 응답 파싱
+          const parsedJson = parseJsonResponse(content);
+          
+          // 응답 데이터 추출 - 직접 response와 reasons 필드 사용
+          const answer = parsedJson.response || '응답을 생성할 수 없습니다.';
+          const reasons = parsedJson.reasons || [];
+          const responseUserName = parsedJson.userName || userName;
+          const metadata = parsedJson.metadata || {};
+          
+          console.log('[useResponse] 파싱된 스타일 변경 응답:', { answer, reasons: reasons.length, userName: responseUserName });
+          
+          setSuggestedResponse(answer);
+          setEditedResponse(answer);
+          setResponseReasons(reasons);
+          
+          if (responseUserName) {
+            setUserName(responseUserName);
+          }
+          
+          // 추가 통계 데이터 저장 (있는 경우)
+          if (metadata && (metadata.participants !== undefined || metadata.keywords !== undefined || 
+              metadata.time !== undefined || metadata.progress !== undefined)) {
+            setResponseData({
+              participants: metadata.participants || 2,
+              keywords: metadata.keywords || 4,
+              time: metadata.time || '30분',
+              progress: metadata.progress || 75
+            });
+          }
+        } catch (parseError) {
+          console.error('[useResponse] JSON 파싱 오류:', parseError);
+          // 개발 환경에서는 기본 응답 사용
+          const { response, reasons } = DEFAULT_RESPONSES[style];
+          setSuggestedResponse(response);
+          setEditedResponse(response);
+          setResponseReasons(reasons);
         }
-        
-        // 추가 통계 데이터 저장
-        if (participants !== undefined || keywords !== undefined || 
-            time !== undefined || progress !== undefined) {
-          setResponseData({
-            participants: participants || 2,
-            keywords: keywords || 4,
-            time: time || '30분',
-            progress: progress || 75
-          });
-        }
-      } else if (response.data && response.data.error) {
-        throw new Error(response.data.error);
       } else {
-        throw new Error('응답 형식이 올바르지 않습니다.');
+        // 개발 환경에서는 기본 응답 사용
+        const { response, reasons } = DEFAULT_RESPONSES[style];
+        setSuggestedResponse(response);
+        setEditedResponse(response);
+        setResponseReasons(reasons);
       }
     } catch (error) {
       console.error('스타일 변경 중 오류가 발생했습니다:', error);
       
       // 개발 환경에서는 기본 응답 사용
-      if (process.env.NODE_ENV === 'development') {
-        const { response, reasons, userName: defaultUserName } = DEFAULT_RESPONSES[style];
-        setSuggestedResponse(response);
-        setEditedResponse(response);
-        setResponseReasons(reasons);
-        if (defaultUserName) {
-          setUserName(defaultUserName);
-        }
-      }
+      const { response, reasons } = DEFAULT_RESPONSES[style];
+      setSuggestedResponse(response);
+      setEditedResponse(response);
+      setResponseReasons(reasons);
     } finally {
       setIsSuggesting(false);
     }
@@ -294,8 +446,8 @@ export const useResponse = () => {
    * 편집된 답변을 저장하는 함수
    */
   const handleSaveResponse = () => {
-    setIsEditing(false);
     setSuggestedResponse(editedResponse);
+    setIsEditing(false);
   };
 
   /**
@@ -306,7 +458,7 @@ export const useResponse = () => {
   };
 
   /**
-   * 편집 중인 답변 내용을 업데이트하는 함수
+   * 편집 중인 답변을 업데이트하는 함수
    * 
    * @param response - 새로운 답변 내용
    */
@@ -315,11 +467,11 @@ export const useResponse = () => {
   };
 
   /**
-   * 답변 편집을 취소하고 원래 답변으로 되돌리는 함수
+   * 편집 모드를 취소하고 원래 답변으로 되돌리는 함수
    */
   const cancelEditing = () => {
-    setIsEditing(false);
     setEditedResponse(suggestedResponse);
+    setIsEditing(false);
   };
 
   return {
@@ -340,6 +492,7 @@ export const useResponse = () => {
     handleSaveResponse,
     toggleReason,
     updateEditedResponse,
-    cancelEditing
+    cancelEditing,
+    handleSetUserName
   };
 }; 

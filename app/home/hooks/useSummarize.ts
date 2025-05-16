@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { EXAMPLE_SUMMARY } from '../constants';
 import axios from 'axios';
-
-// 프록시 API URL (내부 API 라우트)
-const PROXY_API_URL = '/api/proxy';
-// 타임아웃 설정 (60초로 증가)
-const API_TIMEOUT = 60000;
+import { 
+  API_URL, 
+  API_TIMEOUT, 
+  sanitizeInput, 
+  getSummaryPrompt,
+  parseJsonResponse,
+  createFallbackResponse
+} from '../../lib/client-api';
 
 // 개발 환경에서만 로그 출력
 const logDebug = (message: string, data?: any) => {
@@ -51,7 +54,7 @@ export const useSummarize = () => {
 
   /**
    * 입력된 텍스트를 요약하는 함수
-   * 프록시 API를 통해 주요 내용을 추출하고 구조화된 요약을 생성합니다.
+   * 외부 API를 직접 호출하여 주요 내용을 추출하고 구조화된 요약을 생성합니다.
    * 
    * @param input - 요약할 텍스트 내용
    */
@@ -66,15 +69,21 @@ export const useSummarize = () => {
     
     logDebug('요약 요청 시작', { 
       inputLength: input.length, 
-      apiUrl: PROXY_API_URL,
+      apiUrl: API_URL,
       startTime: new Date().toISOString() 
     });
     
     try {
-      // 프록시 API를 통해 요청 전송
+      // 입력 텍스트 정리 (최대 3000자)
+      const sanitizedMessage = sanitizeInput(input, 3000);
+      
+      // 요약 프롬프트 생성
+      const prompt = getSummaryPrompt(sanitizedMessage);
+      
+      // 외부 API 직접 호출
       const startTime = Date.now();
-      const response = await axios.post(PROXY_API_URL, {
-        message: input
+      const response = await axios.post(API_URL, {
+        message: prompt
       }, {
         headers: {
           'Content-Type': 'application/json'
@@ -88,42 +97,38 @@ export const useSummarize = () => {
       // 전체 응답 로깅
       console.log('[useSummarize] 전체 응답 데이터:', JSON.stringify(response.data, null, 2));
       
-      // 메타데이터 로깅 추가
-      if (response.data?.metadata) {
-        console.log('[useSummarize] 메타데이터:', {
-          participants: response.data.participants,
-          keywords: response.data.keywords,
-          time: response.data.time,
-          progress: response.data.progress
-        });
-      } else if (response.data?.summary) {
-        console.log('[useSummarize] 요약 및 메타데이터:', {
-          summary: Object.keys(response.data.summary || {}),
-          participants: response.data.participants,
-          keywords: Array.isArray(response.data.keywords) 
-            ? `${response.data.keywords.length}개 (${response.data.keywords.join(', ')})` 
-            : response.data.keywords,
-          time: response.data.time,
-          progress: response.data.progress
-        });
-      }
-      
-      logDebug('API 응답 완료', { 
-        status: response.status, 
-        responseTime: `${responseTime}ms`,
-        hasChoices: Boolean(response.data?.choices?.length)
-      });
-      
-      // 응답 타임이 너무 짧으면 샘플 응답일 수 있음
-      const isLikelySampleResponse = responseTime < 500 && process.env.NODE_ENV === 'development';
-      if (isLikelySampleResponse) {
-        logDebug('응답 시간이 짧아 샘플 응답으로 판단됨', { responseTime });
-      }
-      
       if (response.data && response.data.choices && response.data.choices.length > 0) {
         const content = response.data.choices[0].message.content;
-        setResult(content);
-        logDebug('요약 결과 설정 완료', { contentLength: content.length });
+        
+        try {
+          // JSON 응답 파싱
+          const parsedJson = parseJsonResponse(content);
+          
+          // 파싱된 JSON을 저장
+          const enhancedContent = JSON.stringify({
+            summary: parsedJson.summary,
+            metadata: parsedJson.metadata
+          }, null, 2);
+          
+          setResult(enhancedContent);
+          
+          // 메타데이터 로깅
+          console.log('[useSummarize] 파싱된 데이터:', {
+            summary: Object.keys(parsedJson.summary || {}),
+            participants: parsedJson.metadata?.participants,
+            keywords: Array.isArray(parsedJson.metadata?.keywords) 
+              ? `${parsedJson.metadata?.keywords.length}개 (${parsedJson.metadata?.keywords.join(', ')})` 
+              : parsedJson.metadata?.keywords,
+            time: parsedJson.metadata?.time,
+            progress: parsedJson.metadata?.progress
+          });
+        } catch (parseError) {
+          console.error('[useSummarize] JSON 파싱 오류:', parseError);
+          // 파싱 실패 시 원본 텍스트 사용
+          setResult(content);
+        }
+        
+        logDebug('요약 결과 설정 완료', { responseTime: `${responseTime}ms` });
         
         // 성공 시 재시도 카운트 초기화
         setRetryCount(0);

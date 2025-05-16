@@ -53,7 +53,8 @@ export default function DemoPage() {
     handleSaveResponse,
     toggleReason,
     updateEditedResponse,
-    cancelEditing
+    cancelEditing,
+    handleSetUserName
   } = useResponse();
 
   // 파일 업로드 시 입력값 업데이트
@@ -143,6 +144,7 @@ export default function DemoPage() {
                   onToggleReason={toggleReason}
                   responseReasons={responseReasons}
                   userName={userName}
+                  onUserNameChange={handleSetUserName}
                 />
               </div>
             )}
@@ -154,7 +156,9 @@ export default function DemoPage() {
                 error={error} 
                 parsedData={responseData ? {
                   participants: responseData.participants,
-                  keywords: responseData.keywords,
+                  keywords: Array.isArray(responseData.keywords) 
+                    ? responseData.keywords.length 
+                    : responseData.keywords,
                   time: responseData.time,
                   progress: responseData.progress
                 } : undefined}
