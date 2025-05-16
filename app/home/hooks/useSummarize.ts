@@ -85,6 +85,29 @@ export const useSummarize = () => {
       const endTime = Date.now();
       const responseTime = endTime - startTime;
       
+      // 전체 응답 로깅
+      console.log('[useSummarize] 전체 응답 데이터:', JSON.stringify(response.data, null, 2));
+      
+      // 메타데이터 로깅 추가
+      if (response.data?.metadata) {
+        console.log('[useSummarize] 메타데이터:', {
+          participants: response.data.participants,
+          keywords: response.data.keywords,
+          time: response.data.time,
+          progress: response.data.progress
+        });
+      } else if (response.data?.summary) {
+        console.log('[useSummarize] 요약 및 메타데이터:', {
+          summary: Object.keys(response.data.summary || {}),
+          participants: response.data.participants,
+          keywords: Array.isArray(response.data.keywords) 
+            ? `${response.data.keywords.length}개 (${response.data.keywords.join(', ')})` 
+            : response.data.keywords,
+          time: response.data.time,
+          progress: response.data.progress
+        });
+      }
+      
       logDebug('API 응답 완료', { 
         status: response.status, 
         responseTime: `${responseTime}ms`,

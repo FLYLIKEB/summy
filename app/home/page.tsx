@@ -45,6 +45,7 @@ export default function DemoPage() {
     editedResponse,
     showReason,
     userName,
+    responseData,
     handleSuggestResponse,
     handleCopyResponse,
     handleStyleChange,
@@ -148,7 +149,16 @@ export default function DemoPage() {
 
             {/* 요약 결과 섹션 */}
             {(result || error) && (
-              <SummaryResult result={result} error={error} />
+              <SummaryResult 
+                result={result} 
+                error={error} 
+                parsedData={responseData ? {
+                  participants: responseData.participants,
+                  keywords: responseData.keywords,
+                  time: responseData.time,
+                  progress: responseData.progress
+                } : undefined}
+              />
             )}
           </div>
         </div>

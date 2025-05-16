@@ -88,9 +88,9 @@ export const SUPPORTED_FILE_TYPES = {
 
 export const DEFAULT_STATISTICS = {
   participants: 4,
-  duration: '30분',
+  duration: '0분',
   keywords: 3,
-  progress: 75
+  progress: 0
 };
 
 export const DEFAULT_KEYWORDS = [

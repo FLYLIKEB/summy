@@ -3,67 +3,186 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/common/ca
 import { Icon } from './common/Icon'
 import { DEFAULT_KEYWORDS } from '../constants'
 
-interface SummaryResultProps {
+export interface SummaryResultProps {
   result: string
   error: string | null
+  parsedData?: {
+    participants?: number
+    keywords?: number
+    time?: string
+    progress?: number
+  }
 }
 
 // API 응답에서 참여자 수 추출 함수
 const extractParticipantCount = (text: string): number => {
+  try {
+    // JSON 형식인지 확인하고 파싱 시도
+    if (text.trim().startsWith('{') && text.trim().endsWith('}')) {
+      const parsedJson = JSON.parse(text);
+      if (parsedJson.metadata && parsedJson.metadata.participants) {
+        return parsedJson.metadata.participants;
+      }
+    }
+  } catch (error) {
+    console.error('참여자 수 파싱 오류:', error);
+  }
+  
+  // 기존 정규식 방식으로 추출 시도
   const participantMatch = text.match(/참여자.*?(\d+)명/);
+  console.log("participantMatch", participantMatch);
   return participantMatch ? parseInt(participantMatch[1]) : 2;
 };
 
 // 진행률 추출 함수
 const extractProgress = (text: string): number => {
+  try {
+    // JSON 형식인지 확인하고 파싱 시도
+    if (text.trim().startsWith('{') && text.trim().endsWith('}')) {
+      const parsedJson = JSON.parse(text);
+      if (parsedJson.metadata && parsedJson.metadata.progress !== undefined) {
+        return parsedJson.metadata.progress;
+      }
+    }
+  } catch (error) {
+    console.error('진행률 파싱 오류:', error);
+  }
+  
+  // 기존 정규식 방식으로 추출 시도
   const progressMatch = text.match(/진행.*?(\d+)%/);
+  console.log("progressMatch", progressMatch);
   return progressMatch ? parseInt(progressMatch[1]) : 75;
 };
 
-// API 응답에서 키워드 추출 함수
-const extractKeywords = (text: string): string[] => {
-  // 기본 키워드가 없으면 텍스트에서 추출
-  const keywordMatches = text.match(/키워드|주제|핵심단어/i);
-  if (keywordMatches) {
-    const keywordLine = text.split('\n').find(line => 
-      line.includes('키워드') || line.includes('주제') || line.includes('핵심단어')
-    );
-    if (keywordLine) {
-      return keywordLine
-        .replace(/.*?[:：]/g, '')
-        .split(/[,，、\s]+/)
-        .filter(k => k.trim().length > 0)
-        .map(k => k.trim());
+// 시간 추출 함수 추가
+const extractTime = (text: string): string => {
+  try {
+    // JSON 형식인지 확인하고 파싱 시도
+    if (text.trim().startsWith('{') && text.trim().endsWith('}')) {
+      const parsedJson = JSON.parse(text);
+      if (parsedJson.metadata && parsedJson.metadata.time) {
+        return parsedJson.metadata.time;
+      }
     }
+  } catch (error) {
+    console.error('시간 파싱 오류:', error);
   }
   
-  // 프로젝트 관련 기본 키워드 추출
-  const projectKeywords = [];
-  if (text.includes('프로젝트')) projectKeywords.push('프로젝트');
-  if (text.includes('개발')) projectKeywords.push('개발');
-  if (text.includes('구현')) projectKeywords.push('구현');
-  if (text.includes('기능')) projectKeywords.push('기능');
-  if (text.includes('디자인')) projectKeywords.push('디자인');
-  if (text.includes('UI') || text.includes('UX')) projectKeywords.push('UI/UX');
-  if (text.includes('계획')) projectKeywords.push('계획');
-  if (text.includes('일정')) projectKeywords.push('일정');
-  if (text.includes('진행')) projectKeywords.push('진행');
+  // 기존 정규식 방식으로 추출 시도
+  const timeMatch = text.match(/시간.*?(\d+)분/);
+  return timeMatch ? `${timeMatch[1]}분` : '30분';
+};
+
+// API 응답에서 키워드 추출 및 개수 함수
+const extractKeywordsInfo = (text: string): { keywords: string[], count: number } => {
+  try {
+    // JSON 형식인지 확인하고 파싱 시도
+    if (text.trim().startsWith('{') && text.trim().endsWith('}')) {
+      const parsedJson = JSON.parse(text);
+      
+      // metadata.keywords 배열이 있으면 직접 사용
+      if (parsedJson.metadata?.keywords && Array.isArray(parsedJson.metadata.keywords)) {
+        return {
+          keywords: parsedJson.metadata.keywords,
+          count: parsedJson.metadata.keywords.length
+        };
+      }
+      
+      // 이전 방식: metadata.keywords가 숫자인 경우
+      if (parsedJson.metadata && typeof parsedJson.metadata.keywords === 'number') {
+        const keywordCount = parsedJson.metadata.keywords;
+        return { 
+          keywords: DEFAULT_KEYWORDS.slice(0, keywordCount), 
+          count: keywordCount 
+        };
+      }
+    }
+  } catch (error) {
+    console.error('키워드 파싱 오류:', error);
+  }
   
-  return projectKeywords.length > 0 ? projectKeywords : DEFAULT_KEYWORDS;
+  // 기본 키워드 제공
+  return { 
+    keywords: DEFAULT_KEYWORDS, 
+    count: DEFAULT_KEYWORDS.length 
+  };
 };
 
 // 새로운 파싱 함수 - API 응답을 대분류로 구분
 const parseStructuredContent = (text: string): {sectionNumber: number, title: string, points: string[]}[] => {
+  // JSON 형식인지 확인하고 파싱 시도
+  try {
+    if (text.trim().startsWith('{') && text.trim().endsWith('}')) {
+      const parsedJson = JSON.parse(text);
+      
+      if (parsedJson.summary) {
+        // JSON 형식으로 파싱된 경우 구조화된 결과 반환
+        const result = [];
+        
+        // 주요 내용 섹션 추가
+        if (parsedJson.summary.mainPoints && parsedJson.summary.mainPoints.length > 0) {
+          result.push({
+            sectionNumber: 1,
+            title: '주요 내용',
+            points: parsedJson.summary.mainPoints
+          });
+        }
+        
+        // 참여자별 발언 섹션 추가
+        if (parsedJson.summary.participantComments && parsedJson.summary.participantComments.length > 0) {
+          result.push({
+            sectionNumber: 2,
+            title: '참여자별 발언',
+            points: parsedJson.summary.participantComments
+          });
+        }
+        
+        // 다음 단계 섹션 추가
+        if (parsedJson.summary.nextSteps && parsedJson.summary.nextSteps.length > 0) {
+          result.push({
+            sectionNumber: 3,
+            title: '다음 단계',
+            points: parsedJson.summary.nextSteps
+          });
+        }
+        
+        return result;
+      }
+    }
+  } catch (error) {
+    console.error('JSON 파싱 오류:', error);
+    // 파싱 실패 시 기존 방식으로 계속 진행
+  }
+  
+  // 기존 텍스트 파싱 로직
   const result: {sectionNumber: number, title: string, points: string[]}[] = [];
   
   // 텍스트를 줄 단위로 분리
   const lines = text.split('\n').filter(line => line.trim().length > 0);
   
+  // JSON 문자열이 포함되어 있는지 확인하고 제거
+  const filteredLines = lines.filter(line => {
+    return !(line.includes('summary') || 
+             line.includes('mainPoints') || 
+             line.includes('participantComments') || 
+             line.includes('nextSteps') || 
+             line.includes('metadata') ||
+             line.includes('{') || 
+             line.includes('}') || 
+             line.includes('[') || 
+             line.includes(']') ||
+             line.trim() === ',' ||
+             line.includes('"participants"') ||
+             line.includes('"keywords"') ||
+             line.includes('"time"') ||
+             line.includes('"progress"'));
+  });
+  
   let currentSection: {sectionNumber: number, title: string, points: string[]} | null = null;
   let currentSubsection: string | null = null;
   
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+  for (let i = 0; i < filteredLines.length; i++) {
+    const line = filteredLines[i].trim();
     
     // 대분류 식별 (1. 주요 내용, 2. 참여자별 발언, 3. 다음 단계 등)
     const sectionMatch = line.match(/^\d+\.\s*(.*)/);
@@ -88,33 +207,39 @@ const parseStructuredContent = (text: string): {sectionNumber: number, title: st
       if (currentSection) {
         const pointText = line.replace(/^[-•*]\s*/, '').trim();
         
+        // 따옴표 제거
+        const cleanedPoint = pointText.replace(/^"|"$/g, '').trim();
+        
         // 하위 섹션 확인 (이름: 내용 형식)
-        const subsectionMatch = pointText.match(/^([^:]+):(.*)/);
+        const subsectionMatch = cleanedPoint.match(/^([^:]+):(.*)/);
         if (subsectionMatch && !currentSubsection) {
           currentSubsection = subsectionMatch[1].trim();
-          currentSection.points.push(pointText);
+          currentSection.points.push(cleanedPoint);
         } else {
-          currentSection.points.push(pointText);
+          currentSection.points.push(cleanedPoint);
         }
       }
       continue;
     }
     
     // 일반 텍스트라인 - 이전 포인트의 연속으로 처리
-    if (currentSection && line.length > 0) {
+    if (currentSection && line.length > 0 && !line.includes('"') && !line.includes(':')) {
+      // 따옴표 제거
+      const cleanedLine = line.replace(/^"|"$/g, '').trim();
+      
       // 새 하위 섹션 확인
-      const subsectionMatch = line.match(/^([^:]+):(.*)/);
+      const subsectionMatch = cleanedLine.match(/^([^:]+):(.*)/);
       if (subsectionMatch) {
         currentSubsection = subsectionMatch[1].trim();
-        currentSection.points.push(line);
+        currentSection.points.push(cleanedLine);
       } 
       // 짧은 라인은 하위 제목일 수 있음
-      else if (line.length < 30 && !line.includes('：') && !line.includes(':')) {
-        currentSection.points.push(line);
+      else if (cleanedLine.length < 30 && !cleanedLine.includes('：') && !cleanedLine.includes(':')) {
+        currentSection.points.push(cleanedLine);
       }
       // 일반 내용은 이전 포인트에 추가
       else {
-        currentSection.points.push(line);
+        currentSection.points.push(cleanedLine);
       }
     }
   }
@@ -130,7 +255,7 @@ const parseStructuredContent = (text: string): {sectionNumber: number, title: st
       {
         sectionNumber: 1,
         title: '주요 내용',
-        points: text.split('\n').filter(line => line.trim().length > 0)
+        points: filteredLines.length > 0 ? filteredLines : text.split('\n').filter(line => line.trim().length > 0)
       }
     ];
     return fallbackSections;
@@ -139,7 +264,7 @@ const parseStructuredContent = (text: string): {sectionNumber: number, title: st
   return result;
 };
 
-export const SummaryResult: React.FC<SummaryResultProps> = ({ result, error }) => {
+export const SummaryResult: React.FC<SummaryResultProps> = ({ result, error, parsedData }) => {
   // 오류가 있는 경우 오류 메시지 표시
   if (error) {
     return (
@@ -178,16 +303,29 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result, error }) =
     return null;
   }
 
-  // 결과에서 정보 추출
-  const participantCount = extractParticipantCount(result);
-  const keywords = extractKeywords(result);
-  const progress = extractProgress(result);
+  // 메타데이터 정보 추출 (parsedData 우선, 없으면 내용에서 추출)
+  const participantCount = parsedData?.participants || extractParticipantCount(result);
+  const progress = parsedData?.progress || extractProgress(result);
+  const time = parsedData?.time || extractTime(result);
+  
+  // 키워드 정보 추출
+  const { keywords, count: extractedKeywordCount } = extractKeywordsInfo(result);
+  const keywordCount = parsedData?.keywords || extractedKeywordCount;
+  
+  // UI 렌더링에 사용되는 데이터 로깅
+  console.log('[SummaryResult] 사용 데이터:', {
+    parsedData,
+    participantCount,
+    progress,
+    time,
+    keywords: Array.isArray(keywords) ? keywords : 'N/A',
+    keywordCount: Array.isArray(parsedData?.keywords) 
+      ? parsedData?.keywords.length
+      : keywordCount
+  });
   
   // 구조화된 컨텐츠 파싱
   const sections = parseStructuredContent(result);
-  
-  // 키워드 개수
-  const keywordCount = Math.min(keywords.length, 9); // 최대 9개로 제한
 
   return (
     <div className="py-4 sm:py-6">
@@ -228,7 +366,7 @@ export const SummaryResult: React.FC<SummaryResultProps> = ({ result, error }) =
               </div>
               <div>
                 <div className="text-xs text-white/50">시간</div>
-                <div className="text-base font-medium">30분</div>
+                <div className="text-base font-medium">{time}</div>
               </div>
             </div>
           </div>

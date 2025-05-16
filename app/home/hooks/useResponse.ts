@@ -12,8 +12,24 @@ interface ApiResponse {
   style: ResponseStyle;
   /** 사용자 이름 */
   userName: string;
+  /** 참여자 수 */
+  participants?: number;
+  /** 키워드 수 */
+  keywords?: number;
+  /** 시간 */
+  time?: string;
+  /** 진행률 */
+  progress?: number;
   /** 오류 메시지 (있을 경우) */
   error?: string;
+}
+
+// 추가 통계 데이터 타입 정의
+interface ResponseData {
+  participants: number;
+  keywords: number;
+  time: string;
+  progress: number;
 }
 
 // 에러 발생시 기본 응답
@@ -72,6 +88,8 @@ export const useResponse = () => {
   const [error, setError] = useState<string | null>(null);
   // 사용자 이름
   const [userName, setUserName] = useState<string>("지우");
+  // 추가 통계 데이터
+  const [responseData, setResponseData] = useState<ResponseData | null>(null);
 
   /**
    * 답변을 제안하는 함수
@@ -98,6 +116,10 @@ export const useResponse = () => {
        *   reasons: string[];   // 답변 작성 이유 목록 (최대 3개)
        *   style: ResponseStyle; // 사용된 답변 스타일 (formal, friendly, concise)
        *   userName: string;    // 사용자 이름
+       *   participants?: number;
+       *   keywords?: number;
+       *   time?: string;
+       *   progress?: number;
        * }
        */
       // 내부 API 엔드포인트 호출
@@ -111,15 +133,40 @@ export const useResponse = () => {
         timeout: 60000 // 60초로 증가
       });
       
+      // 전체 응답 로깅
+      console.log('[useResponse] 전체 응답 데이터:', JSON.stringify(response.data, null, 2));
+      
       if (response.data && response.data.response) {
         // API 응답에서 답변과 이유를 추출
-        const { response: answer, reasons, userName: responseUserName } = response.data;
+        const { 
+          response: answer, 
+          reasons, 
+          userName: responseUserName, 
+          participants, 
+          keywords, 
+          time, 
+          progress 
+        } = response.data;
+        
         setSuggestedResponse(answer);
         setEditedResponse(answer);
         setResponseReasons(reasons || []);
+        
         if (responseUserName) {
           setUserName(responseUserName);
         }
+        
+        // 추가 통계 데이터 저장
+        if (participants !== undefined || keywords !== undefined || 
+            time !== undefined || progress !== undefined) {
+          setResponseData({
+            participants: participants || 2,
+            keywords: keywords || 4,
+            time: time || '30분',
+            progress: progress || 75
+          });
+        }
+        
         console.log(`[useResponse] 응답 수신 완료: ${answer.substring(0, 30)}...`);
       } else if (response.data && response.data.error) {
         throw new Error(response.data.error);
@@ -181,13 +228,37 @@ export const useResponse = () => {
         timeout: 60000 // 60초로 증가
       });
       
+      // 전체 응답 로깅
+      console.log('[useResponse] 스타일 변경 응답 데이터:', JSON.stringify(response.data, null, 2));
+      
       if (response.data && response.data.response) {
-        const { response: answer, reasons, userName: responseUserName } = response.data;
+        const { 
+          response: answer, 
+          reasons, 
+          userName: responseUserName,
+          participants, 
+          keywords, 
+          time, 
+          progress
+        } = response.data;
+        
         setSuggestedResponse(answer);
         setEditedResponse(answer);
         setResponseReasons(reasons || []);
+        
         if (responseUserName) {
           setUserName(responseUserName);
+        }
+        
+        // 추가 통계 데이터 저장
+        if (participants !== undefined || keywords !== undefined || 
+            time !== undefined || progress !== undefined) {
+          setResponseData({
+            participants: participants || 2,
+            keywords: keywords || 4,
+            time: time || '30분',
+            progress: progress || 75
+          });
         }
       } else if (response.data && response.data.error) {
         throw new Error(response.data.error);
@@ -261,6 +332,7 @@ export const useResponse = () => {
     showReason,
     error,
     userName,
+    responseData,
     handleSuggestResponse,
     handleCopyResponse,
     handleStyleChange,
