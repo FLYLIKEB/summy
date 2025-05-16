@@ -6,8 +6,11 @@ import {
   DEFAULT_VALUES
 } from '../constants/templates';
 
-// 외부 API URL
-export const API_URL = 'http://52.78.150.124:8080/api/xai/complete';
+// 외부 API URL - 환경에 따라 HTTP 또는 HTTPS 사용
+// 개발 환경에서는 HTTP, 프로덕션 환경에서는 HTTPS 사용
+export const API_URL = typeof window !== 'undefined' && window.location.protocol === 'https:' 
+  ? 'https://52.78.150.124:8080/api/xai/complete'
+  : 'http://52.78.150.124:8080/api/xai/complete';
 
 // 타임아웃 설정 (60초)
 export const API_TIMEOUT = 60000;
